@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class Movement : MonoBehaviour
 {
 
     public InputActionAsset InputActions;
@@ -9,7 +9,6 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 sprintVelocity;
     public Vector2 acceleration;
     public Vector2 friction;
-
 
     private InputAction moveAction;
     private InputAction sprintAction;
@@ -35,32 +34,35 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    private void Update()
     {
+        MovementLogic();
+    }
 
+
+    /// <summary>
+    /// Movement Logic
+    /// </summary>
+    private void MovementLogic()
+    {
         // Gets the 2D vector for movement
-
         move = moveAction.ReadValue<Vector2>();
 
-        // Sets max velocity to sprint velocity
 
+        // Sets max velocity to sprint or walk depending on if the sprint button is held down
         maxVelocity = sprintAction.IsPressed() ? sprintVelocity : walkVelocity;
 
-
         // Applies an impulse force to the rigidbody
-
         rb.AddForce(move * acceleration * Time.deltaTime, ForceMode2D.Impulse);
-        
+
 
         // Truncates velocity to match the vaximum velocity variable
-
         if (Mathf.Abs(rb.linearVelocityX) > maxVelocity.x) rb.linearVelocityX = Mathf.Sign(rb.linearVelocityX) * maxVelocity.x;
 
         if (Mathf.Abs(rb.linearVelocityY) > maxVelocity.y) rb.linearVelocityY = Mathf.Sign(rb.linearVelocityY) * maxVelocity.y;
 
 
         // Applys an opposite friction force to x & y axis seperately
-
         if (move.x == 0 && rb.linearVelocityX != 0)
         {
             rb.AddForce(Vector2.right * -rb.linearVelocityX * acceleration * friction.x * Time.deltaTime, ForceMode2D.Impulse);
@@ -73,8 +75,5 @@ public class PlayerMovement : MonoBehaviour
 
             if (Mathf.Abs(rb.linearVelocityY) < 0.005) rb.linearVelocityY = 0;
         }
-
-
-        Debug.Log(maxVelocity);
     }
 }
