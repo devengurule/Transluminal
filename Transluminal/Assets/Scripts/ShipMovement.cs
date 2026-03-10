@@ -4,12 +4,19 @@ using UnityEngine.XR;
 
 public class ShipMovement : MonoBehaviour
 {
-    public InputActionAsset InputActions;
-    public Vector2 maxVelocity;
-    public Vector2 acceleration;
-    public Vector2 friction;
-    public float torque;
-    public float zeroVelocitySpeed;
+
+    [SerializeField]
+    private InputActionAsset InputActions;
+    [SerializeField]
+    private Vector2 maxVelocity;
+    [SerializeField]
+    private Vector2 acceleration;
+    [SerializeField]
+    private Vector2 friction;
+    [SerializeField]
+    private float torque;
+    [SerializeField]
+    private float zeroVelocitySpeed;
 
     private InputAction moveAction;
     private InputAction rotateAction;

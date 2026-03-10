@@ -3,35 +3,31 @@ using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
+    [SerializeField]
+    private Vector2 walkVelocity;
+    [SerializeField]
+    private Vector2 sprintVelocity;
+    [SerializeField]
+    private Vector2 acceleration;
+    [SerializeField]
+    private Vector2 friction;
 
-    public InputActionAsset InputActions;
-    public Vector2 walkVelocity;
-    public Vector2 sprintVelocity;
-    public Vector2 acceleration;
-    public Vector2 friction;
-
-    private InputAction moveAction;
-    private InputAction sprintAction;
-    private Vector2 move;
+    private EventManager eventManager;
+    private Vector2 move = Vector2.zero;
+    private float sprintInput = 0;
     private Vector2 maxVelocity;
     private Rigidbody2D rb;
 
-    private void OnEnable()
-    {
-        InputActions.FindActionMap("Player").Enable();
-    }
-
-    private void OnDisable()
-    {
-        InputActions.FindActionMap("Player").Disable();
-    }
-
-
     private void Awake()
     {
-        moveAction = InputSystem.actions.FindAction("Move");
-        sprintAction = InputSystem.actions.FindAction("Sprint");
+        eventManager = GameController.instance.eventManager;
         rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
+        eventManager.Subscribe(EventType.Move, OnMove);
+        eventManager.Subscribe(EventType.Sprint, OnSprint);
     }
 
     private void Update()
@@ -39,18 +35,25 @@ public class Movement : MonoBehaviour
         MovementLogic();
     }
 
+    private void OnMove(object target)
+    {
+        if (target is Vector2 move)
+        {
+            this.move = move;
+        }
+    }
+
+    private void OnSprint(object target)
+    {
+        // Sets max velocity to sprint if the sprint button is held down
+        maxVelocity = sprintVelocity;
+    }
 
     /// <summary>
     /// Movement Logic
     /// </summary>
     private void MovementLogic()
     {
-        // Gets the 2D vector for movement
-        move = moveAction.ReadValue<Vector2>();
-
-
-        // Sets max velocity to sprint or walk depending on if the sprint button is held down
-        maxVelocity = sprintAction.IsPressed() ? sprintVelocity : walkVelocity;
 
         // Applies an impulse force to the rigidbody
         rb.AddForce(move * acceleration * Time.deltaTime, ForceMode2D.Impulse);
