@@ -1,7 +1,9 @@
 public enum EventType
 {
     Move,
-    Sprint,
-    ZeroVelocity,
+    SprintOn,
+    SprintOff,
+    ZeroVelocityOn,
+    ZeroVelocityOff,
     Rotate
 }

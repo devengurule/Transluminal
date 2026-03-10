@@ -14,7 +14,6 @@ public class Movement : MonoBehaviour
 
     private EventManager eventManager;
     private Vector2 move = Vector2.zero;
-    private float sprintInput = 0;
     private Vector2 maxVelocity;
     private Rigidbody2D rb;
 
@@ -26,8 +25,11 @@ public class Movement : MonoBehaviour
 
     private void Start()
     {
+        maxVelocity = walkVelocity;
+
         eventManager.Subscribe(EventType.Move, OnMove);
-        eventManager.Subscribe(EventType.Sprint, OnSprint);
+        eventManager.Subscribe(EventType.SprintOn, OnSprint);
+        eventManager.Subscribe(EventType.SprintOff, OffSprint);
     }
 
     private void Update()
@@ -47,6 +49,12 @@ public class Movement : MonoBehaviour
     {
         // Sets max velocity to sprint if the sprint button is held down
         maxVelocity = sprintVelocity;
+    }
+
+    private void OffSprint(object target)
+    {
+        // Sets max velocity to walk if the sprint button is released
+        maxVelocity = walkVelocity;
     }
 
     /// <summary>

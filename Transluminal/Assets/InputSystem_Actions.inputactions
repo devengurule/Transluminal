@@ -984,6 +984,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "ZeroVelocity",
+                    "type": "Button",
+                    "id": "206036d5-6694-4970-8984-2d90a1f0a41a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Rotate",
                     "type": "Value",
                     "id": "2f77b296-975d-44e4-97d3-db545e043a38",
@@ -991,15 +1000,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "ZeroVelocity",
-                    "type": "Button",
-                    "id": "d79dbafa-2bc4-4a86-9885-408a14524c5a",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1114,6 +1114,39 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "",
+                    "id": "19ac4968-1d30-495e-8e8f-163bac4aed09",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "ZeroVelocity",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8bfc762d-c27f-414b-b4b9-5e95857cf789",
+                    "path": "<Gamepad>/leftStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "ZeroVelocity",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c1b5236b-1516-456c-8dfd-2507ed79616f",
+                    "path": "<XRController>/trigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XR",
+                    "action": "ZeroVelocity",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "QE",
                     "id": "fc84e664-d1b3-4b5d-8d14-55c70908afc0",
                     "path": "1DAxis",
@@ -1145,17 +1178,6 @@
                     "action": "Rotate",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "8ef832f6-5bad-4611-87e6-1b95ecc00086",
-                    "path": "<Keyboard>/shift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "ZeroVelocity",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         }

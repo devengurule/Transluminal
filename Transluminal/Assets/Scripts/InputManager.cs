@@ -1,33 +1,66 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Android.LowLevel;
 
 public class InputManager : MonoBehaviour
 {
     private EventManager eventManager;
+    private PlayerInput playerInput;
+    private InputAction sprintAction;
+    private InputAction zeroVelocityAction;
 
     private void Start()
     {
         eventManager = GameController.instance.eventManager;
+        playerInput = GetComponent<PlayerInput>();
+        
+        if(playerInput.currentActionMap.name == "Player") sprintAction = playerInput.actions["Sprint"];
+
+        if (playerInput.currentActionMap.name == "Ship") zeroVelocityAction = playerInput.actions["ZeroVelocity"];
     }
+
+    #region Toggle Events
+    private void Update()
+    {
+        #region Sprint Event
+        if (playerInput.currentActionMap.name == "Player")
+        {
+            if (sprintAction.WasPressedThisFrame())
+            {
+                eventManager.Publish(EventType.SprintOn);
+            }
+            else if (sprintAction.WasReleasedThisFrame())
+            {
+                eventManager.Publish(EventType.SprintOff);
+            }
+        }
+        #endregion
+
+        #region Zero Velocity Event
+        if (playerInput.currentActionMap.name == "Ship")
+        {
+            if (zeroVelocityAction.WasPressedThisFrame())
+            {
+                eventManager.Publish(EventType.ZeroVelocityOn);
+            }
+            else if (zeroVelocityAction.WasReleasedThisFrame())
+            {
+                eventManager.Publish(EventType.ZeroVelocityOff);
+            }
+        }
+
+        #endregion
+    }
+    #endregion
 
     private void OnMove(InputValue value)
     {
         Vector2 moveVector = value.Get<Vector2>().normalized;
         eventManager.Publish(EventType.Move, moveVector);
     }
-    private void OnSprint()
-    {
-        eventManager.Publish(EventType.Sprint);
-    }
-    private void OnZeroVelocity()
-    {
-        eventManager.Publish(EventType.ZeroVelocity);
-    }
     private void OnRotate(InputValue value)
     {
         float inputValue = value.Get<float>();
-        eventManager.Publish(EventType.Rotate, value);
+        eventManager.Publish(EventType.Rotate, inputValue);
     }
 
 }

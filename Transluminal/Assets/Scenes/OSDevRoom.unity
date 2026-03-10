@@ -417,6 +417,67 @@ Transform:
   - {fileID: 543553812}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &807987679
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3186157511489886338, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: m_Name
+      value: GameController
+      objectReference: {fileID: 0}
+    - target: {fileID: 4473276063552946694, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.80643
+      objectReference: {fileID: 0}
+    - target: {fileID: 4473276063552946694, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.75447
+      objectReference: {fileID: 0}
+    - target: {fileID: 4473276063552946694, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4473276063552946694, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4473276063552946694, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4473276063552946694, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4473276063552946694, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4473276063552946694, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4473276063552946694, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4473276063552946694, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5678059885205768987, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: m_DefaultActionMap
+      value: df70fa95-8a34-4494-b137-73ab6b9c7d37
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
 --- !u!1 &1080918372
 GameObject:
   m_ObjectHideFlags: 0
@@ -919,12 +980,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8187deb00cb55b548abfd626ac0311a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  InputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   maxVelocity: {x: 2, y: 2}
   acceleration: {x: 1, y: 1}
   friction: {x: 0.3, y: 0.3}
   torque: 10
-  zeroVelocitySpeed: 3
+  zeroVelocitySpeed: 5
 --- !u!58 &2016120556
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -969,3 +1029,4 @@ SceneRoots:
   - {fileID: 273472083}
   - {fileID: 598001656}
   - {fileID: 2016120552}
+  - {fileID: 807987679}
