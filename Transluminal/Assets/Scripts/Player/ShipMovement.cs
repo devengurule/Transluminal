@@ -4,6 +4,7 @@ using UnityEngine.XR;
 
 public class ShipMovement : MonoBehaviour
 {
+    #region Variables
     [SerializeField]
     private Vector2 maxVelocity;
     [SerializeField]
@@ -22,8 +23,9 @@ public class ShipMovement : MonoBehaviour
     private float zeroOutFactor;
     private bool isZeroOutVelocity;
     private Rigidbody2D rb;
+    #endregion
 
-
+    #region Unity Methods
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -33,13 +35,24 @@ public class ShipMovement : MonoBehaviour
     {
         eventManager = GameController.instance.eventManager;
 
-        eventManager.Subscribe(EventType.Move, OnMove);
-        eventManager.Subscribe(EventType.Rotate, OnRotate);
-        eventManager.Subscribe(EventType.ZeroVelocityOn, OnZeroVelocity);
-        eventManager.Subscribe(EventType.ZeroVelocityOff, OffZeroVelocity);
+        if (eventManager != null)
+        {
+            eventManager.Subscribe(EventType.Move, OnMove);
+            eventManager.Subscribe(EventType.Rotate, OnRotate);
+            eventManager.Subscribe(EventType.ZeroVelocityOn, OnZeroVelocity);
+            eventManager.Subscribe(EventType.ZeroVelocityOff, OffZeroVelocity);
+        }
     }
-
-
+    private void OnDestroy()
+    {
+        if (eventManager != null)
+        {
+            eventManager.Unsubscribe(EventType.Move, OnMove);
+            eventManager.Unsubscribe(EventType.Rotate, OnRotate);
+            eventManager.Unsubscribe(EventType.ZeroVelocityOn, OnZeroVelocity);
+            eventManager.Unsubscribe(EventType.ZeroVelocityOff, OffZeroVelocity);
+        }
+    }
     private void Update()
     {
         // If pressing zero velocity button then change the factor, if not then set it to 0
@@ -50,8 +63,9 @@ public class ShipMovement : MonoBehaviour
 
         // Debug.Log($"Linear: {rb.linearVelocity},  Angular: {rb.angularVelocity}, Zero: {zeroOutFactor}");
     }
+    #endregion
 
-
+    #region Event Methods
     private void OnMove(object target)
     {
         if (target is Vector2 inputVector)
@@ -75,9 +89,9 @@ public class ShipMovement : MonoBehaviour
     {
         isZeroOutVelocity = false;
     }
+    #endregion
 
-
-
+    #region Methods
     /// <summary>
     /// Movement Logic
     /// </summary>
@@ -90,7 +104,7 @@ public class ShipMovement : MonoBehaviour
 
 
         // Applies an impulse force to the rigidbody
-        rb.AddForce(move * acceleration * Time.deltaTime, ForceMode2D.Impulse);
+        rb.AddForce(move * acceleration * TimeManager.deltaTime, ForceMode2D.Impulse);
 
 
         // Truncates velocity to match the vaximum velocity variable
@@ -102,14 +116,14 @@ public class ShipMovement : MonoBehaviour
         // Applys an opposite friction force to x & y axis seperately
         if (move.x == 0 && rb.linearVelocityX != 0)
         {
-            rb.AddForce(Vector2.right * -rb.linearVelocityX * acceleration * zeroOutFactor * friction.x * Time.deltaTime, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.right * -rb.linearVelocityX * acceleration * zeroOutFactor * friction.x * TimeManager.deltaTime, ForceMode2D.Impulse);
 
             // Clamp linear velocity
             if (Mathf.Abs(rb.linearVelocityX) < 0.01) rb.linearVelocityX = 0;
         }
         if (move.y == 0 && rb.linearVelocityY != 0)
         {
-            rb.AddForce(Vector2.up * -rb.linearVelocityY * acceleration * zeroOutFactor * friction.y * Time.deltaTime, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * -rb.linearVelocityY * acceleration * zeroOutFactor * friction.y * TimeManager.deltaTime, ForceMode2D.Impulse);
 
             // Clamp linear velocity
             if (Mathf.Abs(rb.linearVelocityY) < 0.01) rb.linearVelocityY = 0;
@@ -119,15 +133,16 @@ public class ShipMovement : MonoBehaviour
     private void RotateLogic()
     {
         // Add torque to object
-        rb.AddTorque(torque * rotationInput * Time.deltaTime);
+        rb.AddTorque(torque * rotationInput * TimeManager.deltaTime);
 
         // Apply opposite torque if zero velocity is pressed
         if (isZeroOutVelocity && rb.angularVelocity != 0)
         {
-            rb.AddTorque(Mathf.Sign(-rb.angularVelocity) * zeroOutFactor * Time.deltaTime);
+            rb.AddTorque(Mathf.Sign(-rb.angularVelocity) * zeroOutFactor * TimeManager.deltaTime);
         }
 
         // Clamp anuglar velocity
         if (Mathf.Abs(rb.angularVelocity) < 0.05) rb.angularVelocity = 0;
     }
+    #endregion
 }

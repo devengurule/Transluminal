@@ -8,5 +8,7 @@ public enum EventType
     Rotate,
     Interact,
     PlayerCollidingEnter,
-    PlayerCollidingExit
+    PlayerCollidingExit,
+    PauseOn,
+    PauseOff
 }

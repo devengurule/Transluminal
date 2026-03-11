@@ -6,19 +6,22 @@ using System.Linq;
 
 public class GameController : MonoBehaviour
 {
+    #region Variables
     [SerializeField] private List<string> PlayerInputMapScenes = new();
     [SerializeField] private List<string> ShipInputMapScenes = new();
-
 
     public static GameController instance;
     public EventManager eventManager { get; private set; }
     private PlayerInput playerInput;
     private GameObject parent;
+    private bool isPaused = false;
+    #endregion
 
+    #region Unity Methods
     private void Awake()
     {
         // Parent object
-        parent = transform.parent.gameObject;
+        parent = transform.parent != null ? transform.parent.gameObject : gameObject;
 
         // Destroy itself if singleton intance variable is not self
         if (instance != null && instance != this)
@@ -35,28 +38,80 @@ public class GameController : MonoBehaviour
         {
             eventManager = GetComponent<EventManager>();
         }
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
 
         playerInput = GetComponent<PlayerInput>();
 
+        // Subscribe to active scene change event
+        SceneManager.activeSceneChanged += SceneChange;
+    }
+
+    private void Start()
+    {
+        if (eventManager != null)
+        {
+            eventManager.Subscribe(EventType.PauseOn, OnPauseGame);
+            eventManager.Subscribe(EventType.PauseOff, OffPauseGame);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (eventManager != null)
+        {
+            eventManager.Unsubscribe(EventType.PauseOn, OnPauseGame);
+            eventManager.Unsubscribe(EventType.PauseOff, OffPauseGame);
+        }
+    }
+    #endregion
+
+    #region Event Methods
+
+    // Change Input Map when changing scenes
+    private void SceneChange(Scene current, Scene next)
+    {
         // Setting input map based on current scene
 
         if (PlayerInputMapScenes.Contains(SceneController.GetCurrentSceneName()))
         {
             // We are in Player Input Map Scenes
+
+            // Disable old map
+            playerInput.actions.FindActionMap("Ship").Disable();
+
+            // Enable new map
             ChangeInputMap("Player");
+
         }
         else if (ShipInputMapScenes.Contains(SceneController.GetCurrentSceneName()))
         {
             // We are in Ship Input Map Scenes
+
+            // Disable old map
+            playerInput.actions.FindActionMap("Player").Disable();
+
+            // Setup new map
             ChangeInputMap("Ship");
         }
     }
 
-    #region Event Methods
+
+    // Pause game
+    private void OnPauseGame(object target)
+    {
+        isPaused = true;
+        TimeManager.timeScale = 0;
+    }
+
+    // Unpause game
+    private void OffPauseGame(object target)
+    {
+        isPaused = false;
+        TimeManager.timeScale = 1;
+    }
 
     #endregion
 
@@ -66,9 +121,10 @@ public class GameController : MonoBehaviour
         playerInput.SwitchCurrentActionMap(mapName);
     }
 
-    private bool isActiveScene(string sceneName)
+    public bool IsPaused()
     {
-        return SceneController.GetCurrentSceneName() == sceneName;
+        return isPaused;
     }
+
     #endregion
 }

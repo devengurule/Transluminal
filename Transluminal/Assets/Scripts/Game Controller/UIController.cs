@@ -4,12 +4,16 @@ using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
+    #region Variables
     [SerializeField] private string elevatorButtonTag;
 
     private GameObject canvas;
     private EventManager eventManager;
     private bool interactWithElevator = false;
+    
+    #endregion
 
+    #region Unity Methods
     private void Start()
     {
         canvas = GameObject.Find("Canvas");
@@ -19,19 +23,31 @@ public class UIController : MonoBehaviour
 
         eventManager = GameController.instance.eventManager;
 
-        eventManager.Subscribe(EventType.PlayerCollidingEnter, OnPlayerCollidingEnter);
-        eventManager.Subscribe(EventType.PlayerCollidingExit, OnPlayerCollidingExit);
-        eventManager.Subscribe(EventType.Interact, OnInteractPressed);
+        if (eventManager != null)
+        {
+            eventManager.Subscribe(EventType.PlayerCollidingEnter, OnPlayerCollidingEnter);
+            eventManager.Subscribe(EventType.PlayerCollidingExit, OnPlayerCollidingExit);
+            eventManager.Subscribe(EventType.Interact, OnInteractPressed);
+        }
     }
 
+    private void OnDestroy()
+    {
+        if (eventManager != null)
+        {
+            eventManager.Unsubscribe(EventType.PlayerCollidingEnter, OnPlayerCollidingEnter);
+            eventManager.Unsubscribe(EventType.PlayerCollidingExit, OnPlayerCollidingExit);
+            eventManager.Unsubscribe(EventType.Interact, OnInteractPressed);
+        }
+    }
+    #endregion
+
+    #region Event Methods
     private void OnSceneChange(Scene scene, LoadSceneMode mode)
     {
         // Close Elevator Button Menu if Enabled
         ToggleElevatorButtonUI();
     }
-
-    #region Event Methods
-
 
     private void OnPlayerCollidingEnter(object target)
     {
@@ -54,7 +70,7 @@ public class UIController : MonoBehaviour
 
     private void OnInteractPressed(object target)
     {
-        if (interactWithElevator)
+        if (interactWithElevator && !GameController.instance.IsPaused())
         {
             ToggleElevatorButtonUI();
         }
@@ -62,8 +78,10 @@ public class UIController : MonoBehaviour
 
     #endregion
 
+    #region Methods
     public void GotoFloor(string sceneName)
     {
+        if (GameController.instance.IsPaused()) eventManager.Publish(EventType.PauseOff);
         if(SceneController.GetCurrentSceneName() != sceneName) SceneController.GoToScene(sceneName);
     }
 
@@ -74,7 +92,10 @@ public class UIController : MonoBehaviour
 
         bool elevatorActive = elevatorButtonUI.activeSelf ? false : true;
 
+        if(elevatorActive) eventManager.Publish(EventType.PauseOn);
+        else eventManager.Publish(EventType.PauseOff);
+
         elevatorButtonUI.SetActive(elevatorActive);
     }
-    
+    #endregion
 }

@@ -18,7 +18,7 @@ public class EventManager : MonoBehaviour
         try
         {
             // Create new delegate is none exist
-            if (!eventDict.ContainsKey(eventType))
+            if (!eventDict.ContainsKey(eventType) && GameController.instance.eventManager != null)
             {
                 eventDict[eventType] = delegate { };
             }
@@ -37,7 +37,7 @@ public class EventManager : MonoBehaviour
         try
         {
             // Remove action from delegate
-            if (eventDict.ContainsKey(eventType))
+            if (eventDict.ContainsKey(eventType) && GameController.instance.eventManager != null)
             {
                 eventDict[eventType] -= action;
             }
@@ -55,7 +55,7 @@ public class EventManager : MonoBehaviour
         try
         {
             // Invoke action is delegate for it exists
-            if (eventDict.ContainsKey(eventType))
+            if (eventDict.ContainsKey(eventType) && GameController.instance.eventManager != null)
             {
                 eventDict[eventType]?.Invoke(value);
             }

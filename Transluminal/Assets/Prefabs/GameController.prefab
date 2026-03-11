@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6634095558274168756}
   - component: {fileID: 3006616816486173682}
   - component: {fileID: 8720231284267223148}
+  - component: {fileID: 8201333511005902088}
   - component: {fileID: 5678059885205768987}
   m_Layer: 0
   m_Name: GameController
@@ -48,7 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd6f3524f3ea38c4fb2fb2e1ca5fd467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameController
-  elevatorButtonTag: ElevatorButton
+  PlayerInputMapScenes: []
+  ShipInputMapScenes: []
 --- !u!114 &6634095558274168756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,6 +87,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8569c22252e066b498179d58372da611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIController
+  elevatorButtonTag: 
+--- !u!114 &8201333511005902088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3186157511489886338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5d26069f5706af4c8cf4a382f656c97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TimeManager
 --- !u!114 &5678059885205768987
 MonoBehaviour:
   m_ObjectHideFlags: 0

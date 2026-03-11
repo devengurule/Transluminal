@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class CollisionManager : MonoBehaviour
 {
+    #region Variables
     private EventManager eventManager;
+    #endregion
 
+    #region Unity Methods
     private void Start()
     {
         eventManager = GameController.instance.eventManager;
@@ -32,4 +35,5 @@ public class CollisionManager : MonoBehaviour
         // Publish that a collision stopped happening with the player
         eventManager.Publish(EventType.PlayerCollidingExit, collision.gameObject);
     }
+    #endregion
 }

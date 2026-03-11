@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
+    #region Methods
     public static void GoToScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
@@ -17,4 +18,5 @@ public class SceneController : MonoBehaviour
     {
         return SceneManager.GetActiveScene();
     }
+    #endregion
 }

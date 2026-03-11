@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
+    #region Variables
     [SerializeField]
     private Vector2 walkVelocity;
     [SerializeField]
@@ -16,7 +17,9 @@ public class Movement : MonoBehaviour
     private Vector2 move = Vector2.zero;
     private Vector2 maxVelocity;
     private Rigidbody2D rb;
+    #endregion
 
+    #region Unity Methods
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -28,15 +31,31 @@ public class Movement : MonoBehaviour
 
         maxVelocity = walkVelocity;
 
-        eventManager.Subscribe(EventType.Move, OnMove);
-        eventManager.Subscribe(EventType.SprintOn, OnSprint);
-        eventManager.Subscribe(EventType.SprintOff, OffSprint);
+        if (eventManager != null)
+        {
+            eventManager.Subscribe(EventType.Move, OnMove);
+            eventManager.Subscribe(EventType.SprintOn, OnSprint);
+            eventManager.Subscribe(EventType.SprintOff, OffSprint);
+            eventManager.Subscribe(EventType.PauseOn, OnPauseGame);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (eventManager != null)
+        {
+            eventManager.Unsubscribe(EventType.Move, OnMove);
+            eventManager.Unsubscribe(EventType.SprintOn, OnSprint);
+            eventManager.Unsubscribe(EventType.SprintOff, OffSprint);
+            eventManager.Unsubscribe(EventType.PauseOn, OnPauseGame);
+        }
     }
 
     private void Update()
     {
         MovementLogic();
     }
+    #endregion
 
     #region Event Methods
     private void OnMove(object target)
@@ -60,16 +79,20 @@ public class Movement : MonoBehaviour
         maxVelocity = walkVelocity;
     }
 
+    private void OnPauseGame(object target)
+    {
+        // Set all physics numbers to zero when paused
+        rb.linearVelocity = Vector2.zero;
+        move = Vector2.zero;
+    }
+
     #endregion
 
-    /// <summary>
-    /// Movement Logic
-    /// </summary>
+    #region Methods
     private void MovementLogic()
     {
-
         // Applies an impulse force to the rigidbody
-        rb.AddForce(move * acceleration * Time.deltaTime, ForceMode2D.Impulse);
+        rb.AddForce(move * acceleration * TimeManager.deltaTime, ForceMode2D.Impulse);
 
 
         // Truncates velocity to match the vaximum velocity variable
@@ -81,15 +104,16 @@ public class Movement : MonoBehaviour
         // Applys an opposite friction force to x & y axis seperately
         if (move.x == 0 && rb.linearVelocityX != 0)
         {
-            rb.AddForce(Vector2.right * -rb.linearVelocityX * acceleration * friction.x * Time.deltaTime, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.right * -rb.linearVelocityX * acceleration * friction.x * TimeManager.deltaTime, ForceMode2D.Impulse);
 
             if (Mathf.Abs(rb.linearVelocityX) < 0.005) rb.linearVelocityX = 0;
         }
         if (move.y == 0 && rb.linearVelocityY != 0)
         {
-            rb.AddForce(Vector2.up * -rb.linearVelocityY * acceleration * friction.y * Time.deltaTime, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * -rb.linearVelocityY * acceleration * friction.y * TimeManager.deltaTime, ForceMode2D.Impulse);
 
             if (Mathf.Abs(rb.linearVelocityY) < 0.005) rb.linearVelocityY = 0;
         }
     }
+    #endregion
 }

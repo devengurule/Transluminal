@@ -3,11 +3,14 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
+    #region Variables
     private EventManager eventManager;
     private PlayerInput playerInput;
     private InputAction sprintAction;
     private InputAction zeroVelocityAction;
+    #endregion
 
+    #region Unity Methods
     private void Start()
     {
         eventManager = GameController.instance.eventManager;
@@ -18,6 +21,7 @@ public class InputManager : MonoBehaviour
 
         if (playerInput.currentActionMap.name == "Ship") zeroVelocityAction = playerInput.actions["ZeroVelocity"];
     }
+    #endregion
 
     #region Toggle Events
     private void Update()
@@ -69,5 +73,18 @@ public class InputManager : MonoBehaviour
     {
         eventManager.Publish(EventType.Interact);
     }
+
+    private void OnPause()
+    {
+        if (GameController.instance.IsPaused())
+        {
+            // Currentyly Paused
+            eventManager.Publish(EventType.PauseOff);
+        }
+        // Not currently paused
+        else eventManager.Publish(EventType.PauseOn);
+        
+    }
+
     #endregion
 }

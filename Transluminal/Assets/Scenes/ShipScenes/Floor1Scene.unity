@@ -2792,6 +2792,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1078748646704311672, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: ShipInputMapScenes.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1078748646704311672, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
       propertyPath: 'doNotDeleteList.Array.data[0]'
       value: 
       objectReference: {fileID: 1141249760}
@@ -2811,6 +2815,30 @@ PrefabInstance:
       propertyPath: 'doNotDestroyList.Array.data[1]'
       value: 
       objectReference: {fileID: 1141249760}
+    - target: {fileID: 1078748646704311672, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: PlayerInputMapScenes.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1078748646704311672, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: 'ShipInputMapScenes.Array.data[0]'
+      value: OSDevRoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 1078748646704311672, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: 'PlayerInputMapScenes.Array.data[0]'
+      value: ISDevRoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 1078748646704311672, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: 'PlayerInputMapScenes.Array.data[1]'
+      value: Floor1Scene
+      objectReference: {fileID: 0}
+    - target: {fileID: 1078748646704311672, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: 'PlayerInputMapScenes.Array.data[2]'
+      value: Floor2Scene
+      objectReference: {fileID: 0}
+    - target: {fileID: 1078748646704311672, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: 'PlayerInputMapScenes.Array.data[3]'
+      value: Floor3Scene
+      objectReference: {fileID: 0}
     - target: {fileID: 3186157511489886338, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
       propertyPath: m_Name
       value: GameController
