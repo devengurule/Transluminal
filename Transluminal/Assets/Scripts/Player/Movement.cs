@@ -19,12 +19,13 @@ public class Movement : MonoBehaviour
 
     private void Awake()
     {
-        eventManager = GameController.instance.eventManager;
         rb = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
     {
+        eventManager = GameController.instance.eventManager;
+
         maxVelocity = walkVelocity;
 
         eventManager.Subscribe(EventType.Move, OnMove);
@@ -37,8 +38,10 @@ public class Movement : MonoBehaviour
         MovementLogic();
     }
 
+    #region Event Methods
     private void OnMove(object target)
     {
+        // Set move to the input vector
         if (target is Vector2 move)
         {
             this.move = move;
@@ -56,6 +59,8 @@ public class Movement : MonoBehaviour
         // Sets max velocity to walk if the sprint button is released
         maxVelocity = walkVelocity;
     }
+
+    #endregion
 
     /// <summary>
     /// Movement Logic

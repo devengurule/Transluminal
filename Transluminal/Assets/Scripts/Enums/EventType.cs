@@ -5,5 +5,8 @@ public enum EventType
     SprintOff,
     ZeroVelocityOn,
     ZeroVelocityOff,
-    Rotate
+    Rotate,
+    Interact,
+    PlayerCollidingEnter,
+    PlayerCollidingExit
 }

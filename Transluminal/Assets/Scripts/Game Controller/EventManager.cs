@@ -8,6 +8,8 @@ public class EventManager : MonoBehaviour
 
     private void Awake()
     {
+
+        // Create EventType, Action dictionary
         eventDict = new Dictionary<EventType, Action<object>>();
     }
 
@@ -15,16 +17,18 @@ public class EventManager : MonoBehaviour
     {
         try
         {
+            // Create new delegate is none exist
             if (!eventDict.ContainsKey(eventType))
             {
                 eventDict[eventType] = delegate { };
             }
 
+            // Add action to delegate
             eventDict[eventType] += action;
         }
-        catch
+        catch (Exception e)
         {
-            Debug.Log($"Failed to Subscribe {eventType}, {action}");
+            Debug.Log($"Failed to Subscribe {eventType}, {action}: {e}");
         }
     }
 
@@ -32,29 +36,33 @@ public class EventManager : MonoBehaviour
     {
         try
         {
+            // Remove action from delegate
             if (eventDict.ContainsKey(eventType))
             {
                 eventDict[eventType] -= action;
             }
         }
-        catch
+        catch (Exception e)
         {
-            Debug.Log($"Failed to Unsubscribe {eventType}, {action}");
+            Debug.Log($"Failed to Unsubscribe {eventType}, {action}: {e}");
         }
     }
 
     public void Publish(EventType eventType, object value = null)
     {
+
+
         try
         {
+            // Invoke action is delegate for it exists
             if (eventDict.ContainsKey(eventType))
             {
                 eventDict[eventType]?.Invoke(value);
             }
         }
-        catch
+        catch (Exception e)
         {
-            Debug.Log($"Fauled to Publish {eventType}, {value}");
+            Debug.Log($"Failed to Publish {eventType}, {value}: {e}");
         }
     }
 }

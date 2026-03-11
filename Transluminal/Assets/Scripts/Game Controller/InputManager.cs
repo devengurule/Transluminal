@@ -13,6 +13,7 @@ public class InputManager : MonoBehaviour
         eventManager = GameController.instance.eventManager;
         playerInput = GetComponent<PlayerInput>();
         
+        // Toggle Event Actions
         if(playerInput.currentActionMap.name == "Player") sprintAction = playerInput.actions["Sprint"];
 
         if (playerInput.currentActionMap.name == "Ship") zeroVelocityAction = playerInput.actions["ZeroVelocity"];
@@ -52,6 +53,7 @@ public class InputManager : MonoBehaviour
     }
     #endregion
 
+    #region Instance Events
     private void OnMove(InputValue value)
     {
         Vector2 moveVector = value.Get<Vector2>().normalized;
@@ -63,4 +65,9 @@ public class InputManager : MonoBehaviour
         eventManager.Publish(EventType.Rotate, inputValue);
     }
 
+    private void OnInteract()
+    {
+        eventManager.Publish(EventType.Interact);
+    }
+    #endregion
 }

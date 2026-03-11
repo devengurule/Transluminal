@@ -26,12 +26,13 @@ public class ShipMovement : MonoBehaviour
 
     private void Awake()
     {
-        eventManager = GameController.instance.eventManager;
         rb = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
     {
+        eventManager = GameController.instance.eventManager;
+
         eventManager.Subscribe(EventType.Move, OnMove);
         eventManager.Subscribe(EventType.Rotate, OnRotate);
         eventManager.Subscribe(EventType.ZeroVelocityOn, OnZeroVelocity);

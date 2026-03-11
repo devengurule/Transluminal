@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - ElevatorButton
+  - Persistent
   layers:
   - Default
   - TransparentFX
@@ -43,6 +45,9 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 777021935
+    locked: 0
+  - name: Midground
+    uniqueID: 3458933165
     locked: 0
   - name: Collision
     uniqueID: 1786104339

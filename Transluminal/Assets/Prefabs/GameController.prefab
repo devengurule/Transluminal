@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1078748646704311672}
   - component: {fileID: 6634095558274168756}
   - component: {fileID: 3006616816486173682}
+  - component: {fileID: 8720231284267223148}
   - component: {fileID: 5678059885205768987}
   m_Layer: 0
   m_Name: GameController
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 3186157511489886338}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.12959, y: -0.19567, z: 0}
+  m_LocalPosition: {x: -2.25325, y: -0.63718, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -47,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd6f3524f3ea38c4fb2fb2e1ca5fd467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameController
+  elevatorButtonTag: ElevatorButton
 --- !u!114 &6634095558274168756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,6 +73,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2201793db59bc945b78b98a03dda43e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputManager
+--- !u!114 &8720231284267223148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3186157511489886338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8569c22252e066b498179d58372da611, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIController
 --- !u!114 &5678059885205768987
 MonoBehaviour:
   m_ObjectHideFlags: 0
