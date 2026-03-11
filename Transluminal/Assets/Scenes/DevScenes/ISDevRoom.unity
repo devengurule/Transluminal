@@ -206,19 +206,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 462629395}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1234650705}
-        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: GotoFloor
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: ISDevRoom
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &462629395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -658,19 +646,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 707625715}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1234650705}
-        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
-        m_MethodName: GotoFloor
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Floor2Scene
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &707625715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2070,17 +2046,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &1234650705 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8720231284267223148, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
-  m_PrefabInstance: {fileID: 2198259281104388548}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 31351563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8569c22252e066b498179d58372da611, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UIController
 --- !u!4 &1234650710 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4473276063552946694, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
