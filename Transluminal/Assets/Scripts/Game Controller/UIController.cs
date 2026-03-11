@@ -10,7 +10,9 @@ public class UIController : MonoBehaviour
     private GameObject canvas;
     private EventManager eventManager;
     private bool interactWithElevator = false;
-    
+
+    public static bool isUIUP { get; private set; } = false;
+
     #endregion
 
     #region Unity Methods
@@ -28,6 +30,7 @@ public class UIController : MonoBehaviour
             eventManager.Subscribe(EventType.PlayerCollidingEnter, OnPlayerCollidingEnter);
             eventManager.Subscribe(EventType.PlayerCollidingExit, OnPlayerCollidingExit);
             eventManager.Subscribe(EventType.Interact, OnInteractPressed);
+            eventManager.Subscribe(EventType.Pause, OnPauseGame);
         }
     }
 
@@ -38,6 +41,7 @@ public class UIController : MonoBehaviour
             eventManager.Unsubscribe(EventType.PlayerCollidingEnter, OnPlayerCollidingEnter);
             eventManager.Unsubscribe(EventType.PlayerCollidingExit, OnPlayerCollidingExit);
             eventManager.Unsubscribe(EventType.Interact, OnInteractPressed);
+            eventManager.Subscribe(EventType.Pause, OnPauseGame);
         }
     }
     #endregion
@@ -70,7 +74,15 @@ public class UIController : MonoBehaviour
 
     private void OnInteractPressed(object target)
     {
-        if (interactWithElevator && !GameController.instance.IsPaused())
+        if (interactWithElevator)
+        {
+            ToggleElevatorButtonUI();
+        }
+    }
+
+    private void OnPauseGame(object target)
+    {
+        if (interactWithElevator && isUIUP)
         {
             ToggleElevatorButtonUI();
         }
@@ -81,7 +93,6 @@ public class UIController : MonoBehaviour
     #region Methods
     public void GotoFloor(string sceneName)
     {
-        if (GameController.instance.IsPaused()) eventManager.Publish(EventType.PauseOff);
         if(SceneController.GetCurrentSceneName() != sceneName) SceneController.GoToScene(sceneName);
     }
 
@@ -90,12 +101,31 @@ public class UIController : MonoBehaviour
         // Toggles Elevator Button UI
         GameObject elevatorButtonUI = canvas.transform.Find("ElevatorButtonUI").gameObject;
 
-        bool elevatorActive = elevatorButtonUI.activeSelf ? false : true;
+        bool elevatorActive = elevatorButtonUI.activeSelf;
 
-        if(elevatorActive) eventManager.Publish(EventType.PauseOn);
-        else eventManager.Publish(EventType.PauseOff);
-
-        elevatorButtonUI.SetActive(elevatorActive);
+        if (elevatorActive)
+        {
+            elevatorButtonUI.SetActive(false);
+            isUIUP = false;
+            // UnPause
+            PauseController.UnPauseGame();
+        }
+        else
+        {
+            if (PauseController.isPaused)
+            {
+                // Unpause
+                PauseController.UnPauseGame();
+            }
+            else
+            {
+                elevatorButtonUI.SetActive(true);
+                isUIUP = true;
+                // Pause
+                PauseController.PauseGame();
+            }
+        }
     }
+
     #endregion
 }

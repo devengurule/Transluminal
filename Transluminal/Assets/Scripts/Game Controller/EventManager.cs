@@ -8,61 +8,66 @@ public class EventManager : MonoBehaviour
 
     private void Awake()
     {
-
         // Create EventType, Action dictionary
         eventDict = new Dictionary<EventType, Action<object>>();
     }
 
     public void Subscribe(EventType eventType, Action<object> action)
     {
-        try
+        if (GameController.instance.eventManager != null)
         {
-            // Create new delegate is none exist
-            if (!eventDict.ContainsKey(eventType) && GameController.instance.eventManager != null)
+            try
             {
-                eventDict[eventType] = delegate { };
-            }
+                // Create new delegate is none exist
+                if (!eventDict.ContainsKey(eventType))
+                {
+                    eventDict[eventType] = delegate { };
+                }
 
-            // Add action to delegate
-            eventDict[eventType] += action;
-        }
-        catch (Exception e)
-        {
-            Debug.Log($"Failed to Subscribe {eventType}, {action}: {e}");
+                // Add action to delegate
+                eventDict[eventType] += action;
+            }
+            catch (Exception e)
+            {
+                Debug.Log($"Failed to Subscribe {eventType}, {action}: {e}");
+            }
         }
     }
 
     public void Unsubscribe(EventType eventType, Action<object> action)
     {
-        try
-        {
-            // Remove action from delegate
-            if (eventDict.ContainsKey(eventType) && GameController.instance.eventManager != null)
+        if (GameController.instance.eventManager != null) {
+            try
             {
-                eventDict[eventType] -= action;
+                // Remove action from delegate
+                if (eventDict.ContainsKey(eventType))
+                {
+                    eventDict[eventType] -= action;
+                }
             }
-        }
-        catch (Exception e)
-        {
-            Debug.Log($"Failed to Unsubscribe {eventType}, {action}: {e}");
+            catch (Exception e)
+            {
+                Debug.Log($"Failed to Unsubscribe {eventType}, {action}: {e}");
+            }
         }
     }
 
     public void Publish(EventType eventType, object value = null)
     {
-
-
-        try
+        if (GameController.instance.eventManager != null)
         {
-            // Invoke action is delegate for it exists
-            if (eventDict.ContainsKey(eventType) && GameController.instance.eventManager != null)
+            try
             {
-                eventDict[eventType]?.Invoke(value);
+                // Invoke action is delegate for it exists
+                if (eventDict.ContainsKey(eventType))
+                {
+                    eventDict[eventType]?.Invoke(value);
+                }
             }
-        }
-        catch (Exception e)
-        {
-            Debug.Log($"Failed to Publish {eventType}, {value}: {e}");
+            catch (Exception e)
+            {
+                Debug.Log($"Failed to Publish {eventType}, {value}: {e}");
+            }
         }
     }
 }

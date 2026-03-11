@@ -10,5 +10,6 @@ public enum EventType
     PlayerCollidingEnter,
     PlayerCollidingExit,
     PauseOn,
-    PauseOff
+    PauseOff,
+    Pause
 }

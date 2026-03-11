@@ -14,7 +14,6 @@ public class GameController : MonoBehaviour
     public EventManager eventManager { get; private set; }
     private PlayerInput playerInput;
     private GameObject parent;
-    private bool isPaused = false;
     #endregion
 
     #region Unity Methods
@@ -53,8 +52,8 @@ public class GameController : MonoBehaviour
     {
         if (eventManager != null)
         {
-            eventManager.Subscribe(EventType.PauseOn, OnPauseGame);
-            eventManager.Subscribe(EventType.PauseOff, OffPauseGame);
+            // Subscribe Events
+
         }
     }
 
@@ -62,8 +61,8 @@ public class GameController : MonoBehaviour
     {
         if (eventManager != null)
         {
-            eventManager.Unsubscribe(EventType.PauseOn, OnPauseGame);
-            eventManager.Unsubscribe(EventType.PauseOff, OffPauseGame);
+            // Unsubscribe Events
+
         }
     }
     #endregion
@@ -98,21 +97,6 @@ public class GameController : MonoBehaviour
         }
     }
 
-
-    // Pause game
-    private void OnPauseGame(object target)
-    {
-        isPaused = true;
-        TimeManager.timeScale = 0;
-    }
-
-    // Unpause game
-    private void OffPauseGame(object target)
-    {
-        isPaused = false;
-        TimeManager.timeScale = 1;
-    }
-
     #endregion
 
     #region Methods
@@ -120,11 +104,5 @@ public class GameController : MonoBehaviour
     {
         playerInput.SwitchCurrentActionMap(mapName);
     }
-
-    public bool IsPaused()
-    {
-        return isPaused;
-    }
-
     #endregion
 }

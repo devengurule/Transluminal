@@ -76,14 +76,7 @@ public class InputManager : MonoBehaviour
 
     private void OnPause()
     {
-        if (GameController.instance.IsPaused())
-        {
-            // Currentyly Paused
-            eventManager.Publish(EventType.PauseOff);
-        }
-        // Not currently paused
-        else eventManager.Publish(EventType.PauseOn);
-        
+        eventManager.Publish(EventType.Pause);
     }
 
     #endregion
