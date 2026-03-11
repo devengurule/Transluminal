@@ -12,20 +12,18 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
+        // Parent object
         parent = transform.parent.gameObject;
 
+        // Destroy itself if singleton intance variable is not self
         if (instance != null && instance != this)
         {
             Destroy(parent);
             return;
         }
 
-        instance = this;
-
+        // Dont destroy parent object when loading into scene
         DontDestroyOnLoad(parent);
-
-        // Subscribe to changing scene event
-        SceneManager.sceneLoaded += OnSceneChange;
 
         // Set up instance so other objects can get the event manager instance
         if (eventManager == null)
@@ -39,7 +37,6 @@ public class GameController : MonoBehaviour
 
         playerInput = GetComponent<PlayerInput>();
 
-
         // Setting input map based on current scene
         if (isActiveScene("ISDevRoom"))
         {
@@ -49,15 +46,6 @@ public class GameController : MonoBehaviour
         {
             ChangeInputMap("Ship");
         }
-    }
-
-    private void OnSceneChange(Scene scene, LoadSceneMode mode)
-    {
-        //if(GameObject.FindGameObjectsWithTag(parent.tag).Length > 1)
-        //{
-        //    Destroy(parent);
-        //    return;
-        //}
     }
 
     #region Event Methods
