@@ -2,9 +2,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class GameController : MonoBehaviour
 {
+    [SerializeField] private List<string> PlayerInputMapScenes = new();
+    [SerializeField] private List<string> ShipInputMapScenes = new();
+
+
     public static GameController instance;
     public EventManager eventManager { get; private set; }
     private PlayerInput playerInput;
@@ -38,12 +43,15 @@ public class GameController : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
 
         // Setting input map based on current scene
-        if (isActiveScene("ISDevRoom"))
+
+        if (PlayerInputMapScenes.Contains(SceneController.GetCurrentSceneName()))
         {
+            // We are in Player Input Map Scenes
             ChangeInputMap("Player");
         }
-        else if (isActiveScene("OSDevRoom"))
+        else if (ShipInputMapScenes.Contains(SceneController.GetCurrentSceneName()))
         {
+            // We are in Ship Input Map Scenes
             ChangeInputMap("Ship");
         }
     }

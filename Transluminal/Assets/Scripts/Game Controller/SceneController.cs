@@ -12,4 +12,9 @@ public class SceneController : MonoBehaviour
     {
         return SceneManager.GetActiveScene().name;
     }
+
+    public static Scene GetCurrentScene()
+    {
+        return SceneManager.GetActiveScene();
+    }
 }
