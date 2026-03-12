@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ElevatorButton
   - Persistent
+  - PauseUI
   layers:
   - Default
   - TransparentFX

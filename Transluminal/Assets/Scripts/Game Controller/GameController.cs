@@ -54,6 +54,7 @@ public class GameController : MonoBehaviour
         {
             // Subscribe Events
             eventManager.Subscribe(EventType.Interact, OnInteractPressed);
+            eventManager.Subscribe(EventType.Restart, OnRestartGame);
         }
     }
 
@@ -63,7 +64,7 @@ public class GameController : MonoBehaviour
         {
             // Unsubscribe Events
             eventManager.Unsubscribe(EventType.Interact, OnInteractPressed);
-
+            eventManager.Unsubscribe(EventType.Restart, OnRestartGame);
         }
     }
     #endregion
@@ -106,6 +107,10 @@ public class GameController : MonoBehaviour
             print(1);
             SceneController.GoToScene("Floor1Scene");
         }
+    }
+    private void OnRestartGame(object target)
+    {
+        SceneController.GoToScene("Floor1Scene");
     }
 
     #endregion

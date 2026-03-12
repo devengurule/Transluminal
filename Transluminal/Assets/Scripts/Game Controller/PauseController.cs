@@ -11,6 +11,7 @@ public class PauseController : MonoBehaviour
     #region Unity Methods
     private void Start()
     {
+
         eventManager = GameController.instance.eventManager;
 
         if (eventManager != null)

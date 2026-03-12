@@ -83,6 +83,10 @@ public class InputManager : MonoBehaviour
     {
         eventManager.Publish(EventType.Interact);
     }
+    private void OnRestart()
+    {
+        eventManager.Publish(EventType.Restart);
+    }
 
     #endregion
 }

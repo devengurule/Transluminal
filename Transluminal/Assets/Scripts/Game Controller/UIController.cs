@@ -67,7 +67,7 @@ public class UIController : MonoBehaviour
     private void OnInteractPressed(object target)
     {
         // Toggle UI menu
-        if (isUIUP)
+        if (isUIUP && interactWithUI)
         {
             TurnOffMenu();
 
@@ -76,7 +76,7 @@ public class UIController : MonoBehaviour
                 PauseController.UnPauseGame();
             }
         }
-        else
+        else if(interactWithUI)
         {
             TurnOnMenu();
 
