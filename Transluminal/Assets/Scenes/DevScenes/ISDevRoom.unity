@@ -1828,7 +1828,7 @@ GameObject:
   - component: {fileID: 1156169294}
   - component: {fileID: 1156169293}
   - component: {fileID: 1156169292}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: ElevatorButtonCollider
   m_TagString: ElevatorButton
   m_Icon: {fileID: 0}
@@ -2323,7 +2323,7 @@ GameObject:
   - component: {fileID: 1748458085}
   m_Layer: 5
   m_Name: ElevatorButtonUI
-  m_TagString: Untagged
+  m_TagString: ElevatorButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

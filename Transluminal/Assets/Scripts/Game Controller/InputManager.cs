@@ -22,7 +22,7 @@ public class InputManager : MonoBehaviour
         if (playerInput.currentActionMap.name == "Ship") zeroVelocityAction = playerInput.actions["ZeroVelocity"];
     }
     #endregion
-
+    
     #region Toggle Events
     private void Update()
     {
@@ -77,6 +77,11 @@ public class InputManager : MonoBehaviour
     private void OnPause()
     {
         eventManager.Publish(EventType.Pause);
+    }
+
+    private void OnLeaveShip()
+    {
+        eventManager.Publish(EventType.Interact);
     }
 
     #endregion

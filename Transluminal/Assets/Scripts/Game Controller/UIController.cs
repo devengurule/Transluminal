@@ -5,24 +5,17 @@ using UnityEngine.SceneManagement;
 public class UIController : MonoBehaviour
 {
     #region Variables
-    [SerializeField] private string elevatorButtonTag;
-
-    private GameObject canvas;
     private EventManager eventManager;
-    private bool interactWithElevator = false;
+    private bool interactWithUI = false;
+    private string colliderLayerName = "UICollider";
+    private static string availableUIInteractTag = "";
 
     public static bool isUIUP { get; private set; } = false;
-
     #endregion
 
     #region Unity Methods
     private void Start()
     {
-        canvas = GameObject.Find("Canvas");
-
-        // Subscribe to changing scene event
-        SceneManager.sceneLoaded += OnSceneChange;
-
         eventManager = GameController.instance.eventManager;
 
         if (eventManager != null)
@@ -30,7 +23,6 @@ public class UIController : MonoBehaviour
             eventManager.Subscribe(EventType.PlayerCollidingEnter, OnPlayerCollidingEnter);
             eventManager.Subscribe(EventType.PlayerCollidingExit, OnPlayerCollidingExit);
             eventManager.Subscribe(EventType.Interact, OnInteractPressed);
-            eventManager.Subscribe(EventType.Pause, OnPauseGame);
         }
     }
 
@@ -41,91 +33,100 @@ public class UIController : MonoBehaviour
             eventManager.Unsubscribe(EventType.PlayerCollidingEnter, OnPlayerCollidingEnter);
             eventManager.Unsubscribe(EventType.PlayerCollidingExit, OnPlayerCollidingExit);
             eventManager.Unsubscribe(EventType.Interact, OnInteractPressed);
-            eventManager.Subscribe(EventType.Pause, OnPauseGame);
         }
     }
     #endregion
 
     #region Event Methods
-    private void OnSceneChange(Scene scene, LoadSceneMode mode)
-    {
-        // Close Elevator Button Menu if Enabled
-        ToggleElevatorButtonUI();
-    }
 
     private void OnPlayerCollidingEnter(object target)
     {
         GameObject gameObject = target as GameObject;
+        int layerID = LayerMask.NameToLayer(colliderLayerName);
 
-        if (gameObject.tag == elevatorButtonTag)
+
+        if (gameObject.layer == layerID)
         {
-            interactWithElevator = true;
+            interactWithUI = true;
+            availableUIInteractTag = gameObject.tag;
         }
     }
     private void OnPlayerCollidingExit(object target)
     {
         GameObject gameObject = target as GameObject;
+        int layerID = LayerMask.NameToLayer(colliderLayerName);
 
-        if (gameObject.tag == elevatorButtonTag)
+
+        if (gameObject.layer == layerID)
         {
-            interactWithElevator = false;
+            interactWithUI = false;
+            availableUIInteractTag = "";
         }
     }
 
     private void OnInteractPressed(object target)
     {
-        if (interactWithElevator)
+        // Toggle UI menu
+        if (isUIUP)
         {
-            ToggleElevatorButtonUI();
-        }
-    }
+            TurnOffMenu();
 
-    private void OnPauseGame(object target)
-    {
-        if (interactWithElevator && isUIUP)
+            if(PauseController.isPaused)
+            {
+                PauseController.UnPauseGame();
+            }
+        }
+        else
         {
-            ToggleElevatorButtonUI();
+            TurnOnMenu();
+
+            if (!PauseController.isPaused)
+            {
+                PauseController.PauseGame();
+            }
         }
     }
 
     #endregion
 
     #region Methods
-    public void GotoFloor(string sceneName)
+    // Turn on UI by tag
+    public static void TurnOnMenu()
     {
-        if(SceneController.GetCurrentSceneName() != sceneName) SceneController.GoToScene(sceneName);
+        GameObject canvas = GameObject.Find("Canvas");
+        GameObject UIObject = UIController.FindChildWithTag(canvas, UIController.availableUIInteractTag);
+
+        if(UIObject != null)
+        {
+            UIObject.SetActive(true);
+            isUIUP = true;
+        }
     }
 
-    private void ToggleElevatorButtonUI()
+    // Turn off UI by tag
+    public static void TurnOffMenu()
     {
-        // Toggles Elevator Button UI
-        GameObject elevatorButtonUI = canvas.transform.Find("ElevatorButtonUI").gameObject;
+        GameObject canvas = GameObject.Find("Canvas");
+        GameObject UIObject = UIController.FindChildWithTag(canvas, UIController.availableUIInteractTag);
 
-        bool elevatorActive = elevatorButtonUI.activeSelf;
-
-        if (elevatorActive)
+        if (UIObject != null)
         {
-            elevatorButtonUI.SetActive(false);
+            UIObject.SetActive(false);
             isUIUP = false;
-            // UnPause
-            PauseController.UnPauseGame();
-        }
-        else
-        {
-            if (PauseController.isPaused)
-            {
-                // Unpause
-                PauseController.UnPauseGame();
-            }
-            else
-            {
-                elevatorButtonUI.SetActive(true);
-                isUIUP = true;
-                // Pause
-                PauseController.PauseGame();
-            }
         }
     }
 
+    // Find child game object of obj parent by tag
+    private static GameObject FindChildWithTag(GameObject obj, string tag)
+    {
+        foreach (Transform child in obj.transform)
+        {
+            if(child.gameObject.tag == tag)
+            {
+                return child.gameObject;
+            }
+        }
+        return null;
+    }
     #endregion
 }

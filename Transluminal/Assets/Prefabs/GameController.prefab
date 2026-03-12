@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8720231284267223148}
   - component: {fileID: 8201333511005902088}
   - component: {fileID: 3038361900289613912}
+  - component: {fileID: 1040531272663084075}
   - component: {fileID: 5678059885205768987}
   m_Layer: 0
   m_Name: GameController
@@ -88,7 +89,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8569c22252e066b498179d58372da611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIController
-  elevatorButtonTag: 
 --- !u!114 &8201333511005902088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,6 +113,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5430acdacf3bfd340b285c575bb30271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &1040531272663084075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3186157511489886338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c068fac9055dd6c4ca8e226a961cd5d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneController
 --- !u!114 &5678059885205768987
 MonoBehaviour:
   m_ObjectHideFlags: 0

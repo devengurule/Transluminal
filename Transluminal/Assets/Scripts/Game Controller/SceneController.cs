@@ -6,7 +6,17 @@ public class SceneController : MonoBehaviour
     #region Methods
     public static void GoToScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        if (GetCurrentSceneName() != sceneName)
+        {
+            // When loading scenes, unpause game and turn off menu UI
+            if (UIController.isUIUP)
+            {
+                UIController.TurnOffMenu();
+                PauseController.UnPauseGame();
+            }
+
+            SceneManager.LoadScene(sceneName);
+        }
     }
 
     public static string GetCurrentSceneName()

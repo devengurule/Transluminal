@@ -53,7 +53,7 @@ public class GameController : MonoBehaviour
         if (eventManager != null)
         {
             // Subscribe Events
-
+            eventManager.Subscribe(EventType.Interact, OnInteractPressed);
         }
     }
 
@@ -62,6 +62,7 @@ public class GameController : MonoBehaviour
         if (eventManager != null)
         {
             // Unsubscribe Events
+            eventManager.Unsubscribe(EventType.Interact, OnInteractPressed);
 
         }
     }
@@ -94,6 +95,16 @@ public class GameController : MonoBehaviour
 
             // Setup new map
             ChangeInputMap("Ship");
+        }
+    }
+
+    private void OnInteractPressed(object target)
+    {
+        if (ShipInputMapScenes.Contains(SceneController.GetCurrentSceneName()))
+        {
+            // Inside a ship scene
+            print(1);
+            SceneController.GoToScene("Floor1Scene");
         }
     }
 

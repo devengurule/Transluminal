@@ -31,12 +31,22 @@ public class PauseController : MonoBehaviour
     #region Event Methods
     private void OnPauseGame(object target)
     {
-        if (!UIController.isUIUP && isPaused)
+        if (isPaused)
         {
-            UnPauseGame();
+            if(UIController.isUIUP)
+            {
+                // Currently Paused and UI is UP
+
+                // Unpause and put away UI
+
+                UnPauseGame();
+                UIController.TurnOffMenu();
+            }
+            else UnPauseGame();
         }
-        else if(!UIController.isUIUP && !isPaused)
+        else
         {
+            // Not Paused, UI can't be up
             PauseGame();
         }
     }
