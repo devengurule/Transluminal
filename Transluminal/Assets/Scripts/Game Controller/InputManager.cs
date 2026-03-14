@@ -27,7 +27,8 @@ public class InputManager : MonoBehaviour
     private void Update()
     {
         #region Sprint Event
-        if (playerInput.currentActionMap.name == "Player")
+        if (playerInput == null) print(1);
+        if (playerInput.currentActionMap.name == "Player" && sprintAction != null)
         {
             if (sprintAction.WasPressedThisFrame())
             {

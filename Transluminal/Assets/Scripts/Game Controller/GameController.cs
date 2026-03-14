@@ -104,8 +104,11 @@ public class GameController : MonoBehaviour
         if (ShipInputMapScenes.Contains(SceneController.GetCurrentSceneName()))
         {
             // Inside a ship scene
-            print(1);
             SceneController.GoToScene("Floor1Scene");
+        }
+        else
+        {
+            print(2);
         }
     }
     private void OnRestartGame(object target)

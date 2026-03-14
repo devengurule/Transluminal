@@ -1,14 +1,18 @@
 using NUnit.Framework;
+using System;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
     #region Variables
+    [SerializeField] private string pauseMenuTag;
     private EventManager eventManager;
     private bool interactWithUI = false;
     private string colliderLayerName = "UICollider";
     private static string availableUIInteractTag = "";
+
 
     public static bool isUIUP { get; private set; } = false;
     #endregion
@@ -23,6 +27,8 @@ public class UIController : MonoBehaviour
             eventManager.Subscribe(EventType.PlayerCollidingEnter, OnPlayerCollidingEnter);
             eventManager.Subscribe(EventType.PlayerCollidingExit, OnPlayerCollidingExit);
             eventManager.Subscribe(EventType.Interact, OnInteractPressed);
+            eventManager.Subscribe(EventType.PauseOn, PauseGameOn);
+            eventManager.Subscribe(EventType.PauseOff, PauseGameOff);
         }
     }
 
@@ -83,6 +89,48 @@ public class UIController : MonoBehaviour
             if (!PauseController.isPaused)
             {
                 PauseController.PauseGame();
+            }
+        }
+    }
+
+
+    
+    private void PauseGameOn(object target)
+    {
+
+        // Open Pause Menu
+        if (!isUIUP)
+        {
+            try
+            {
+                GameObject canvas = GameObject.Find("Canvas");
+                GameObject pauseMenuUI = UIController.FindChildWithTag(canvas, pauseMenuTag);
+
+                pauseMenuUI.SetActive(true);
+            }
+            catch (Exception e)
+            {
+                Debug.Log($"Failed to Open Pause Menu: {e}");
+            }
+        }
+    }
+
+    private void PauseGameOff(object target)
+    {
+
+        // Close Pause Menu
+        if (!isUIUP)
+        {
+            try
+            {
+                GameObject canvas = GameObject.Find("Canvas");
+                GameObject pauseMenuUI = UIController.FindChildWithTag(canvas, pauseMenuTag);
+
+                pauseMenuUI.SetActive(false);
+            }
+            catch (Exception e)
+            {
+                Debug.Log($"Failed to Close Pause Menu: {e}");
             }
         }
     }
