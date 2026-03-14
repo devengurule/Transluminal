@@ -14,13 +14,13 @@ public class ShipMovement : MonoBehaviour
     [SerializeField]
     private float torque;
     [SerializeField]
-    private float zeroVelocitySpeed;
+    private Vector2 zeroVelocitySpeed;
 
     private EventManager eventManager;
     private float rotationInput;
     private Vector2 inputVector;
     private Vector2 move;
-    private float zeroOutFactor;
+    private Vector2 zeroOutFactor;
     private bool isZeroOutVelocity;
     private Rigidbody2D rb;
     #endregion
@@ -56,7 +56,7 @@ public class ShipMovement : MonoBehaviour
     private void Update()
     {
         // If pressing zero velocity button then change the factor, if not then set it to 0
-        zeroOutFactor = isZeroOutVelocity ? zeroVelocitySpeed : 1;
+        zeroOutFactor = isZeroOutVelocity ? zeroVelocitySpeed : Vector2.one;
 
         RotateLogic();
         MovementLogic();
@@ -116,14 +116,14 @@ public class ShipMovement : MonoBehaviour
         // Applys an opposite friction force to x & y axis seperately
         if (move.x == 0 && rb.linearVelocityX != 0)
         {
-            rb.AddForce(Vector2.right * -rb.linearVelocityX * acceleration * zeroOutFactor * friction.x * TimeManager.deltaTime, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.right * -rb.linearVelocityX * acceleration * zeroOutFactor.x * friction.x * TimeManager.deltaTime, ForceMode2D.Impulse);
 
             // Clamp linear velocity
             if (Mathf.Abs(rb.linearVelocityX) < 0.01) rb.linearVelocityX = 0;
         }
         if (move.y == 0 && rb.linearVelocityY != 0)
         {
-            rb.AddForce(Vector2.up * -rb.linearVelocityY * acceleration * zeroOutFactor * friction.y * TimeManager.deltaTime, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * -rb.linearVelocityY * acceleration * zeroOutFactor.x * friction.y * TimeManager.deltaTime, ForceMode2D.Impulse);
 
             // Clamp linear velocity
             if (Mathf.Abs(rb.linearVelocityY) < 0.01) rb.linearVelocityY = 0;
@@ -138,7 +138,7 @@ public class ShipMovement : MonoBehaviour
         // Apply opposite torque if zero velocity is pressed
         if (isZeroOutVelocity && rb.angularVelocity != 0)
         {
-            rb.AddTorque(Mathf.Sign(-rb.angularVelocity) * zeroOutFactor * TimeManager.deltaTime);
+            rb.AddTorque(Mathf.Sign(-rb.angularVelocity) * zeroOutFactor.y * TimeManager.deltaTime);
         }
 
         // Clamp anuglar velocity

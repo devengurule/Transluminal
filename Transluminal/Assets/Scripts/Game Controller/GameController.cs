@@ -7,13 +7,19 @@ using System.Linq;
 public class GameController : MonoBehaviour
 {
     #region Variables
+    public static GameController instance;
+    public EventManager eventManager { get; private set; }
+
+
     [SerializeField] private List<string> PlayerInputMapScenes = new();
     [SerializeField] private List<string> ShipInputMapScenes = new();
 
-    public static GameController instance;
-    public EventManager eventManager { get; private set; }
     private PlayerInput playerInput;
     private GameObject parent;
+    private string transportLayer = "TransportCollider";
+    private bool interactWithTransport = false;
+    private string currentShipScene = "OSDevRoom";
+
     #endregion
 
     #region Unity Methods
@@ -55,6 +61,8 @@ public class GameController : MonoBehaviour
             // Subscribe Events
             eventManager.Subscribe(EventType.Interact, OnInteractPressed);
             eventManager.Subscribe(EventType.Restart, OnRestartGame);
+            eventManager.Subscribe(EventType.PlayerCollidingEnter, OnPlayerEnterCollide);
+            eventManager.Subscribe(EventType.PlayerCollidingExit, OnPlayerExitCollide);
         }
     }
 
@@ -65,6 +73,8 @@ public class GameController : MonoBehaviour
             // Unsubscribe Events
             eventManager.Unsubscribe(EventType.Interact, OnInteractPressed);
             eventManager.Unsubscribe(EventType.Restart, OnRestartGame);
+            eventManager.Subscribe(EventType.PlayerCollidingEnter, OnPlayerEnterCollide);
+            eventManager.Subscribe(EventType.PlayerCollidingExit, OnPlayerExitCollide);
         }
     }
     #endregion
@@ -101,19 +111,46 @@ public class GameController : MonoBehaviour
 
     private void OnInteractPressed(object target)
     {
+        // Switch to floor1scene if inside a ship scene
         if (ShipInputMapScenes.Contains(SceneController.GetCurrentSceneName()))
         {
             // Inside a ship scene
-            SceneController.GoToScene("Floor1Scene");
+            SceneController.GoToScene("ISDevRoom");
         }
         else
         {
-            print(2);
+            // Not inside a ship scene
+            if(interactWithTransport)
+            {
+                // Need to make this more robust to allow for multiple different ship scenes
+                SceneController.GoToScene(currentShipScene);
+            }
         }
     }
     private void OnRestartGame(object target)
     {
         SceneController.GoToScene("Floor1Scene");
+    }
+
+    private void OnPlayerEnterCollide(object target)
+    {
+        GameObject gameObject = target as GameObject;
+        int layerID = LayerMask.NameToLayer(transportLayer);
+
+        if (gameObject.layer == layerID)
+        {
+            interactWithTransport = true;
+        }
+    }
+    private void OnPlayerExitCollide(object target)
+    {
+        GameObject gameObject = target as GameObject;
+        int layerID = LayerMask.NameToLayer(transportLayer);
+
+        if (gameObject.layer == layerID)
+        {
+            interactWithTransport = false;
+        }
     }
 
     #endregion
@@ -122,6 +159,7 @@ public class GameController : MonoBehaviour
     private void ChangeInputMap(string mapName)
     {
         playerInput.SwitchCurrentActionMap(mapName);
+        playerInput.actions.FindActionMap(mapName).Enable();
     }
     #endregion
 }

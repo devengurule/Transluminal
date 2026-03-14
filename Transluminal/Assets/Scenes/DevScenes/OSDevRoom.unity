@@ -980,7 +980,7 @@ MonoBehaviour:
   acceleration: {x: 1, y: 1}
   friction: {x: 0.3, y: 0.3}
   torque: 10
-  zeroVelocitySpeed: 5
+  zeroVelocitySpeed: {x: 5, y: 10}
 --- !u!58 &2016120556
 CircleCollider2D:
   m_ObjectHideFlags: 0

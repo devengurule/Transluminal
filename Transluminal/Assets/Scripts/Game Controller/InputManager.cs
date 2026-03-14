@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class InputManager : MonoBehaviour
 {
@@ -15,46 +17,41 @@ public class InputManager : MonoBehaviour
     {
         eventManager = GameController.instance.eventManager;
         playerInput = GetComponent<PlayerInput>();
-        
+
+        // Subscribe to active scene change event
+        SceneManager.activeSceneChanged += SceneChange;
+
         // Toggle Event Actions
-        if(playerInput.currentActionMap.name == "Player") sprintAction = playerInput.actions["Sprint"];
+        if (playerInput.currentActionMap.name == "Player") sprintAction = playerInput.actions["Sprint"];
+
+        if (playerInput.currentActionMap.name == "Ship") zeroVelocityAction = playerInput.actions["ZeroVelocity"];
+    }
+
+    private void Update()
+    {
+        ToggleEvents();
+    }
+    #endregion
+
+    #region Event Methods
+    // Update actions when changing scenes
+    private void SceneChange(Scene current, Scene next)
+    {
+        // Toggle Event Actions
+        if (playerInput.currentActionMap.name == "Player") sprintAction = playerInput.actions["Sprint"];
 
         if (playerInput.currentActionMap.name == "Ship") zeroVelocityAction = playerInput.actions["ZeroVelocity"];
     }
     #endregion
-    
+
     #region Toggle Events
-    private void Update()
+    private void ToggleEvents()
     {
-        #region Sprint Event
-        if (playerInput == null) print(1);
-        if (playerInput.currentActionMap.name == "Player" && sprintAction != null)
-        {
-            if (sprintAction.WasPressedThisFrame())
-            {
-                eventManager.Publish(EventType.SprintOn);
-            }
-            else if (sprintAction.WasReleasedThisFrame())
-            {
-                eventManager.Publish(EventType.SprintOff);
-            }
-        }
-        #endregion
+        // Sprint Toggle Action
+        ToggleAction("Player", sprintAction, EventType.SprintOn, EventType.SprintOff);
 
-        #region Zero Velocity Event
-        if (playerInput.currentActionMap.name == "Ship")
-        {
-            if (zeroVelocityAction.WasPressedThisFrame())
-            {
-                eventManager.Publish(EventType.ZeroVelocityOn);
-            }
-            else if (zeroVelocityAction.WasReleasedThisFrame())
-            {
-                eventManager.Publish(EventType.ZeroVelocityOff);
-            }
-        }
-
-        #endregion
+        // Zero Velocity Toggle Action
+        ToggleAction("Ship", zeroVelocityAction, EventType.ZeroVelocityOn, EventType.ZeroVelocityOff);
     }
     #endregion
 
@@ -87,6 +84,25 @@ public class InputManager : MonoBehaviour
     private void OnRestart()
     {
         eventManager.Publish(EventType.Restart);
+    }
+
+    #endregion
+
+    #region Methods
+
+    private void ToggleAction(string actionMapName, InputAction inputAction, EventType onEvent, EventType offEvent)
+    {
+        if (playerInput.currentActionMap.name == actionMapName && inputAction != null)
+        {
+            if (inputAction.WasPressedThisFrame())
+            {
+                eventManager.Publish(onEvent);
+            }
+            else if (inputAction.WasReleasedThisFrame())
+            {
+                eventManager.Publish(offEvent);
+            }
+        }
     }
 
     #endregion
