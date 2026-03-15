@@ -306,13 +306,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 348208128}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae9e0780b5bc67a4692023ec5026e2f2, type: 3}
+  m_Script: {fileID: 11500000, guid: 523a89fa728c293459dc7d25de4e7a53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  moveSpeed: 1
-  eventManager: {fileID: 0}
-  inputVector: {x: 0, y: 0}
-  positionVector: {x: 0, y: 0}
 --- !u!58 &348208131
 CircleCollider2D:
   m_ObjectHideFlags: 0

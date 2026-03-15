@@ -33,8 +33,8 @@ public class Movement : MonoBehaviour
 
         if (eventManager != null)
         {
-            eventManager.Subscribe(EventType.Move, OnMove);
-            eventManager.Subscribe(EventType.SprintOn, OnSprint);
+            eventManager.Subscribe(EventType.Move, OnMovePlayer);
+            eventManager.Subscribe(EventType.SprintOn, OnSprintPlayer);
             eventManager.Subscribe(EventType.SprintOff, OffSprint);
             eventManager.Subscribe(EventType.PauseOn, OnPauseGame);
         }
@@ -44,8 +44,8 @@ public class Movement : MonoBehaviour
     {
         if (eventManager != null)
         {
-            eventManager.Unsubscribe(EventType.Move, OnMove);
-            eventManager.Unsubscribe(EventType.SprintOn, OnSprint);
+            eventManager.Unsubscribe(EventType.Move, OnMovePlayer);
+            eventManager.Unsubscribe(EventType.SprintOn, OnSprintPlayer);
             eventManager.Unsubscribe(EventType.SprintOff, OffSprint);
             eventManager.Unsubscribe(EventType.PauseOn, OnPauseGame);
         }
@@ -58,7 +58,7 @@ public class Movement : MonoBehaviour
     #endregion
 
     #region Event Methods
-    private void OnMove(object target)
+    private void OnMovePlayer(object target)
     {
         // Set move to the input vector
         if (target is Vector2 move)
@@ -67,7 +67,7 @@ public class Movement : MonoBehaviour
         }
     }
 
-    private void OnSprint(object target)
+    private void OnSprintPlayer(object target)
     {
         // Sets max velocity to sprint if the sprint button is held down
         maxVelocity = sprintVelocity;
