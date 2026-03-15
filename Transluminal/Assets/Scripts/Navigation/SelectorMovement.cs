@@ -4,10 +4,11 @@ using UnityEngine;
 public class SelectorMovement : MonoBehaviour
 {
     #region Variables
+    [SerializeField] private float moveSpeed;
+
     private EventManager eventManager;
     private Vector2 positionVector;
     private Vector2 move;
-    private float moveSpeed;
     #endregion
 
     #region Unity Methods

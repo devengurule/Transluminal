@@ -309,6 +309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523a89fa728c293459dc7d25de4e7a53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  moveSpeed: 1
 --- !u!58 &348208131
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -394,7 +395,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &469494493
 RectTransform:
   m_ObjectHideFlags: 0
