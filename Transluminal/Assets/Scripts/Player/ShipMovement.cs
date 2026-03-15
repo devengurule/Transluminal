@@ -60,8 +60,6 @@ public class ShipMovement : MonoBehaviour
 
         RotateLogic();
         MovementLogic();
-
-        // Debug.Log($"Linear: {rb.linearVelocity},  Angular: {rb.angularVelocity}, Zero: {zeroOutFactor}");
     }
     #endregion
 

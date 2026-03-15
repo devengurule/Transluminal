@@ -39,6 +39,8 @@ public class UIController : MonoBehaviour
             eventManager.Unsubscribe(EventType.PlayerCollidingEnter, OnPlayerCollidingEnter);
             eventManager.Unsubscribe(EventType.PlayerCollidingExit, OnPlayerCollidingExit);
             eventManager.Unsubscribe(EventType.Interact, OnInteractPressed);
+            eventManager.Unsubscribe(EventType.PauseOn, PauseGameOn);
+            eventManager.Unsubscribe(EventType.PauseOff, PauseGameOff);
         }
     }
     #endregion

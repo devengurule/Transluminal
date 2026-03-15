@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using UnityEditor;
 
 public class GameController : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class GameController : MonoBehaviour
     private string transportLayer = "TransportCollider";
     private bool interactWithTransport = false;
     private string currentShipScene = "OSDevRoom";
+
 
     #endregion
 
@@ -84,6 +86,7 @@ public class GameController : MonoBehaviour
     // Change Input Map when changing scenes
     private void SceneChange(Scene current, Scene next)
     {
+
         // Setting input map based on current scene
 
         if (PlayerInputMapScenes.Contains(SceneController.GetCurrentSceneName()))

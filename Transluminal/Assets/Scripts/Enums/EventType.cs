@@ -12,5 +12,7 @@ public enum EventType
     PauseOn,
     PauseOff,
     Pause,
-    Restart
+    Restart,
+    HomeNodeEnter,
+    HomeNodeExit
 }
