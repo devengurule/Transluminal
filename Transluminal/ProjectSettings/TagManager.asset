@@ -9,6 +9,7 @@ TagManager:
   - PauseUI
   - ShipHelm
   - NavSelector
+  - NavUI
   layers:
   - Default
   - TransparentFX

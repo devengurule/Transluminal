@@ -14,5 +14,7 @@ public enum EventType
     Pause,
     Restart,
     HomeNodeEnter,
-    HomeNodeExit
+    HomeNodeExit,
+    NodeSelected,
+    NodeDeselected
 }

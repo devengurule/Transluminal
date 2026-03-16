@@ -15,11 +15,12 @@ public class GameController : MonoBehaviour
     [SerializeField] private List<string> PlayerInputMapScenes = new();
     [SerializeField] private List<string> ShipInputMapScenes = new();
 
+    private NavigationController navController;
     private PlayerInput playerInput;
     private GameObject parent;
     private string transportLayer = "TransportCollider";
     private bool interactWithTransport = false;
-    private string currentShipScene = "OSDevRoom";
+    
 
 
     #endregion
@@ -27,6 +28,8 @@ public class GameController : MonoBehaviour
     #region Unity Methods
     private void Awake()
     {
+        navController = GetComponent<NavigationController>();
+
         // Parent object
         parent = transform.parent != null ? transform.parent.gameObject : gameObject;
 
@@ -86,7 +89,6 @@ public class GameController : MonoBehaviour
     // Change Input Map when changing scenes
     private void SceneChange(Scene current, Scene next)
     {
-
         // Setting input map based on current scene
 
         if (PlayerInputMapScenes.Contains(SceneController.GetCurrentSceneName()))
@@ -126,7 +128,7 @@ public class GameController : MonoBehaviour
             if(interactWithTransport)
             {
                 // Need to make this more robust to allow for multiple different ship scenes
-                SceneController.GoToScene(currentShipScene);
+                SceneController.GoToScene(navController.GetCurrentShipScene());
             }
         }
     }
