@@ -107,7 +107,6 @@ public class HoverScript : MonoBehaviour
 
                     eventManager.Publish(EventType.NodeDeselected, gameObject);
                 }
-
             }
         }
     }
