@@ -127,8 +127,10 @@ public class GameController : MonoBehaviour
             // Not inside a ship scene
             if(interactWithTransport)
             {
-                // Need to make this more robust to allow for multiple different ship scenes
-                SceneController.GoToScene(navController.GetCurrentShipScene());
+                if (!navController.IsAtHomeNode())
+                {
+                    SceneController.GoToScene(navController.GetCurrentShipScene());
+                }
             }
         }
     }

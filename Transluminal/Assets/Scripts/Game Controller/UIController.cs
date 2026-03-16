@@ -74,16 +74,6 @@ public class UIController : MonoBehaviour
 
     private void OnInteractPressed(object target)
     {
-        // Toggle UI menu
-        //if (isUIUP && interactWithUI)
-        //{
-        //    TurnOffMenu();
-
-        //    if(PauseController.isPaused)
-        //    {
-        //        PauseController.UnPauseGame();
-        //    }
-        //}
         if(interactWithUI && !isUIUP)
         {
             TurnOnMenu();

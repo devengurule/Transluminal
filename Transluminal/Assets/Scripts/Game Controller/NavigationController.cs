@@ -55,8 +55,8 @@ public class NavigationController : MonoBehaviour
     }
     private void Update()
     {
-        string targetName = targetNode != null ? targetNode.name : "Null";
-        print($"{currentNode.name} --> {targetName}");
+        // string targetName = targetNode != null ? targetNode.name : "Null";
+        // print($"{currentNode.name} --> {targetName}");
 
         if(targetNode != null)
         {
@@ -97,5 +97,9 @@ public class NavigationController : MonoBehaviour
     public string GetCurrentShipScene()
     {
         return currentShipScene;
+    }
+    public bool IsAtHomeNode()
+    {
+        return atHomeNode;
     }
 }
