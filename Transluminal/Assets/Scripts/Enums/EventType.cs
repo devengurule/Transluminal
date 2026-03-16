@@ -16,5 +16,6 @@ public enum EventType
     HomeNodeEnter,
     HomeNodeExit,
     NodeSelected,
-    NodeDeselected
+    NodeDeselected,
+    Confirm
 }

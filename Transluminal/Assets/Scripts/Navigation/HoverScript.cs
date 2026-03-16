@@ -99,6 +99,15 @@ public class HoverScript : MonoBehaviour
                 hoverObject.SetActive(false);
                 isHovered = false;
 
+                if (isSelected)
+                {
+                    GameObject selectObject = transform.Find("Selected").gameObject;
+                    selectObject.SetActive(false);
+                    isSelected = false;
+
+                    eventManager.Publish(EventType.NodeDeselected, gameObject);
+                }
+
             }
         }
     }

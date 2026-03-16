@@ -6,13 +6,16 @@ using UnityEngine.SceneManagement;
 public class InputManager : MonoBehaviour
 {
     #region Variables
+    private bool holdTrigger;
     private EventManager eventManager;
     private PlayerInput playerInput;
     private InputAction sprintAction;
     private InputAction zeroVelocityAction;
+    private InputAction interactAction;
     #endregion
 
     #region Unity Methods
+    
     private void Start()
     {
         eventManager = GameController.instance.eventManager;
@@ -21,16 +24,34 @@ public class InputManager : MonoBehaviour
         // Subscribe to active scene change event
         SceneManager.activeSceneChanged += SceneChange;
 
-        // Toggle Event Actions
-        if (playerInput.currentActionMap.name == "Player") sprintAction = playerInput.actions["Sprint"];
+        // Event Actions
+        if (playerInput.currentActionMap.name == "Player")
+        {
+            interactAction = playerInput.actions["Interact"];
+            sprintAction = playerInput.actions["Sprint"];
+        }
 
         if (playerInput.currentActionMap.name == "Ship") zeroVelocityAction = playerInput.actions["ZeroVelocity"];
+
+        interactAction.started += HandleInteract;
+        interactAction.performed += HandleInteract;
+        interactAction.canceled += HandleInteract;
     }
 
     private void Update()
     {
         ToggleEvents();
     }
+
+    private void OnDisable()
+    {
+        SceneManager.activeSceneChanged -= SceneChange;
+
+        interactAction.started -= HandleInteract;
+        interactAction.performed -= HandleInteract;
+        interactAction.canceled -= HandleInteract;
+    }
+
     #endregion
 
     #region Event Methods
@@ -67,9 +88,26 @@ public class InputManager : MonoBehaviour
         eventManager.Publish(EventType.Rotate, inputValue);
     }
 
-    private void OnInteract()
+    private void HandleInteract(InputAction.CallbackContext ctx)
     {
-        eventManager.Publish(EventType.Interact);
+        // Resat hold trigger when starting an input
+        if (ctx.started)
+            holdTrigger = false;
+
+        // If fulling help publish confirm event
+        if (ctx.performed)
+        {
+            holdTrigger = true;
+            print("Confirm");
+            eventManager.Publish(EventType.Confirm);
+        }
+
+        // If cancelled before fully hold publish intereact event
+        if (ctx.canceled && !holdTrigger)
+        {
+            print("Interact");
+            eventManager.Publish(EventType.Interact);
+        }
     }
 
     private void OnPause()

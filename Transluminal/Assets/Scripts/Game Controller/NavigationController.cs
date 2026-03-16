@@ -7,6 +7,7 @@ public class NavigationController : MonoBehaviour
 
     [SerializeField] private GameObject currentNode;
     [SerializeField] private GameObject lineObject;
+    [SerializeField] private GameObject toolTipUIObject;
 
     private EventManager eventManager;
     private GameObject targetNode;
@@ -70,13 +71,14 @@ public class NavigationController : MonoBehaviour
     {
         if(target is GameObject targetNode)
         {
+            toolTipUIObject.SetActive(true);
             this.targetNode = targetNode;
         }
     }
     private void OnNodeDeselect(object target)
     {
         targetNode = null;
-
+        toolTipUIObject.SetActive(false);
         lineObject.GetComponent<LineScript>().SetDrawLine(false);
     }
 
