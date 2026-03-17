@@ -43,13 +43,16 @@ public class InputManager : MonoBehaviour
         ToggleEvents();
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         SceneManager.activeSceneChanged -= SceneChange;
 
-        interactAction.started -= HandleInteract;
-        interactAction.performed -= HandleInteract;
-        interactAction.canceled -= HandleInteract;
+        if (playerInput != null)
+        {
+            interactAction.started -= HandleInteract;
+            interactAction.performed -= HandleInteract;
+            interactAction.canceled -= HandleInteract;
+        }
     }
 
     #endregion
@@ -98,14 +101,12 @@ public class InputManager : MonoBehaviour
         if (ctx.performed)
         {
             holdTrigger = true;
-            print("Confirm");
             eventManager.Publish(EventType.Confirm);
         }
 
         // If cancelled before fully hold publish intereact event
         if (ctx.canceled && !holdTrigger)
         {
-            print("Interact");
             eventManager.Publish(EventType.Interact);
         }
     }

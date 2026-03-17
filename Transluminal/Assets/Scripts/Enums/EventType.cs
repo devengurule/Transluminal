@@ -1,21 +1,32 @@
 public enum EventType
 {
+    // Movement
     Move,
     SprintOn,
     SprintOff,
     ZeroVelocityOn,
     ZeroVelocityOff,
     Rotate,
+
+    // Interaction
     Interact,
+    Confirm,
+
+    // Collision
     PlayerCollidingEnter,
     PlayerCollidingExit,
+
+    // Pausing
     PauseOn,
     PauseOff,
     Pause,
-    Restart,
+
+    // Nav Nodes
     HomeNodeEnter,
     HomeNodeExit,
     NodeSelected,
     NodeDeselected,
-    Confirm
+
+    // Misc
+    Restart
 }

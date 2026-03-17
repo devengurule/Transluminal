@@ -263,7 +263,7 @@
                 {
                     "name": "",
                     "id": "c7fa11f9-c414-4268-85a5-9d6fd782ce23",
-                    "path": "<Keyboard>/escape",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",

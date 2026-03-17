@@ -14,6 +14,8 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private List<string> PlayerInputMapScenes = new();
     [SerializeField] private List<string> ShipInputMapScenes = new();
+    [SerializeField] private bool devMode;
+
 
     private NavigationController navController;
     private PlayerInput playerInput;
@@ -36,7 +38,7 @@ public class GameController : MonoBehaviour
         // Destroy itself if singleton intance variable is not self
         if (instance != null && instance != this)
         {
-            Destroy(parent);
+            if(parent != null) Destroy(parent);
             return;
         }
 
@@ -120,7 +122,14 @@ public class GameController : MonoBehaviour
         if (ShipInputMapScenes.Contains(SceneController.GetCurrentSceneName()))
         {
             // Inside a ship scene
-            SceneController.GoToScene("ISDevRoom");
+            if (devMode)
+            {
+                SceneController.GoToScene("ISDevRoom");
+            }
+            else
+            {
+                SceneController.GoToScene("Floor1Scene");
+            }
         }
         else
         {

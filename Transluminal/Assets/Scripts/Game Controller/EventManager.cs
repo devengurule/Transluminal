@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
+    #region Variables
+    // Invocatees and EventType dictionary
     private Dictionary<EventType, Action<object>> eventDict;
+    #endregion
 
+    #region Unity Methods
     private void Awake()
     {
         // Create EventType, Action dictionary
         eventDict = new Dictionary<EventType, Action<object>>();
     }
+    #endregion
 
+    #region Methods
     public void Subscribe(EventType eventType, Action<object> action)
     {
         if (GameController.instance.eventManager != null)
@@ -70,4 +76,5 @@ public class EventManager : MonoBehaviour
             }
         }
     }
+    #endregion
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HoverScript : MonoBehaviour
 {
@@ -15,7 +16,10 @@ public class HoverScript : MonoBehaviour
     #region Unity Methods
     private void Start()
     {
-        if(isCurrentNode)
+        // Subscribe to active scene change event
+        SceneManager.activeSceneChanged += SceneChange;
+
+        if (isCurrentNode)
         {
             GameObject selectObject = transform.Find("Selected").gameObject;
             selectObject.SetActive(true);
@@ -41,6 +45,17 @@ public class HoverScript : MonoBehaviour
     }
 
     #endregion
+
+    private void SceneChange(Scene current, Scene next)
+    {
+        if (isCurrentNode)
+        {
+            GameObject selectObject = transform.Find("Selected").gameObject;
+            selectObject.SetActive(true);
+            isSelected = true;
+        }
+    }
+
 
     private void OnGameInteract(object target)
     {
@@ -113,5 +128,18 @@ public class HoverScript : MonoBehaviour
     public void SetIsCurrentNode(bool input)
     {
         isCurrentNode = input;
+    }
+
+    public void Reset()
+    {
+        // Reset Hover Sprite
+        GameObject hoverObject = transform.Find("Hovered").gameObject;
+        hoverObject.SetActive(false);
+        isHovered = false;
+
+        // Reset Selected Sprite
+        GameObject selectObject = transform.Find("Selected").gameObject;
+        selectObject.SetActive(false);
+        isSelected = false;
     }
 }
