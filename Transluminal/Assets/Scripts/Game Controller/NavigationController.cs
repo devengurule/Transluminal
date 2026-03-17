@@ -35,6 +35,11 @@ public class NavigationController : MonoBehaviour
     {
         eventManager = GameController.instance.eventManager;
 
+        if(atHomeNode)
+        {
+            eventManager.Publish(EventType.ArrivedAtHomeNode);
+        }
+
         if (eventManager != null)
         {
             eventManager.Subscribe(EventType.NodeSelected, OnNodeSelect);
@@ -118,6 +123,7 @@ public class NavigationController : MonoBehaviour
         if (currentNode.GetComponent<NodeScript>().IsHomeNode())
         {
             atHomeNode = true;
+            eventManager.Publish(EventType.ArrivedAtHomeNode);
         }
         else
         {

@@ -7,6 +7,8 @@ public class FuelManager : MonoBehaviour
     #region Variables
     [SerializeField] private float maxFuel;
     [SerializeField] private float currentFuel;
+
+    private EventManager eventManager;
     #endregion
 
     #region Unity Methods
@@ -19,9 +21,23 @@ public class FuelManager : MonoBehaviour
         {
             UpdateFuelMeter();
         }
+
+        eventManager = GameController.instance.eventManager;
+
+        if (eventManager != null)
+        {
+            eventManager.Subscribe(EventType.ArrivedAtHomeNode, OnRefuel);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (eventManager != null)
+        {
+            eventManager.Unsubscribe(EventType.ArrivedAtHomeNode, OnRefuel);
+        }
     }
     #endregion
-
 
     #region Event Methods
     private void SceneChange(Scene current, Scene next)
@@ -38,6 +54,11 @@ public class FuelManager : MonoBehaviour
     {
         GameObject fuelMeterObject = GameObject.Find("FuelMeter");
         fuelMeterObject.GetComponent<Image>().fillAmount = currentFuel / maxFuel;
+    }
+
+    private void OnRefuel(object target)
+    {
+        currentFuel = maxFuel;
     }
     #endregion
 }
