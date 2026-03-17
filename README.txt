@@ -1,5 +1,8 @@
 Need to add food, fuel, money, player HP
 
+Bold = Working
+Bold/Italic = Done
+
 Food:
 	Food counter
 	Food cost for travel
