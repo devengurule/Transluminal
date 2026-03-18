@@ -43,7 +43,7 @@ public class MoneyManager : MonoBehaviour
 
         UpdateMoneyCounter();
 
-        Destroy(collisionObject);
+        eventManager.Publish(EventType.DestroyScrap, collisionObject);
 }
 
     #endregion

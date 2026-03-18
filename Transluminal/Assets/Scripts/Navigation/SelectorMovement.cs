@@ -9,6 +9,7 @@ public class SelectorMovement : MonoBehaviour
     private EventManager eventManager;
     private Vector2 positionVector;
     private Vector2 move;
+    private bool canMove = true;
     #endregion
 
     #region Unity Methods
@@ -34,7 +35,10 @@ public class SelectorMovement : MonoBehaviour
 
     private void Update()
     {
-        MovementLogic();
+        if (canMove)
+        {
+            MovementLogic();
+        }
     }
 
     #endregion
@@ -53,5 +57,10 @@ public class SelectorMovement : MonoBehaviour
         positionVector += move * moveSpeed;
 
         transform.position = positionVector;
+    }
+
+    public void SetMove(bool canMove)
+    {
+        this.canMove = canMove;
     }
 }

@@ -15,6 +15,7 @@ public class LineScript : MonoBehaviour
     {
         // Get line component
         line = GetComponent<RectTransform>();
+        StopDrawingLine();
     }
     #endregion
 

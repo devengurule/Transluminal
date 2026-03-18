@@ -31,5 +31,6 @@ public enum EventType
     LeftHomeNode,
 
     // Misc
-    Restart
+    Restart,
+    DestroyScrap
 }

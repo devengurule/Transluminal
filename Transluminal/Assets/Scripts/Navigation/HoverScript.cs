@@ -95,12 +95,26 @@ public class HoverScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "NavSelector")
         {
-            if (!isSelected && !isCurrentNode)
+            if (!isCurrentNode)
             {
-                GameObject hoverObject = transform.Find("Hovered").gameObject;
-                hoverObject.SetActive(true);
+                if (!isSelected)
+                {
+                    GameObject hoverObject = transform.Find("Hovered").gameObject;
+                    hoverObject.SetActive(true);
 
-                isHovered = true;
+                    isHovered = true;
+
+                    collision.gameObject.GetComponent<SelectorMovement>().SetMove(true);
+                }
+                else
+                {
+                    collision.gameObject.GetComponent<SelectorMovement>().SetMove(false);
+                    collision.gameObject.transform.position = gameObject.transform.position;
+                }
+            }
+            else
+            {
+                collision.gameObject.GetComponent<SelectorMovement>().SetMove(true);
             }
         }
     }

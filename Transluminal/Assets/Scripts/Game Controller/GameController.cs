@@ -16,7 +16,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private List<string> ShipInputMapScenes = new();
     [SerializeField] private bool devMode;
 
-
+    private Dictionary<string, List<ScrapData>> shipScenesVisited = new Dictionary<string, List<ScrapData>>();
     private NavigationController navController;
     private PlayerInput playerInput;
     private GameObject parent;
@@ -70,6 +70,8 @@ public class GameController : MonoBehaviour
             eventManager.Subscribe(EventType.Restart, OnRestartGame);
             eventManager.Subscribe(EventType.PlayerCollidingEnter, OnPlayerEnterCollide);
             eventManager.Subscribe(EventType.PlayerCollidingExit, OnPlayerExitCollide);
+            eventManager.Subscribe(EventType.DestroyScrap, OnDestroyScrap);
+            eventManager.Subscribe(EventType.ArrivedAtHomeNode, OnArrivedHome);
         }
     }
 
@@ -82,6 +84,8 @@ public class GameController : MonoBehaviour
             eventManager.Unsubscribe(EventType.Restart, OnRestartGame);
             eventManager.Subscribe(EventType.PlayerCollidingEnter, OnPlayerEnterCollide);
             eventManager.Subscribe(EventType.PlayerCollidingExit, OnPlayerExitCollide);
+            eventManager.Subscribe(EventType.DestroyScrap, OnDestroyScrap);
+            eventManager.Unsubscribe(EventType.ArrivedAtHomeNode, OnArrivedHome);
         }
     }
     #endregion
@@ -108,13 +112,32 @@ public class GameController : MonoBehaviour
         {
             // We are in Ship Input Map Scenes
 
+            if (!shipScenesVisited.ContainsKey(SceneController.GetCurrentSceneName()))
+            {
+                // never visited this scene before
+
+                GetComponent<ScrapSpawnController>().ResetScrapLefToSpawn();
+
+                // spawn scrap
+                GetComponent<ScrapSpawnController>().SpawnScrap();
+
+                // add new scene to dictionary
+                shipScenesVisited.Add(SceneController.GetCurrentSceneName(), GetListOfScrapData());
+            }
+            else
+            {
+                // visiting a ship scene previously visited
+
+                // spawn scrap
+                GetComponent<ScrapSpawnController>().SpawnExistingScrap(shipScenesVisited[SceneController.GetCurrentSceneName()]);
+
+            }
+
             // Disable old map
             playerInput.actions.FindActionMap("Player").Disable();
 
             // Setup new map
             ChangeInputMap("Ship");
-
-            GetComponent<ScrapSpawnController>().SpawnScrap();
         }
     }
 
@@ -171,6 +194,21 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private void OnDestroyScrap(object target)
+    {
+        GameObject destroyedObject = target as GameObject;
+
+        shipScenesVisited[SceneController.GetCurrentSceneName()].Remove(FindObjWithSameData(destroyedObject, shipScenesVisited[SceneController.GetCurrentSceneName()]));
+
+        Destroy(destroyedObject);
+    }
+
+    private void OnArrivedHome(object target)
+    {
+        // Clears out dictionary when coming home
+        shipScenesVisited.Clear();
+    }
+
     #endregion
 
     #region Methods
@@ -179,5 +217,37 @@ public class GameController : MonoBehaviour
         playerInput.SwitchCurrentActionMap(mapName);
         playerInput.actions.FindActionMap(mapName).Enable();
     }
+
+    private List<ScrapData> GetListOfScrapData()
+    {
+        GameObject[] scrapObjects = GameObject.FindGameObjectsWithTag("Scrap");
+        
+        List<ScrapData> scrapDataList = new List<ScrapData>();
+
+        foreach (GameObject obj in scrapObjects)
+        {
+            ScrapData data;
+            data.position = obj.transform.position;
+            data.eulerRotation = obj.transform.eulerAngles;
+
+            scrapDataList.Add(data);
+        }
+
+        return scrapDataList;
+    }
+
+    private ScrapData FindObjWithSameData(GameObject obj, List<ScrapData> data)
+    {
+        foreach(ScrapData scrapData in data)
+        {
+            if ((Vector2)obj.transform.position == scrapData.position && obj.transform.eulerAngles == scrapData.eulerRotation)
+            {
+                return scrapData;
+            }
+        }
+        // Never hit this
+        return data[0];
+    }
+
     #endregion
 }

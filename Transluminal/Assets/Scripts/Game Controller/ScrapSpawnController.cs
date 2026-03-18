@@ -1,16 +1,19 @@
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class ScrapSpawnController : MonoBehaviour
 {
-    [SerializeField] private int numOfScrap;
+    [SerializeField] private Vector2Int numOfScrapRange;
     [SerializeField] GameObject scrapPrefab;
+
     private int scrapLeftToSpawn;
 
     private void Start()
     {
-        scrapLeftToSpawn = numOfScrap;
+        scrapLeftToSpawn = Random.Range(numOfScrapRange.x, numOfScrapRange.y);
     }
 
     public void SpawnScrap()
@@ -26,6 +29,14 @@ public class ScrapSpawnController : MonoBehaviour
 
                 scrapLeftToSpawn--;
             }
+        }
+    }
+
+    public void SpawnExistingScrap(List<ScrapData> scrapObjects)
+    {
+        foreach(ScrapData obj in scrapObjects)
+        {
+            Instantiate(scrapPrefab, obj.position, Quaternion.Euler(obj.eulerRotation));
         }
     }
 
@@ -49,5 +60,11 @@ public class ScrapSpawnController : MonoBehaviour
             return false;
         }
         else return true;
+    }
+
+    public void ResetScrapLefToSpawn()
+    {
+        scrapLeftToSpawn = Random.Range(numOfScrapRange.x, numOfScrapRange.y);
+        print(scrapLeftToSpawn);
     }
 }
