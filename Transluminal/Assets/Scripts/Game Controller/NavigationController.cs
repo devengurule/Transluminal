@@ -33,7 +33,7 @@ public class NavigationController : MonoBehaviour
         else
         {
             atHomeNode = false;
-            currentShipScene = currentNode.GetComponent<NodeScript>().TargetShipScene().name;
+            currentShipScene = currentNode.GetComponent<NodeScript>().TargetShipScene();
         }
     }
     private void Start()
@@ -143,7 +143,7 @@ public class NavigationController : MonoBehaviour
         else
         {
             atHomeNode = false;
-            currentShipScene = currentNode.GetComponent<NodeScript>().TargetShipScene().name;
+            currentShipScene = currentNode.GetComponent<NodeScript>().TargetShipScene();
         }
     }
 

@@ -1,13 +1,29 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class NodeScript : MonoBehaviour
 {
-    #region Variables
     [SerializeField] private bool isHomeNode;
+
+#if UNITY_EDITOR
     [SerializeField] private SceneAsset targetShipScene;
-    #endregion
+#endif
+
+    [SerializeField] private string targetShipSceneName;
+
+    private void OnValidate()
+    {
+#if UNITY_EDITOR
+        if (targetShipScene != null)
+        {
+            targetShipSceneName = targetShipScene.name;
+        }
+#endif
+    }
 
     private void Start()
     {
@@ -17,15 +33,13 @@ public class NodeScript : MonoBehaviour
         }
     }
 
-    #region Methods
     public bool IsHomeNode()
     {
         return isHomeNode;
     }
 
-    public SceneAsset TargetShipScene()
+    public string TargetShipScene()
     {
-        return targetShipScene;
+        return targetShipSceneName;
     }
-    #endregion
 }
