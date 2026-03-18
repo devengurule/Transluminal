@@ -1,22 +1,18 @@
 Need to add food, fuel, money, player HP
 
+Asszzzzzz
 
+**Bold = Working**
 
-Bold = Working
-
-Bold/Italic = Done
+***Bold/Italic = Done***
 
 
 
 **Food:**
 
-&#x09;***Food counter***
+&#x09;**<i>~~Food counter~~</i>**
 
-&#x09;Food cost for travel
-
-&#x09;Does food diminish over time? Does the player go to sleep and that removes fuel? Is it only based on traveling? Combo of traveling and sleeping?
-
-
+&#x09;**Food cost for travel**
 
 &#x09;For now(Until play tests say otherwise) Food depletes:
 
@@ -28,21 +24,17 @@ Bold/Italic = Done
 
 &#x09;		1 day per 20 minutes maybe?
 
-&#x09;		Its not the primary way of losing food but it does exist for added pressure
-
 
 
 **Fuel:**
 
-&#x09;***Fuel counter***
+&#x09;**<i>~~Fuel counter~~</i>**
 
-&#x09;Fuel cost for travel
+&#x09;**Fuel cost for travel**
 
-&#x09;***Fuel refill at home node***
+&#x09;**<i>~~Fuel refill at home node~~</i>**
 
-&#x09;	***Set fuel to 100% at home node***
-
-
+&#x09;	**<i>~~Set fuel to 100% at home node~~</i>**
 
 &#x09;For now(Until play tests say otherwise) Fuel depletes:
 
@@ -52,21 +44,17 @@ Bold/Italic = Done
 
 
 
-Money:
+**Money:**
 
-&#x09;Money counter
+&#x09;**<i>~~Money counter~~</i>**
 
-&#x09;	A shop to spend money
-
-&#x09;Nodes with money collectables
-
-&#x09;	Salvage will be a future ordeal
+&#x09;A shop to spend money
 
 
 
-Player HP:
+**<i>~~Player HP:~~</i>**
 
-&#x09;HP counter
+&#x09;**<i>~~HP counter~~</i>**
 
 
 
@@ -75,4 +63,16 @@ Player HP:
 In conclusion
 
 A lot of UI
+
+
+
+FoodCounter
+
+FuelCounter
+
+
+
+FoodCostCounter
+
+FuelCostCounter
 

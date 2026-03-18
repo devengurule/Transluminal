@@ -75,5 +75,15 @@ public class FoodManager : MonoBehaviour
 
         return foodString;
     }
+
+    public int GetCurrentFood()
+    {
+        return currentFood;
+    }
+
+    public void SubtractFood(int food)
+    {
+        currentFood -= food;
+    }
     #endregion
 }

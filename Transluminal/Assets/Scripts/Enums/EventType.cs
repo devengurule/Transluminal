@@ -27,6 +27,7 @@ public enum EventType
     NodeSelected,
     NodeDeselected,
     ArrivedAtHomeNode,
+    LeftHomeNode,
 
     // Misc
     Restart

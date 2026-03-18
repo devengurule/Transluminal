@@ -127,6 +127,70 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 117898668951027788, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_Name
+      value: FoodCostCounter
+      objectReference: {fileID: 0}
+    - target: {fileID: 853450829472290152, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 990019004736511714, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: nodeSelectionUI
+      value: 
+      objectReference: {fileID: 1804038617}
+    - target: {fileID: 990019004736511714, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: toolTipUIObject
+      value: 
+      objectReference: {fileID: 1804038617}
+    - target: {fileID: 990019004736511714, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: foodCostConstant
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 990019004736511714, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: fuelCostConstant
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3951149623737332845, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_Name
+      value: FuelCostPercent
+      objectReference: {fileID: 0}
+    - target: {fileID: 4258562887369458709, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 529.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 4363953204868744883, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 737.0499
+      objectReference: {fileID: 0}
+    - target: {fileID: 4363953204868744883, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -214.79001
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851519073723574117, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: maxFuel
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851519073723574117, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: currentFuel
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5058720858528443688, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5622788500786208363, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -98.380005
+      objectReference: {fileID: 0}
+    - target: {fileID: 5622788500786208363, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 121.089966
+      objectReference: {fileID: 0}
+    - target: {fileID: 5846452388661053360, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 529.49
+      objectReference: {fileID: 0}
     - target: {fileID: 7027223480011342505, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: devMode
       value: 0
@@ -134,6 +198,14 @@ PrefabInstance:
     - target: {fileID: 7442989515994135670, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_Name
       value: DontDestroyObjects
+      objectReference: {fileID: 0}
+    - target: {fileID: 7567080946463142963, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7675851018847805725, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 518.71533
       objectReference: {fileID: 0}
     - target: {fileID: 7884803505008437301, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_LocalPosition.x
@@ -174,6 +246,10 @@ PrefabInstance:
     - target: {fileID: 7884803505008437301, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8338094564662952031, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 518.71533
       objectReference: {fileID: 0}
     - target: {fileID: 8854299135367264778, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: text
@@ -1636,6 +1712,11 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1804038617 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 853450829472290152, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+  m_PrefabInstance: {fileID: 284211510}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2074991212
 GameObject:
   m_ObjectHideFlags: 0
