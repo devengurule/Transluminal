@@ -1,24 +1,14 @@
-Need to add food, fuel, money, player HP
-
-Asszzzzzz
-
-**Bold = Working**
-
-***Bold/Italic = Done***
-
-
-
 **Food:**
 
 &#x09;**<i>~~Food counter~~</i>**
 
-&#x09;**Food cost for travel**
+&#x09;<b>~~Food cost for travel~~</b>
 
 &#x09;For now(Until play tests say otherwise) Food depletes:
 
 &#x09;	1 Day per slept night
 
-&#x09;	Traveling to nodes
+&#x09;	**<i>~~Traveling to nodes~~</i>**
 
 &#x09;	Over a period of time
 
@@ -30,7 +20,7 @@ Asszzzzzz
 
 &#x09;**<i>~~Fuel counter~~</i>**
 
-&#x09;**Fuel cost for travel**
+&#x09;<b>~~Fuel cost for travel~~</b>
 
 &#x09;**<i>~~Fuel refill at home node~~</i>**
 
@@ -38,7 +28,7 @@ Asszzzzzz
 
 &#x09;For now(Until play tests say otherwise) Fuel depletes:
 
-&#x09;	Traveling to nodes
+&#x09;	**<i>~~Traveling to nodes~~</i>**
 
 &#x09;	Using thrusters
 
@@ -63,16 +53,4 @@ Asszzzzzz
 In conclusion
 
 A lot of UI
-
-
-
-FoodCounter
-
-FuelCounter
-
-
-
-FoodCostCounter
-
-FuelCostCounter
 
