@@ -104,6 +104,7 @@ GameObject:
   - component: {fileID: 2562185812467109831}
   - component: {fileID: 3665440866862357700}
   - component: {fileID: 1795817574860663228}
+  - component: {fileID: -977959931175993678}
   m_Layer: 0
   m_Name: PlayerShip
   m_TagString: Untagged
@@ -266,3 +267,15 @@ MonoBehaviour:
   friction: {x: 0.3, y: 0.3}
   torque: 10
   zeroVelocitySpeed: {x: 5, y: 10}
+--- !u!114 &-977959931175993678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5825526461628578718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fe530a51ed29b14a984de35a8ba8267, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'

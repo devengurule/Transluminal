@@ -113,6 +113,8 @@ public class GameController : MonoBehaviour
 
             // Setup new map
             ChangeInputMap("Ship");
+
+            GetComponent<ScrapSpawnController>().SpawnScrap();
         }
     }
 

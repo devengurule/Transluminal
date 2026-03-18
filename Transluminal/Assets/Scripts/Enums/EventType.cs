@@ -15,6 +15,7 @@ public enum EventType
     // Collision
     PlayerCollidingEnter,
     PlayerCollidingExit,
+    ShipCollidingWithScrap,
 
     // Pausing
     PauseOn,

@@ -110,11 +110,12 @@ public class NavigationController : MonoBehaviour
             // turn off the line
             lineObject.GetComponent<LineScript>().StopDrawingLine();
 
-            print($"Traveled to {targetNode.name}");
+            //print($"Traveled to {targetNode.name}");
             ChangeCurrentNode(targetNode);
         }
     }
     #endregion
+
 
     #region Methods
 

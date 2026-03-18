@@ -10,6 +10,7 @@ TagManager:
   - ShipHelm
   - NavSelector
   - NavUI
+  - Scrap
   layers:
   - Default
   - TransparentFX

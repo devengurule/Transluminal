@@ -61,7 +61,6 @@ public class HoverScript : MonoBehaviour
     {
         if (isHovered && !isCurrentNode)
         {
-            print(3);
             if (!isSelected)
             {
                 GameObject selectObject = transform.Find("Selected").gameObject;
@@ -98,7 +97,6 @@ public class HoverScript : MonoBehaviour
         {
             if (!isSelected && !isCurrentNode)
             {
-                print(1);
                 GameObject hoverObject = transform.Find("Hovered").gameObject;
                 hoverObject.SetActive(true);
 
@@ -113,7 +111,6 @@ public class HoverScript : MonoBehaviour
         {
             if (!isCurrentNode)
             {
-                print(2);
                 GameObject hoverObject = transform.Find("Hovered").gameObject;
                 hoverObject.SetActive(false);
                 isHovered = false;
