@@ -1167,7 +1167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 523a89fa728c293459dc7d25de4e7a53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  moveSpeed: 1
+  moveSpeed: 100
+  sprintSpeed: 500
 --- !u!1 &1607694616748448207
 GameObject:
   m_ObjectHideFlags: 0
@@ -5833,6 +5834,10 @@ PrefabInstance:
       propertyPath: targetShipScene
       value: 
       objectReference: {fileID: 102900000, guid: b53a737a3d035ee4387880217a3b8c3c, type: 3}
+    - target: {fileID: 1170676715736887071, guid: 628ce28baf84bfe44bb156acd6bc20f1, type: 3}
+      propertyPath: targetShipSceneName
+      value: SalvageScene_0
+      objectReference: {fileID: 0}
     - target: {fileID: 4616122863170857833, guid: 628ce28baf84bfe44bb156acd6bc20f1, type: 3}
       propertyPath: m_Name
       value: Node (1)
@@ -5939,6 +5944,10 @@ PrefabInstance:
       propertyPath: targetShipScene
       value: 
       objectReference: {fileID: 102900000, guid: 2c1797d383a24fd4d965f570d22ddd40, type: 3}
+    - target: {fileID: 1170676715736887071, guid: 628ce28baf84bfe44bb156acd6bc20f1, type: 3}
+      propertyPath: targetShipSceneName
+      value: SalvageScene_1
+      objectReference: {fileID: 0}
     - target: {fileID: 4616122863170857833, guid: 628ce28baf84bfe44bb156acd6bc20f1, type: 3}
       propertyPath: m_Name
       value: Node (2)

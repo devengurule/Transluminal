@@ -5,11 +5,14 @@ public class SelectorMovement : MonoBehaviour
 {
     #region Variables
     [SerializeField] private float moveSpeed;
+    [SerializeField] private float sprintSpeed;
 
+    private float currentSpeed;
     private EventManager eventManager;
     private Vector2 positionVector;
     private Vector2 move;
     private bool canMove = true;
+    private bool canSprint;
     #endregion
 
     #region Unity Methods
@@ -22,6 +25,8 @@ public class SelectorMovement : MonoBehaviour
         if (eventManager != null)
         {
             eventManager.Subscribe(EventType.Move, OnMoveSelector);
+            eventManager.Subscribe(EventType.SprintOn, OnCursorSprint);
+            eventManager.Subscribe(EventType.SprintOff, OffCursorSprint);
         }
     }
 
@@ -30,6 +35,8 @@ public class SelectorMovement : MonoBehaviour
         if (eventManager != null)
         {
             eventManager.Unsubscribe(EventType.Move, OnMoveSelector);
+            eventManager.Unsubscribe(EventType.SprintOn, OnCursorSprint);
+            eventManager.Unsubscribe(EventType.SprintOff, OffCursorSprint);
         }
     }
 
@@ -39,6 +46,12 @@ public class SelectorMovement : MonoBehaviour
         {
             MovementLogic();
         }
+
+        if(canSprint)
+        {
+            currentSpeed = sprintSpeed;
+        }
+        else currentSpeed = moveSpeed;
     }
 
     #endregion
@@ -52,9 +65,19 @@ public class SelectorMovement : MonoBehaviour
         }
     }
 
+    private void OnCursorSprint(object target)
+    {
+        canSprint = true;
+    }
+
+    private void OffCursorSprint(object target)
+    {
+        canSprint = false;
+    }
+
     private void MovementLogic()
     {
-        positionVector += move * moveSpeed;
+        positionVector += move * currentSpeed * Time.deltaTime;
 
         transform.position = positionVector;
     }
