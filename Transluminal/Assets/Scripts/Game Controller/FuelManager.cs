@@ -71,5 +71,12 @@ public class FuelManager : MonoBehaviour
     {
         currentFuel -= fuel;
     }
+
+    public void IncreaseMaxFuel(float percentAmount)
+    {
+        maxFuel = (int)(maxFuel * (1 + percentAmount));
+
+        currentFuel = maxFuel;
+    }
     #endregion
 }

@@ -15,6 +15,7 @@ public class NavigationController : MonoBehaviour
     private EventManager eventManager;
     private GameObject targetNode;
     private string currentShipScene;
+    private ValueTier currentNodeTier;
     private bool atHomeNode;
     private int foodCost;
     private int fuelCost;
@@ -51,7 +52,6 @@ public class NavigationController : MonoBehaviour
             eventManager.Subscribe(EventType.NodeDeselected, OnNodeDeselect);
             eventManager.Subscribe(EventType.Confirm, OnConfirmTravel);
         }
-
     }
 
     private void OnDestroy()
@@ -144,6 +144,7 @@ public class NavigationController : MonoBehaviour
         {
             atHomeNode = false;
             currentShipScene = currentNode.GetComponent<NodeScript>().TargetShipScene();
+            currentNodeTier = currentNode.GetComponent<NodeScript>().ValueTier();
         }
     }
 
@@ -183,6 +184,10 @@ public class NavigationController : MonoBehaviour
     public bool IsAtHomeNode()
     {
         return atHomeNode;
+    }
+    public ValueTier GetNodeTier()
+    {
+        return currentNodeTier;
     }
     #endregion
 }

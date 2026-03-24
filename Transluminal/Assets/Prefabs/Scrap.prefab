@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6370791243946314465}
   - component: {fileID: 6124580373977795808}
   - component: {fileID: 107136659415540533}
+  - component: {fileID: 150108196753795085}
   m_Layer: 0
   m_Name: Scrap
   m_TagString: Scrap
@@ -128,3 +129,15 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 2.7
+--- !u!114 &150108196753795085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5138417330971813383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 267e17e81b6352a48ac95abf1f558e02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'

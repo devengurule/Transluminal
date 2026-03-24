@@ -14,6 +14,8 @@ public class NodeScript : MonoBehaviour
 #endif
 
     [SerializeField] private string targetShipSceneName;
+    [SerializeField] private ValueTier valueTier;
+
 
     private void OnValidate()
     {
@@ -41,5 +43,10 @@ public class NodeScript : MonoBehaviour
     public string TargetShipScene()
     {
         return targetShipSceneName;
+    }
+
+    public ValueTier ValueTier()
+    {
+        return valueTier;
     }
 }

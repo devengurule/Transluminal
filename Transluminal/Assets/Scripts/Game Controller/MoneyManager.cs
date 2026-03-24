@@ -39,7 +39,7 @@ public class MoneyManager : MonoBehaviour
     {
         GameObject collisionObject = target as GameObject;
 
-        AddMoney((int)Random.Range(ScrapValue.x, ScrapValue.y));
+        AddMoney(collisionObject.GetComponent<ScrapScript>().value);
 
         UpdateMoneyCounter();
 

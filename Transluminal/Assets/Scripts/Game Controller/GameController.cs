@@ -11,12 +11,11 @@ public class GameController : MonoBehaviour
     public static GameController instance;
     public EventManager eventManager { get; private set; }
 
-
     [SerializeField] private List<string> PlayerInputMapScenes = new();
     [SerializeField] private List<string> ShipInputMapScenes = new();
     [SerializeField] private bool devMode;
 
-    private Dictionary<string, List<ScrapData>> shipScenesVisited = new Dictionary<string, List<ScrapData>>();
+    private Dictionary<string, List<ScrapSaveData>> shipScenesVisited = new Dictionary<string, List<ScrapSaveData>>();
     private NavigationController navController;
     private PlayerInput playerInput;
     private GameObject parent;
@@ -115,11 +114,10 @@ public class GameController : MonoBehaviour
             if (!shipScenesVisited.ContainsKey(SceneController.GetCurrentSceneName()))
             {
                 // never visited this scene before
-
-                GetComponent<ScrapSpawnController>().ResetScrapLefToSpawn();
+                GetComponent<ScrapSpawnController>().ResetScrapLeftToSpawn();
 
                 // spawn scrap
-                GetComponent<ScrapSpawnController>().SpawnScrap();
+                GetComponent<ScrapSpawnController>().SpawnScrap(GetComponent<NavigationController>().GetNodeTier());
 
                 // add new scene to dictionary
                 shipScenesVisited.Add(SceneController.GetCurrentSceneName(), GetListOfScrapData());
@@ -218,17 +216,19 @@ public class GameController : MonoBehaviour
         playerInput.actions.FindActionMap(mapName).Enable();
     }
 
-    private List<ScrapData> GetListOfScrapData()
+    private List<ScrapSaveData> GetListOfScrapData()
     {
         GameObject[] scrapObjects = GameObject.FindGameObjectsWithTag("Scrap");
         
-        List<ScrapData> scrapDataList = new List<ScrapData>();
+        List<ScrapSaveData> scrapDataList = new List<ScrapSaveData>();
 
         foreach (GameObject obj in scrapObjects)
         {
-            ScrapData data;
+            ScrapSaveData data;
             data.position = obj.transform.position;
             data.eulerRotation = obj.transform.eulerAngles;
+            data.scrapData = obj.GetComponent<ScrapScript>().GetScrapData();
+            data.value = obj.GetComponent<ScrapScript>().value;
 
             scrapDataList.Add(data);
         }
@@ -236,9 +236,9 @@ public class GameController : MonoBehaviour
         return scrapDataList;
     }
 
-    private ScrapData FindObjWithSameData(GameObject obj, List<ScrapData> data)
+    private ScrapSaveData FindObjWithSameData(GameObject obj, List<ScrapSaveData> data)
     {
-        foreach(ScrapData scrapData in data)
+        foreach(ScrapSaveData scrapData in data)
         {
             if ((Vector2)obj.transform.position == scrapData.position && obj.transform.eulerAngles == scrapData.eulerRotation)
             {
