@@ -16,6 +16,7 @@ public enum EventType
     PlayerCollidingEnter,
     PlayerCollidingExit,
     ShipCollidingWithScrap,
+    ShipCollidingWithSalvage,
 
     // Pausing
     PauseOn,
@@ -32,5 +33,6 @@ public enum EventType
 
     // Misc
     Restart,
-    DestroyScrap
+    DestroyScrap,
+    DestroySalvage
 }

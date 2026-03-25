@@ -6,5 +6,5 @@ public class ScrapData : ScriptableObject
 {
     public TierData tier;
     public Sprite sprite;
-    public int scale;
+    public float scale;
 }

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 1414151382941597215}
   - component: {fileID: -8210518752818356001}
   - component: {fileID: -6372975659343732928}
+  - component: {fileID: 728943618792478831}
   - component: {fileID: 6650028721645696972}
   m_Layer: 0
   m_Name: GameController
@@ -196,8 +197,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce4e9ef725aa4c840afb8a05adf794b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScrapSpawnController
-  numOfScrap: 0
+  numOfScrapRange: {x: 0, y: 0}
   scrapPrefab: {fileID: 0}
+  lowTierScrapData: []
+  medTierScrapData: []
+  highTierScrapData: []
+  numOfSalvageRange: {x: 0, y: 0}
+  salvagePrefab: {fileID: 0}
+  lowTierSalvageData: []
+  medTierSalvageData: []
+  highTierSalvageData: []
 --- !u!114 &-6372975659343732928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,6 +217,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 318360a06053b1e49adad0ec7253f3ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  totalDigits: 0
+  currentMoney: 0
+--- !u!114 &728943618792478831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5101720563598869061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d5045a2187fac24694a999ae956d60b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
 --- !u!114 &6650028721645696972

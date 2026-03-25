@@ -15,7 +15,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private List<string> ShipInputMapScenes = new();
     [SerializeField] private bool devMode;
 
-    private Dictionary<string, List<ScrapSaveData>> shipScenesVisited = new Dictionary<string, List<ScrapSaveData>>();
+    private Dictionary<string, SceneData> shipScenesVisited = new Dictionary<string, SceneData>();
     private NavigationController navController;
     private PlayerInput playerInput;
     private GameObject parent;
@@ -70,6 +70,7 @@ public class GameController : MonoBehaviour
             eventManager.Subscribe(EventType.PlayerCollidingEnter, OnPlayerEnterCollide);
             eventManager.Subscribe(EventType.PlayerCollidingExit, OnPlayerExitCollide);
             eventManager.Subscribe(EventType.DestroyScrap, OnDestroyScrap);
+            eventManager.Subscribe(EventType.DestroySalvage, OnDestroySalvage);
             eventManager.Subscribe(EventType.ArrivedAtHomeNode, OnArrivedHome);
         }
     }
@@ -84,6 +85,7 @@ public class GameController : MonoBehaviour
             eventManager.Subscribe(EventType.PlayerCollidingEnter, OnPlayerEnterCollide);
             eventManager.Subscribe(EventType.PlayerCollidingExit, OnPlayerExitCollide);
             eventManager.Subscribe(EventType.DestroyScrap, OnDestroyScrap);
+            eventManager.Subscribe(EventType.DestroySalvage, OnDestroySalvage);
             eventManager.Unsubscribe(EventType.ArrivedAtHomeNode, OnArrivedHome);
         }
     }
@@ -114,20 +116,35 @@ public class GameController : MonoBehaviour
             if (!shipScenesVisited.ContainsKey(SceneController.GetCurrentSceneName()))
             {
                 // never visited this scene before
-                GetComponent<ScrapSpawnController>().ResetScrapLeftToSpawn();
+
+                // Reset spawning amount
+                GetComponent<SpawnController>().ResetScrapLeftToSpawn();
+                GetComponent<SpawnController>().ResetSalvageLeftToSpawn();
 
                 // spawn scrap
-                GetComponent<ScrapSpawnController>().SpawnScrap(GetComponent<NavigationController>().GetNodeTier());
+                GetComponent<SpawnController>().SpawnScrap(GetComponent<NavigationController>().GetNodeTier());
+
+                // spawn salvage
+                ValueTier tier = GetComponent<NavigationController>().GetNodeTier();
+
+                if (GetComponent<SpawnController>() == null) print(1);
+
+                GetComponent<SpawnController>().SpawnSalvage(tier);
 
                 // add new scene to dictionary
-                shipScenesVisited.Add(SceneController.GetCurrentSceneName(), GetListOfScrapData());
+                SceneData data = GetSceneData();
+
+                shipScenesVisited.Add(SceneController.GetCurrentSceneName(), data);
             }
             else
             {
                 // visiting a ship scene previously visited
 
                 // spawn scrap
-                GetComponent<ScrapSpawnController>().SpawnExistingScrap(shipScenesVisited[SceneController.GetCurrentSceneName()]);
+                GetComponent<SpawnController>().SpawnExistingScrap(shipScenesVisited[SceneController.GetCurrentSceneName()].scrapSaveDataList);
+
+                // spawn salvage
+                GetComponent<SpawnController>().SpawnExistingSalvage(shipScenesVisited[SceneController.GetCurrentSceneName()].salvageSaveDataList);
 
             }
 
@@ -195,8 +212,17 @@ public class GameController : MonoBehaviour
     private void OnDestroyScrap(object target)
     {
         GameObject destroyedObject = target as GameObject;
+        
+        shipScenesVisited[SceneController.GetCurrentSceneName()].scrapSaveDataList.Remove(FindObjWithSameData(destroyedObject, shipScenesVisited[SceneController.GetCurrentSceneName()].scrapSaveDataList));
 
-        shipScenesVisited[SceneController.GetCurrentSceneName()].Remove(FindObjWithSameData(destroyedObject, shipScenesVisited[SceneController.GetCurrentSceneName()]));
+        Destroy(destroyedObject);
+    }
+
+    private void OnDestroySalvage(object target)
+    {
+        GameObject destroyedObject = target as GameObject;
+
+        shipScenesVisited[SceneController.GetCurrentSceneName()].salvageSaveDataList.Remove(FindObjWithSameData(destroyedObject, shipScenesVisited[SceneController.GetCurrentSceneName()].salvageSaveDataList));
 
         Destroy(destroyedObject);
     }
@@ -205,6 +231,13 @@ public class GameController : MonoBehaviour
     {
         // Clears out dictionary when coming home
         shipScenesVisited.Clear();
+
+        // Add all scrap collected value to money counter
+        int totalScrapValue = GetComponent<CollectableManager>().GetCollectedScrapValue();
+
+        GetComponent<MoneyManager>().AddMoney(totalScrapValue);
+
+        GetComponent<CollectableManager>().ResetScrapTotal();
     }
 
     #endregion
@@ -216,11 +249,13 @@ public class GameController : MonoBehaviour
         playerInput.actions.FindActionMap(mapName).Enable();
     }
 
-    private List<ScrapSaveData> GetListOfScrapData()
+    private SceneData GetSceneData()
     {
         GameObject[] scrapObjects = GameObject.FindGameObjectsWithTag("Scrap");
-        
+        GameObject[] salvageObjects = GameObject.FindGameObjectsWithTag("Salvage");
+
         List<ScrapSaveData> scrapDataList = new List<ScrapSaveData>();
+        List<SalvageSaveData> salvageDataList = new List<SalvageSaveData>();
 
         foreach (GameObject obj in scrapObjects)
         {
@@ -233,7 +268,23 @@ public class GameController : MonoBehaviour
             scrapDataList.Add(data);
         }
 
-        return scrapDataList;
+        foreach (GameObject obj in salvageObjects)
+        {
+            SalvageSaveData data;
+            data.position = obj.transform.position;
+            data.eulerRotation = obj.transform.eulerAngles;
+            data.salvageData = obj.GetComponent<SalvageScript>().GetSalvageData();
+            data.value = obj.GetComponent<SalvageScript>().value;
+            data.type = obj.GetComponent<SalvageScript>().GetSalvageType();
+
+            salvageDataList.Add(data);
+        }
+
+        SceneData sceneData = new();
+        sceneData.scrapSaveDataList = scrapDataList;
+        sceneData.salvageSaveDataList = salvageDataList;
+
+        return sceneData;
     }
 
     private ScrapSaveData FindObjWithSameData(GameObject obj, List<ScrapSaveData> data)
@@ -243,6 +294,19 @@ public class GameController : MonoBehaviour
             if ((Vector2)obj.transform.position == scrapData.position && obj.transform.eulerAngles == scrapData.eulerRotation)
             {
                 return scrapData;
+            }
+        }
+        // Never hit this
+        return data[0];
+    }
+
+    private SalvageSaveData FindObjWithSameData(GameObject obj, List<SalvageSaveData> data)
+    {
+        foreach (SalvageSaveData salvageData in data)
+        {
+            if ((Vector2)obj.transform.position == salvageData.position && obj.transform.eulerAngles == salvageData.eulerRotation)
+            {
+                return salvageData;
             }
         }
         // Never hit this

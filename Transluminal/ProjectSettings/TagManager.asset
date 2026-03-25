@@ -11,6 +11,8 @@ TagManager:
   - NavSelector
   - NavUI
   - Shop
+  - Scrap
+  - Salvage
   layers:
   - Default
   - TransparentFX

@@ -19,6 +19,11 @@ public class ShipCollisionManager : MonoBehaviour
             // Publish that a collision happened with the player
             eventManager.Publish(EventType.ShipCollidingWithScrap, collision.gameObject);
         }
+        else if(collision.gameObject.tag == "Salvage")
+        {
+            // Publish that a collision happened with the player
+            eventManager.Publish(EventType.ShipCollidingWithSalvage, collision.gameObject);
+        }
     }
     #endregion
 }

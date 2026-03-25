@@ -62,18 +62,18 @@ public class EventManager : MonoBehaviour
     {
         if (GameController.instance.eventManager != null)
         {
-            try
-            {
+            //try
+            //{
                 // Invoke action is delegate for it exists
                 if (eventDict.ContainsKey(eventType))
                 {
                     eventDict[eventType]?.Invoke(value);
                 }
-            }
-            catch (Exception e)
-            {
-                Debug.Log($"Failed to Publish {eventType}, {value}: {e}");
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    Debug.Log($"Failed to Publish {eventType}, {value}: {e}");
+            //}
         }
     }
     #endregion

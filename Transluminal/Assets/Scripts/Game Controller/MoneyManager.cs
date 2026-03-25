@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 public class MoneyManager : MonoBehaviour
 {
     #region Variables
-    [SerializeField, Tooltip("Range from Min to Max"), Min(0)] private Vector2 ScrapValue;
     [SerializeField, Min(0)] private int totalDigits;
     [SerializeField] private int currentMoney;
 
@@ -15,16 +14,9 @@ public class MoneyManager : MonoBehaviour
     #region Unity Methods
     private void Start()
     {
-        eventManager = GameController.instance.eventManager;
-
         // Subscribe to active scene change event
         SceneManager.activeSceneChanged += SceneChange;
         UpdateMoneyCounter();
-
-        if (eventManager != null)
-        {
-            eventManager.Subscribe(EventType.ShipCollidingWithScrap, OnShipCollision);
-        }
     }
     #endregion
 
@@ -34,17 +26,6 @@ public class MoneyManager : MonoBehaviour
     {
         UpdateMoneyCounter();
     }
-
-    private void OnShipCollision(object target)
-    {
-        GameObject collisionObject = target as GameObject;
-
-        AddMoney(collisionObject.GetComponent<ScrapScript>().value);
-
-        UpdateMoneyCounter();
-
-        eventManager.Publish(EventType.DestroyScrap, collisionObject);
-}
 
     #endregion
 
@@ -92,6 +73,8 @@ public class MoneyManager : MonoBehaviour
     public void AddMoney(int money)
     {
         currentMoney += money;
+
+        UpdateMoneyCounter();
     }
 
     public void SubtractMoney(int money)
