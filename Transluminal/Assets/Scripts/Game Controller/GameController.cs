@@ -22,7 +22,8 @@ public class GameController : MonoBehaviour
     private string transportLayer = "TransportCollider";
     private bool interactWithTransport = false;
     
-
+    private ShipSaveData shipSaveData;
+    private PlayerSaveData playerSaveData;
 
     #endregion
 
@@ -55,6 +56,9 @@ public class GameController : MonoBehaviour
         }
 
         playerInput = GetComponent<PlayerInput>();
+
+        playerSaveData.position = GameObject.Find("Player").transform.position;
+        playerSaveData.eulerRotation = GameObject.Find("Player").transform.eulerAngles;
 
         // Subscribe to active scene change event
         SceneManager.activeSceneChanged += SceneChange;
@@ -102,6 +106,9 @@ public class GameController : MonoBehaviour
         {
             // We are in Player Input Map Scenes
 
+            GameObject.Find("Player").transform.position = playerSaveData.position;
+            GameObject.Find("Player").transform.eulerAngles = playerSaveData.eulerRotation;
+
             // Disable old map
             playerInput.actions.FindActionMap("Ship").Disable();
 
@@ -112,6 +119,9 @@ public class GameController : MonoBehaviour
         else if (ShipInputMapScenes.Contains(SceneController.GetCurrentSceneName()))
         {
             // We are in Ship Input Map Scenes
+
+            GameObject.Find("PlayerShip").transform.position = shipSaveData.position;
+            GameObject.Find("PlayerShip").transform.eulerAngles = shipSaveData.eulerRotation;
 
             if (!shipScenesVisited.ContainsKey(SceneController.GetCurrentSceneName()))
             {
@@ -162,6 +172,9 @@ public class GameController : MonoBehaviour
         if (ShipInputMapScenes.Contains(SceneController.GetCurrentSceneName()))
         {
             // Inside a ship scene
+            shipSaveData.position = GameObject.Find("PlayerShip").transform.position;
+            shipSaveData.eulerRotation = GameObject.Find("PlayerShip").transform.eulerAngles;
+
             if (devMode)
             {
                 SceneController.GoToScene("ISDevRoom");
@@ -174,7 +187,11 @@ public class GameController : MonoBehaviour
         else
         {
             // Not inside a ship scene
-            if(interactWithTransport)
+
+            playerSaveData.position = GameObject.Find("Player").transform.position;
+            playerSaveData.eulerRotation = GameObject.Find("Player").transform.eulerAngles;
+
+            if (interactWithTransport)
             {
                 if (!navController.IsAtHomeNode())
                 {
