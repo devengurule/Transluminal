@@ -159,6 +159,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: FuelCostPercent
       objectReference: {fileID: 0}
+    - target: {fileID: 4015142628785939457, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4099461919131746403, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4258562887369458709, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 529.49
@@ -406,7 +414,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8609397816828364346, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: currentMoney
-      value: 100
+      value: 999999
       objectReference: {fileID: 0}
     - target: {fileID: 8741825255591450546, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_text

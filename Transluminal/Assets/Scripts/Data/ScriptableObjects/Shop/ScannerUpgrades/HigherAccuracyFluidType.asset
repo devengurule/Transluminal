@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e10febe8457d77f4db27883b825a0b34, type: 3}
+  m_Name: HigherAccuracyFluidType
+  m_EditorClassIdentifier: Assembly-CSharp::PurchasableData
+  title: Increase Fluid Amount Accuracy
+  description: Scavangers will be able to have higher confidence in scanning technology
+    with this higher accracy upgrade
+  price: 250000
+  sprite: {fileID: -7656000516549335239, guid: f002d4fcadf854b4e86ded8723395a1c, type: 3}

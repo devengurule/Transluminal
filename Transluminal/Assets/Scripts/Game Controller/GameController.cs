@@ -330,5 +330,17 @@ public class GameController : MonoBehaviour
         return data[0];
     }
 
+    public bool CanPurchase(int price)
+    {
+        if (GetComponent<MoneyManager>().GetCurrentMoney() >= price) return true;
+        else return false;
+    }
+
+    public void MakePurchase(int price)
+    {
+        GetComponent<MoneyManager>().SubtractMoney(price);
+        GetComponent<MoneyManager>().UpdateMoneyCounter();
+    }
+
     #endregion
 }

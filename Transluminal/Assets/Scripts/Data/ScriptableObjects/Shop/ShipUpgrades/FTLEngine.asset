@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e10febe8457d77f4db27883b825a0b34, type: 3}
+  m_Name: FTLEngine
+  m_EditorClassIdentifier: Assembly-CSharp::PurchasableData
+  title: Transluminal Engine
+  description: Organic creatures were never built to move past the speed of light
+    and yet here we are
+  price: 1000000
+  sprite: {fileID: 1512425262535794871, guid: 9ba6b486b1152d047a69f38d587b9ba9, type: 3}

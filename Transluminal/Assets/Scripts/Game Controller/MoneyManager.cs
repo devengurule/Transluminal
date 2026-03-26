@@ -30,7 +30,7 @@ public class MoneyManager : MonoBehaviour
     #endregion
 
     #region Methods
-    private void UpdateMoneyCounter()
+    public void UpdateMoneyCounter()
     {
         // Get UI object
         GameObject moneyCounterObject = GameObject.Find("MoneyCounter");
