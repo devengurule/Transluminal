@@ -304,7 +304,7 @@
                 },
                 {
                     "name": "WS",
-                    "id": "2c5837d3-2cf2-4d1d-ade6-efe799427d74",
+                    "id": "afb88f73-d850-4a34-bb69-dc3cb0876e99",
                     "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
@@ -315,7 +315,7 @@
                 },
                 {
                     "name": "Positive",
-                    "id": "e6157b22-9237-46c1-9f64-b103a600da25",
+                    "id": "1f2f4c9f-5d37-418d-8d6c-f96bac310320",
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
@@ -326,7 +326,7 @@
                 },
                 {
                     "name": "Negative",
-                    "id": "822ce38b-94eb-42dc-ad49-433c483003f4",
+                    "id": "5a5efbf6-95e7-4c64-852a-1f74debea1c7",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
@@ -334,6 +334,28 @@
                     "action": "Scroll",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "03b34512-4adc-496c-9f64-9f6d318de4aa",
+                    "path": "<Gamepad>/dpad/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Scroll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f77115cd-cc93-41dc-a3d8-feb05b161ace",
+                    "path": "<Gamepad>/leftStick/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Scroll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

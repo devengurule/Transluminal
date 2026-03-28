@@ -12,6 +12,8 @@ public class InputManager : MonoBehaviour
     private InputAction sprintAction;
     private InputAction zeroVelocityAction;
     private InputAction interactAction;
+
+    private bool movingScroll;
     #endregion
 
     #region Unity Methods
@@ -128,7 +130,17 @@ public class InputManager : MonoBehaviour
     private void OnScroll(InputValue value)
     {
         float scrollValue = value.Get<float>();
-        eventManager.Publish(EventType.Scroll, scrollValue);
+        
+        if(Mathf.Abs(scrollValue) == 1 && !movingScroll)
+        {
+            movingScroll = true;
+            print(scrollValue);
+            eventManager.Publish(EventType.Scroll, Mathf.Sign(scrollValue));
+        }
+        else if (Mathf.Abs(scrollValue) != 1)
+        {
+            movingScroll = false;
+        }
     }
 
     #endregion
