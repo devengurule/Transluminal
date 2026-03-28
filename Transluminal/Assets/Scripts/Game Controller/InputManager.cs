@@ -13,11 +13,12 @@ public class InputManager : MonoBehaviour
     private InputAction zeroVelocityAction;
     private InputAction interactAction;
 
-    private bool movingScroll;
+    private bool movingScrollVert;
+    private bool movingScrollHori;
     #endregion
 
     #region Unity Methods
-    
+
     private void Start()
     {
         eventManager = GameController.instance.eventManager;
@@ -127,19 +128,33 @@ public class InputManager : MonoBehaviour
         eventManager.Publish(EventType.Restart);
     }
 
-    private void OnScroll(InputValue value)
+    private void OnScrollVert(InputValue value)
     {
         float scrollValue = value.Get<float>();
         
-        if(Mathf.Abs(scrollValue) == 1 && !movingScroll)
+        if(Mathf.Abs(scrollValue) == 1 && !movingScrollVert)
         {
-            movingScroll = true;
-            print(scrollValue);
-            eventManager.Publish(EventType.Scroll, Mathf.Sign(scrollValue));
+            movingScrollVert = true;
+            eventManager.Publish(EventType.ScrollVert, Mathf.Sign(scrollValue));
         }
         else if (Mathf.Abs(scrollValue) != 1)
         {
-            movingScroll = false;
+            movingScrollVert = false;
+        }
+    }
+
+    private void OnScrollHori(InputValue value)
+    {
+        float scrollValue = value.Get<float>();
+
+        if (Mathf.Abs(scrollValue) == 1 && !movingScrollHori)
+        {
+            movingScrollHori = true;
+            eventManager.Publish(EventType.ScrollHori, Mathf.Sign(scrollValue));
+        }
+        else if (Mathf.Abs(scrollValue) != 1)
+        {
+            movingScrollHori = false;
         }
     }
 

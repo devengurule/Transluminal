@@ -61,9 +61,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Scroll",
+                    "name": "ScrollVert",
                     "type": "Value",
                     "id": "ed8c0eb2-37e6-4563-ad54-5dcfdd9ea05d",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "ScrollHori",
+                    "type": "Value",
+                    "id": "6aefec0f-37e9-454f-9bfd-81e3bc6dbbdf",
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
@@ -309,7 +318,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Scroll",
+                    "action": "ScrollVert",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -320,7 +329,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Scroll",
+                    "action": "ScrollVert",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -331,7 +340,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Scroll",
+                    "action": "ScrollVert",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -342,7 +351,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "Scroll",
+                    "action": "ScrollVert",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -353,7 +362,62 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Scroll",
+                    "action": "ScrollVert",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "AD",
+                    "id": "3cb026e8-b29c-4cda-a725-8135b2830471",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ScrollHori",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Positive",
+                    "id": "395a4562-3a73-44fd-92ef-82424a5d80fd",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ScrollHori",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Negative",
+                    "id": "f0a23054-14f4-4692-b735-9d0e3f2a7b62",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ScrollHori",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "af8235a5-689b-4a8e-a001-a229b92ca82b",
+                    "path": "<Gamepad>/dpad/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "ScrollHori",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6b303b28-57f5-4260-82c6-7bd9db20e890",
+                    "path": "<Gamepad>/leftStick/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "ScrollHori",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

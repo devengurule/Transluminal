@@ -30,7 +30,7 @@ public class ElevatorButtonController : MonoBehaviour
 
         if (eventManager != null)
         {
-            eventManager.Subscribe(EventType.Scroll, OnChangeButton);
+            eventManager.Subscribe(EventType.ScrollVert, OnChangeButton);
             eventManager.Subscribe(EventType.Interact, SelectButton);
         }
     }
@@ -39,7 +39,7 @@ public class ElevatorButtonController : MonoBehaviour
     {
         if (eventManager != null)
         {
-            eventManager.Unsubscribe(EventType.Scroll, OnChangeButton);
+            eventManager.Unsubscribe(EventType.ScrollVert, OnChangeButton);
             eventManager.Subscribe(EventType.Interact, SelectButton);
         }
     }

@@ -6,7 +6,7 @@ public class PurchaseableScript : MonoBehaviour
 {
     [SerializeField] GameObject priceText;
     [SerializeField] private PurchasableData data;
-    private bool isPurchased;
+    public bool isPurchased { get; set; }
     private GameController gameController;
 
     private void Awake()
@@ -23,23 +23,28 @@ public class PurchaseableScript : MonoBehaviour
         priceText.GetComponent<TMP_Text>().text = data.price.ToString();
     }
 
-    public void AttemptPurchase()
-    {
-        if (!isPurchased && gameController.CanPurchase(data.price))
-        {
-            CompletePurchase();
-        }
-        else
-        {
-            print("Not enough money :/");
-        }
-    }
+    //public void AttemptPurchase()
+    //{
+    //    if (!isPurchased && gameController.CanPurchase(data.price))
+    //    {
+    //        CompletePurchase();
+    //    }
+    //    else
+    //    {
+    //        print("Not enough money :/");
+    //    }
+    //}
 
-    private void CompletePurchase()
-    {
-        isPurchased = true;
-        gameController.MakePurchase(data.price);
+    //private void CompletePurchase()
+    //{
+    //    isPurchased = true;
+    //    gameController.MakePurchase(data.price);
 
-        transform.Find("Purchased").gameObject.SetActive(true);
+    //    transform.Find("Purchased").gameObject.SetActive(true);
+    //}
+
+    public PurchasableData Data()
+    {
+        return data;
     }
 }

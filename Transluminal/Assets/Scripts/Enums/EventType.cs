@@ -37,5 +37,6 @@ public enum EventType
     DestroySalvage,
 
     // UI
-    Scroll
+    ScrollVert,
+    ScrollHori
 }
