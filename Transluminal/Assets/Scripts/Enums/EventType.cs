@@ -34,5 +34,8 @@ public enum EventType
     // Misc
     Restart,
     DestroyScrap,
-    DestroySalvage
+    DestroySalvage,
+
+    // UI
+    Scroll
 }

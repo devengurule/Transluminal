@@ -125,6 +125,12 @@ public class InputManager : MonoBehaviour
         eventManager.Publish(EventType.Restart);
     }
 
+    private void OnScroll(InputValue value)
+    {
+        float scrollValue = value.Get<float>();
+        eventManager.Publish(EventType.Scroll, scrollValue);
+    }
+
     #endregion
 
     #region Methods

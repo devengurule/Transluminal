@@ -13,7 +13,6 @@ public class UIController : MonoBehaviour
     private string colliderLayerName = "UICollider";
     private static string availableUIInteractTag = "";
 
-
     public static bool isUIUP { get; private set; } = false;
     #endregion
 

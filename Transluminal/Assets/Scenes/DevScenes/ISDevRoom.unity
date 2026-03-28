@@ -1866,6 +1866,14 @@ PrefabInstance:
       propertyPath: currentNode
       value: 
       objectReference: {fileID: 1661228170}
+    - target: {fileID: 4015142628785939457, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4099461919131746403, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4763416399504188631, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_text
       value: 'TAB to Pause
@@ -1874,6 +1882,10 @@ PrefabInstance:
         F to Interact'
       objectReference: {fileID: 0}
     - target: {fileID: 5058720858528443688, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6709727404661726724, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}

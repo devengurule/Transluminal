@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class CollectableManager : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class CollectableManager : MonoBehaviour
     {
         eventManager = GameController.instance.eventManager;
 
-        if(eventManager != null )
+        if (eventManager != null )
         {
             eventManager.Subscribe(EventType.ShipCollidingWithScrap, OnShipCollideWithScrap);
             eventManager.Subscribe(EventType.ShipCollidingWithSalvage, OnShipCollideWithSalvage);

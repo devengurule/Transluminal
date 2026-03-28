@@ -35,10 +35,14 @@ public class MoneyManager : MonoBehaviour
         // Get UI object
         GameObject moneyCounterObject = GameObject.Find("MoneyCounter");
         // Get text attached to object
-        TMP_Text moneyCounterText = moneyCounterObject.GetComponent<TMP_Text>();
 
-        // Update text
-        moneyCounterText.text = MoneyIntToStr(currentMoney);
+        if (moneyCounterObject != null)
+        {
+            TMP_Text moneyCounterText = moneyCounterObject.GetComponent<TMP_Text>();
+
+            // Update text
+            moneyCounterText.text = MoneyIntToStr(currentMoney);
+        }
     }
 
     private string MoneyIntToStr(int money)
