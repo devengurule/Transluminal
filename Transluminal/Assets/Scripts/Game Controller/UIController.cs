@@ -51,11 +51,18 @@ public class UIController : MonoBehaviour
         GameObject gameObject = target as GameObject;
         int layerID = LayerMask.NameToLayer(colliderLayerName);
 
-
         if (gameObject.layer == layerID)
         {
-            interactWithUI = true;
-            availableUIInteractTag = gameObject.tag;
+            if (gameObject.tag == "Shop" && !GameController.instance.GetComponent<NavigationController>().IsAtHomeNode())
+            {
+                interactWithUI = false;
+                availableUIInteractTag = "";
+            }
+            else
+            {
+                interactWithUI = true;
+                availableUIInteractTag = gameObject.tag;
+            }
         }
     }
     private void OnPlayerCollidingExit(object target)

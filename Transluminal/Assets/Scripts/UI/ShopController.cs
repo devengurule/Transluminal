@@ -91,28 +91,43 @@ public class ShopController : MonoBehaviour
 
     private void OnChangeUpgrades(object target)
     {
-        if (Equals(currentButtonList, buttonListScanner))
+
+        if (target is float input)
         {
-            // Currently in scanner upgrades
+            float horiInput = input;
 
-            // Switch to ship
+            if (Equals(currentButtonList, buttonListScanner) && horiInput < 0)
+            {
+                // Currently in scanner upgrades
 
-            CopyList(currentButtonList, buttonListShip);
+                // Switch to ship
 
-            buttonListScanner[0].transform.parent.gameObject.SetActive(false);
-            buttonListShip[0].transform.parent.gameObject.SetActive(true);
+                CopyList(currentButtonList, buttonListShip);
 
-        }
-        else
-        {
-            // Currently in ship uprgades
+                buttonListScanner[0].transform.parent.gameObject.SetActive(false);
+                buttonListShip[0].transform.parent.gameObject.SetActive(true);
 
-            // Switch to scanner
+                currentIndex = 0;
 
-            CopyList(currentButtonList, buttonListScanner);
+                UpdateButton("Hovered");
+            }
+            else if (Equals(currentButtonList, buttonListShip) && horiInput > 0)
+            {
+                // Currently in ship uprgades
 
-            buttonListScanner[0].transform.parent.gameObject.SetActive(true);
-            buttonListShip[0].transform.parent.gameObject.SetActive(false);
+                // Switch to scanner
+
+                CopyList(currentButtonList, buttonListScanner);
+
+                buttonListScanner[0].transform.parent.gameObject.SetActive(true);
+                buttonListShip[0].transform.parent.gameObject.SetActive(false);
+
+                currentIndex = 0;
+
+                UpdateButton("Hovered");
+            }
+
+            
         }
     }
 
