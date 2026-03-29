@@ -4,8 +4,6 @@ using UnityEngine.UI;
 public class LineScript : MonoBehaviour
 {
     #region Variables
-    private Vector3 start;
-    private Vector3 end;
     private RectTransform line;
     private float distance;
     #endregion
@@ -20,17 +18,17 @@ public class LineScript : MonoBehaviour
     #endregion
 
     #region Methods
-    public float DrawLine()
+    public float DrawLine(Vector2 start, Vector2 end)
     {
         // line is visible
         GetComponent<Image>().enabled = true;
 
         // get direction and length of line
-        Vector3 direction = end - start;
+        Vector2 direction = end - start;
         distance = direction.magnitude;
 
         // set the line object inbetween two points
-        line.position = start + direction / 2f;
+        line.anchoredPosition = start + direction / 2f;
 
         // set the correct length of the line
         line.sizeDelta = new Vector2(distance, line.sizeDelta.y);
@@ -39,7 +37,9 @@ public class LineScript : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         // set the lines angle
-        line.rotation = Quaternion.Euler(0, 0, angle);
+        line.localRotation = Quaternion.Euler(0, 0, angle);
+        
+        print($"Start: {start}, End: {end}, {distance}");
 
         return distance;
     }
@@ -49,19 +49,15 @@ public class LineScript : MonoBehaviour
         GetComponent<Image>().enabled = false;
     }
 
-    public void SetStart(Vector3 start)
+    public Vector2 GetLocalPosition(RectTransform node)
     {
-        this.start = start;
-    }
+        Vector2 screenPoint = RectTransformUtility.WorldToScreenPoint(null, node.position);
 
-    public void SetEnd(Vector3 end)
-    {
-        this.end = end;
-    }
+        RectTransform parentTransform = GetComponent<RectTransform>().parent.GetComponent<RectTransform>();
 
-    public float GetDistance()
-    {
-        return distance;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(parentTransform, screenPoint, null, out Vector2 localPoint);
+
+        return localPoint;
     }
     #endregion
 }

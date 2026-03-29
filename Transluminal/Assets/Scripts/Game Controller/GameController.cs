@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     #region Variables
     public static GameController instance;
     public EventManager eventManager { get; private set; }
+    public Camera cam { get; private set; }
 
     [SerializeField] private List<string> PlayerInputMapScenes = new();
     [SerializeField] private List<string> ShipInputMapScenes = new();
@@ -49,6 +50,10 @@ public class GameController : MonoBehaviour
         if (eventManager == null)
         {
             eventManager = GetComponent<EventManager>();
+        }
+        if (cam == null)
+        {
+            cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         }
         if (instance == null)
         {
@@ -100,6 +105,9 @@ public class GameController : MonoBehaviour
     // Change Input Map when changing scenes
     private void SceneChange(Scene current, Scene next)
     {
+        // Get scene camera
+        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+
         // Setting input map based on current scene
 
         if (PlayerInputMapScenes.Contains(SceneController.GetCurrentSceneName()))

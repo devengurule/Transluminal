@@ -80,9 +80,10 @@ public class NavigationController : MonoBehaviour
 
             if (this.targetNode != null)
             {
-                lineObject.GetComponent<LineScript>().SetStart(currentNode.transform.position);
-                lineObject.GetComponent<LineScript>().SetEnd(targetNode.transform.position);
-                UpdateSelectedNodeUI(lineObject.GetComponent<LineScript>().DrawLine());
+                Vector3 startScreenPos = lineObject.GetComponent<LineScript>().GetLocalPosition(currentNode.GetComponent<RectTransform>());
+                Vector3 endScreenPos = lineObject.GetComponent<LineScript>().GetLocalPosition(targetNode.GetComponent<RectTransform>());
+
+                UpdateSelectedNodeUI(lineObject.GetComponent<LineScript>().DrawLine(startScreenPos, endScreenPos));
             }
         }
     }
