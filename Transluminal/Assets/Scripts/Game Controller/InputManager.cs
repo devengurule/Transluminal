@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -86,7 +87,8 @@ public class InputManager : MonoBehaviour
     private void OnMove(InputValue value)
     {
         Vector2 moveVector = value.Get<Vector2>().normalized;
-        eventManager.Publish(EventType.Move, moveVector);
+
+        eventManager.Publish(EventType.Move, QuantizeVector(moveVector));
     }
     private void OnRotate(InputValue value)
     {
@@ -175,6 +177,58 @@ public class InputManager : MonoBehaviour
                 eventManager.Publish(offEvent);
             }
         }
+    }
+
+    private Vector2 QuantizeVector(Vector2 vector)
+    {
+        Vector2 outputVector = Vector2.zero;
+
+        float angle = Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
+
+        if (vector != Vector2.zero)
+        {
+            if (angle >= -30 && angle <= 30)
+            {
+                // Moving Right
+                outputVector = Vector2.right;
+            }
+            else if (angle > 30 && angle < 60)
+            {
+                // Moving Top Right
+                outputVector = new Vector2(Mathf.Sqrt(2) / 2, Mathf.Sqrt(2) / 2);
+            }
+            else if (angle >= 60 && angle <= 120)
+            {
+                // Moving Up
+                outputVector = Vector2.up;
+            }
+            else if (angle > 120 && angle < 150)
+            {
+                // Moving Top Left
+                outputVector = new Vector2(-Mathf.Sqrt(2) / 2, Mathf.Sqrt(2) / 2);
+            }
+            else if (angle >= 150 || (angle >= -180 && angle <= -150))
+            {
+                // Moving Left
+                outputVector = Vector2.left;
+            }
+            else if (angle > -150 && angle < -120)
+            {
+                // Moving Bottom Left
+                outputVector = new Vector2(-Mathf.Sqrt(2) / 2, -Mathf.Sqrt(2) / 2);
+            }
+            else if (angle >= -120 && angle <= -60)
+            {
+                // Moving Down
+                outputVector = Vector2.down;
+            }
+            else if (angle > -60 && angle < -30)
+            {
+                // Moving Bottom Right
+                outputVector = new Vector2(Mathf.Sqrt(2) / 2, -Mathf.Sqrt(2) / 2);
+            }
+        }
+        return outputVector;
     }
 
     #endregion
