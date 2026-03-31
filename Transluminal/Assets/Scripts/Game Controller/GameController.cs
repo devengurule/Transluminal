@@ -2,9 +2,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
-using System.Linq;
-using UnityEditor;
-using System;
 
 public class GameController : MonoBehaviour
 {
@@ -15,8 +12,6 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private List<string> PlayerInputMapScenes = new();
     [SerializeField] private List<string> ShipInputMapScenes = new();
-
-    [SerializeField] private int maxHealth;
 
     [SerializeField] private bool devMode;
 
@@ -352,11 +347,6 @@ public class GameController : MonoBehaviour
     {
         GetComponent<MoneyManager>().SubtractMoney(price);
         GetComponent<MoneyManager>().UpdateMoneyCounter();
-    }
-
-    public int GetMaxHealth()
-    {
-        return maxHealth;
     }
     #endregion
 }

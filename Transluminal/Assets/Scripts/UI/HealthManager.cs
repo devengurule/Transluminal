@@ -1,18 +1,53 @@
 using UnityEngine;
-using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour
 {
-    GameController gameController;
-
-    [SerializeField] private List<GameObject> heartOrbs;
-    private int maxHealth;
-    private int currentHealth;
+    [SerializeField] private float maxHealth;
+    [SerializeField] GameObject healthBarObject;
+    
+    private float currentHealth;
+    private Image healthBar;
 
     private void Start()
     {
-        gameController = GameController.instance;
-        maxHealth = gameController.GetMaxHealth();
         currentHealth = maxHealth;
+        healthBar = healthBarObject.GetComponent<Image>();
+    }
+
+    private void Update()
+    {
+        UpdateHealthBar();
+    }
+
+    public void SubtractHealth(int amount)
+    {
+        if(currentHealth - amount > 0)
+        {
+            currentHealth -= amount;
+        }
+        else
+        {
+            // You ded
+        }
+        UpdateHealthBar();
+    }
+    public void AddHealth(int amount)
+    {
+        if(currentHealth + amount <= maxHealth)
+        {
+            currentHealth += amount;
+        }
+        else
+        {
+            currentHealth = maxHealth;
+        }
+        UpdateHealthBar();
+    }
+
+    private void UpdateHealthBar()
+    {
+        float percent = currentHealth / maxHealth;
+        healthBar.fillAmount = percent;
     }
 }

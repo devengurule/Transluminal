@@ -131,6 +131,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FoodCostCounter
       objectReference: {fileID: 0}
+    - target: {fileID: 531962170209934641, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 853450829472290152, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -379,6 +383,10 @@ PrefabInstance:
     - target: {fileID: 7027223480011342505, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: devMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7390662903018827261, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: currentHealth
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 7442989515994135670, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_Name

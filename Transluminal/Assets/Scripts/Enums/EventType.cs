@@ -11,6 +11,7 @@ public enum EventType
     // Interaction
     Interact,
     Confirm,
+    Quit,
 
     // Collision
     PlayerCollidingEnter,

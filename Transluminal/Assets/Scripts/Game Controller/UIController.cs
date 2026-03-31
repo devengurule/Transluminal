@@ -1,8 +1,5 @@
-using NUnit.Framework;
 using System;
-using System.ComponentModel;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {

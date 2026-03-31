@@ -9468,6 +9468,18 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3919527044812584071, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3919527044812584071, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: currentHealth
+      value: 49.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3919527044812584071, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: healthBarObject
+      value: 
+      objectReference: {fileID: 747570552585031052}
     - target: {fileID: 5101720563598869061, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
       propertyPath: m_Name
       value: GameController
