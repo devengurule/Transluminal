@@ -258,10 +258,6 @@ public class GameController : MonoBehaviour
 
         // Add all scrap collected value to money counter
         int totalScrapValue = GetComponent<CollectableManager>().GetCollectedScrapValue();
-
-        GetComponent<MoneyManager>().AddMoney(totalScrapValue);
-
-        GetComponent<CollectableManager>().ResetScrapTotal();
     }
 
     #endregion
@@ -351,6 +347,16 @@ public class GameController : MonoBehaviour
     public List<SalvageSaveData> GetSalvageList()
     {
         return GetComponent<CollectableManager>().GetSalvageList();
+    }
+
+    public int GetScrapValue()
+    {
+        return GetComponent<CollectableManager>().GetCollectedScrapValue();
+    }
+
+    public int GetSalvageValue()
+    {
+        return GetComponent<CollectableManager>().GetCollectedSalvageValue();
     }
     #endregion
 }

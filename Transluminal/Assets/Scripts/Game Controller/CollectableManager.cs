@@ -1,10 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 
 public class CollectableManager : MonoBehaviour
 {
     private int collectedScrapValue = 0;
+    private int collectedSalvageValue = 0;
     private List<SalvageSaveData> salvageSaveDataList = new();
 
     private EventManager eventManager;
@@ -39,7 +39,6 @@ public class CollectableManager : MonoBehaviour
         data.value = salvageObject.GetComponent<SalvageScript>().value;
 
         salvageSaveDataList.Add(data);
-        print(1);
 
         eventManager.Publish(EventType.DestroySalvage, salvageObject);
     }
@@ -48,10 +47,19 @@ public class CollectableManager : MonoBehaviour
     {
         return collectedScrapValue;
     }
+    public int GetCollectedSalvageValue()
+    {
+        return collectedSalvageValue;
+    }
 
     public void ResetScrapTotal()
     {
         collectedScrapValue = 0;
+    }
+
+    public void ResetSalvageTotal()
+    {
+        collectedSalvageValue = 0;
     }
 
     public List<SalvageSaveData> GetSalvageList()
