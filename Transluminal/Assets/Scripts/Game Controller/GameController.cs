@@ -299,7 +299,6 @@ public class GameController : MonoBehaviour
             data.eulerRotation = obj.transform.eulerAngles;
             data.salvageData = obj.GetComponent<SalvageScript>().GetSalvageData();
             data.value = obj.GetComponent<SalvageScript>().value;
-            data.type = obj.GetComponent<SalvageScript>().GetSalvageType();
 
             salvageDataList.Add(data);
         }
@@ -347,6 +346,11 @@ public class GameController : MonoBehaviour
     {
         GetComponent<MoneyManager>().SubtractMoney(price);
         GetComponent<MoneyManager>().UpdateMoneyCounter();
+    }
+
+    public List<SalvageSaveData> GetSalvageList()
+    {
+        return GetComponent<CollectableManager>().GetSalvageList();
     }
     #endregion
 }

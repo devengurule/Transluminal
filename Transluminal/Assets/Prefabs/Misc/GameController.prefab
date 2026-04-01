@@ -67,7 +67,6 @@ MonoBehaviour:
   - OSDevRoom
   - SalvageScene_0
   - SalvageScene_1
-  maxHealth: 0
   devMode: 1
 --- !u!114 &5388767112792395842
 MonoBehaviour:
@@ -361,3 +360,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dac1ffc9c93ce72469424f4b691b05b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthManager
+  maxHealth: 0
+  healthBarObject: {fileID: 0}

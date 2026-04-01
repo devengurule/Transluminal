@@ -37,11 +37,9 @@ public class CollectableManager : MonoBehaviour
 
         data.salvageData = salvageObject.GetComponent<SalvageScript>().GetSalvageData();
         data.value = salvageObject.GetComponent<SalvageScript>().value;
-        data.type = salvageObject.GetComponent<SalvageScript>().GetSalvageType();
 
         salvageSaveDataList.Add(data);
-
-        print(salvageSaveDataList.Count);
+        print(1);
 
         eventManager.Publish(EventType.DestroySalvage, salvageObject);
     }
@@ -54,5 +52,10 @@ public class CollectableManager : MonoBehaviour
     public void ResetScrapTotal()
     {
         collectedScrapValue = 0;
+    }
+
+    public List<SalvageSaveData> GetSalvageList()
+    {
+        return salvageSaveDataList;
     }
 }

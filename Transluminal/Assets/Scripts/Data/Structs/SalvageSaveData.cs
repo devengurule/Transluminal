@@ -8,6 +8,5 @@ public struct SalvageSaveData
 
     // Other data
     public SalvageData salvageData;
-    public SalvageType type;
     public int value;
 }

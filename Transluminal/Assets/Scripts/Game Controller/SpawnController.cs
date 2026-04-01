@@ -130,7 +130,6 @@ public class SpawnController : MonoBehaviour
 
             salvageObject.GetComponent<SalvageScript>().value = obj.value;
             salvageObject.GetComponent<SalvageScript>().SetScale(obj.salvageData.scale);
-            salvageObject.GetComponent<SalvageScript>().SetSalvageType(obj.type);
         }
     }
 

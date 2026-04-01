@@ -80,4 +80,9 @@ public class ScannerSelectionController : MonoBehaviour
             }
         }
     }
+
+    public GameObject GetCurrentSelection()
+    {
+        return currentSelection;
+    }
 }

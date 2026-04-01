@@ -14,3 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SalvageData
   tier: {fileID: 11400000, guid: 0d93f1ecca3c8654b8e067e29b039289, type: 2}
   scale: 1
+  fluidAmount: 0
+  sprite: {fileID: 7829150259624011003, guid: 14e6384d18f703145879f0c8f96c74f7, type: 3}
+  densityImage: {fileID: 2252775689430538882, guid: faad3df4f426a88468c51208df1fa816, type: 3}
+  deepFluidDensityImage: {fileID: 0}
+  fluidType: 0
+  partType: 1

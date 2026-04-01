@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cd2645e6b8f0a914fbeb0b7d07513a2f, type: 3}
-  m_Name: LowTierSalvage2
+  m_Name: LowTierSalvage4
   m_EditorClassIdentifier: Assembly-CSharp::SalvageData
   tier: {fileID: 11400000, guid: 0d93f1ecca3c8654b8e067e29b039289, type: 2}
   scale: 1
   fluidAmount: 0
-  sprite: {fileID: 8651859793449260610, guid: cde2da8ef54138c4ba05997de7d8c8fc, type: 3}
-  densityImage: {fileID: 9036986259991608325, guid: 98f86a82d18833d4192cd25ede6f60b8, type: 3}
+  sprite: {fileID: 7986617657211487716, guid: 056afd43e2e49eb4596ef53c3d693979, type: 3}
+  densityImage: {fileID: 6364878570953694266, guid: e04a78dabc0dbbb438abc516d17b9e3b, type: 3}
   deepFluidDensityImage: {fileID: 0}
   fluidType: 0
-  partType: 0
+  partType: 3

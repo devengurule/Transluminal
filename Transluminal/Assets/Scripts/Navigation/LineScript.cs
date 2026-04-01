@@ -38,8 +38,6 @@ public class LineScript : MonoBehaviour
 
         // set the lines angle
         line.localRotation = Quaternion.Euler(0, 0, angle);
-        
-        print($"Start: {start}, End: {end}, {distance}");
 
         return distance;
     }
