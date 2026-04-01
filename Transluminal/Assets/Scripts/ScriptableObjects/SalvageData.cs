@@ -5,4 +5,9 @@ public class SalvageData : ScriptableObject
 {
     public TierData tier;
     public float scale;
+    public float fluidAmount;
+    public Sprite densityImage;
+    public Sprite deepFluidDensityImage;
+    public FluidType fluidType;
+    public PartType partType;
 }

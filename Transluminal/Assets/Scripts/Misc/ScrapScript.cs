@@ -13,7 +13,7 @@ public class ScrapScript : MonoBehaviour
 
         GetComponent<SpriteRenderer>().sprite = scrapData.sprite;
         
-        transform.localScale *= scrapData.scale;
+        transform.localScale *= scrapData.scale + Random.Range(0, 0.2f);
     }
 
     public ScrapData GetScrapData()
