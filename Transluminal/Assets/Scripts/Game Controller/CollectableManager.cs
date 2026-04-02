@@ -47,9 +47,15 @@ public class CollectableManager : MonoBehaviour
     {
         return collectedScrapValue;
     }
+
     public int GetCollectedSalvageValue()
     {
         return collectedSalvageValue;
+    }
+
+    public void AddCollectedSalvageValue(int value)
+    {
+        collectedSalvageValue += value;
     }
 
     public void ResetScrapTotal()
@@ -65,5 +71,10 @@ public class CollectableManager : MonoBehaviour
     public List<SalvageSaveData> GetSalvageList()
     {
         return salvageSaveDataList;
+    }
+
+    public void RemoveSalvage(int index)
+    {
+        salvageSaveDataList.RemoveAt(index);
     }
 }

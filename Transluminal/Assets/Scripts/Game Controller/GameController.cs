@@ -344,11 +344,6 @@ public class GameController : MonoBehaviour
         GetComponent<MoneyManager>().UpdateMoneyCounter();
     }
 
-    public List<SalvageSaveData> GetSalvageList()
-    {
-        return GetComponent<CollectableManager>().GetSalvageList();
-    }
-
     public int GetScrapValue()
     {
         return GetComponent<CollectableManager>().GetCollectedScrapValue();
@@ -358,5 +353,6 @@ public class GameController : MonoBehaviour
     {
         return GetComponent<CollectableManager>().GetCollectedSalvageValue();
     }
+
     #endregion
 }

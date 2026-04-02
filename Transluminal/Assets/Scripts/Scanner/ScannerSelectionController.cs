@@ -31,7 +31,7 @@ public class ScannerSelectionController : MonoBehaviour
 
     private void ChangeSelection(object target)
     {
-        if(target is Vector2 inputVector && gameObject.activeSelf)
+        if(target is Vector2 inputVector && gameObject.activeSelf && GetComponent<ScannerController>().CanChangeSelection())
         {
             this.inputVector = inputVector;
 

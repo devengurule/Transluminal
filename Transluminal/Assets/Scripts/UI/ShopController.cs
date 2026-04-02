@@ -65,6 +65,11 @@ public class ShopController : MonoBehaviour
         UpdateButton("Hovered");
         StartCoroutine(Wait());
     }
+    private void OnDisable()
+    {
+        canPurchase = false;
+    }
+
     private IEnumerator Wait()
     {
         yield return null;

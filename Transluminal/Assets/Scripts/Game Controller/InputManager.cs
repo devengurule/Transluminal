@@ -158,6 +158,11 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    private void OnQuit()
+    {
+        eventManager.Publish(EventType.Quit);
+    }
+
     #endregion
 
     #region Methods
