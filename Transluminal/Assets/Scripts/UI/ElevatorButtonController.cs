@@ -21,7 +21,7 @@ public class ElevatorButtonController : MonoBehaviour
         currentIndex = 0;
         selectedIndex = currentIndex;
 
-        UpdateButton("Hovered");
+        UpdateButton("Hover");
         UpdateButton("Selected");
 
         // Subscribe to active scene change event
@@ -147,7 +147,7 @@ public class ElevatorButtonController : MonoBehaviour
             currentIndex -= (int)input;
         }
 
-        UpdateButton("Hovered");
+        UpdateButton("Hover");
     }
 
     private void UpdateButton(string objName)
