@@ -119,11 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &480159101 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1175461377686343979, guid: 19f9c04572959ca4288edd0516563076, type: 3}
-  m_PrefabInstance: {fileID: 964167403}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &603150671
 GameObject:
   m_ObjectHideFlags: 0
@@ -671,6 +666,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DontDestroyObjects
       objectReference: {fileID: 0}
+    - target: {fileID: 3284176783976601457, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3287549048314290646, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -715,6 +714,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3602510169972282844, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3679804082091834379, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_text
       value: 0
@@ -731,6 +734,10 @@ PrefabInstance:
       propertyPath: currentMoney
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 5371855984890962478, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5973868785138200518, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -738,11 +745,11 @@ PrefabInstance:
     - target: {fileID: 6792220880123412672, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: scrapValueCounter
       value: 
-      objectReference: {fileID: 1822547536}
+      objectReference: {fileID: 0}
     - target: {fileID: 6792220880123412672, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: salvageValueCounter
       value: 
-      objectReference: {fileID: 1711246993}
+      objectReference: {fileID: 0}
     - target: {fileID: 6792220880123412672, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: buttonListSell.Array.size
       value: 1
@@ -750,7 +757,7 @@ PrefabInstance:
     - target: {fileID: 6792220880123412672, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: 'buttonListSell.Array.data[0]'
       value: 
-      objectReference: {fileID: 480159101}
+      objectReference: {fileID: 0}
     - target: {fileID: 6814390706811506446, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1603,11 +1610,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!1 &1711246993 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1663488058609688765, guid: 19f9c04572959ca4288edd0516563076, type: 3}
-  m_PrefabInstance: {fileID: 964167403}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1743283304 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8842678169535479588, guid: 04912dd4f933c9843bd26fd9afc72239, type: 3}
@@ -1704,11 +1706,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!1 &1822547536 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 142885069353604085, guid: 19f9c04572959ca4288edd0516563076, type: 3}
-  m_PrefabInstance: {fileID: 964167403}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2074991212
 GameObject:
   m_ObjectHideFlags: 0
@@ -1794,8 +1791,8 @@ Transform:
   m_GameObject: {fileID: 2074991212}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.47784, y: -0.89139, z: 0}
-  m_LocalScale: {x: 0.92929, y: 0.92929, z: 0.92929}
+  m_LocalPosition: {x: 0.5316711, y: -0.79384774, z: 0}
+  m_LocalScale: {x: 0.9458524, y: 0.9424619, z: 1.2109237}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 991450131}
