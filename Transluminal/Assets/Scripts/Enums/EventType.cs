@@ -36,6 +36,7 @@ public enum EventType
     Restart,
     DestroyScrap,
     DestroySalvage,
+    HealthChange,
 
     // UI
     ScrollVert,

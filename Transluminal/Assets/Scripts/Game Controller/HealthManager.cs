@@ -3,21 +3,18 @@ using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour
 {
-    [SerializeField] private float maxHealth;
-    [SerializeField] GameObject healthBarObject;
-    
-    private float currentHealth;
-    private Image healthBar;
+    [SerializeField] private int maxHealth;
+    private int currentHealth;
+    private EventManager eventManager;
+
+    private void Awake()
+    {
+        currentHealth = maxHealth;
+    }
 
     private void Start()
     {
-        currentHealth = maxHealth;
-        healthBar = healthBarObject.GetComponent<Image>();
-    }
-
-    private void Update()
-    {
-        UpdateHealthBar();
+        eventManager = GameController.instance.eventManager;
     }
 
     public void SubtractHealth(int amount)
@@ -25,29 +22,28 @@ public class HealthManager : MonoBehaviour
         if(currentHealth - amount > 0)
         {
             currentHealth -= amount;
+            eventManager.Publish(EventType.HealthChange, currentHealth);
         }
         else
         {
             // You ded
         }
-        UpdateHealthBar();
     }
     public void AddHealth(int amount)
     {
         if(currentHealth + amount <= maxHealth)
         {
             currentHealth += amount;
+            eventManager.Publish(EventType.HealthChange, currentHealth);
         }
         else
         {
             currentHealth = maxHealth;
         }
-        UpdateHealthBar();
     }
 
-    private void UpdateHealthBar()
+    public int GetCurrentHealth()
     {
-        float percent = currentHealth / maxHealth;
-        healthBar.fillAmount = percent;
+        return currentHealth;
     }
 }
