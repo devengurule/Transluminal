@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 6930537405963704846}
   - component: {fileID: 8042069839533214136}
   m_Layer: 5
-  m_Name: Hovered
+  m_Name: Hover
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

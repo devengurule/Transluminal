@@ -716,7 +716,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3602510169972282844, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3679804082091834379, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_text
@@ -732,11 +732,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4277981388501146257, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: currentMoney
-      value: 100
+      value: 1000000
       objectReference: {fileID: 0}
     - target: {fileID: 5371855984890962478, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5973868785138200518, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
