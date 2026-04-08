@@ -45,8 +45,10 @@ public class HealthOrbController : MonoBehaviour
         int fullOrbsNum = health / 2;
 
         // Equals zero when health is an even number
-        int halfOrbsNum = health % 2 == 0 ? 0 : 1;
+        int halfOrbsNum = health % 2 == 0 || health < 0? 0 : 1;
 
+
+        // FULL ORBS
         if (fullOrbsNum > 0)
         {
             Vector3 pos = GetComponent<RectTransform>().position;
@@ -61,12 +63,13 @@ public class HealthOrbController : MonoBehaviour
             }
         }
 
+        // HALF ORBS
         if(halfOrbsNum > 0)
         {
             // Get position of last orb in the list
             Vector3 pos = fullOrbsNum > 0 ? healthOrbList[healthOrbList.Count - 1].GetComponent<RectTransform>().position : GetComponent<RectTransform>().position;
 
-            Vector3 orbPos = new Vector3(pos.x + xOffset, pos.y, pos.z);
+            Vector3 orbPos = fullOrbsNum > 0 ? new Vector3(pos.x + xOffset, pos.y, pos.z) : GetComponent<RectTransform>().position;
 
             GameObject halfOrb = Instantiate(healthOrbPrefab, orbPos, Quaternion.identity, GetComponent<RectTransform>());
 
