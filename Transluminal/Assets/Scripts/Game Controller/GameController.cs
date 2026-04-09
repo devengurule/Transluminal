@@ -303,6 +303,8 @@ public class GameController : MonoBehaviour
 
             data.value = obj.GetComponent<SalvageScript>().value;
             data.alienData = obj.GetComponent<SalvageScript>().GetAlienData();
+
+
             data.salvageData = obj.GetComponent<SalvageScript>().GetSalvageData();
 
 

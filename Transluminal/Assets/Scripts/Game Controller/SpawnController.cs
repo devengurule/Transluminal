@@ -100,9 +100,13 @@ public class SpawnController : MonoBehaviour
                 float angle = Random.Range(0, 360);
                 GameObject salvageObject = Instantiate(salvagePrefab, randomPoint, Quaternion.Euler(0, 0, angle));
 
-                AlienData alien = Random.Range(0, 1) >= 1 - chanceForAlien ? alienArchetypes[Random.Range(0, alienArchetypes.Count - 1)] : null;
+                AlienData alien = Random.Range(0, 1) >= 1 - chanceForAlien ? alienArchetypes[Random.Range(0, alienArchetypes.Count)] : null;
 
-                SalvageData salvageData = salvageArchetypes[Random.Range(0, salvageArchetypes.Count - 1)];
+                if (alien == null) print(1);
+
+                int index = Random.Range(0, salvageArchetypes.Count);
+
+                SalvageData salvageData = salvageArchetypes[index];
                 // Set salvages designated tier values
                 switch (tier)
                 {

@@ -6,14 +6,14 @@ using System.Collections;
 
 public class ScannerController : MonoBehaviour
 {
+    [SerializeField] private GameObject alienDensityImage;
     [SerializeField] private GameObject densityImage;
     [SerializeField] private GameObject salvageObject;
     [SerializeField] private GameObject displayObject;
 
-    private GameObject alienDesnityImage;
     private EventManager eventManager;
     private List<SalvageSaveData> salvageList;
-    private SalvageData currentSalvage;
+    private SalvageSaveData currentSalvage;
     private bool canChangeSelection = true;
     private bool canScan;
 
@@ -22,6 +22,7 @@ public class ScannerController : MonoBehaviour
         eventManager = GameController.instance.eventManager;
 
         densityImage.SetActive(false);
+        alienDensityImage.SetActive(false);
 
         if (eventManager != null )
         {
@@ -43,13 +44,13 @@ public class ScannerController : MonoBehaviour
 
         if(salvageList.Count > 0 && salvageList != null)
         {
-            currentSalvage = salvageList[0].salvageData;
+            currentSalvage = salvageList[0];
         }
 
-        if (currentSalvage != null)
+        if (currentSalvage.salvageData != null)
         {
             salvageObject.GetComponent<Image>().enabled = true;
-            salvageObject.GetComponent<Image>().sprite = currentSalvage.sprite;
+            salvageObject.GetComponent<Image>().sprite = currentSalvage.salvageData.sprite;
         }
         else
         {
@@ -73,7 +74,7 @@ public class ScannerController : MonoBehaviour
 
     private void SelectButton(object target)
     {
-        if (gameObject.activeSelf && currentSalvage != null && canScan)
+        if (gameObject.activeSelf && currentSalvage.salvageData != null && canScan)
         {
             GameObject selectedScan = GetComponent<ScannerSelectionController>().GetCurrentSelection();
 
@@ -81,8 +82,15 @@ public class ScannerController : MonoBehaviour
             {
                 case "FluidAmount":
 
-                    UpdateDisplay(currentSalvage.fluidAmount.ToString());
-
+                    if(currentSalvage.alienData != null)
+                    {
+                        UpdateDisplay((currentSalvage.salvageData.fluidAmount + currentSalvage.alienData.fluidSignature).ToString());
+                    }
+                    else
+                    {
+                        UpdateDisplay(currentSalvage.salvageData.fluidAmount.ToString());
+                    }
+                    
                     break;
                 case "DensityCT":
 
@@ -91,7 +99,7 @@ public class ScannerController : MonoBehaviour
                     break;
                 case "FluidType":
 
-                    UpdateDisplay(currentSalvage.fluidType.ToString());
+                    UpdateDisplay(currentSalvage.salvageData.fluidType.ToString());
 
                     break;
                 case "SalvageIt":
@@ -121,13 +129,23 @@ public class ScannerController : MonoBehaviour
     {
         if (!densityImage.GetComponent<Image>().IsActive())
         {
-            densityImage.GetComponent<Image>().sprite = currentSalvage.densityImage;
+            densityImage.GetComponent<Image>().sprite = currentSalvage.salvageData.densityImage;
             densityImage.SetActive(true);
             canChangeSelection = false;
+
+            if(currentSalvage.alienData != null)
+            {
+                alienDensityImage.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, Random.Range(0, 360));
+                alienDensityImage.GetComponent<RectTransform>().localScale = Vector3.one * Random.Range(0.5f, 1);
+                alienDensityImage.GetComponent<RectTransform>().position = densityImage.GetComponent<RectTransform>().position + new Vector3(Random.Range(-50, 50), Random.Range(-50, 50), 0);
+                alienDensityImage.GetComponent<Image>().sprite = currentSalvage.alienData.densityImage;
+                alienDensityImage.SetActive(true);
+            }
         }
         else
         {
             densityImage.SetActive(false);
+            alienDensityImage.SetActive(false);
             canChangeSelection = true;
         }
     }

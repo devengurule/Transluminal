@@ -35,6 +35,7 @@ public class CollectableManager : MonoBehaviour
 
         SalvageSaveData data = new();
 
+        data.alienData = salvageObject.GetComponent<SalvageScript>().GetAlienData();
         data.salvageData = salvageObject.GetComponent<SalvageScript>().GetSalvageData();
         data.value = salvageObject.GetComponent<SalvageScript>().value;
 
