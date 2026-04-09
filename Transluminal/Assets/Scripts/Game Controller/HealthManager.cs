@@ -29,6 +29,7 @@ public class HealthManager : MonoBehaviour
             // You ded
         }
     }
+
     public void AddHealth(int amount)
     {
         if(currentHealth + amount <= maxHealth)

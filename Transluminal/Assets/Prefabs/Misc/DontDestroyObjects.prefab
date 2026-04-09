@@ -3178,6 +3178,7 @@ GameObject:
   - component: {fileID: 236384240159786491}
   - component: {fileID: 4121617637375167808}
   - component: {fileID: 3339446028268468498}
+  - component: {fileID: 4597249891730890132}
   m_Layer: 5
   m_Name: Health
   m_TagString: Untagged
@@ -3226,6 +3227,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthOrbController
   healthOrbPrefab: {fileID: 4087173817132249283, guid: 55d5435b51407474f88ac6e4aaa2d0d4, type: 3}
   xOffset: 100
+--- !u!114 &4597249891730890132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2371710567419541617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.HorizontalLayoutGroup
+  m_Padding:
+    m_Left: 40
+    m_Right: 0
+    m_Top: 40
+    m_Bottom: 0
+  m_ChildAlignment: 4
+  m_Spacing: 30
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
 --- !u!1 &2426720695760695044
 GameObject:
   m_ObjectHideFlags: 0
