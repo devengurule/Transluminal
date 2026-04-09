@@ -40,5 +40,8 @@ public enum EventType
 
     // UI
     ScrollVert,
-    ScrollHori
+    ScrollHori,
+
+    // ALIENS
+    SpawnHunter
 }
