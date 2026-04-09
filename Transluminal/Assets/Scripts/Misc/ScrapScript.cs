@@ -1,31 +1,26 @@
 using UnityEngine;
 
+
 public class ScrapScript : MonoBehaviour
 {
-    private ScrapData scrapData;
     public int value { get; set; }
 
-    public void Initialize(ScrapData data)
+    public void Initialize(TierData tier, float maxScale, Sprite sprite)
     {
-        scrapData = data;
+        value = Random.Range(tier.minValue, tier.maxValue);
 
-        value = Random.Range(scrapData.tier.minValue, scrapData.tier.maxValue + 1);
+        // Larger scale = larger value
+        float scale = (value / (tier.maxValue - tier.minValue)) + 1;
+        SetScale(scale);
 
-        GetComponent<SpriteRenderer>().sprite = scrapData.sprite;
-        
-        transform.localScale *= scrapData.scale + Random.Range(0, 0.2f);
+        SetSprite(sprite);
     }
 
-    public ScrapData GetScrapData()
-    {
-        return scrapData;
-    }
-
-    public void SetScale(float scale)
+    private void SetScale(float scale)
     {
         transform.localScale *= scale;
     }
-
+    
     public void SetSprite(Sprite sprite)
     {
         GetComponent<SpriteRenderer>().sprite = sprite;

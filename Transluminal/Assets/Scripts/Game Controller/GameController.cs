@@ -143,10 +143,9 @@ public class GameController : MonoBehaviour
 
                 // spawn salvage
                 ValueTier tier = GetComponent<NavigationController>().GetNodeTier();
+                float chanceForAlien = GetComponent<NavigationController>().GetChanceForAlien();
 
-                if (GetComponent<SpawnController>() == null) print(1);
-
-                GetComponent<SpawnController>().SpawnSalvage(tier);
+                GetComponent<SpawnController>().SpawnSalvage(tier, chanceForAlien);
 
                 // add new scene to dictionary
                 SceneData data = GetSceneData();
@@ -282,8 +281,8 @@ public class GameController : MonoBehaviour
             ScrapSaveData data;
             data.position = obj.transform.position;
             data.eulerRotation = obj.transform.eulerAngles;
-            data.scrapData = obj.GetComponent<ScrapScript>().GetScrapData();
             data.value = obj.GetComponent<ScrapScript>().value;
+            data.sprite = obj.GetComponent<Sprite>();
 
             scrapDataList.Add(data);
         }

@@ -3,15 +3,20 @@ using UnityEngine;
 public class SalvageScript : MonoBehaviour
 {
     private SalvageData salvageData;
+    private AlienData alienData;
     public int value {  get; set; }
 
-    public void Initialize(SalvageData data)
+    public void Initialize(TierData tier, SalvageData salvageData, AlienData alienData, float maxScale)
     {
-        salvageData = data;
+        // Save Salvage and Alien Data
+        this.salvageData = salvageData;
+        this.alienData = alienData;
 
-        value = Random.Range(salvageData.tier.minValue, salvageData.tier.maxValue + 1);
+        value = Random.Range(tier.minValue, tier.maxValue);
 
-        transform.localScale *= salvageData.scale + Random.Range(0, 0.2f);
+        // Larger scale = larger value
+        float scale = (value / (tier.maxValue - tier.minValue)) + 1;
+        SetScale(scale);
 
         GetComponent<SpriteRenderer>().sprite = salvageData.sprite;
     }
@@ -21,13 +26,13 @@ public class SalvageScript : MonoBehaviour
         return salvageData;
     }
 
-    public void SetScale(float scale)
+    public AlienData GetAlienData()
     {
-        transform.localScale *= scale;
+        return alienData;
     }
 
-    public void SetSprite(Sprite sprite)
+    private void SetScale(float scale)
     {
-        GetComponent<SpriteRenderer>().sprite = sprite;
+        transform.localScale *= scale;
     }
 }

@@ -7,6 +7,6 @@ public struct ScrapSaveData
     public Vector3 eulerRotation;
 
     // Other data
-    public ScrapData scrapData;
     public int value;
+    public Sprite sprite;
 }

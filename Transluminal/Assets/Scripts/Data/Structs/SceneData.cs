@@ -5,4 +5,5 @@ public struct SceneData
 {
     public List<ScrapSaveData> scrapSaveDataList;
     public List<SalvageSaveData> salvageSaveDataList;
+    public float chanceForAlien;
 }

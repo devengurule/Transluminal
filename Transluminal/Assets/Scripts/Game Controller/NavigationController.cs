@@ -116,7 +116,6 @@ public class NavigationController : MonoBehaviour
     }
     #endregion
 
-
     #region Methods
 
     private void ChangeCurrentNode(GameObject newNode)
@@ -188,6 +187,10 @@ public class NavigationController : MonoBehaviour
     public ValueTier GetNodeTier()
     {
         return currentNodeTier;
+    }
+    public float GetChanceForAlien()
+    {
+        return currentNode.GetComponent<NodeScript>().ChanceForAlien();
     }
     #endregion
 }
