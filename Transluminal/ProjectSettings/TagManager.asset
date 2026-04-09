@@ -19,6 +19,8 @@ TagManager:
   - DensityCT
   - PartType
   - MRScan
+  - SalvageIt
+  - TrashIt
   layers:
   - Default
   - TransparentFX

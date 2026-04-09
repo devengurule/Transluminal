@@ -21,16 +21,11 @@ public class ScannerController : MonoBehaviour
     {
         eventManager = GameController.instance.eventManager;
 
-        alienDesnityImage = densityImage.transform.Find("AleinDensityScan").gameObject;
-
         densityImage.SetActive(false);
-        alienDesnityImage.SetActive(false);
 
         if (eventManager != null )
         {
-            eventManager.Subscribe(EventType.Interact, SelectScan);
-            eventManager.Subscribe(EventType.Confirm, ConfirmSalvage);
-            eventManager.Subscribe(EventType.Quit, TrashSalvage);
+            eventManager.Subscribe(EventType.Interact, SelectButton);
         }
     }
 
@@ -38,9 +33,7 @@ public class ScannerController : MonoBehaviour
     {
         if (eventManager != null)
         {
-            eventManager.Unsubscribe(EventType.Interact, SelectScan);
-            eventManager.Unsubscribe(EventType.Confirm, ConfirmSalvage);
-            eventManager.Unsubscribe(EventType.Quit, TrashSalvage);
+            eventManager.Unsubscribe(EventType.Interact, SelectButton);
         }
     }
 
@@ -78,7 +71,7 @@ public class ScannerController : MonoBehaviour
         canScan = true;
     }
 
-    private void SelectScan(object target)
+    private void SelectButton(object target)
     {
         if (gameObject.activeSelf && currentSalvage != null && canScan)
         {
@@ -101,15 +94,25 @@ public class ScannerController : MonoBehaviour
                     UpdateDisplay(currentSalvage.fluidType.ToString());
 
                     break;
+                case "SalvageIt":
+
+                    KeepSalvage();
+
+                    break;
+                case "TrashIt":
+
+                    TrashSalvage();
+
+                    break;
             }
         }
     }
 
-    private void ConfirmSalvage(object target)
+    private void KeepSalvage()
     {
         print("Confirm Bitch");
     }
-    private void TrashSalvage(object target)
+    private void TrashSalvage()
     {
         print("Trash Bitch");
     }
