@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 
 
 #if UNITY_EDITOR
@@ -14,10 +13,9 @@ public class NodeScript : MonoBehaviour
 #if UNITY_EDITOR
     [SerializeField] private SceneAsset targetShipScene;
 #endif
-
-    [SerializeField] private string targetShipSceneName;
     [SerializeField] private ValueTier valueTier;
     [SerializeField] private float chanceForAlien;
+    private string targetShipSceneName;
 
 
     private void OnValidate()

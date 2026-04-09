@@ -46,7 +46,7 @@ public class ElevatorButtonController : MonoBehaviour
     private void OnEnable()
     {
         currentIndex = selectedIndex;
-        UpdateButton("Hovered");
+        UpdateButton("Hover");
         UpdateButton("Selected");
     }
     #endregion

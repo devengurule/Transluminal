@@ -107,25 +107,11 @@ public class ScannerController : MonoBehaviour
 
     private void ConfirmSalvage(object target)
     {
-        if (currentSalvage != null && gameObject.activeSelf)
-        {
-            int value = Random.Range(currentSalvage.tier.minValue, currentSalvage.tier.maxValue);
-            GameController.instance.GetComponent<CollectableManager>().AddCollectedSalvageValue(value);
-            GameController.instance.GetComponent<CollectableManager>().RemoveSalvage(0);
-            salvageObject.GetComponent<Image>().enabled = false;
-
-            currentSalvage = null;
-        }
+        print("Confirm Bitch");
     }
     private void TrashSalvage(object target)
     {
-        if (currentSalvage != null && gameObject.activeSelf)
-        {
-            GameController.instance.GetComponent<CollectableManager>().RemoveSalvage(0);
-            salvageObject.GetComponent<Image>().enabled = false;
-            
-            currentSalvage = null;
-        }
+        print("Trash Bitch");
     }
 
     private void ToggleDensityScan()

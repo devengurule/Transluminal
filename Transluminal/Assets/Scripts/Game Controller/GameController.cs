@@ -138,11 +138,13 @@ public class GameController : MonoBehaviour
                 GetComponent<SpawnController>().ResetScrapLeftToSpawn();
                 GetComponent<SpawnController>().ResetSalvageLeftToSpawn();
 
+                ValueTier tier = GetComponent<NavigationController>().GetNodeTier();
+
                 // spawn scrap
-                GetComponent<SpawnController>().SpawnScrap(GetComponent<NavigationController>().GetNodeTier());
+                GetComponent<SpawnController>().SpawnScrap(tier);
 
                 // spawn salvage
-                ValueTier tier = GetComponent<NavigationController>().GetNodeTier();
+                
                 float chanceForAlien = GetComponent<NavigationController>().GetChanceForAlien();
 
                 GetComponent<SpawnController>().SpawnSalvage(tier, chanceForAlien);
@@ -279,10 +281,14 @@ public class GameController : MonoBehaviour
         foreach (GameObject obj in scrapObjects)
         {
             ScrapSaveData data;
+
             data.position = obj.transform.position;
             data.eulerRotation = obj.transform.eulerAngles;
+            data.scale = obj.transform.localScale.x;
+
             data.value = obj.GetComponent<ScrapScript>().value;
-            data.sprite = obj.GetComponent<Sprite>();
+            data.sprite = obj.GetComponent<SpriteRenderer>().sprite;
+            
 
             scrapDataList.Add(data);
         }
@@ -290,10 +296,15 @@ public class GameController : MonoBehaviour
         foreach (GameObject obj in salvageObjects)
         {
             SalvageSaveData data;
+
             data.position = obj.transform.position;
             data.eulerRotation = obj.transform.eulerAngles;
-            data.salvageData = obj.GetComponent<SalvageScript>().GetSalvageData();
+            data.scale = obj.transform.localScale.x;
+
             data.value = obj.GetComponent<SalvageScript>().value;
+            data.alienData = obj.GetComponent<SalvageScript>().GetAlienData();
+            data.salvageData = obj.GetComponent<SalvageScript>().GetSalvageData();
+
 
             salvageDataList.Add(data);
         }

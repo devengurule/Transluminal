@@ -198,16 +198,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce4e9ef725aa4c840afb8a05adf794b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScrapSpawnController
-  numOfScrapRange: {x: 0, y: 0}
-  scrapPrefab: {fileID: 0}
-  lowTierScrapData: []
-  medTierScrapData: []
-  highTierScrapData: []
-  numOfSalvageRange: {x: 0, y: 0}
-  salvagePrefab: {fileID: 0}
-  lowTierSalvageData: []
-  medTierSalvageData: []
-  highTierSalvageData: []
+  scrapScale: {x: 0.1, y: 0.3}
+  numOfScrapRange: {x: 20, y: 40}
+  scrapPrefab: {fileID: 5138417330971813383, guid: 5cbbcec0b783a0f4290fcbf8dbb675cd, type: 3}
+  scrapSprites:
+  - {fileID: 325067837955656104, guid: caade051e1649614bba621abde32077f, type: 3}
+  scrapLowTier: {fileID: 11400000, guid: 7e7f2ac99c0445f449cda0161f596f64, type: 2}
+  scrapMedTier: {fileID: 11400000, guid: c40f0c7ed6c20d440814f77d49ab0322, type: 2}
+  scrapHighTier: {fileID: 11400000, guid: d14c2d153a69b6647b07266cfc6cc85e, type: 2}
+  salvageScale: {x: 0.3, y: 0.7}
+  chanceToSpawnSalvage: 1
+  numOfSalvageRange: {x: 1, y: 1}
+  salvagePrefab: {fileID: 3803265778080364224, guid: 9424b9fece8718843a49c04d03b8350f, type: 3}
+  salvageLowTier: {fileID: 11400000, guid: 0d93f1ecca3c8654b8e067e29b039289, type: 2}
+  salvageMedTier: {fileID: 11400000, guid: 0d93f1ecca3c8654b8e067e29b039289, type: 2}
+  salvageHighTier: {fileID: 11400000, guid: 849d67a5b4577d54d873689ce9396054, type: 2}
+  alienArchetypes: []
+  salvageArchetypes:
+  - {fileID: 11400000, guid: f300730aa128e944fafb216cbb701a7c, type: 2}
+  - {fileID: 11400000, guid: ce27a35315ed1e84f9b2e564397dbae2, type: 2}
 --- !u!114 &-6372975659343732928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,7 +256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthManager
   maxHealth: 0
-  healthOrbPrefab: {fileID: 0}
+  currentHealth: 0
 --- !u!114 &6650028721645696972
 MonoBehaviour:
   m_ObjectHideFlags: 0

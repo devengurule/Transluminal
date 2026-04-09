@@ -666,6 +666,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -50
       objectReference: {fileID: 0}
+    - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: scrapScale.x
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: scrapScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: salvageScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: salvageScale.y
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 2027796009054927797, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_SizeDelta.x
       value: 190.008

@@ -12607,11 +12607,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8210518752818356001, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
       propertyPath: numOfSalvageRange.x
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8210518752818356001, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
       propertyPath: numOfSalvageRange.y
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8210518752818356001, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
       propertyPath: lowTierScrapData.Array.size

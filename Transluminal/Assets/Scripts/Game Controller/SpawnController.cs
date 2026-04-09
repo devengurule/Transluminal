@@ -5,7 +5,7 @@ public class SpawnController : MonoBehaviour
 {
     [Header("Scrap")]
 
-    [SerializeField] private float maxScrapScale;
+    [SerializeField] private Vector2 scrapScale;
     [SerializeField] private Vector2Int numOfScrapRange;
     [SerializeField] GameObject scrapPrefab;
     [SerializeField] List<Sprite> scrapSprites;
@@ -16,7 +16,7 @@ public class SpawnController : MonoBehaviour
 
     [Header("Salvage")]
 
-    [SerializeField] private float maxSalvageScale;
+    [SerializeField] private Vector2 salvageScale;
     [SerializeField] private float chanceToSpawnSalvage;
     [SerializeField] private Vector2Int numOfSalvageRange;
     [SerializeField] GameObject salvagePrefab;
@@ -38,11 +38,10 @@ public class SpawnController : MonoBehaviour
 
         // Get initial NumOfSalvageToSpawn
         int targetNumOfSalvageToSpawn = Random.Range(numOfSalvageRange.x, numOfSalvageRange.y);
-         
         for (int i = 0; i < targetNumOfSalvageToSpawn; i++)
         {
             // If win chance to spawn, add to number of salvage left To spawn
-            if (Random.Range(0, chanceToSpawnSalvage) >= chanceToSpawnSalvage)
+            if (Random.Range(0, 1) >= 1 - chanceToSpawnSalvage)
             {
                 // Add Salvage to Spawn
                 salvageLeftToSpawn++;
@@ -56,11 +55,13 @@ public class SpawnController : MonoBehaviour
         {
             Vector2 randomPoint = RandomPointInScene();
 
-            if(randomPoint != new Vector2(float.NegativeInfinity, float.PositiveInfinity))
+            if(randomPoint != Vector2.zero)
             {
                 // Spawn Scrap
                 float angle = Random.Range(0, 360);
                 GameObject scrapObject = Instantiate(scrapPrefab, randomPoint, Quaternion.Euler(0, 0, angle));
+
+                Sprite sprite = scrapSprites[Random.Range(0, scrapSprites.Count - 1)];
 
                 // Set scraps designated tier values
                 switch (tier)
@@ -70,15 +71,15 @@ public class SpawnController : MonoBehaviour
                         break;
 
                     case ValueTier.low:
-                        scrapObject.GetComponent<ScrapScript>().Initialize(scrapLowTier, maxScrapScale, scrapSprites[Random.Range(0, scrapSprites.Count - 1)]);
+                        scrapObject.GetComponent<ScrapScript>().Initialize(scrapLowTier, scrapScale, sprite);
                         break;
 
                     case ValueTier.medium:
-                        scrapObject.GetComponent<ScrapScript>().Initialize(scrapMedTier, maxScrapScale, scrapSprites[Random.Range(0, scrapSprites.Count - 1)]);
+                        scrapObject.GetComponent<ScrapScript>().Initialize(scrapMedTier, scrapScale, sprite);
                         break;
 
                     case ValueTier.high:
-                        scrapObject.GetComponent<ScrapScript>().Initialize(scrapHighTier, maxScrapScale, scrapSprites[Random.Range(0, scrapSprites.Count - 1)]);
+                        scrapObject.GetComponent<ScrapScript>().Initialize(scrapHighTier, scrapScale, sprite);
                         break;
                 }
 
@@ -93,15 +94,15 @@ public class SpawnController : MonoBehaviour
         {
             Vector2 randomPoint = RandomPointInScene();
 
-            if (randomPoint != new Vector2(float.NegativeInfinity, float.PositiveInfinity))
+            if (randomPoint != Vector2.zero)
             {
-
                 // Spawn Salvage
                 float angle = Random.Range(0, 360);
                 GameObject salvageObject = Instantiate(salvagePrefab, randomPoint, Quaternion.Euler(0, 0, angle));
-                AlienData alien = Random.Range(0, chanceForAlien) >= chanceForAlien ? alienArchetypes[Random.Range(0, alienArchetypes.Count - 1)] : null;
-                SalvageData salvageData = salvageArchetypes[Random.Range(0, salvageArchetypes.Count - 1)];
 
+                AlienData alien = Random.Range(0, 1) >= 1 - chanceForAlien ? alienArchetypes[Random.Range(0, alienArchetypes.Count - 1)] : null;
+
+                SalvageData salvageData = salvageArchetypes[Random.Range(0, salvageArchetypes.Count - 1)];
                 // Set salvages designated tier values
                 switch (tier)
                 {
@@ -110,15 +111,15 @@ public class SpawnController : MonoBehaviour
                         break;
 
                     case ValueTier.low:
-                        salvageObject.GetComponent<SalvageScript>().Initialize(salvageLowTier, salvageData, alien, maxSalvageScale);
+                        salvageObject.GetComponent<SalvageScript>().Initialize(salvageLowTier, salvageData, alien, salvageScale);
                         break;
 
                     case ValueTier.medium:
-                        salvageObject.GetComponent<SalvageScript>().Initialize(salvageMedTier, salvageData, alien, maxSalvageScale);
+                        salvageObject.GetComponent<SalvageScript>().Initialize(salvageMedTier, salvageData, alien, salvageScale);
                         break;
 
                     case ValueTier.high:
-                        salvageObject.GetComponent<SalvageScript>().Initialize(salvageHighTier, salvageData, alien, maxSalvageScale);
+                        salvageObject.GetComponent<SalvageScript>().Initialize(salvageHighTier, salvageData, alien, salvageScale);
                         break;
                 }
 
@@ -135,6 +136,7 @@ public class SpawnController : MonoBehaviour
 
             scrapObject.GetComponent<ScrapScript>().value = obj.value;
             scrapObject.GetComponent<ScrapScript>().SetSprite(obj.sprite);
+            scrapObject.GetComponent<ScrapScript>().SetScale(obj.scale);
         }
     }
 
@@ -145,7 +147,9 @@ public class SpawnController : MonoBehaviour
             GameObject salvageObject = Instantiate(salvagePrefab, obj.position, Quaternion.Euler(obj.eulerRotation));
 
             salvageObject.GetComponent<SalvageScript>().value = obj.value;
-            salvageObject.GetComponent<SalvageScript>().SetScale(obj.salvageData.scale);
+            salvageObject.GetComponent<SalvageScript>().SetScale(obj.scale);
+            salvageObject.GetComponent<SalvageScript>().SetAlienData(obj.alienData);
+            salvageObject.GetComponent<SalvageScript>().SetSalvageData(obj.salvageData);
         }
     }
 
@@ -164,7 +168,7 @@ public class SpawnController : MonoBehaviour
         }
 
         // Return Junk
-        return new Vector2(float.NegativeInfinity, float.PositiveInfinity);
+        return Vector2.zero;
     }
 
     private bool CanSpawnAtPoint(Vector2 coordinate, float radius)
@@ -185,6 +189,17 @@ public class SpawnController : MonoBehaviour
 
     public void ResetSalvageLeftToSpawn()
     {
-        
+        salvageLeftToSpawn = 0;
+
+        int targetNumOfSalvageToSpawn = Random.Range(numOfSalvageRange.x, numOfSalvageRange.y);
+        for (int i = 0; i < targetNumOfSalvageToSpawn; i++)
+        {
+            // If win chance to spawn, add to number of salvage left To spawn
+            if (Random.Range(0, 1) >= 1 - chanceToSpawnSalvage)
+            {
+                // Add Salvage to Spawn
+                salvageLeftToSpawn++;
+            }
+        }
     }
 }

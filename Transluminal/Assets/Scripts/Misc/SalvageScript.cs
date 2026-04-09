@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SalvageScript : MonoBehaviour
 {
@@ -6,19 +7,22 @@ public class SalvageScript : MonoBehaviour
     private AlienData alienData;
     public int value {  get; set; }
 
-    public void Initialize(TierData tier, SalvageData salvageData, AlienData alienData, float maxScale)
+    public void Initialize(TierData tier, SalvageData salvageData, AlienData alienData, Vector2 scaleRange)
     {
         // Save Salvage and Alien Data
         this.salvageData = salvageData;
         this.alienData = alienData;
 
         value = Random.Range(tier.minValue, tier.maxValue);
+        GetComponent<SpriteRenderer>().sprite = salvageData.sprite;
 
         // Larger scale = larger value
-        float scale = (value / (tier.maxValue - tier.minValue)) + 1;
-        SetScale(scale);
+        float a = (float)(value - tier.minValue) / (float)(tier.maxValue - tier.minValue);
+        float b = a * (scaleRange.y - scaleRange.x);
 
-        GetComponent<SpriteRenderer>().sprite = salvageData.sprite;
+        float scale = b + scaleRange.x;
+
+        SetScale(scale);
     }
 
     public SalvageData GetSalvageData()
@@ -31,8 +35,18 @@ public class SalvageScript : MonoBehaviour
         return alienData;
     }
 
-    private void SetScale(float scale)
+    public void SetAlienData(AlienData alienData)
     {
-        transform.localScale *= scale;
+        this.alienData = alienData;
+    }
+    
+    public void SetSalvageData(SalvageData salvageData)
+    {
+        this.salvageData = salvageData;
+    }
+    
+    public void SetScale(float scale)
+    {
+        transform.localScale = Vector3.one * scale;
     }
 }
