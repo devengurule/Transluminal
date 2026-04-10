@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 public class SpawnController : MonoBehaviour
 {
+    [Header("SpawningField")]
+    [SerializeField] private Vector2 spawnOffset;
+    [SerializeField] private Vector2 spawnBoundary;
+
     [Header("Scrap")]
 
     [SerializeField] private Vector2 scrapScale;
@@ -159,11 +163,11 @@ public class SpawnController : MonoBehaviour
 
     private Vector2 RandomPointInScene()
     {
-        float worldHeight = Camera.main.orthographicSize * 2;
-        float worldWidth = worldHeight * Camera.main.aspect;
+        float worldHeight = spawnBoundary.x + spawnOffset.x;
+        float worldWidth = spawnBoundary.y + spawnOffset.y;
 
-        float x = Random.Range(-worldWidth / 2, worldWidth / 2);
-        float y = Random.Range(-worldHeight / 2, worldHeight / 2);
+        float x = Random.Range(spawnOffset.x - (worldWidth / 2), spawnOffset.x + (worldWidth / 2));
+        float y = Random.Range(spawnOffset.y - (worldHeight / 2), spawnOffset.y + (worldHeight / 2));
 
         if(CanSpawnAtPoint(new Vector2(x, y), 0.5f))
         {
@@ -205,5 +209,11 @@ public class SpawnController : MonoBehaviour
                 salvageLeftToSpawn++;
             }
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(spawnOffset, spawnBoundary);
     }
 }

@@ -199,6 +199,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce4e9ef725aa4c840afb8a05adf794b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScrapSpawnController
+  centerSpawn: {x: 3.37, y: -1.1, z: 0}
+  spawnSize: {x: 29.6, y: 29.6, z: 0}
   scrapScale: {x: 0.1, y: 0.3}
   numOfScrapRange: {x: 20, y: 40}
   scrapPrefab: {fileID: 5138417330971813383, guid: 5cbbcec0b783a0f4290fcbf8dbb675cd, type: 3}

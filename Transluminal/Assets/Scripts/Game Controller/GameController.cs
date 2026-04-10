@@ -127,12 +127,13 @@ public class GameController : MonoBehaviour
         {
             // We are in Ship Input Map Scenes
 
-            GameObject.Find("PlayerShip").transform.position = shipSaveData.position;
-            GameObject.Find("PlayerShip").transform.eulerAngles = shipSaveData.eulerRotation;
+            // Setting Position and Rotation Based on Saved Data
 
             if (!shipScenesVisited.ContainsKey(SceneController.GetCurrentSceneName()))
             {
                 // never visited this scene before
+
+                SetShipPos();
 
                 // Reset spawning amount
                 GetComponent<SpawnController>().ResetScrapLeftToSpawn();
@@ -158,6 +159,17 @@ public class GameController : MonoBehaviour
             {
                 // visiting a ship scene previously visited
 
+                if(SceneController.GetCurrentSceneName() != shipSaveData.sceneName)
+                {
+                    // Visited a new node
+                    SetShipPos();
+                }
+                else
+                {
+                    SetShipPos(shipSaveData);
+                }
+
+
                 // spawn scrap
                 GetComponent<SpawnController>().SpawnExistingScrap(shipScenesVisited[SceneController.GetCurrentSceneName()].scrapSaveDataList);
 
@@ -182,15 +194,9 @@ public class GameController : MonoBehaviour
             // Inside a ship scene
             shipSaveData.position = GameObject.Find("PlayerShip").transform.position;
             shipSaveData.eulerRotation = GameObject.Find("PlayerShip").transform.eulerAngles;
+            shipSaveData.sceneName = SceneController.GetCurrentSceneName();
 
-            if (devMode)
-            {
-                SceneController.GoToScene("ISDevRoom");
-            }
-            else
-            {
-                SceneController.GoToScene("Floor1Scene");
-            }
+            SceneController.GoToScene("Floor1Scene");
         }
         else
         {
@@ -364,6 +370,27 @@ public class GameController : MonoBehaviour
     public int GetSalvageValue()
     {
         return GetComponent<CollectableManager>().GetCollectedSalvageValue();
+    }
+
+    private void SetShipPos()
+    {
+        GameObject.Find("PlayerShip").transform.position = GameObject.Find("ShipSpawn").transform.position;
+        GameObject.Find("PlayerShip").transform.eulerAngles = Vector3.zero;
+        GameObject.Find("Main Camera").transform.position = GameObject.Find("PlayerShip").transform.position;
+        GameObject.Find("Main Camera").transform.eulerAngles = Vector3.zero;
+    }
+
+    private void SetShipPos(ShipSaveData data)
+    {
+        GameObject.Find("PlayerShip").transform.position = shipSaveData.position;
+        GameObject.Find("PlayerShip").transform.eulerAngles = shipSaveData.eulerRotation;
+        GameObject.Find("Main Camera").transform.position = shipSaveData.position;
+        GameObject.Find("Main Camera").transform.eulerAngles = shipSaveData.eulerRotation;
+    }
+
+    private void ResetShipSaveData()
+    {
+
     }
 
     #endregion

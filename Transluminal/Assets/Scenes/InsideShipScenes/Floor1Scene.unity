@@ -679,12 +679,44 @@ PrefabInstance:
       value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: centerSpawn.x
+      value: 3.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: centerSpawn.y
+      value: -1.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: spawnOffset.x
+      value: 3.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: spawnOffset.y
+      value: -1.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: salvageScale.x
       value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: salvageScale.y
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: spawnBoundary.x
+      value: 29.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: spawnBoundary.y
+      value: 29.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: numOfScrapRange.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: numOfScrapRange.y
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: numOfSalvageRange.x

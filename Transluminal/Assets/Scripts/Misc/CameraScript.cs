@@ -17,18 +17,5 @@ public class CameraScript : MonoBehaviour
         float lerpAngle = Mathf.Lerp(0, Mathf.DeltaAngle(thisZ, targetZ), rotationSpeed);
 
         transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z + lerpAngle);
-        
-        
-
-    }
-    
-
-    private float GetAltAngle(float angle)
-    {
-        if (angle > 180)
-        {
-            return angle - 360;
-        }
-        else return angle;
     }
 }

@@ -21,6 +21,7 @@ TagManager:
   - MRScan
   - SalvageIt
   - TrashIt
+  - ShipSpawn
   layers:
   - Default
   - TransparentFX
