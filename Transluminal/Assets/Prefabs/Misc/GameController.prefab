@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 728943618792478831}
   - component: {fileID: 7508190167933735306}
   - component: {fileID: -2437626297781991987}
+  - component: {fileID: 5482783032590093953}
   - component: {fileID: 6650028721645696972}
   m_Layer: 0
   m_Name: GameController
@@ -199,8 +200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce4e9ef725aa4c840afb8a05adf794b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScrapSpawnController
-  centerSpawn: {x: 3.37, y: -1.1, z: 0}
-  spawnSize: {x: 29.6, y: 29.6, z: 0}
+  spawnOffset: {x: 0, y: 0}
+  spawnBoundary: {x: 0, y: 0}
   scrapScale: {x: 0.1, y: 0.3}
   numOfScrapRange: {x: 20, y: 40}
   scrapPrefab: {fileID: 5138417330971813383, guid: 5cbbcec0b783a0f4290fcbf8dbb675cd, type: 3}
@@ -272,6 +273,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5f8e6f56de8159489d483608c3e24cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AlienManager
+--- !u!114 &5482783032590093953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5101720563598869061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc696854b45ab874a957fe58d163e910, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TextManager
+  file: {fileID: 4900000, guid: 417092a1faa322844bc6a621183b7688, type: 3}
 --- !u!114 &6650028721645696972
 MonoBehaviour:
   m_ObjectHideFlags: 0
