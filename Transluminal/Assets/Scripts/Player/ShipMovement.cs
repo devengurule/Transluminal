@@ -98,7 +98,7 @@ public class ShipMovement : MonoBehaviour
         Vector2 forward = transform.up;
         Vector2 input = inputVector;
         Vector2 right = new Vector2(forward.y, -forward.x);
-        move = input.x * right + input.y * forward;
+        move = input.y * forward;
 
 
         // Applies an impulse force to the rigidbody

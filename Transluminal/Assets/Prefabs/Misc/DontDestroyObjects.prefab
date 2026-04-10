@@ -1155,7 +1155,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2313221711030130763
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5795,8 +5795,8 @@ RectTransform:
   - {fileID: 7389796116577678571}
   - {fileID: 3325679889016063388}
   - {fileID: 1845670153695278858}
-  - {fileID: 236384240159786491}
   - {fileID: 2313221711030130763}
+  - {fileID: 236384240159786491}
   m_Father: {fileID: 3333755633978831275}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -12974,7 +12974,7 @@ PrefabInstance:
     - target: {fileID: 1170676715736887071, guid: 628ce28baf84bfe44bb156acd6bc20f1, type: 3}
       propertyPath: targetShipScene
       value: 
-      objectReference: {fileID: 102900000, guid: 2c1797d383a24fd4d965f570d22ddd40, type: 3}
+      objectReference: {fileID: 102900000, guid: b53a737a3d035ee4387880217a3b8c3c, type: 3}
     - target: {fileID: 1170676715736887071, guid: 628ce28baf84bfe44bb156acd6bc20f1, type: 3}
       propertyPath: targetShipSceneName
       value: SalvageScene_1
