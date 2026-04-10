@@ -14,12 +14,14 @@ public class CameraScript : MonoBehaviour
 
         float targetZ = target.transform.eulerAngles.z;
         float thisZ = transform.eulerAngles.z;
-        float lerpAngle;
+        float lerpAngle = Mathf.Lerp(0, Mathf.DeltaAngle(thisZ, targetZ), rotationSpeed);
 
+        transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z + lerpAngle);
+        
         
 
     }
-
+    
 
     private float GetAltAngle(float angle)
     {
