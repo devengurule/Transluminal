@@ -37,7 +37,7 @@ public class TextController : MonoBehaviour
 
     IEnumerator WriteText(string key)
     {
-        yield return new WaitForSeconds(2);
+        yield return WaitForSeconds(2);
 
         var lines = TextManager.text[key];
 
@@ -49,7 +49,7 @@ public class TextController : MonoBehaviour
             {
                 text = text + currentText[counter];
                 textObject.text = text;
-                yield return new WaitForSeconds(characterSpeed);
+                yield return WaitForSeconds(characterSpeed);
 
                 counter++;
             }
@@ -60,6 +60,17 @@ public class TextController : MonoBehaviour
             yield return new WaitUntil(() => canContinue == true);
 
             text = "";
+        }
+    }
+
+    IEnumerator WaitForSeconds(float second)
+    {
+        float elapsedTime = 0;
+
+        while (elapsedTime < second)
+        {
+            elapsedTime += TimeManager.deltaTime;
+            yield return null;
         }
     }
 
