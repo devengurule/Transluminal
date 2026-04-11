@@ -1,13 +1,14 @@
 using TMPro;
 using UnityEngine;
 using System.Collections;
-using Unity.VisualScripting;
 
 public class TextController : MonoBehaviour
 {
-    [SerializeField] private float lineSpeed;
-    [SerializeField] private float characterSpeed;
-    [SerializeField] private TMP_Text textObject;
+    #region Variables
+    private float characterSpeed = 0;
+    private float appearTime = 0;
+    private TMP_Text textObject;
+    private string key = "Test";
 
     private EventManager eventManager;
     private bool canContinue;
@@ -15,37 +16,96 @@ public class TextController : MonoBehaviour
     private string currentText;
     private int counter = 0;
 
+    private bool justStarted;
+    private bool isRunning;
+
+    private Timer timer;
+    #endregion
+
+    #region Unity Methods
     private void Start()
     {
         eventManager = GameController.instance.eventManager;
 
         if(eventManager != null)
         {
-            eventManager.Subscribe(EventType.Interact, SkipLine);
+            eventManager.Subscribe(EventType.Interact, OnGameIntereact);
+            eventManager.Subscribe(EventType.FinishedDialogue, OnFinishedPriting);
         }
 
-        StartCoroutine(WriteText("Test"));
+        timer = gameObject.AddComponent<Timer>();
     }
 
     private void OnDestroy()
     {
         if (eventManager != null)
         {
-            eventManager.Unsubscribe(EventType.Interact, SkipLine);
+            eventManager.Unsubscribe(EventType.Interact, OnGameIntereact);
+            eventManager.Unsubscribe(EventType.FinishedDialogue, OnFinishedPriting);
+        }
+    }
+    #endregion
+
+    #region Event Methods
+    private void OnGameIntereact(object target)
+    {
+        if (UIController.isUIUP)
+        {
+            isRunning = false;
+            ResetText();
+            return;
+        }
+
+        if (!justStarted && isRunning)
+        {
+            if (currentText != text)
+            {
+                // in middle of line
+                text = currentText;
+                textObject.text = text;
+            }
+            else
+            {
+                canContinue = true;
+            }
         }
     }
 
-    IEnumerator WriteText(string key)
+    private void OnFinishedPriting(object target)
     {
-        yield return WaitForSeconds(2);
+        if (target is string input)
+        {
+            if (input == key && appearTime != 0)
+            {
+                timer.Initalize(appearTime, ResetText);
+                timer.Run();
+            }
+        }
+    }
+
+    #endregion
+
+    #region IEnumerator
+    IEnumerator WriteTextRoutine(string key)
+    {
+        isRunning = true;
+
+        justStarted = true;
+
+        yield return null;
+
+        justStarted = false;
 
         var lines = TextManager.text[key];
+
+        textObject.text = "";
+        text = "";
 
         foreach (var line in lines)
         {
             currentText = line;
 
-            while(text != currentText)
+            while (text != currentText && isRunning)
             {
                 text = text + currentText[counter];
                 textObject.text = text;
@@ -54,13 +114,18 @@ public class TextController : MonoBehaviour
                 counter++;
             }
 
+            if (lines.Count > 1)
+            {
+                canContinue = false;
+                yield return new WaitUntil(() => canContinue == true);
+            }
+
             counter = 0;
-
-            canContinue = false;
-            yield return new WaitUntil(() => canContinue == true);
-
             text = "";
         }
+        eventManager.Publish(EventType.FinishedDialogue, key);
+
+        isRunning = false;
     }
 
     IEnumerator WaitForSeconds(float second)
@@ -73,18 +138,40 @@ public class TextController : MonoBehaviour
             yield return null;
         }
     }
+    #endregion
 
-    private void SkipLine(object target)
+    #region Methods
+    public void Initalize(float characterSpeed, TMP_Text textObject)
     {
-        if(currentText != text)
+        this.characterSpeed = characterSpeed;
+        this.textObject = textObject;
+        this.textObject.text = text;
+    }
+
+    public void Initalize(float characterSpeed, float appearTime, TMP_Text textObject)
+    {
+        this.characterSpeed = characterSpeed;
+        this.appearTime = appearTime;
+        this.textObject = textObject;
+        this.textObject.text = text;
+    }
+
+    public void WriteText(string key)
+    {
+        if (timer.isRunning) timer.Reset();
+
+        if (!isRunning)
         {
-            // in middle of line
-            text = currentText;
-            textObject.text = text;
-        }
-        else
-        {
-            canContinue = true;
+            StartCoroutine(WriteTextRoutine(key));
+            this.key = key;
         }
     }
+
+    private void ResetText()
+    {
+        textObject.text = "";
+        text = "";
+        timer.Reset();
+    }
+    #endregion
 }

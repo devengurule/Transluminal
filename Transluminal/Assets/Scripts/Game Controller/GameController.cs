@@ -211,6 +211,10 @@ public class GameController : MonoBehaviour
                 {
                     SceneController.GoToScene(navController.GetCurrentShipScene());
                 }
+                else
+                {
+                    eventManager.Publish(EventType.NoHelmAccess);
+                }
             }
         }
     }

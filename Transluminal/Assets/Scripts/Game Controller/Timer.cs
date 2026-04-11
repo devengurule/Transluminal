@@ -43,6 +43,13 @@ public class Timer : MonoBehaviour
     private void Execute(Action action)
     {
         action?.Invoke();
-        remainingTime = 0;
+        remainingTime = duration;
+        isRunning = false;
+    }
+    
+    public void Reset()
+    {
+        remainingTime = duration;
+        isRunning = false;
     }
 }

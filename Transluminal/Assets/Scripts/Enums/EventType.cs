@@ -43,5 +43,9 @@ public enum EventType
     ScrollHori,
 
     // ALIENS
-    SpawnHunter
+    SpawnHunter,
+
+    // DIALOGUE
+    NoHelmAccess,
+    FinishedDialogue
 }
