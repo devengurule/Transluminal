@@ -23,6 +23,8 @@ public enum EventType
     PauseOn,
     PauseOff,
     Pause,
+    FreezePlayerMove,
+    UnFreezePlayerMove,
 
     // Nav Nodes
     HomeNodeEnter,
@@ -37,6 +39,8 @@ public enum EventType
     DestroyScrap,
     DestroySalvage,
     HealthChange,
+    OnEnterCloset,
+    OnExitCloset,
 
     // UI
     ScrollVert,

@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private List<string> PlayerInputMapScenes = new();
     [SerializeField] private List<string> ShipInputMapScenes = new();
-
+    [SerializeField] private Vector2 playerHidingPos;
     [SerializeField] private bool devMode;
 
     private Dictionary<string, SceneData> shipScenesVisited = new Dictionary<string, SceneData>();
@@ -20,8 +20,11 @@ public class GameController : MonoBehaviour
     private PlayerInput playerInput;
     private GameObject parent;
     private string transportLayer = "TransportCollider";
+    private string closetLayer = "ClosetCollider";
     private bool interactWithTransport = false;
-    
+    private bool interactWithCloset = false;
+    private object closetObject;
+    private bool isHiding;
     private ShipSaveData shipSaveData;
     private PlayerSaveData playerSaveData;
 
@@ -216,6 +219,17 @@ public class GameController : MonoBehaviour
                     eventManager.Publish(EventType.NoHelmAccess);
                 }
             }
+            else if (interactWithCloset)
+            {
+                isHiding = true;
+                eventManager.Publish(EventType.OnEnterCloset, closetObject);
+            }
+            else if(isHiding)
+            {
+                isHiding = false;
+                eventManager.Publish(EventType.OnExitCloset, closetObject);
+                closetObject = null;
+            }
         }
     }
     private void OnRestartGame(object target)
@@ -226,21 +240,32 @@ public class GameController : MonoBehaviour
     private void OnPlayerEnterCollide(object target)
     {
         GameObject gameObject = target as GameObject;
-        int layerID = LayerMask.NameToLayer(transportLayer);
+        int transportLayerID = LayerMask.NameToLayer(transportLayer);
+        int closetLayerID = LayerMask.NameToLayer(closetLayer);
 
-        if (gameObject.layer == layerID)
+        if (gameObject.layer == transportLayerID)
         {
             interactWithTransport = true;
+        }
+        else if (gameObject.layer == closetLayerID)
+        {
+            interactWithCloset = true;
+            closetObject = target;
         }
     }
     private void OnPlayerExitCollide(object target)
     {
         GameObject gameObject = target as GameObject;
-        int layerID = LayerMask.NameToLayer(transportLayer);
+        int transportLayerID = LayerMask.NameToLayer(transportLayer);
+        int closetLayerID = LayerMask.NameToLayer(closetLayer);
 
-        if (gameObject.layer == layerID)
+        if (gameObject.layer == transportLayerID)
         {
             interactWithTransport = false;
+        }
+        else if(gameObject.layer == closetLayerID)
+        {
+            interactWithCloset = false;
         }
     }
 
@@ -392,10 +417,20 @@ public class GameController : MonoBehaviour
         GameObject.Find("Main Camera").transform.eulerAngles = shipSaveData.eulerRotation;
     }
 
-    private void ResetShipSaveData()
+    public Vector2 PlayerHidingPos()
     {
-
+        return playerHidingPos;
     }
 
+    public bool IsHiding()
+    {
+        return isHiding;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(playerHidingPos, 0.5f);
+    }
     #endregion
 }

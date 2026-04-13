@@ -4,19 +4,17 @@ using UnityEngine.InputSystem;
 public class Movement : MonoBehaviour
 {
     #region Variables
-    [SerializeField]
-    private Vector2 walkVelocity;
-    [SerializeField]
-    private Vector2 sprintVelocity;
-    [SerializeField]
-    private Vector2 acceleration;
-    [SerializeField]
-    private Vector2 friction;
+    [SerializeField] private Vector2 walkVelocity;
+    [SerializeField] private Vector2 sprintVelocity;
+    [SerializeField] private Vector2 acceleration;
+    [SerializeField] private Vector2 friction;
 
     private EventManager eventManager;
     private Vector2 move = Vector2.zero;
     private Vector2 maxVelocity;
     private Rigidbody2D rb;
+    private Vector2 lastHidingPos;
+    private bool canMove = true;
     #endregion
 
     #region Unity Methods
@@ -37,6 +35,8 @@ public class Movement : MonoBehaviour
             eventManager.Subscribe(EventType.SprintOn, OnSprintPlayer);
             eventManager.Subscribe(EventType.SprintOff, OffSprint);
             eventManager.Subscribe(EventType.PauseOn, OnPauseGame);
+            eventManager.Subscribe(EventType.OnEnterCloset, OnEnterCloset);
+            eventManager.Subscribe(EventType.OnExitCloset, OnExitCloset);
         }
     }
 
@@ -48,6 +48,8 @@ public class Movement : MonoBehaviour
             eventManager.Unsubscribe(EventType.SprintOn, OnSprintPlayer);
             eventManager.Unsubscribe(EventType.SprintOff, OffSprint);
             eventManager.Unsubscribe(EventType.PauseOn, OnPauseGame);
+            eventManager.Unsubscribe(EventType.OnEnterCloset, OnEnterCloset);
+            eventManager.Unsubscribe(EventType.OnExitCloset, OnExitCloset);
         }
     }
 
@@ -61,7 +63,7 @@ public class Movement : MonoBehaviour
     private void OnMovePlayer(object target)
     {
         // Set move to the input vector
-        if (target is Vector2 move)
+        if (target is Vector2 move && canMove)
         {
             this.move = move;
         }
@@ -86,6 +88,25 @@ public class Movement : MonoBehaviour
         move = Vector2.zero;
     }
 
+    private void OnEnterCloset(object target)
+    {
+        canMove = false;
+
+        rb.linearVelocity = Vector2.zero;
+        move = Vector2.zero;
+
+        lastHidingPos = transform.position;
+        transform.position = GameController.instance.PlayerHidingPos();
+    }
+    private void OnExitCloset(object target)
+    {
+        canMove = true;
+
+        if (target is GameObject obj)
+        {
+            transform.position = lastHidingPos;
+        }
+    }
     #endregion
 
     #region Methods

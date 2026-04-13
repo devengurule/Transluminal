@@ -22,6 +22,7 @@ TagManager:
   - SalvageIt
   - TrashIt
   - ShipSpawn
+  - Closet
   layers:
   - Default
   - TransparentFX
@@ -33,7 +34,7 @@ TagManager:
   - Background
   - UICollider
   - TransportCollider
-  - 
+  - ClosetCollider
   - 
   - 
   - 
