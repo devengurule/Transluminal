@@ -23,6 +23,8 @@ TagManager:
   - TrashIt
   - ShipSpawn
   - Closet
+  - Hunter
+  - Rat
   layers:
   - Default
   - TransparentFX

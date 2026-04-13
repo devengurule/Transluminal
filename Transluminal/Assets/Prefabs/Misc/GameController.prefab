@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 7508190167933735306}
   - component: {fileID: -2437626297781991987}
   - component: {fileID: 5482783032590093953}
+  - component: {fileID: 4705991524552788740}
   - component: {fileID: 6650028721645696972}
   m_Layer: 0
   m_Name: GameController
@@ -69,6 +70,7 @@ MonoBehaviour:
   - OSDevRoom
   - SalvageScene_0
   - SalvageScene_1
+  playerHidingPos: {x: 0, y: 0}
   devMode: 1
 --- !u!114 &5388767112792395842
 MonoBehaviour:
@@ -286,6 +288,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextManager
   file: {fileID: 4900000, guid: 417092a1faa322844bc6a621183b7688, type: 3}
+--- !u!114 &4705991524552788740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5101720563598869061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b67e0d26777df8e41b39ea069fc3940e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!114 &6650028721645696972
 MonoBehaviour:
   m_ObjectHideFlags: 0
