@@ -140,7 +140,7 @@ public class ScannerController : MonoBehaviour
 
                 case AlienType.hunter:
 
-                    eventManager.Publish(EventType.SpawnHunter, currentSalvage.alienData);
+                    eventManager.Publish(EventType.SpawnHunter);
 
                     break;
             }

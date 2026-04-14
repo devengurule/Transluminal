@@ -10,7 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6547208785575125265}
   - component: {fileID: 5273689047629449810}
+  - component: {fileID: 8876940889826270142}
   - component: {fileID: 6623533194109332253}
+  - component: {fileID: 3234892854379979655}
+  - component: {fileID: -670556452729928859}
   m_Layer: 0
   m_Name: Hunter
   m_TagString: Hunter
@@ -78,8 +81,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -836034131
-  m_SortingLayer: 2
+  m_SortingLayerID: 194754441
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
@@ -92,6 +95,33 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!50 &8876940889826270142
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5802581833874066596}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &6623533194109332253
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -138,3 +168,27 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.61171436, y: 0.3038844}
   m_EdgeRadius: 0
+--- !u!114 &3234892854379979655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5802581833874066596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be85002dfc88bfa4290eab7ce1e70923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AlienScript
+--- !u!114 &-670556452729928859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5802581833874066596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d75c5ee2d7433224cab9eba75e169265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HunterScript

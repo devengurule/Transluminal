@@ -25,6 +25,7 @@ TagManager:
   - Closet
   - Hunter
   - Rat
+  - SpawnZone
   layers:
   - Default
   - TransparentFX

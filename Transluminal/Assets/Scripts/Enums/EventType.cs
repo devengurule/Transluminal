@@ -48,6 +48,8 @@ public enum EventType
 
     // ALIENS
     SpawnHunter,
+    SpawnRat,
+    KillAlien,
 
     // DIALOGUE
     NoHelmAccess,

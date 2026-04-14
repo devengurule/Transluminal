@@ -27,7 +27,6 @@ public class GameController : MonoBehaviour
     private bool isHiding;
     private ShipSaveData shipSaveData;
     private PlayerSaveData playerSaveData;
-
     #endregion
 
     #region Unity Methods
