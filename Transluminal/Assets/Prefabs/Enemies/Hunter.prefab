@@ -121,7 +121,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &6623533194109332253
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -192,3 +192,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d75c5ee2d7433224cab9eba75e169265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HunterScript
+  distance: 2
+  acceleration: {x: 10, y: 3}
+  maxVelocity: {x: 3, y: 2}

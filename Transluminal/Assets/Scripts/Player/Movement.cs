@@ -116,7 +116,7 @@ public class Movement : MonoBehaviour
         rb.AddForce(move * acceleration * TimeManager.deltaTime, ForceMode2D.Impulse);
 
 
-        // Truncates velocity to match the vaximum velocity variable
+        // Truncates velocity to match the maximum velocity variable
         if (Mathf.Abs(rb.linearVelocityX) > maxVelocity.x) rb.linearVelocityX = Mathf.Sign(rb.linearVelocityX) * maxVelocity.x;
 
         if (Mathf.Abs(rb.linearVelocityY) > maxVelocity.y) rb.linearVelocityY = Mathf.Sign(rb.linearVelocityY) * maxVelocity.y;
