@@ -1,13 +1,24 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class HunterScript : MonoBehaviour
 {
     private AlienSaveData saveDataInstance;
-    private float lifeTime;
     private EventManager eventManager;
     private Timer timer;
+    private float lifeTime;
+    private Rigidbody2D rb;
+
+    private State currentState;
+
+    private enum State
+    {
+        hide,
+        chase,
+        attack,
+        wander,
+        flee
+    }
 
     private void Awake()
     {
@@ -20,23 +31,21 @@ public class HunterScript : MonoBehaviour
 
         SceneManager.sceneUnloaded += OnSceneUnloaded;
 
-        if (eventManager != null)
-        {
+        rb = GetComponent<Rigidbody2D>();
 
-        }
-    }
-
-    private void OnDestroy()
-    {
-        if (eventManager != null)
-        {
-
-        }
+        currentState = State.hide;
     }
 
     private void Update()
     {
-        print(timer.remainingTime);
+        AILogic();
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneUnloaded -= OnSceneUnloaded;
+
+        
     }
 
     private void OnSceneUnloaded(Scene scene)
@@ -59,5 +68,41 @@ public class HunterScript : MonoBehaviour
 
         timer.Initalize(this.lifeTime, Dead);
         timer.Run();
+    }
+
+    private void AILogic()
+    {
+        switch (currentState)
+        {
+            case State.hide:
+
+
+
+                break;
+
+            case State.chase:
+
+
+                  
+                break;
+
+            case State.attack:
+
+
+
+                break;
+
+            case State.wander:
+
+
+
+                break;
+
+            case State.flee:
+
+
+
+                break;
+        }
     }
 }

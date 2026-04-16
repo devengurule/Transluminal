@@ -33,6 +33,9 @@ public class AlienManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        // Unsubscribe to active scene change event
+        SceneManager.activeSceneChanged -= SceneChange;
+
         if (eventManager != null)
         {
             eventManager.Unsubscribe(EventType.SpawnHunter, QueueHunterSpawn);
