@@ -444,6 +444,10 @@ PrefabInstance:
       value: CaplsuleCollider (1)
       objectReference: {fileID: 0}
     - target: {fileID: 1429787510973059349, guid: 04912dd4f933c9843bd26fd9afc72239, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1429787510973059349, guid: 04912dd4f933c9843bd26fd9afc72239, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -633,7 +637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: numOfSalvageRange.x
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: numOfSalvageRange.y
@@ -761,7 +765,7 @@ PrefabInstance:
       objectReference: {fileID: 5802581833874066596, guid: 6aa1323592796704e8273c14b3c0765c, type: 3}
     - target: {fileID: 4826480850986139676, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: hunterLifeTime
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5371855984890962478, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
@@ -911,6 +915,10 @@ PrefabInstance:
     - target: {fileID: 1429787510973059349, guid: 04912dd4f933c9843bd26fd9afc72239, type: 3}
       propertyPath: m_Name
       value: CaplsuleCollider (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1429787510973059349, guid: 04912dd4f933c9843bd26fd9afc72239, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1429787510973059349, guid: 04912dd4f933c9843bd26fd9afc72239, type: 3}
       propertyPath: m_IsActive

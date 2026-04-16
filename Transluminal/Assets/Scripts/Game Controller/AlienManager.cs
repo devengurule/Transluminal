@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.Android;
 using UnityEngine.SceneManagement;
+using static UnityEditor.PlayerSettings;
 
 public class AlienManager : MonoBehaviour
 {
@@ -13,7 +15,7 @@ public class AlienManager : MonoBehaviour
     [SerializeField] private float ratLifeTime;
 
     private GameObject spawnZone;
-    private List<AlienSaveData> alienSaveList = new();
+    private List<AlienSaveData> alienSaveList = new List<AlienSaveData>();
     private EventManager eventManager;
 
     private void Start()
@@ -26,8 +28,6 @@ public class AlienManager : MonoBehaviour
         if (eventManager != null)
         {
             eventManager.Subscribe(EventType.SpawnHunter, QueueHunterSpawn);
-            eventManager.Subscribe(EventType.SpawnRat, QueueRatSpawn);
-            eventManager.Subscribe(EventType.KillAlien, RemoveAlienFromList);
         }
     }
 
@@ -36,8 +36,6 @@ public class AlienManager : MonoBehaviour
         if (eventManager != null)
         {
             eventManager.Unsubscribe(EventType.SpawnHunter, QueueHunterSpawn);
-            eventManager.Unsubscribe(EventType.SpawnRat, QueueRatSpawn);
-            eventManager.Unsubscribe(EventType.KillAlien, RemoveAlienFromList);
         }
     }
 
@@ -45,61 +43,52 @@ public class AlienManager : MonoBehaviour
     {
         spawnZone = GameObject.FindGameObjectWithTag("SpawnZone");
 
-        if (SceneController.GetCurrentSceneName() == "Floor1Scene")
+        for (int i = 0; i < alienSaveList.Count; i++)
         {
-            foreach (AlienSaveData data in alienSaveList)
+            AlienSaveData data = alienSaveList[i];
+
+            switch (SceneController.GetCurrentSceneName())
             {
-                if (data.currentFloor == "Floor1Scene")
-                {
-                    GameObject alien = Instantiate(data.alienObject, RandomSpawnPoint(), Quaternion.identity);
-                    alien.GetComponent<AlienScript>().lifeTime = data.remainingLifeTime;
-                }
-            }
-        }
-        else if (SceneController.GetCurrentSceneName() == "Floor2Scene")
-        {
-            foreach (AlienSaveData data in alienSaveList)
-            {
-                if (data.currentFloor == "Floor2Scene")
-                {
-                    GameObject alien = Instantiate(data.alienObject, RandomSpawnPoint(), Quaternion.identity);
-                    alien.GetComponent<AlienScript>().lifeTime = data.remainingLifeTime;
-                }
-            }
-        }
-        else if (SceneController.GetCurrentSceneName() == "Floor3Scene")
-        {
-            foreach (AlienSaveData data in alienSaveList)
-            {
-                if (data.currentFloor == "Floor3Scene")
-                {
-                    GameObject alien = Instantiate(data.alienObject, RandomSpawnPoint(), Quaternion.identity);
-                    alien.GetComponent<AlienScript>().lifeTime = data.remainingLifeTime;
-                }
+                case "Floor1Scene":
+                    if (data.currentFloor == "Floor1Scene")
+                    {
+                        SpawnAlien(data);
+                        alienSaveList[i] = data;
+                    }
+                    break;
+
+                case "Floor2Scene":
+                    if (data.currentFloor == "Floor2Scene")
+                    {
+                        SpawnAlien(data);
+                        alienSaveList[i] = data;
+                    }
+                    break;
+
+                case "Floor3Scene":
+                    if (data.currentFloor == "Floor3Scene")
+                    {
+                        SpawnAlien(data);
+                        alienSaveList[i] = data;
+                    }
+                    break;
             }
         }
     }
 
     private void QueueHunterSpawn(object target)
     {
-        print("Adding Hunter");
-        alienSaveList.Add(new AlienSaveData(hunterPrefab, GetFloorToSpawn(), hunterLifeTime));
-    }
-    private void QueueRatSpawn(object target)
-    {
-        print("Adding Rat");
-        alienSaveList.Add(new AlienSaveData(ratPrefab, GetFloorToSpawn(), ratLifeTime));
-    }
+        AlienSaveData data = new();
 
-    private void RemoveAlienFromList(object target)
-    {
-        foreach(AlienSaveData data in alienSaveList)
-        {
-            if(data.remainingLifeTime <= 0)
-            {
-                alienSaveList.Remove(data);
-            }
-        }
+        data.position = Vector2.zero;
+        data.prefabObject = hunterPrefab;
+        data.alienType = AlienType.hunter;
+        data.currentFloor = GetRandomFloor();
+        data.remainingLifeTime = hunterLifeTime;
+
+        print(data.currentFloor);
+
+        alienSaveList.Add(data);
     }
 
     private Vector2 RandomSpawnPoint()
@@ -109,48 +98,22 @@ public class AlienManager : MonoBehaviour
 
         float x = Random.Range(pos.x - renderer.bounds.size.x / 2, pos.x + renderer.bounds.size.x / 2);
         float y = Random.Range(pos.y - renderer.bounds.size.y / 2, pos.y + renderer.bounds.size.y / 2);
-        
+
         return new Vector2(x, y);
     }
 
-    private string GetFloorToSpawn()
+    private string GetRandomFloor()
     {
         int x = Random.Range(1, 4);
 
         switch (x)
         {
             case 1:
-
-                if(SceneController.GetCurrentSceneName() != "Floor1Scene")
-                {
-                    return "Floor1Scene";
-                }
-                else
-                {
-                    return "Floor2Scene";
-                }
-
+                return "Floor1Scene";
             case 2:
-
-                if (SceneController.GetCurrentSceneName() != "Floor2Scene")
-                {
-                    return "Floor2Scene";
-                }
-                else
-                {
-                    return "Floor3Scene";
-                }
-
+                return "Floor2Scene";
             case 3:
-
-                if (SceneController.GetCurrentSceneName() != "Floor3Scene")
-                {
-                    return "Floor3Scene";
-                }
-                else
-                {
-                    return "Floor1Scene";
-                }
+                return "Floor3Scene";
         }
         return "";
     }
@@ -158,5 +121,36 @@ public class AlienManager : MonoBehaviour
     public void SetSpawnZone(GameObject spawnZone)
     {
         this.spawnZone = spawnZone;
+    }
+
+    private void SpawnAlien(AlienSaveData data)
+    {
+        Vector2 randomPos = RandomSpawnPoint();
+        GameObject alien = Instantiate(data.prefabObject, randomPos, Quaternion.identity);
+
+        data.position = randomPos;
+
+        if (data.alienType == AlienType.hunter)
+        {
+            alien.GetComponent<HunterScript>().Initialize(data, data.remainingLifeTime);
+        }
+    }
+
+    public void SetRemainingTime(AlienSaveData data, float remainingTime)
+    {
+        alienSaveList[FindSaveDataIndex(data)].remainingLifeTime = remainingTime;
+    }
+
+    private int FindSaveDataIndex(AlienSaveData data)
+    {
+        for (int i = 0; i < alienSaveList.Count; i++)
+        {
+            if (alienSaveList[i].position == data.position)
+            {
+                return i;
+            }
+        }
+
+        return -1;
     }
 }

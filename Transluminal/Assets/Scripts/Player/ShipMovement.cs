@@ -41,6 +41,7 @@ public class ShipMovement : MonoBehaviour
             eventManager.Subscribe(EventType.Rotate, OnRotate);
             eventManager.Subscribe(EventType.ZeroVelocityOn, OnZeroVelocity);
             eventManager.Subscribe(EventType.ZeroVelocityOff, OffZeroVelocity);
+            eventManager.Subscribe(EventType.PauseOn, OnPauseGame);
         }
     }
     private void OnDestroy()
@@ -51,6 +52,7 @@ public class ShipMovement : MonoBehaviour
             eventManager.Unsubscribe(EventType.Rotate, OnRotate);
             eventManager.Unsubscribe(EventType.ZeroVelocityOn, OnZeroVelocity);
             eventManager.Unsubscribe(EventType.ZeroVelocityOff, OffZeroVelocity);
+            eventManager.Unsubscribe(EventType.PauseOn, OnPauseGame);
         }
     }
     private void Update()
@@ -86,6 +88,13 @@ public class ShipMovement : MonoBehaviour
     private void OffZeroVelocity(object target)
     {
         isZeroOutVelocity = false;
+    }
+
+    private void OnPauseGame(object target)
+    {
+        // Set all physics numbers to zero when paused
+        rb.linearVelocity = Vector2.zero;
+        move = Vector2.zero;
     }
     #endregion
 

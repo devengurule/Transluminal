@@ -12,8 +12,9 @@ public class AlienScript : MonoBehaviour
 
         timer = gameObject.AddComponent<Timer>();
         timer.Initalize(lifeTime, Dead);
+        timer.Run();
     }
-    
+
     private void Dead()
     {
         eventManager.Publish(EventType.KillAlien, gameObject);

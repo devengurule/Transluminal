@@ -853,7 +853,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "TAB to Pause\n\nF to Interact\n\nPlayer:\n\tWASD to Move\n\t\n\tShift
-    to Sprint\nShip:\n\n\tWASD to Move\n\t\n\tShift to Slow\n\t\t   Down"
+    to Sprint\nShip:\n\tWASD to Move\n\t\n\tQE Rotate Ship\n\t\n\tShift to Slow\n\t\t  
+    Down"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1155,7 +1156,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2313221711030130763
 RectTransform:
   m_ObjectHideFlags: 0

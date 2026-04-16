@@ -2,14 +2,11 @@ using UnityEngine;
 
 public class AlienSaveData
 {
-    public GameObject alienObject { get; private set; }
-    public string currentFloor { get; private set; }
-    public float remainingLifeTime{ get; private set; }
+    public Vector2 position;
 
-    public AlienSaveData(GameObject alienObject,  string currentFloor,  float remainingLifeTime)
-    {
-        this.alienObject = alienObject;
-        this.currentFloor = currentFloor;
-        this.remainingLifeTime = remainingLifeTime;
-    }
+    public GameObject prefabObject;
+    public AlienType alienType;
+
+    public string currentFloor;
+    public float remainingLifeTime;
 }
