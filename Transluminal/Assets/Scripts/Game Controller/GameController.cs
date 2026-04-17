@@ -12,7 +12,10 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private List<string> PlayerInputMapScenes = new();
     [SerializeField] private List<string> ShipInputMapScenes = new();
+
     [SerializeField] private Vector2 playerHidingPos;
+    [SerializeField] private Vector2 hunterFleePos;
+    
     [SerializeField] private bool devMode;
 
     private Dictionary<string, SceneData> shipScenesVisited = new Dictionary<string, SceneData>();
@@ -421,6 +424,11 @@ public class GameController : MonoBehaviour
         return playerHidingPos;
     }
 
+    public Vector2 HunterFleePos()
+    {
+        return hunterFleePos;
+    }
+
     public bool IsHiding()
     {
         return isHiding;
@@ -430,6 +438,9 @@ public class GameController : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(playerHidingPos, 0.5f);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(hunterFleePos, 0.5f);
     }
     #endregion
 }

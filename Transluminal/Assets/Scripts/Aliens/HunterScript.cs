@@ -3,11 +3,17 @@ using UnityEngine.SceneManagement;
 
 public class HunterScript : MonoBehaviour
 {
+    [SerializeField] private Vector2 speed;
+    [SerializeField] private Vector2 maxSpeed;
+    
     private AlienSaveData saveDataInstance;
     private EventManager eventManager;
     private Timer timer;
-    private float lifeTime;
     private Rigidbody2D rb;
+
+    private float lifeTime;
+    private Vector2 target;
+    private Vector2 direction;
 
     private State currentState;
 
@@ -31,9 +37,11 @@ public class HunterScript : MonoBehaviour
 
         SceneManager.sceneUnloaded += OnSceneUnloaded;
 
+        target = GameController.instance.GetComponent<GameController>().HunterFleePos();
+
         rb = GetComponent<Rigidbody2D>();
 
-        currentState = State.hide;
+        currentState = State.flee;
     }
 
     private void Update()
@@ -100,9 +108,28 @@ public class HunterScript : MonoBehaviour
 
             case State.flee:
 
-
+                Flee();
 
                 break;
         }
+    }
+
+    private void Flee()
+    {
+        direction.x = Mathf.Lerp(direction.x, target.x - transform.position.x, 0.5f);
+        direction.y = Mathf.Lerp(direction.y, target.y - transform.position.y, 0.5f);
+        
+        Move(direction, speed, maxSpeed);
+    }
+
+    private void Move(Vector2 direction, Vector2 speed, Vector2 maxSpeed)
+    {
+        // Applies an impulse force to the rigidbody
+        rb.AddForce(direction * speed * TimeManager.deltaTime, ForceMode2D.Impulse);
+
+        // Truncates velocity to match the maximum velocity variable
+        if (Mathf.Abs(rb.linearVelocityX) > maxSpeed.x) rb.linearVelocityX = Mathf.Sign(rb.linearVelocityX) * maxSpeed.x;
+
+        if (Mathf.Abs(rb.linearVelocityY) > maxSpeed.y) rb.linearVelocityY = Mathf.Sign(rb.linearVelocityY) * maxSpeed.y;
     }
 }

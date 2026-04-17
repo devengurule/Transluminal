@@ -69,7 +69,8 @@ MonoBehaviour:
   - OSDevRoom
   - SalvageScene_0
   - SalvageScene_1
-  playerHidingPos: {x: 0, y: 0}
+  playerHidingPos: {x: -20, y: 0}
+  hunterFleePos: {x: -13, y: -2}
   devMode: 1
 --- !u!114 &5388767112792395842
 MonoBehaviour:
