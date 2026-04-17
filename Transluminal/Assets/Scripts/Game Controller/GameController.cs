@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     public static GameController instance;
     public EventManager eventManager { get; private set; }
     public Camera cam { get; private set; }
+    public GameObject player { get; private set; }
 
     [SerializeField] private List<string> PlayerInputMapScenes = new();
     [SerializeField] private List<string> ShipInputMapScenes = new();
@@ -28,6 +29,7 @@ public class GameController : MonoBehaviour
     private bool interactWithCloset = false;
     private object closetObject;
     private bool isHiding;
+    private Vector2 playerLastPos;
     private ShipSaveData shipSaveData;
     private PlayerSaveData playerSaveData;
     #endregion
@@ -85,6 +87,7 @@ public class GameController : MonoBehaviour
             eventManager.Subscribe(EventType.DestroyScrap, OnDestroyScrap);
             eventManager.Subscribe(EventType.DestroySalvage, OnDestroySalvage);
             eventManager.Subscribe(EventType.ArrivedAtHomeNode, OnArrivedHome);
+            eventManager.Subscribe(EventType.PlayerHiding, PlayerOnHiding);
         }
     }
 
@@ -95,11 +98,12 @@ public class GameController : MonoBehaviour
             // Unsubscribe Events
             eventManager.Unsubscribe(EventType.Interact, OnInteractPressed);
             eventManager.Unsubscribe(EventType.Restart, OnRestartGame);
-            eventManager.Subscribe(EventType.PlayerCollidingEnter, OnPlayerEnterCollide);
-            eventManager.Subscribe(EventType.PlayerCollidingExit, OnPlayerExitCollide);
-            eventManager.Subscribe(EventType.DestroyScrap, OnDestroyScrap);
-            eventManager.Subscribe(EventType.DestroySalvage, OnDestroySalvage);
+            eventManager.Unsubscribe(EventType.PlayerCollidingEnter, OnPlayerEnterCollide);
+            eventManager.Unsubscribe(EventType.PlayerCollidingExit, OnPlayerExitCollide);
+            eventManager.Unsubscribe(EventType.DestroyScrap, OnDestroyScrap);
+            eventManager.Unsubscribe(EventType.DestroySalvage, OnDestroySalvage);
             eventManager.Unsubscribe(EventType.ArrivedAtHomeNode, OnArrivedHome);
+            eventManager.Unsubscribe(EventType.PlayerHiding, PlayerOnHiding);
         }
     }
     #endregion
@@ -109,6 +113,9 @@ public class GameController : MonoBehaviour
     // Change Input Map when changing scenes
     private void SceneChange(Scene current, Scene next)
     {
+        // Get player in scene
+        player = GameObject.Find("Player");
+
         // Get scene camera
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 
@@ -298,6 +305,14 @@ public class GameController : MonoBehaviour
         int totalScrapValue = GetComponent<CollectableManager>().GetCollectedScrapValue();
     }
 
+    private void PlayerOnHiding(object target)
+    {
+        if(target is Vector2 lastPlayerPos)
+        {
+            playerLastPos = lastPlayerPos;
+        }
+    }
+
     #endregion
 
     #region Methods
@@ -441,6 +456,16 @@ public class GameController : MonoBehaviour
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(hunterFleePos, 0.5f);
+    }
+
+    public Vector2 GetPlayerPos()
+    {
+        if (isHiding)
+        {
+            return new Vector2(playerLastPos.x, playerLastPos.y - 1.7f);
+        }
+        
+        return new Vector2(player.transform.position.x, player.transform.position.y - 1.7f);
     }
     #endregion
 }

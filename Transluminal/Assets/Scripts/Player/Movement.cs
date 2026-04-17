@@ -97,6 +97,8 @@ public class Movement : MonoBehaviour
 
         lastHidingPos = transform.position;
         transform.position = GameController.instance.PlayerHidingPos();
+
+        eventManager.Publish(EventType.PlayerHiding, lastHidingPos);
     }
     private void OnExitCloset(object target)
     {

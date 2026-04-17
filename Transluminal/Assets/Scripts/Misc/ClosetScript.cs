@@ -26,7 +26,7 @@ public class ClosetScript : MonoBehaviour
         if (eventManager != null)
         {
             eventManager.Unsubscribe(EventType.OnEnterCloset, OnEnterCloset);
-            eventManager.Subscribe(EventType.OnExitCloset, OnExitCloset);
+            eventManager.Unsubscribe(EventType.OnExitCloset, OnExitCloset);
         }
     }
 

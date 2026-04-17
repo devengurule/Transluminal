@@ -5,18 +5,18 @@ public class HunterScript : MonoBehaviour
 {
     [SerializeField] private Vector2 speed;
     [SerializeField] private Vector2 maxSpeed;
-    
+    [SerializeField] private float XT;
+    [SerializeField] private float YT;
+    [SerializeField] private float VelocityT;
+
     private AlienSaveData saveDataInstance;
     private EventManager eventManager;
     private Timer timer;
     private Rigidbody2D rb;
-
     private float lifeTime;
-    private Vector2 target;
     private Vector2 direction;
-
+    private Vector2 target;
     private State currentState;
-
     private enum State
     {
         hide,
@@ -37,11 +37,13 @@ public class HunterScript : MonoBehaviour
 
         SceneManager.sceneUnloaded += OnSceneUnloaded;
 
-        target = GameController.instance.GetComponent<GameController>().HunterFleePos();
-
         rb = GetComponent<Rigidbody2D>();
 
-        currentState = State.flee;
+        currentState = State.chase;
+
+        if(eventManager != null)
+        {
+        }
     }
 
     private void Update()
@@ -53,7 +55,9 @@ public class HunterScript : MonoBehaviour
     {
         SceneManager.sceneUnloaded -= OnSceneUnloaded;
 
-        
+        if (eventManager != null)
+        {
+        }
     }
 
     private void OnSceneUnloaded(Scene scene)
@@ -90,8 +94,9 @@ public class HunterScript : MonoBehaviour
 
             case State.chase:
 
+                // Move to player
+                MoveToTarget(GameController.instance.GetComponent<GameController>().GetPlayerPos());
 
-                  
                 break;
 
             case State.attack:
@@ -102,23 +107,65 @@ public class HunterScript : MonoBehaviour
 
             case State.wander:
 
-
+                print("Wandering");
 
                 break;
 
             case State.flee:
 
-                Flee();
+                // Move to flee position
+                target = GameController.instance.GetComponent<GameController>().HunterFleePos();
+
+                MoveToTarget(target);
 
                 break;
         }
     }
 
-    private void Flee()
+    private void MoveToTarget(Vector2 target)
     {
-        direction.x = Mathf.Lerp(direction.x, target.x - transform.position.x, 0.5f);
-        direction.y = Mathf.Lerp(direction.y, target.y - transform.position.y, 0.5f);
-        
+        // X Direction
+        if (Mathf.Abs(target.x - transform.position.x) > 0.5)
+        {
+            // Lerp direction from wherever it is to the dircetion vector between target and current pos
+            direction.x = Mathf.Lerp(direction.x, target.x - transform.position.x, XT);
+        }
+        else
+        {
+            // When close enough to target position
+
+            // Turn off x direction
+            direction.x = 0f;
+
+            // Lerp linear velocity to 0
+            rb.linearVelocity = new Vector2(Mathf.Lerp(rb.linearVelocityX, 0f, VelocityT), rb.linearVelocityY);
+        }
+
+        // Y Direction
+        if (Mathf.Abs(target.y - transform.position.y) > 0.5)
+        {
+            // Lerp direction from wherever it is to the dircetion vector between target and current pos
+            direction.y = Mathf.Lerp(direction.y, target.y - transform.position.y, YT);
+        }
+        else
+        {
+            // When close enough to target position
+
+            // Turn off y direction
+            direction.y = 0f;
+
+            // Lerp linear velocity to 0
+            rb.linearVelocity = new Vector2(rb.linearVelocityX, Mathf.Lerp(rb.linearVelocityY, 0f, VelocityT));
+        }
+
+        if (Mathf.Abs((target - (Vector2)transform.position).magnitude) < 0.5 && Mathf.Abs(rb.linearVelocity.magnitude) <= 0.1)
+        {
+            if(currentState == State.chase)
+            {
+                currentState = State.wander;
+            }
+        }
+
         Move(direction, speed, maxSpeed);
     }
 

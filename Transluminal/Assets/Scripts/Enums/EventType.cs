@@ -41,6 +41,7 @@ public enum EventType
     HealthChange,
     OnEnterCloset,
     OnExitCloset,
+    PlayerHiding,
 
     // UI
     ScrollVert,
