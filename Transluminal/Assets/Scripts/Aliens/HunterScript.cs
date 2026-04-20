@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class HunterScript : MonoBehaviour
 {
+    #region Variables
     [SerializeField] private Vector2 speed;
     [SerializeField] private Vector2 maxSpeed;
     [SerializeField] private float detectionRadius;
@@ -39,7 +40,9 @@ public class HunterScript : MonoBehaviour
         wander,
         flee
     }
+    #endregion
 
+    #region Unity Methods
     private void Awake()
     {
         lifeTimeTimer = gameObject.AddComponent<Timer>();
@@ -49,10 +52,6 @@ public class HunterScript : MonoBehaviour
 
     private void Start()
     {
-        // TEMP
-        wakeUpTimer.Initalize(wakeUpTime, OnWakeUp);
-        wanderTimer.Initalize(wanderTime + Random.Range(0f, 4f), OnEndWander);
-
         eventManager = GameController.instance.eventManager;
 
         SceneManager.sceneUnloaded += OnSceneUnloaded;
@@ -61,25 +60,17 @@ public class HunterScript : MonoBehaviour
 
         currentState = State.hide;
 
-        if(eventManager != null)
-        {
-        }
+        wakeUpTimer.Initalize(wakeUpTime, OnWakeUp);
+        wanderTimer.Initalize(wanderTime + Random.Range(0f, 4f), OnEndWander);
     }
 
     private void Update()
     {
         StateController();
     }
+    #endregion
 
-    private void OnDestroy()
-    {
-        SceneManager.sceneUnloaded -= OnSceneUnloaded;
-
-        if (eventManager != null)
-        {
-        }
-    }
-
+    #region Event Methods
     private void OnSceneUnloaded(Scene scene)
     {
         if (GameController.instance != null)
@@ -102,7 +93,9 @@ public class HunterScript : MonoBehaviour
     {
         isFleeing = true;
     }
+    #endregion
 
+    #region Methods
     public void Initialize(AlienSaveData saveDataInstance, float lifeTime)
     {
         this.saveDataInstance = saveDataInstance;
@@ -110,8 +103,6 @@ public class HunterScript : MonoBehaviour
 
         lifeTimeTimer.Initalize(this.lifeTime, Dead);
         lifeTimeTimer.Run();
-
-        wakeUpTimer.Initalize(wakeUpTime, OnWakeUp);
     }
 
     private void StateController()
@@ -271,6 +262,14 @@ public class HunterScript : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
             arrivedAtTarget = true;
         }
+
+        if(currentState == State.flee && Mathf.Abs((target - (Vector2)transform.position).magnitude) < 0.5)
+        {
+            direction = Vector2.zero;
+            rb.linearVelocity = Vector2.zero;
+            arrivedAtTarget = true;
+            lifeTimeTimer.Pause();
+        }
                 
         Move(direction, speed, maxSpeed);
     }
@@ -310,7 +309,9 @@ public class HunterScript : MonoBehaviour
         Vector2Int damage = GameController.instance.GetComponent<AlienManager>().HunterDamageRange();
         GameController.instance.GetComponent<HealthManager>().SubtractHealth(Random.Range(damage.x, damage.y + 1));
     }
+    #endregion
 
+    #region Gizmos
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
@@ -322,4 +323,5 @@ public class HunterScript : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(gizmosTarget, 0.3f);
     }
+    #endregion
 }

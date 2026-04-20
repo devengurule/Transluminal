@@ -184,6 +184,8 @@ MonoBehaviour:
   sprintVelocity: {x: 10, y: 3.5}
   acceleration: {x: 20, y: 15}
   friction: {x: 1, y: 2}
+  knockBackForce: 10
+  stunDuration: 0.1
 --- !u!114 &2852539809563669897
 MonoBehaviour:
   m_ObjectHideFlags: 0

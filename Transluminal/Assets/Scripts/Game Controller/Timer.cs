@@ -40,6 +40,14 @@ public class Timer : MonoBehaviour
         }
     }
 
+    public void Pause()
+    {
+        if (isRunning)
+        {
+            isRunning = false;
+        }
+    }
+
     private void Execute(Action action)
     {
         action?.Invoke();

@@ -228,7 +228,7 @@ public class GameController : MonoBehaviour
                     eventManager.Publish(EventType.NoHelmAccess);
                 }
             }
-            else if (interactWithCloset)
+            else if (interactWithCloset && !GameController.instance.GetComponent<UIController>().CanInteractWithUI())
             {
                 isHiding = true;
                 eventManager.Publish(EventType.OnEnterCloset, closetObject);

@@ -42,7 +42,6 @@ public class UIController : MonoBehaviour
     #endregion
 
     #region Event Methods
-
     private void OnPlayerCollidingEnter(object target)
     {
         GameObject gameObject = target as GameObject;
@@ -170,6 +169,11 @@ public class UIController : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public bool CanInteractWithUI()
+    {
+        return interactWithUI;
     }
     #endregion
 }
