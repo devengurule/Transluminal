@@ -51,6 +51,7 @@ public enum EventType
     SpawnHunter,
     SpawnRat,
     KillAlien,
+    AttackPlayer,
 
     // DIALOGUE
     NoHelmAccess,

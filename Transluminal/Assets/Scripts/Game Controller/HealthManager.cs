@@ -5,6 +5,7 @@ public class HealthManager : MonoBehaviour
 {
     [SerializeField] private int maxHealth;
     [SerializeField] private int currentHealth;
+    
     private EventManager eventManager;
 
     private void Awake()

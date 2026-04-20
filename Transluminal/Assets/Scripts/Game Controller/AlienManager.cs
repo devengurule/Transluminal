@@ -1,14 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.Android;
 using UnityEngine.SceneManagement;
-using static UnityEditor.PlayerSettings;
 
 public class AlienManager : MonoBehaviour
 {
     [Header("Hunter")]
     [SerializeField] private GameObject hunterPrefab;
     [SerializeField] private float hunterLifeTime;
+    [SerializeField] private Vector2Int hunterDamageRange;
 
     [Header("Rat")]
     [SerializeField] private GameObject ratPrefab;
@@ -21,6 +20,8 @@ public class AlienManager : MonoBehaviour
     private void Start()
     {
         eventManager = GameController.instance.eventManager;
+
+        spawnZone = GameObject.FindGameObjectWithTag("SpawnZone");
 
         // Subscribe to active scene change event
         SceneManager.activeSceneChanged += SceneChange;
@@ -94,7 +95,7 @@ public class AlienManager : MonoBehaviour
         alienSaveList.Add(data);
     }
 
-    private Vector2 RandomSpawnPoint()
+    public Vector2 RandomSpawnPoint()
     {
         Vector3 pos = spawnZone.transform.position;
         Renderer renderer = spawnZone.GetComponent<Renderer>();
@@ -155,5 +156,10 @@ public class AlienManager : MonoBehaviour
         }
 
         return -1;
+    }
+
+    public Vector2Int HunterDamageRange()
+    {
+        return hunterDamageRange;
     }
 }

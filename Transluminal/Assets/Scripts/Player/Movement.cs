@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
@@ -8,6 +7,8 @@ public class Movement : MonoBehaviour
     [SerializeField] private Vector2 sprintVelocity;
     [SerializeField] private Vector2 acceleration;
     [SerializeField] private Vector2 friction;
+    [SerializeField] private float knockBackForce;
+    [SerializeField] private float stunDuration;
 
     private EventManager eventManager;
     private Vector2 move = Vector2.zero;
@@ -15,6 +16,8 @@ public class Movement : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 lastHidingPos;
     private bool canMove = true;
+    private bool isKnockedBack;
+    private Timer stunTimer;
     #endregion
 
     #region Unity Methods
@@ -27,6 +30,9 @@ public class Movement : MonoBehaviour
     {
         eventManager = GameController.instance.eventManager;
 
+        stunTimer = gameObject.AddComponent<Timer>();
+        stunTimer.Initalize(stunDuration, () => isKnockedBack = false);
+
         maxVelocity = walkVelocity;
 
         if (eventManager != null)
@@ -37,6 +43,7 @@ public class Movement : MonoBehaviour
             eventManager.Subscribe(EventType.PauseOn, OnPauseGame);
             eventManager.Subscribe(EventType.OnEnterCloset, OnEnterCloset);
             eventManager.Subscribe(EventType.OnExitCloset, OnExitCloset);
+            eventManager.Subscribe(EventType.AttackPlayer, OnKnockBack);
         }
     }
 
@@ -50,6 +57,7 @@ public class Movement : MonoBehaviour
             eventManager.Unsubscribe(EventType.PauseOn, OnPauseGame);
             eventManager.Unsubscribe(EventType.OnEnterCloset, OnEnterCloset);
             eventManager.Unsubscribe(EventType.OnExitCloset, OnExitCloset);
+            eventManager.Unsubscribe(EventType.AttackPlayer, OnKnockBack);
         }
     }
 
@@ -109,11 +117,28 @@ public class Movement : MonoBehaviour
             transform.position = lastHidingPos;
         }
     }
+
+    private void OnKnockBack(object target)
+    {
+        if(target is GameObject enemy)
+        {
+            isKnockedBack = true;
+            stunTimer.Run();
+
+            rb.linearVelocity = Vector2.zero;
+
+            Vector2 direction = (transform.position - enemy.transform.position).normalized;
+            rb.AddForce(direction * knockBackForce, ForceMode2D.Impulse);
+        }
+    }
+
     #endregion
 
     #region Methods
     private void MovementLogic()
     {
+        if (isKnockedBack) return;
+
         // Applies an impulse force to the rigidbody
         rb.AddForce(move * acceleration * TimeManager.deltaTime, ForceMode2D.Impulse);
 

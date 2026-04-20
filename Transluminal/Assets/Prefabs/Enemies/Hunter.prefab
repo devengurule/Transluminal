@@ -179,6 +179,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d75c5ee2d7433224cab9eba75e169265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HunterScript
-  distance: 2
-  acceleration: {x: 10, y: 3}
-  maxVelocity: {x: 3, y: 2}
+  speed: {x: 10, y: 10}
+  maxSpeed: {x: 3, y: 2}
+  detectionRadius: 2
+  attackRadius: 1.15
+  wakeUpTime: 2
+  wanderTime: 30
+  t: {x: 0.1, y: 0.9}
+  VelocityT: 0.01

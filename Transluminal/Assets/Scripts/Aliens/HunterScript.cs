@@ -1,3 +1,4 @@
+using Mono.Cecil;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,17 +6,30 @@ public class HunterScript : MonoBehaviour
 {
     [SerializeField] private Vector2 speed;
     [SerializeField] private Vector2 maxSpeed;
-    [SerializeField] private float XT;
-    [SerializeField] private float YT;
+    [SerializeField] private float detectionRadius;
+    [SerializeField] private float attackRadius;
+    [SerializeField] private float wakeUpTime;
+    [SerializeField] private float wanderTime;
+    [SerializeField] private Vector2 t;
     [SerializeField] private float VelocityT;
 
     private AlienSaveData saveDataInstance;
     private EventManager eventManager;
-    private Timer timer;
+    private Timer lifeTimeTimer;
+    private Timer wakeUpTimer;
+    private Timer wanderTimer;
     private Rigidbody2D rb;
     private float lifeTime;
     private Vector2 direction;
     private Vector2 target;
+    private bool isAwake;
+    private bool isFleeing;
+    private bool isWandering;
+    private bool isAttacking;
+    private bool arrivedAtTarget;
+
+    private Vector2 gizmosTarget;
+
     private State currentState;
     private enum State
     {
@@ -28,18 +42,24 @@ public class HunterScript : MonoBehaviour
 
     private void Awake()
     {
-        timer = gameObject.AddComponent<Timer>();
+        lifeTimeTimer = gameObject.AddComponent<Timer>();
+        wakeUpTimer = gameObject.AddComponent<Timer>();
+        wanderTimer = gameObject.AddComponent<Timer>();
     }
 
     private void Start()
     {
+        // TEMP
+        wakeUpTimer.Initalize(wakeUpTime, OnWakeUp);
+        wanderTimer.Initalize(wanderTime + Random.Range(0f, 4f), OnEndWander);
+
         eventManager = GameController.instance.eventManager;
 
         SceneManager.sceneUnloaded += OnSceneUnloaded;
 
         rb = GetComponent<Rigidbody2D>();
 
-        currentState = State.chase;
+        currentState = State.hide;
 
         if(eventManager != null)
         {
@@ -48,7 +68,7 @@ public class HunterScript : MonoBehaviour
 
     private void Update()
     {
-        AILogic();
+        StateController();
     }
 
     private void OnDestroy()
@@ -64,7 +84,7 @@ public class HunterScript : MonoBehaviour
     {
         if (GameController.instance != null)
         {
-            GameController.instance.GetComponent<AlienManager>().SetRemainingTime(saveDataInstance, timer.remainingTime);
+            GameController.instance.GetComponent<AlienManager>().SetRemainingTime(saveDataInstance, lifeTimeTimer.remainingTime);
         }
     }
 
@@ -73,22 +93,78 @@ public class HunterScript : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void OnWakeUp()
+    {
+        isAwake = true;
+    }
+
+    private void OnEndWander()
+    {
+        isFleeing = true;
+    }
+
     public void Initialize(AlienSaveData saveDataInstance, float lifeTime)
     {
         this.saveDataInstance = saveDataInstance;
         this.lifeTime = lifeTime;
 
-        timer.Initalize(this.lifeTime, Dead);
-        timer.Run();
+        lifeTimeTimer.Initalize(this.lifeTime, Dead);
+        lifeTimeTimer.Run();
+
+        wakeUpTimer.Initalize(wakeUpTime, OnWakeUp);
     }
 
-    private void AILogic()
+    private void StateController()
+    {
+        if (isFleeing)
+        {
+            currentState = State.flee;
+        }
+        else if (isAwake)
+        {
+            if (PlayerCollisionCheck(attackRadius))
+            {
+                currentState = State.attack;
+            }
+            else if (!isWandering && !arrivedAtTarget)
+            {
+                // Move to chasing
+                currentState = State.chase;
+            }
+            else if (arrivedAtTarget && PlayerCollisionCheck(attackRadius))
+            {
+                // Successfully attacked the player
+                currentState = State.attack;
+            }
+            else if (arrivedAtTarget && !PlayerCollisionCheck(attackRadius))
+            {
+                // Player is not in sight
+                currentState = State.wander;
+                isWandering = true;
+            }
+        }
+        else
+        {
+            // Default state
+            currentState = State.hide;
+
+            if (!wakeUpTimer.isRunning && PlayerCollisionCheck(detectionRadius))
+            {
+                wakeUpTimer.Run();
+            }
+        }
+
+        StateManager();
+    }
+
+    private void StateManager()
     {
         switch (currentState)
         {
             case State.hide:
 
-
+                direction = Vector2.zero;
+                rb.linearVelocity = Vector2.zero;
 
                 break;
 
@@ -101,13 +177,36 @@ public class HunterScript : MonoBehaviour
 
             case State.attack:
 
+                DealDamage();
 
+                direction = Vector2.zero;
+                rb.linearVelocity = Vector2.zero;
+
+                if (!isAttacking)
+                {
+                    eventManager.Publish(EventType.AttackPlayer, gameObject);
+                    isAttacking = true;
+                    isFleeing = true;
+                }
+
+                // Move to flee position after attacking
+                target = GameController.instance.GetComponent<GameController>().HunterFleePos();
+
+                MoveToTarget(target);
 
                 break;
 
             case State.wander:
 
-                print("Wandering");
+                if (arrivedAtTarget)
+                {
+                    arrivedAtTarget = false;
+                    target = GetRandomTarget();
+                }
+
+                MoveToTarget(target);
+                
+                if (!wanderTimer.isRunning) wanderTimer.Run();
 
                 break;
 
@@ -124,11 +223,12 @@ public class HunterScript : MonoBehaviour
 
     private void MoveToTarget(Vector2 target)
     {
+        gizmosTarget = target;
         // X Direction
-        if (Mathf.Abs(target.x - transform.position.x) > 0.5)
+        if (Mathf.Abs(target.x - transform.position.x) > 0.3)
         {
             // Lerp direction from wherever it is to the dircetion vector between target and current pos
-            direction.x = Mathf.Lerp(direction.x, target.x - transform.position.x, XT);
+            direction.x = Mathf.Lerp(direction.x, target.x - transform.position.x, t.x);
         }
         else
         {
@@ -142,10 +242,10 @@ public class HunterScript : MonoBehaviour
         }
 
         // Y Direction
-        if (Mathf.Abs(target.y - transform.position.y) > 0.5)
+        if (Mathf.Abs(target.y - transform.position.y) > 0.3)
         {
             // Lerp direction from wherever it is to the dircetion vector between target and current pos
-            direction.y = Mathf.Lerp(direction.y, target.y - transform.position.y, YT);
+            direction.y = Mathf.Lerp(direction.y, target.y - transform.position.y, t.y);
         }
         else
         {
@@ -158,14 +258,20 @@ public class HunterScript : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocityX, Mathf.Lerp(rb.linearVelocityY, 0f, VelocityT));
         }
 
-        if (Mathf.Abs((target - (Vector2)transform.position).magnitude) < 0.5 && Mathf.Abs(rb.linearVelocity.magnitude) <= 0.1)
+        if(currentState == State.wander && Mathf.Abs((target - (Vector2)transform.position).magnitude) < 0.5)
         {
-            if(currentState == State.chase)
-            {
-                currentState = State.wander;
-            }
+            // Arrived at target
+            arrivedAtTarget = true;
         }
 
+        if (currentState == State.chase && Mathf.Abs((target - (Vector2)transform.position).magnitude) < 0.3 && Mathf.Abs(rb.linearVelocity.magnitude) <= 0.5)
+        {
+            // Arrived at target
+            direction = Vector2.zero;
+            rb.linearVelocity = Vector2.zero;
+            arrivedAtTarget = true;
+        }
+                
         Move(direction, speed, maxSpeed);
     }
 
@@ -178,5 +284,42 @@ public class HunterScript : MonoBehaviour
         if (Mathf.Abs(rb.linearVelocityX) > maxSpeed.x) rb.linearVelocityX = Mathf.Sign(rb.linearVelocityX) * maxSpeed.x;
 
         if (Mathf.Abs(rb.linearVelocityY) > maxSpeed.y) rb.linearVelocityY = Mathf.Sign(rb.linearVelocityY) * maxSpeed.y;
+    }
+
+    private bool PlayerCollisionCheck(float radius)
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius);
+
+        foreach(Collider2D obj in colliders)
+        {
+            if(obj.gameObject.tag == "Player")
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Vector2 GetRandomTarget()
+    {
+        return GameController.instance.GetComponent<AlienManager>().RandomSpawnPoint();
+    }
+
+    private void DealDamage()
+    {
+        Vector2Int damage = GameController.instance.GetComponent<AlienManager>().HunterDamageRange();
+        GameController.instance.GetComponent<HealthManager>().SubtractHealth(Random.Range(damage.x, damage.y + 1));
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRadius);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(gizmosTarget, 0.3f);
     }
 }
