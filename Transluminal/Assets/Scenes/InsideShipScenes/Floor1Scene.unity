@@ -649,12 +649,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: alienArchetypes.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: 'alienArchetypes.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: eeaedc9bbed132747a38d9d962c1adb9, type: 2}
     - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: 'alienArchetypes.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: 7a094b00dda42144e8ed65a9a88e7a30, type: 2}
+      objectReference: {fileID: 11400000, guid: eeaedc9bbed132747a38d9d962c1adb9, type: 2}
+    - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: 'alienArchetypes.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: eeaedc9bbed132747a38d9d962c1adb9, type: 2}
     - target: {fileID: 2027796009054927797, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_SizeDelta.x
       value: 190.008
@@ -758,6 +766,14 @@ PrefabInstance:
     - target: {fileID: 4277981388501146257, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: currentMoney
       value: 1000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826480850986139676, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: numOfRat.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826480850986139676, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: numOfRat.y
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4826480850986139676, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: spawnPos.y

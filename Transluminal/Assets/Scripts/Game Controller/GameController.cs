@@ -15,7 +15,6 @@ public class GameController : MonoBehaviour
     [SerializeField] private List<string> ShipInputMapScenes = new();
 
     [SerializeField] private Vector2 playerHidingPos;
-    [SerializeField] private Vector2 hunterFleePos;
     
     [SerializeField] private bool devMode;
 
@@ -439,23 +438,9 @@ public class GameController : MonoBehaviour
         return playerHidingPos;
     }
 
-    public Vector2 HunterFleePos()
-    {
-        return hunterFleePos;
-    }
-
     public bool IsHiding()
     {
         return isHiding;
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(playerHidingPos, 0.5f);
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(hunterFleePos, 0.5f);
     }
 
     public Vector2 GetPlayerPos()
@@ -464,8 +449,16 @@ public class GameController : MonoBehaviour
         {
             return new Vector2(playerLastPos.x, playerLastPos.y - 1.7f);
         }
-        
+
         return new Vector2(player.transform.position.x, player.transform.position.y - 1.7f);
+    }
+    #endregion
+
+    #region Gizmos
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(playerHidingPos, 0.5f);
     }
     #endregion
 }

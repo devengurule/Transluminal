@@ -134,7 +134,7 @@ public class ScannerController : MonoBehaviour
 
                 case AlienType.rat:
 
-
+                    eventManager.Publish(EventType.SpawnRat);
 
                     break;
 

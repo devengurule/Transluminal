@@ -181,7 +181,7 @@ public class HunterScript : MonoBehaviour
                 }
 
                 // Move to flee position after attacking
-                target = GameController.instance.GetComponent<GameController>().HunterFleePos();
+                target = GameController.instance.GetComponent<AlienManager>().HunterFleePos();
 
                 MoveToTarget(target);
 
@@ -204,7 +204,7 @@ public class HunterScript : MonoBehaviour
             case State.flee:
 
                 // Move to flee position
-                target = GameController.instance.GetComponent<GameController>().HunterFleePos();
+                target = GameController.instance.GetComponent<AlienManager>().HunterFleePos();
 
                 MoveToTarget(target);
 
@@ -301,7 +301,7 @@ public class HunterScript : MonoBehaviour
 
     private Vector2 GetRandomTarget()
     {
-        return GameController.instance.GetComponent<AlienManager>().RandomSpawnPoint();
+        return GameController.instance.GetComponent<AlienManager>().RandomHunterSpawnPoint();
     }
 
     private void DealDamage()

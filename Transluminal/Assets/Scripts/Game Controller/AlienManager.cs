@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class AlienManager : MonoBehaviour
 {
@@ -8,12 +8,15 @@ public class AlienManager : MonoBehaviour
     [SerializeField] private GameObject hunterPrefab;
     [SerializeField] private float hunterLifeTime;
     [SerializeField] private Vector2Int hunterDamageRange;
+    [SerializeField] private Vector2 hunterFleePos;
 
     [Header("Rat")]
     [SerializeField] private GameObject ratPrefab;
     [SerializeField] private float ratLifeTime;
+    [SerializeField] private Vector2 numOfRat;
 
     private GameObject spawnZone;
+    private GameObject ratSpawnZone;
     private List<AlienSaveData> alienSaveList = new List<AlienSaveData>();
     private EventManager eventManager;
 
@@ -29,6 +32,7 @@ public class AlienManager : MonoBehaviour
         if (eventManager != null)
         {
             eventManager.Subscribe(EventType.SpawnHunter, QueueHunterSpawn);
+            eventManager.Subscribe(EventType.SpawnRat, QueueRatSpawn);
         }
     }
 
@@ -40,12 +44,14 @@ public class AlienManager : MonoBehaviour
         if (eventManager != null)
         {
             eventManager.Unsubscribe(EventType.SpawnHunter, QueueHunterSpawn);
+            eventManager.Unsubscribe(EventType.SpawnRat, QueueRatSpawn);
         }
     }
 
     private void SceneChange(Scene current, Scene next)
     {
         spawnZone = GameObject.FindGameObjectWithTag("SpawnZone");
+        ratSpawnZone = GameObject.FindGameObjectWithTag("RatSpawnZone");
 
         for (int i = 0; i < alienSaveList.Count; i++)
         {
@@ -94,8 +100,26 @@ public class AlienManager : MonoBehaviour
 
         alienSaveList.Add(data);
     }
+    private void QueueRatSpawn(object target)
+    {
+        AlienSaveData data = new();
 
-    public Vector2 RandomSpawnPoint()
+        data.position = Vector2.zero;
+        data.prefabObject = ratPrefab;
+        data.alienType = AlienType.rat;
+
+        string floor = GetRandomFloor();
+        while(floor == "Floor1Scene") floor = GetRandomFloor();
+
+        data.currentFloor = floor;
+        data.remainingLifeTime = 0;
+
+        print(data.currentFloor);
+
+        alienSaveList.Add(data);
+    }
+
+    public Vector2 RandomSpawnPoint(GameObject spawnZone)
     {
         Vector3 pos = spawnZone.transform.position;
         Renderer renderer = spawnZone.GetComponent<Renderer>();
@@ -104,6 +128,11 @@ public class AlienManager : MonoBehaviour
         float y = Random.Range(pos.y - renderer.bounds.size.y / 2, pos.y + renderer.bounds.size.y / 2);
 
         return new Vector2(x, y);
+    }
+
+    public Vector2 RandomHunterSpawnPoint()
+    {
+        return RandomSpawnPoint(spawnZone);
     }
 
     private string GetRandomFloor()
@@ -129,14 +158,21 @@ public class AlienManager : MonoBehaviour
 
     private void SpawnAlien(AlienSaveData data)
     {
-        Vector2 randomPos = RandomSpawnPoint();
-        GameObject alien = Instantiate(data.prefabObject, randomPos, Quaternion.identity);
-
-        data.position = randomPos;
-
         if (data.alienType == AlienType.hunter)
         {
+            Vector2 randomPos = RandomSpawnPoint(spawnZone);
+            GameObject alien = Instantiate(data.prefabObject, randomPos, Quaternion.identity);
+
+            data.position = randomPos;
+
             alien.GetComponent<HunterScript>().Initialize(data, data.remainingLifeTime);
+        }
+        else if(data.alienType == AlienType.rat)
+        {
+            for (int i = 0; i < Random.Range(numOfRat.x, numOfRat.y); i++)
+            {
+                Instantiate(data.prefabObject, RandomSpawnPoint(ratSpawnZone), Quaternion.identity);
+            }
         }
     }
 
@@ -158,8 +194,21 @@ public class AlienManager : MonoBehaviour
         return -1;
     }
 
+    public Vector2 HunterFleePos()
+    {
+        return hunterFleePos;
+    }
+
     public Vector2Int HunterDamageRange()
     {
         return hunterDamageRange;
     }
+
+    #region Gizmos
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(hunterFleePos, 0.5f);
+    }
+    #endregion
 }
