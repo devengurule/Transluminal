@@ -4,22 +4,23 @@ using UnityEngine;
 public class SelectorMovement : MonoBehaviour
 {
     #region Variables
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float sprintSpeed;
+    [SerializeField] private float speed;
+    [SerializeField] private float sprintMaxSpeed;
+    [SerializeField] private float maxSpeed;
+    [SerializeField] private float friction;
 
-    private float currentSpeed;
+    private float currentMaxSpeed;
+    private Rigidbody2D rb;
     private EventManager eventManager;
-    private Vector2 positionVector;
     private Vector2 move;
     private bool canMove = true;
     private bool canSprint;
     #endregion
 
     #region Unity Methods
-
     private void Start()
     {
-        positionVector = transform.position;
+        rb = GetComponent<Rigidbody2D>();
         eventManager = GameController.instance.eventManager;
 
         if (eventManager != null)
@@ -44,14 +45,15 @@ public class SelectorMovement : MonoBehaviour
     {
         if (canMove)
         {
-            MovementLogic();
+            if (move.magnitude > 0) Move(speed, currentMaxSpeed);
+            else FrictionForce();
         }
 
         if(canSprint)
         {
-            currentSpeed = sprintSpeed;
+            currentMaxSpeed = sprintMaxSpeed;
         }
-        else currentSpeed = moveSpeed;
+        else currentMaxSpeed = maxSpeed;
     }
 
     #endregion
@@ -75,11 +77,35 @@ public class SelectorMovement : MonoBehaviour
         canSprint = false;
     }
 
-    private void MovementLogic()
+    private void Move(float speed, float maxSpeed)
     {
-        positionVector += move * currentSpeed * Time.deltaTime;
+        // Applies an impulse force to the rigidbody
+        rb.AddForce(move * speed * Time.deltaTime, ForceMode2D.Impulse);
 
-        transform.position = positionVector;
+        // Truncates velocity to match the maximum velocity variable
+        if (Mathf.Abs(rb.linearVelocityX) > maxSpeed) rb.linearVelocityX = Mathf.Sign(rb.linearVelocityX) * maxSpeed;
+
+        if (Mathf.Abs(rb.linearVelocityY) > maxSpeed) rb.linearVelocityY = Mathf.Sign(rb.linearVelocityY) * maxSpeed;
+
+        FrictionForce();
+    }
+
+    private void FrictionForce()
+    {
+        if (Mathf.Abs(rb.linearVelocityX) > 0.1)
+        {
+            Vector2 direction = Vector2.right * -rb.linearVelocityX;
+            rb.AddForce(direction * friction * Time.deltaTime, ForceMode2D.Impulse);
+        }
+        else rb.linearVelocityX = 0f;
+
+
+        if (Mathf.Abs(rb.linearVelocityY) > 0.1)
+        {
+            Vector2 direction = Vector2.up * -rb.linearVelocityY;
+            rb.AddForce(direction * friction * Time.deltaTime, ForceMode2D.Impulse);
+        }
+        else rb.linearVelocityY = 0f;
     }
 
     public void SetMove(bool canMove)

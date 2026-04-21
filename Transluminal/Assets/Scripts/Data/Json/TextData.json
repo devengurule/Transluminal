@@ -5,6 +5,9 @@
     "Where are you from...originally"
   ],
   "NoHelmAccess": [
-    "ERROR CODE 387// Salvager can not access ship helm while docked at hub"
+    "Error Code 387// Salvager can not access ship helm while docked at HUB"
+  ],
+  "NoShopAccess": [
+    "Error Code 207// Salvager can not access HUB shop while not docked at HUB"
   ]
 }

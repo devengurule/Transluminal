@@ -49,16 +49,17 @@ public class UIController : MonoBehaviour
 
         if (gameObject.layer == layerID)
         {
-            if (gameObject.tag == "Shop" && !GameController.instance.GetComponent<NavigationController>().IsAtHomeNode())
-            {
-                interactWithUI = false;
-                availableUIInteractTag = "";
-            }
-            else
-            {
-                interactWithUI = true;
-                availableUIInteractTag = gameObject.tag;
-            }
+            //if (gameObject.tag == "Shop" && !GameController.instance.GetComponent<NavigationController>().IsAtHomeNode())
+            //{
+            //    interactWithUI = false;
+            //    availableUIInteractTag = "";
+            //}
+            //else
+            //{
+                
+            //}
+            interactWithUI = true;
+            availableUIInteractTag = gameObject.tag;
         }
     }
     private void OnPlayerCollidingExit(object target)
@@ -76,7 +77,12 @@ public class UIController : MonoBehaviour
 
     private void OnInteractPressed(object target)
     {
-        if(interactWithUI && !isUIUP)
+        if(availableUIInteractTag == "Shop" && !GameController.instance.GetComponent<NavigationController>().IsAtHomeNode())
+        {
+            eventManager.Publish(EventType.NoShopAccess);
+            return;
+        }
+        else if(interactWithUI && !isUIUP)
         {
             TurnOnMenu();
 

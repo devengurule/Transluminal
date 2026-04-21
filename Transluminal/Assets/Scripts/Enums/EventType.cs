@@ -57,5 +57,6 @@ public enum EventType
 
     // DIALOGUE
     NoHelmAccess,
+    NoShopAccess,
     FinishedDialogue
 }
