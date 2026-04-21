@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour
     private string closetLayer = "ClosetCollider";
     private bool interactWithTransport = false;
     private bool interactWithCloset = false;
+    private bool disableClosets = false;
     private object closetObject;
     private bool isHiding;
     private Vector2 playerLastPos;
@@ -87,6 +88,7 @@ public class GameController : MonoBehaviour
             eventManager.Subscribe(EventType.DestroySalvage, OnDestroySalvage);
             eventManager.Subscribe(EventType.ArrivedAtHomeNode, OnArrivedHome);
             eventManager.Subscribe(EventType.PlayerHiding, PlayerOnHiding);
+            eventManager.Subscribe(EventType.SpawnCreature, DisableCloset);
         }
     }
 
@@ -103,6 +105,7 @@ public class GameController : MonoBehaviour
             eventManager.Unsubscribe(EventType.DestroySalvage, OnDestroySalvage);
             eventManager.Unsubscribe(EventType.ArrivedAtHomeNode, OnArrivedHome);
             eventManager.Unsubscribe(EventType.PlayerHiding, PlayerOnHiding);
+            eventManager.Unsubscribe(EventType.SpawnCreature, DisableCloset);
         }
     }
     #endregion
@@ -255,7 +258,7 @@ public class GameController : MonoBehaviour
         {
             interactWithTransport = true;
         }
-        else if (gameObject.layer == closetLayerID)
+        else if (gameObject.layer == closetLayerID && !disableClosets)
         {
             interactWithCloset = true;
             closetObject = target;
@@ -310,6 +313,11 @@ public class GameController : MonoBehaviour
         {
             playerLastPos = lastPlayerPos;
         }
+    }
+
+    private void DisableCloset(object target)
+    {
+        disableClosets = true;
     }
 
     #endregion

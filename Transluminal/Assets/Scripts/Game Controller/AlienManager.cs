@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using Unity.Android.Gradle.Manifest;
+using System.Linq;
 
 public class AlienManager : MonoBehaviour
 {
@@ -17,9 +18,12 @@ public class AlienManager : MonoBehaviour
     [SerializeField] private Vector2 numOfRat;
 
     [Header("Creature")]
+    [SerializeField] private GameObject creaturePrefab;
     [SerializeField] private Vector2 spawnOffsetTimeRange;
+    [SerializeField] private Vector2 creatureSpawnPos;
     [SerializeField] private int maxNumberOfCreature;
 
+    private Timer creatureSpawnTimer;
     private int currentNumberOfCreature;
     private GameObject spawnZone;
     private GameObject ratSpawnZone;
@@ -30,6 +34,9 @@ public class AlienManager : MonoBehaviour
     {
         eventManager = GameController.instance.eventManager;
 
+        creatureSpawnTimer = gameObject.AddComponent<Timer>();
+        creatureSpawnTimer.Initalize(Random.Range(spawnOffsetTimeRange.x, spawnOffsetTimeRange.y), QueueCreatureSpawn);
+     
         spawnZone = GameObject.FindGameObjectWithTag("SpawnZone");
 
         // Subscribe to active scene change event
@@ -39,7 +46,6 @@ public class AlienManager : MonoBehaviour
         {
             eventManager.Subscribe(EventType.SpawnHunter, QueueHunterSpawn);
             eventManager.Subscribe(EventType.SpawnRat, QueueRatSpawn);
-            eventManager.Subscribe(EventType.SpawnCreature, QueueCreatureSpawn);
             eventManager.Subscribe(EventType.KillAlien, RemoveAlienFromList);
             eventManager.Subscribe(EventType.AddCreature, AddCreature);
 
@@ -55,7 +61,6 @@ public class AlienManager : MonoBehaviour
         {
             eventManager.Unsubscribe(EventType.SpawnHunter, QueueHunterSpawn);
             eventManager.Unsubscribe(EventType.SpawnRat, QueueRatSpawn);
-            eventManager.Unsubscribe(EventType.SpawnCreature, QueueCreatureSpawn);
             eventManager.Unsubscribe(EventType.KillAlien, RemoveAlienFromList);
             eventManager.Unsubscribe(EventType.AddCreature, AddCreature);
         }
@@ -73,7 +78,12 @@ public class AlienManager : MonoBehaviour
             switch (SceneController.GetCurrentSceneName())
             {
                 case "Floor1Scene":
-                    if (data.currentFloor == "Floor1Scene")
+                    if(data.alienType == AlienType.creature)
+                    {
+                        SpawnAlien(data);
+                        alienSaveList[i] = data;
+                    }
+                    else if (data.currentFloor == "Floor1Scene")
                     {
                         SpawnAlien(data);
                         alienSaveList[i] = data;
@@ -81,7 +91,12 @@ public class AlienManager : MonoBehaviour
                     break;
 
                 case "Floor2Scene":
-                    if (data.currentFloor == "Floor2Scene")
+                    if (data.alienType == AlienType.creature)
+                    {
+                        SpawnAlien(data);
+                        alienSaveList[i] = data;
+                    }
+                    else if (data.currentFloor == "Floor2Scene")
                     {
                         SpawnAlien(data);
                         alienSaveList[i] = data;
@@ -89,7 +104,12 @@ public class AlienManager : MonoBehaviour
                     break;
 
                 case "Floor3Scene":
-                    if (data.currentFloor == "Floor3Scene")
+                    if (data.alienType == AlienType.creature)
+                    {
+                        SpawnAlien(data);
+                        alienSaveList[i] = data;
+                    }
+                    else if (data.currentFloor == "Floor3Scene")
                     {
                         SpawnAlien(data);
                         alienSaveList[i] = data;
@@ -109,10 +129,11 @@ public class AlienManager : MonoBehaviour
         data.currentFloor = GetRandomFloor();
         data.remainingLifeTime = hunterLifeTime;
 
-        print(data.currentFloor);
+        print($"Hunter: {data.currentFloor}");
 
         alienSaveList.Add(data);
     }
+
     private void QueueRatSpawn(object target)
     {
         AlienSaveData data = new();
@@ -127,14 +148,27 @@ public class AlienManager : MonoBehaviour
         data.currentFloor = floor;
         data.remainingLifeTime = 0;
 
-        print(data.currentFloor);
+        print($"Rat: {data.currentFloor}");
 
         alienSaveList.Add(data);
     }
 
-    private void QueueCreatureSpawn(object target)
+    private void QueueCreatureSpawn()
     {
+        AlienSaveData data = new();
 
+        data.position = creatureSpawnPos;
+        data.prefabObject = creaturePrefab;
+        data.alienType = AlienType.creature;
+        data.currentFloor = "";
+        data.remainingLifeTime = 0;
+        alienSaveList.Add(data);
+
+        if(GameObject.FindGameObjectsWithTag("Player").Length > 0)
+        {
+            eventManager.Publish(EventType.SpawnCreature);
+            SpawnAlien(data);
+        }
     }
 
     private void RemoveAlienFromList(object target)
@@ -158,7 +192,7 @@ public class AlienManager : MonoBehaviour
 
         if (currentNumberOfCreature >= maxNumberOfCreature)
         {
-            eventManager.Publish(EventType.SpawnCreature);
+            creatureSpawnTimer.Run();
         }
     }
 
@@ -210,7 +244,7 @@ public class AlienManager : MonoBehaviour
 
             alien.GetComponent<HunterScript>().Initialize(data, data.remainingLifeTime);
         }
-        else if(data.alienType == AlienType.rat)
+        else if (data.alienType == AlienType.rat)
         {
             for (int i = 0; i < Random.Range(numOfRat.x, numOfRat.y); i++)
             {
@@ -218,11 +252,24 @@ public class AlienManager : MonoBehaviour
                 alien.GetComponent<RatScript>().Initialize(data);
             }
         }
+        else if (data.alienType == AlienType.creature)
+        {
+            GameObject alien = Instantiate(data.prefabObject, data.position, Quaternion.identity);
+
+            data.position = hunterFleePos;
+
+            alien.GetComponent<CreatureScript>().Initialize(data);
+        }
     }
 
     public void SetRemainingTime(AlienSaveData data, float remainingTime)
     {
         alienSaveList[FindSaveDataIndex(data)].remainingLifeTime = remainingTime;
+    }
+
+    public void SetCreaturePosition(AlienSaveData data, Vector2 position)
+    {
+        alienSaveList[FindSaveDataIndex(data)].position = position;
     }
 
     private int FindSaveDataIndex(AlienSaveData data)
@@ -253,6 +300,9 @@ public class AlienManager : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(hunterFleePos, 0.5f);
+
+        Gizmos.color = Color.tomato;
+        Gizmos.DrawWireSphere(creatureSpawnPos, 0.5f);
     }
     #endregion
 }
