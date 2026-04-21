@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using Unity.Android.Gradle.Manifest;
 
 public class AlienManager : MonoBehaviour
 {
@@ -15,6 +16,11 @@ public class AlienManager : MonoBehaviour
     [SerializeField] private float ratLifeTime;
     [SerializeField] private Vector2 numOfRat;
 
+    [Header("Creature")]
+    [SerializeField] private Vector2 spawnOffsetTimeRange;
+    [SerializeField] private int maxNumberOfCreature;
+
+    private int currentNumberOfCreature;
     private GameObject spawnZone;
     private GameObject ratSpawnZone;
     private List<AlienSaveData> alienSaveList = new List<AlienSaveData>();
@@ -33,6 +39,10 @@ public class AlienManager : MonoBehaviour
         {
             eventManager.Subscribe(EventType.SpawnHunter, QueueHunterSpawn);
             eventManager.Subscribe(EventType.SpawnRat, QueueRatSpawn);
+            eventManager.Subscribe(EventType.SpawnCreature, QueueCreatureSpawn);
+            eventManager.Subscribe(EventType.KillAlien, RemoveAlienFromList);
+            eventManager.Subscribe(EventType.AddCreature, AddCreature);
+
         }
     }
 
@@ -45,6 +55,9 @@ public class AlienManager : MonoBehaviour
         {
             eventManager.Unsubscribe(EventType.SpawnHunter, QueueHunterSpawn);
             eventManager.Unsubscribe(EventType.SpawnRat, QueueRatSpawn);
+            eventManager.Unsubscribe(EventType.SpawnCreature, QueueCreatureSpawn);
+            eventManager.Unsubscribe(EventType.KillAlien, RemoveAlienFromList);
+            eventManager.Unsubscribe(EventType.AddCreature, AddCreature);
         }
     }
 
@@ -119,6 +132,36 @@ public class AlienManager : MonoBehaviour
         alienSaveList.Add(data);
     }
 
+    private void QueueCreatureSpawn(object target)
+    {
+
+    }
+
+    private void RemoveAlienFromList(object target)
+    {
+        if(target is AlienSaveData alienData)
+        {
+            foreach(AlienSaveData data in alienSaveList)
+            {
+                if(data == alienData)
+                {
+                    alienSaveList.Remove(data);
+                    return;
+                }
+            }
+        }
+    }
+
+    private void AddCreature(object target)
+    {
+        currentNumberOfCreature++;
+
+        if (currentNumberOfCreature >= maxNumberOfCreature)
+        {
+            eventManager.Publish(EventType.SpawnCreature);
+        }
+    }
+
     public Vector2 RandomSpawnPoint(GameObject spawnZone)
     {
         Vector3 pos = spawnZone.transform.position;
@@ -171,7 +214,8 @@ public class AlienManager : MonoBehaviour
         {
             for (int i = 0; i < Random.Range(numOfRat.x, numOfRat.y); i++)
             {
-                Instantiate(data.prefabObject, RandomSpawnPoint(ratSpawnZone), Quaternion.identity);
+                GameObject alien = Instantiate(data.prefabObject, RandomSpawnPoint(ratSpawnZone), Quaternion.identity);
+                alien.GetComponent<RatScript>().Initialize(data);
             }
         }
     }

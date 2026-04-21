@@ -82,6 +82,7 @@ public class HunterScript : MonoBehaviour
     private void Dead()
     {
         Destroy(gameObject);
+        eventManager.Publish(EventType.KillAlien, saveDataInstance);
     }
 
     private void OnWakeUp()

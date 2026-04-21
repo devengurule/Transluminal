@@ -70,7 +70,6 @@ MonoBehaviour:
   - SalvageScene_0
   - SalvageScene_1
   playerHidingPos: {x: -20, y: 0}
-  hunterFleePos: {x: -13, y: -2}
   devMode: 1
 --- !u!114 &5388767112792395842
 MonoBehaviour:
@@ -281,8 +280,9 @@ MonoBehaviour:
   hunterFleePos: {x: -13, y: -2}
   ratPrefab: {fileID: 1766123075382733402, guid: 72f1ff0cf29cddf408e22ef5875f9605, type: 3}
   ratLifeTime: 10
-  floor2RatSpot: {x: 0, y: 0}
-  floor3RatSpot: {x: 0, y: 0}
+  numOfRat: {x: 0, y: 0}
+  spawnOffsetTimeRange: {x: 0, y: 0}
+  maxNumberOfCreature: 0
 --- !u!114 &5482783032590093953
 MonoBehaviour:
   m_ObjectHideFlags: 0

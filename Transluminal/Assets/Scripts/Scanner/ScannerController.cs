@@ -24,7 +24,7 @@ public class ScannerController : MonoBehaviour
         densityImage.SetActive(false);
         alienDensityImage.SetActive(false);
 
-        UpdateDisplay("Hello World");
+        UpdateDisplay("pAPERS.os/ Hello World");
 
         if (eventManager != null )
         {
@@ -128,7 +128,7 @@ public class ScannerController : MonoBehaviour
             {
                 case AlienType.creature:
 
-
+                    eventManager.Publish(EventType.AddCreature);
 
                     break;
 
