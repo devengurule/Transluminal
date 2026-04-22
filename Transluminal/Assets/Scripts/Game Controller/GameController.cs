@@ -15,8 +15,9 @@ public class GameController : MonoBehaviour
     [SerializeField] private List<string> ShipInputMapScenes = new();
 
     [SerializeField] private Vector2 playerHidingPos;
-    
-    [SerializeField] private bool devMode;
+
+    [SerializeField] private GameObject healthObject;
+    [SerializeField] private GameObject shipHUDObject;
 
     private Dictionary<string, SceneData> shipScenesVisited = new Dictionary<string, SceneData>();
     private NavigationController navController;
@@ -127,6 +128,9 @@ public class GameController : MonoBehaviour
         {
             // We are in Player Input Map Scenes
 
+            healthObject.SetActive(true);
+            shipHUDObject.SetActive(false);
+
             GameObject.Find("Player").transform.position = playerSaveData.position;
             GameObject.Find("Player").transform.eulerAngles = playerSaveData.eulerRotation;
 
@@ -140,6 +144,9 @@ public class GameController : MonoBehaviour
         else if (ShipInputMapScenes.Contains(SceneController.GetCurrentSceneName()))
         {
             // We are in Ship Input Map Scenes
+
+            healthObject.SetActive(false);
+            shipHUDObject.SetActive(true);
 
             // Setting Position and Rotation Based on Saved Data
 

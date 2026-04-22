@@ -49,15 +49,6 @@ public class UIController : MonoBehaviour
 
         if (gameObject.layer == layerID)
         {
-            //if (gameObject.tag == "Shop" && !GameController.instance.GetComponent<NavigationController>().IsAtHomeNode())
-            //{
-            //    interactWithUI = false;
-            //    availableUIInteractTag = "";
-            //}
-            //else
-            //{
-                
-            //}
             interactWithUI = true;
             availableUIInteractTag = gameObject.tag;
         }
@@ -66,8 +57,7 @@ public class UIController : MonoBehaviour
     {
         GameObject gameObject = target as GameObject;
         int layerID = LayerMask.NameToLayer(colliderLayerName);
-
-
+          
         if (gameObject.layer == layerID)
         {
             interactWithUI = false;
@@ -93,8 +83,6 @@ public class UIController : MonoBehaviour
         }
     }
 
-
-    
     private void PauseGameOn(object target)
     {
 

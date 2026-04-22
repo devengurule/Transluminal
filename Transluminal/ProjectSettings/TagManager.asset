@@ -28,6 +28,8 @@ TagManager:
   - SpawnZone
   - RatSpawnZone
   - Creature
+  - PlayerShip
+  - FuelMeter
   layers:
   - Default
   - TransparentFX

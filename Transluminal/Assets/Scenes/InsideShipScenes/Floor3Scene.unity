@@ -1750,7 +1750,7 @@ GameObject:
   - component: {fileID: 1960993834}
   m_Layer: 5
   m_Name: FuelMeter
-  m_TagString: Untagged
+  m_TagString: FuelMeter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

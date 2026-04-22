@@ -1,20 +1,14 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.XR;
 
 public class ShipMovement : MonoBehaviour
 {
     #region Variables
-    [SerializeField]
-    private Vector2 maxVelocity;
-    [SerializeField]
-    private Vector2 acceleration;
-    [SerializeField]
-    private Vector2 friction;
-    [SerializeField]
-    private float torque;
-    [SerializeField]
-    private Vector2 zeroVelocitySpeed;
+    [SerializeField] private Vector2 maxVelocity;
+    [SerializeField] private Vector2 acceleration;
+    [SerializeField] private Vector2 friction;
+    [SerializeField] private float torque;
+    [SerializeField] private Vector2 zeroVelocitySpeed;
+    [SerializeField] private float fuelConsumptionRate;
 
     private EventManager eventManager;
     private float rotationInput;
@@ -62,6 +56,8 @@ public class ShipMovement : MonoBehaviour
 
         RotateLogic();
         MovementLogic();
+
+        if(isZeroOutVelocity) ConsumeFuel();
     }
     #endregion
 
@@ -109,6 +105,7 @@ public class ShipMovement : MonoBehaviour
         Vector2 right = new Vector2(forward.y, -forward.x);
         move = input.y * forward;
 
+        if (Mathf.Abs(move.magnitude) > 0) ConsumeFuel();
 
         // Applies an impulse force to the rigidbody
         rb.AddForce(move * acceleration * TimeManager.deltaTime, ForceMode2D.Impulse);
@@ -142,6 +139,8 @@ public class ShipMovement : MonoBehaviour
         // Add torque to object
         rb.AddTorque(torque * rotationInput * TimeManager.deltaTime);
 
+        if(Mathf.Abs(rotationInput) > 0) ConsumeFuel();
+
         // Apply opposite torque if zero velocity is pressed
         if (isZeroOutVelocity && rb.angularVelocity != 0)
         {
@@ -150,6 +149,11 @@ public class ShipMovement : MonoBehaviour
 
         // Clamp anuglar velocity
         if (Mathf.Abs(rb.angularVelocity) < 0.05) rb.angularVelocity = 0;
+    }
+
+    private void ConsumeFuel()
+    {
+        GameController.instance.GetComponent<FuelManager>().SubtractFuel(fuelConsumptionRate);
     }
     #endregion
 }

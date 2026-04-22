@@ -5,8 +5,8 @@ using UnityEngine.UI;
 public class FuelManager : MonoBehaviour
 {
     #region Variables
-    [SerializeField] private int maxFuel;
-    [SerializeField] private int currentFuel;
+    [SerializeField] private float maxFuel;
+    [SerializeField] private float currentFuel;
 
     private EventManager eventManager;
     #endregion
@@ -17,16 +17,22 @@ public class FuelManager : MonoBehaviour
         // Subscribe to active scene change event
         SceneManager.activeSceneChanged += SceneChange;
 
-        if (SceneController.GetCurrentScene().name == "Floor3Scene")
-        {
-            UpdateFuelMeter();
-        }
-
         eventManager = GameController.instance.eventManager;
 
         if (eventManager != null)
         {
             eventManager.Subscribe(EventType.ArrivedAtHomeNode, OnRefuel);
+        }
+    }
+
+    private void Update()
+    {
+        foreach(GameObject obj in GameObject.FindGameObjectsWithTag("FuelMeter"))
+        {
+            if (obj.activeSelf)
+            {
+                UpdateFuelMeter();
+            }
         }
     }
 
@@ -53,7 +59,7 @@ public class FuelManager : MonoBehaviour
     private void UpdateFuelMeter()
     {
         GameObject fuelMeterObject = GameObject.Find("FuelMeter");
-        float fuelAmount = (float)currentFuel / (float)maxFuel;
+        float fuelAmount = currentFuel / maxFuel;
         fuelMeterObject.GetComponent<Image>().fillAmount = fuelAmount;
     }
 
@@ -62,12 +68,12 @@ public class FuelManager : MonoBehaviour
         currentFuel = maxFuel;
     }
 
-    public int GetCurrentFuel()
+    public float GetCurrentFuel()
     {
         return currentFuel;
     }
 
-    public void SubtractFuel(int fuel)
+    public void SubtractFuel(float fuel)
     {
         currentFuel -= fuel;
     }
