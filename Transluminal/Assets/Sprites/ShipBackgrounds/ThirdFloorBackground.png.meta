@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 365e8fa915cfab64bb988bfa2a07f1bc
+guid: 6f893c6b7e9c0b5418e21a9f7e7b18bb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -761128991238543022
-    second: ThirdFloorBackground_0
+      213: -8224648047616746093
+    second: Floor3Background_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ThirdFloorBackground_0
+      name: Floor3Background_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 259a9f0173def65f0800000000000000
-      internalID: -761128991238543022
+      spriteID: 39d913f3d2e2cdd80800000000000000
+      internalID: -8224648047616746093
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ThirdFloorBackground_0: -761128991238543022
+      Floor3Background_0: -8224648047616746093
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
