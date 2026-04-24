@@ -6,9 +6,14 @@ public class ShipMovement : MonoBehaviour
     [SerializeField] private Vector2 maxVelocity;
     [SerializeField] private Vector2 acceleration;
     [SerializeField] private Vector2 friction;
+    [SerializeField] private float torqueFriction;
     [SerializeField] private float torque;
     [SerializeField] private Vector2 zeroVelocitySpeed;
     [SerializeField] private float fuelConsumptionRate;
+    [SerializeField] private float hullStrikeFuelPenalty;
+    [SerializeField] private float speedThreshold;
+    [SerializeField] private float hullStrikeForce;
+    [SerializeField] private float torqueStrength;
 
     private EventManager eventManager;
     private float rotationInput;
@@ -36,6 +41,7 @@ public class ShipMovement : MonoBehaviour
             eventManager.Subscribe(EventType.ZeroVelocityOn, OnZeroVelocity);
             eventManager.Subscribe(EventType.ZeroVelocityOff, OffZeroVelocity);
             eventManager.Subscribe(EventType.PauseOn, OnPauseGame);
+            eventManager.Subscribe(EventType.ShipCollidingWithDebris, OnCollideWithDebris);
         }
     }
     private void OnDestroy()
@@ -47,6 +53,7 @@ public class ShipMovement : MonoBehaviour
             eventManager.Unsubscribe(EventType.ZeroVelocityOn, OnZeroVelocity);
             eventManager.Unsubscribe(EventType.ZeroVelocityOff, OffZeroVelocity);
             eventManager.Unsubscribe(EventType.PauseOn, OnPauseGame);
+            eventManager.Unsubscribe(EventType.ShipCollidingWithDebris, OnCollideWithDebris);
         }
     }
     private void Update()
@@ -92,6 +99,18 @@ public class ShipMovement : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
         move = Vector2.zero;
     }
+
+    private void OnCollideWithDebris(object target)
+    {
+        if(target is Vector2 contactPoint && rb.linearVelocity.magnitude > speedThreshold)
+        {
+            FuelPenalty();
+            Vector2 direction = ((Vector2)transform.position - contactPoint).normalized;
+            rb.AddForce(direction * hullStrikeForce, ForceMode2D.Impulse);
+            rb.AddTorque(direction.x * torqueStrength);
+        }
+    }
+
     #endregion
 
     #region Methods
@@ -140,6 +159,15 @@ public class ShipMovement : MonoBehaviour
         rb.AddTorque(torque * rotationInput * TimeManager.deltaTime);
 
         if(Mathf.Abs(rotationInput) > 0) ConsumeFuel();
+        else if(Mathf.Abs(rotationInput) <= 0 && rb.angularVelocity != 0)
+        {
+            // Torque Friction
+
+            rb.AddTorque(Mathf.Sign(-rb.angularVelocity) * torqueFriction * TimeManager.deltaTime);
+
+            // Clamp anuglar velocity
+            if (Mathf.Abs(rb.angularVelocity) < 0.05) rb.angularVelocity = 0;
+        }
 
         // Apply opposite torque if zero velocity is pressed
         if (isZeroOutVelocity && rb.angularVelocity != 0)
@@ -154,6 +182,11 @@ public class ShipMovement : MonoBehaviour
     private void ConsumeFuel()
     {
         GameController.instance.GetComponent<FuelManager>().SubtractFuel(fuelConsumptionRate);
+    }
+
+    private void FuelPenalty()
+    {
+        GameController.instance.GetComponent<FuelManager>().SubtractFuel(hullStrikeFuelPenalty);
     }
     #endregion
 }

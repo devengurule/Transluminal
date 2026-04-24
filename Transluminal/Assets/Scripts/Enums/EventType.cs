@@ -18,6 +18,7 @@ public enum EventType
     PlayerCollidingExit,
     ShipCollidingWithScrap,
     ShipCollidingWithSalvage,
+    ShipCollidingWithDebris,
 
     // Pausing
     PauseOn,

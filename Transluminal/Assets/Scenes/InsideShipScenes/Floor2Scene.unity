@@ -353,7 +353,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 1777512901747984553, guid: bf2dcbde5310c7a41a0faa1d1ef67b16, type: 3}
-  m_Color: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -442,6 +442,18 @@ PrefabInstance:
     - target: {fileID: 3959725600008842223, guid: fd36b60a6b173074e99b179bcb610a76, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5398968655093407551, guid: fd36b60a6b173074e99b179bcb610a76, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5398968655093407551, guid: fd36b60a6b173074e99b179bcb610a76, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5398968655093407551, guid: fd36b60a6b173074e99b179bcb610a76, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -598,7 +610,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2349549714738610913, guid: 0241360d3af79f54aa02c8b10959bb9f, type: 3}
-  m_Color: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2503,7 +2515,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 5167690650097798016, guid: 36e4d7ab40af89f48a7eaf9da36872df, type: 3}
-  m_Color: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

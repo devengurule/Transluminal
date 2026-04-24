@@ -12,6 +12,14 @@ public class ShipCollisionManager : MonoBehaviour
         eventManager = GameController.instance.eventManager;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if ((collision.gameObject.tag == "Debris"))
+        {
+            eventManager.Publish(EventType.ShipCollidingWithDebris, collision.GetContact(0).point);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Scrap")
