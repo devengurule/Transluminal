@@ -270,9 +270,9 @@ MonoBehaviour:
   zeroVelocitySpeed: {x: 5, y: 10}
   fuelConsumptionRate: 0.001
   hullStrikeFuelPenalty: 10
-  speedThreshold: 0.1
-  hullStrikeForce: 0.5
-  torqueStrength: 1
+  speedThreshold: 0.05
+  hullStrikeForce: 1
+  torqueStrength: 5
 --- !u!114 &-977959931175993678
 MonoBehaviour:
   m_ObjectHideFlags: 0

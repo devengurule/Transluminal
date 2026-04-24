@@ -7,6 +7,7 @@ public class FuelManager : MonoBehaviour
     #region Variables
     [SerializeField] private float maxFuel;
     [SerializeField] private float currentFuel;
+    [SerializeField] private float lerpSpeed;
 
     private EventManager eventManager;
     #endregion
@@ -59,8 +60,12 @@ public class FuelManager : MonoBehaviour
     private void UpdateFuelMeter()
     {
         GameObject fuelMeterObject = GameObject.Find("FuelMeter");
-        float fuelAmount = currentFuel / maxFuel;
-        fuelMeterObject.GetComponent<Image>().fillAmount = fuelAmount;
+        float newFuelPercent = currentFuel / maxFuel;
+        float currentFuelPercent = fuelMeterObject.GetComponent<Image>().fillAmount;
+
+        float lerpedFuelPercent = Mathf.Lerp(currentFuelPercent, newFuelPercent, lerpSpeed);
+
+        fuelMeterObject.GetComponent<Image>().fillAmount = lerpedFuelPercent;
     }
 
     private void OnRefuel(object target)

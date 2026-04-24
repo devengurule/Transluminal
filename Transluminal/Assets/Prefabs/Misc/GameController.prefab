@@ -70,7 +70,8 @@ MonoBehaviour:
   - SalvageScene_0
   - SalvageScene_1
   playerHidingPos: {x: -20, y: 0}
-  devMode: 1
+  healthObject: {fileID: 0}
+  shipHUDObject: {fileID: 0}
 --- !u!114 &5388767112792395842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,6 +190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FuelManager
   maxFuel: 100
   currentFuel: 69
+  lerpSpeed: 0.05
 --- !u!114 &-8210518752818356001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,7 +283,9 @@ MonoBehaviour:
   ratPrefab: {fileID: 1766123075382733402, guid: 72f1ff0cf29cddf408e22ef5875f9605, type: 3}
   ratLifeTime: 10
   numOfRat: {x: 0, y: 0}
+  creaturePrefab: {fileID: 0}
   spawnOffsetTimeRange: {x: 0, y: 0}
+  creatureSpawnPos: {x: 0, y: 0}
   maxNumberOfCreature: 0
 --- !u!114 &5482783032590093953
 MonoBehaviour:
