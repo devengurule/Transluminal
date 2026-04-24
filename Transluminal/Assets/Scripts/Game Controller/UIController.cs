@@ -51,6 +51,7 @@ public class UIController : MonoBehaviour
         {
             interactWithUI = true;
             availableUIInteractTag = gameObject.tag;
+            GameController.instance.GetComponent<GameController>().TurnOnHighLight(gameObject);
         }
     }
     private void OnPlayerCollidingExit(object target)
@@ -62,6 +63,7 @@ public class UIController : MonoBehaviour
         {
             interactWithUI = false;
             availableUIInteractTag = "";
+            GameController.instance.GetComponent<GameController>().TurnOffHighLight(gameObject);
         }
     }
 

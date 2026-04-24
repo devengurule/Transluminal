@@ -1,7 +1,9 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using static UnityEngine.GraphicsBuffer;
 
 public class GameController : MonoBehaviour
 {
@@ -18,6 +20,8 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private GameObject healthObject;
     [SerializeField] private GameObject shipHUDObject;
+
+    [SerializeField] private float alphaFadeSpeed;
 
     private Dictionary<string, SceneData> shipScenesVisited = new Dictionary<string, SceneData>();
     private NavigationController navController;
@@ -110,6 +114,8 @@ public class GameController : MonoBehaviour
         }
     }
     #endregion
+
+    
 
     #region Event Methods
 
@@ -250,6 +256,7 @@ public class GameController : MonoBehaviour
             }
         }
     }
+
     private void OnRestartGame(object target)
     {
         SceneController.GoToScene("Floor1Scene");
@@ -264,11 +271,13 @@ public class GameController : MonoBehaviour
         if (gameObject.layer == transportLayerID)
         {
             interactWithTransport = true;
+            TurnOnHighLight(gameObject);
         }
         else if (gameObject.layer == closetLayerID && !disableClosets)
         {
             interactWithCloset = true;
             closetObject = target;
+            TurnOnHighLight(gameObject);
         }
     }
     private void OnPlayerExitCollide(object target)
@@ -280,10 +289,12 @@ public class GameController : MonoBehaviour
         if (gameObject.layer == transportLayerID)
         {
             interactWithTransport = false;
+            TurnOffHighLight(gameObject);
         }
         else if(gameObject.layer == closetLayerID)
         {
             interactWithCloset = false;
+            TurnOffHighLight(gameObject);
         }
     }
 
@@ -466,6 +477,64 @@ public class GameController : MonoBehaviour
         }
 
         return new Vector2(player.transform.position.x, player.transform.position.y - 1.7f);
+    }
+
+    public void TurnOnHighLight(GameObject gameObject)
+    {
+        StartCoroutine(FadeInAlpha(gameObject));
+    }
+    public void TurnOffHighLight(GameObject gameObject)
+    {
+        StartCoroutine(FadeOutAlpha(gameObject));
+    }
+
+    #endregion
+
+    #region IEnumerator Methods
+    IEnumerator FadeInAlpha(GameObject gameObject)
+    {
+        GameObject childObject = null;
+
+        if(gameObject != null) childObject = gameObject.transform.Find("Highlight").gameObject;
+        if (childObject != null)
+        {
+            SpriteRenderer childSpriteRenderer = childObject.GetComponent<SpriteRenderer>();
+
+            float alpha = childSpriteRenderer.color.a;
+
+            while (!Mathf.Approximately(alpha, 1))
+            {
+                alpha = Mathf.MoveTowards(alpha, 1, alphaFadeSpeed);
+                if(childSpriteRenderer != null) childSpriteRenderer.color = new Vector4(1, 1, 1, alpha);
+
+                yield return null;
+            }
+
+            if (childSpriteRenderer != null) childSpriteRenderer.color = new Vector4(1, 1, 1, 1);
+        }
+    }
+
+    IEnumerator FadeOutAlpha(GameObject gameObject)
+    {
+        GameObject childObject = null;
+
+        if (gameObject != null) childObject = gameObject.transform.Find("Highlight").gameObject;
+        if (childObject != null)
+        {
+            SpriteRenderer childSpriteRenderer = childObject.GetComponent<SpriteRenderer>();
+
+            float alpha = childSpriteRenderer.color.a;
+
+            while (!Mathf.Approximately(alpha, 0))
+            {
+                alpha = Mathf.MoveTowards(alpha, 0, alphaFadeSpeed);
+                if(childSpriteRenderer != null) childSpriteRenderer.color = new Vector4(1, 1, 1, alpha);
+
+                yield return null;
+            }
+
+            if (childSpriteRenderer != null) childSpriteRenderer.color = new Vector4(1, 1, 1, 0);
+        }
     }
     #endregion
 
