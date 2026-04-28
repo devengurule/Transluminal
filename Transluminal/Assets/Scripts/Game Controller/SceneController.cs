@@ -12,9 +12,7 @@ public class SceneController : MonoBehaviour
             if (UIController.isUIUP)
             {
                 UIController.TurnOffMenu();
-                PauseController.UnPauseGame();
             }
-
             SceneManager.LoadScene(sceneName);
         }
     }

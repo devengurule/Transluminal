@@ -5,6 +5,7 @@ public class Timer : MonoBehaviour
 {
     private float duration;
     private Action action;
+    private bool pauseAware;
 
     public float remainingTime { get; private set; }
     public bool isRunning { get; private set; }
@@ -16,19 +17,27 @@ public class Timer : MonoBehaviour
             if(remainingTime <= 0)
             {
                 isRunning = false;
-                Execute(action);
+                if(action != null) Execute(action);
             }
             else
             {
-                remainingTime -= TimeManager.deltaTime;
+                if(pauseAware) remainingTime -= TimeManager.deltaTime;
+                else remainingTime -= Time.deltaTime;
             }
         }
     }
 
-    public void Initalize(float duration, Action action)
+    public void Initalize(float duration, bool pauseAware)
+    {
+        this.duration = duration;
+        this.pauseAware = pauseAware;
+    }
+
+    public void Initalize(float duration, Action action, bool pauseAware)
     {
         this.duration = duration;
         this.action = action;
+        this.pauseAware = pauseAware;
     }
 
     public void Run()

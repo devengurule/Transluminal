@@ -11,7 +11,7 @@ public class AlienScript : MonoBehaviour
         eventManager = GameController.instance.eventManager;
 
         timer = gameObject.AddComponent<Timer>();
-        timer.Initalize(lifeTime, Dead);
+        timer.Initalize(lifeTime, Dead, true);
         timer.Run();
     }
 

@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
-using Unity.Android.Gradle.Manifest;
-using System.Linq;
 
 public class AlienManager : MonoBehaviour
 {
@@ -35,7 +33,7 @@ public class AlienManager : MonoBehaviour
         eventManager = GameController.instance.eventManager;
 
         creatureSpawnTimer = gameObject.AddComponent<Timer>();
-        creatureSpawnTimer.Initalize(Random.Range(spawnOffsetTimeRange.x, spawnOffsetTimeRange.y), QueueCreatureSpawn);
+        creatureSpawnTimer.Initalize(Random.Range(spawnOffsetTimeRange.x, spawnOffsetTimeRange.y), QueueCreatureSpawn, true);
      
         spawnZone = GameObject.FindGameObjectWithTag("SpawnZone");
 

@@ -1,14 +1,17 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
     #region Variables
     [SerializeField] private string pauseMenuTag;
+
     private EventManager eventManager;
     private bool interactWithUI = false;
     private string colliderLayerName = "UICollider";
     private static string availableUIInteractTag = "";
+    private bool canInteract;
 
     public static bool isUIUP { get; private set; } = false;
     #endregion
@@ -25,7 +28,11 @@ public class UIController : MonoBehaviour
             eventManager.Subscribe(EventType.Interact, OnInteractPressed);
             eventManager.Subscribe(EventType.PauseOn, PauseGameOn);
             eventManager.Subscribe(EventType.PauseOff, PauseGameOff);
+            eventManager.Subscribe(EventType.TransitionOffFinished, TransitionOnFinished);
+            eventManager.Subscribe(EventType.TransitionOffFinished, TransitionOffFinished);
         }
+
+        SceneManager.activeSceneChanged += SceneChange;
     }
 
     private void OnDestroy()
@@ -37,11 +44,19 @@ public class UIController : MonoBehaviour
             eventManager.Unsubscribe(EventType.Interact, OnInteractPressed);
             eventManager.Unsubscribe(EventType.PauseOn, PauseGameOn);
             eventManager.Unsubscribe(EventType.PauseOff, PauseGameOff);
+            eventManager.Unsubscribe(EventType.TransitionOffFinished, TransitionOnFinished);
+            eventManager.Unsubscribe(EventType.TransitionOffFinished, TransitionOffFinished);
         }
     }
     #endregion
 
     #region Event Methods
+
+    private void SceneChange(Scene current, Scene next)
+    {
+        canInteract = false;
+    }
+
     private void OnPlayerCollidingEnter(object target)
     {
         GameObject gameObject = target as GameObject;
@@ -69,12 +84,12 @@ public class UIController : MonoBehaviour
 
     private void OnInteractPressed(object target)
     {
-        if(availableUIInteractTag == "Shop" && !GameController.instance.GetComponent<NavigationController>().IsAtHomeNode())
+        if(availableUIInteractTag == "Shop" && !GameController.instance.GetComponent<NavigationController>().IsAtHomeNode() && canInteract)
         {
             eventManager.Publish(EventType.NoShopAccess);
             return;
         }
-        else if(interactWithUI && !isUIUP)
+        else if(interactWithUI && !isUIUP && canInteract)
         {
             TurnOnMenu();
 
@@ -87,7 +102,6 @@ public class UIController : MonoBehaviour
 
     private void PauseGameOn(object target)
     {
-
         // Open Pause Menu
         if (!isUIUP)
         {
@@ -107,7 +121,6 @@ public class UIController : MonoBehaviour
 
     private void PauseGameOff(object target)
     {
-
         // Close Pause Menu
         if (!isUIUP)
         {
@@ -123,6 +136,16 @@ public class UIController : MonoBehaviour
                 Debug.Log($"Failed to Close Pause Menu: {e}");
             }
         }
+    }
+
+    private void TransitionOnFinished(object target)
+    {
+        //canInteract = false;
+    }
+
+    private void TransitionOffFinished(object target)
+    {
+        canInteract = true;
     }
 
     #endregion

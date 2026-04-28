@@ -32,6 +32,7 @@ TagManager:
   - FuelMeter
   - Debris
   - Bed
+  - Transition
   layers:
   - Default
   - TransparentFX

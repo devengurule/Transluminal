@@ -15,12 +15,9 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private List<string> PlayerInputMapScenes = new();
     [SerializeField] private List<string> ShipInputMapScenes = new();
-
     [SerializeField] private Vector2 playerHidingPos;
-
     [SerializeField] private GameObject healthObject;
     [SerializeField] private GameObject shipHUDObject;
-
     [SerializeField] private float alphaFadeSpeed;
 
     private Dictionary<string, SceneData> shipScenesVisited = new Dictionary<string, SceneData>();
@@ -115,13 +112,13 @@ public class GameController : MonoBehaviour
     }
     #endregion
 
-    
-
     #region Event Methods
 
     // Change Input Map when changing scenes
     private void SceneChange(Scene current, Scene next)
     {
+        eventManager.Publish(EventType.TransitionOff);
+
         // Get player in scene
         player = GameObject.Find("Player");
 
@@ -280,6 +277,7 @@ public class GameController : MonoBehaviour
             TurnOnHighLight(gameObject);
         }
     }
+
     private void OnPlayerExitCollide(object target)
     {
         GameObject gameObject = target as GameObject;
@@ -337,7 +335,6 @@ public class GameController : MonoBehaviour
     {
         disableClosets = true;
     }
-
     #endregion
 
     #region Methods

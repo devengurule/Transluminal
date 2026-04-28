@@ -68,6 +68,11 @@ public class FuelManager : MonoBehaviour
         fuelMeterObject.GetComponent<Image>().fillAmount = lerpedFuelPercent;
     }
 
+    private void QuickUpdateFuelMeter()
+    {
+
+    }
+
     private void OnRefuel(object target)
     {
         currentFuel = maxFuel;

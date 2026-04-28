@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,13 +12,13 @@ public class ElevatorButtonController : MonoBehaviour
     private float input;
     private int currentIndex;
     private int selectedIndex;
+    private bool canInteract = true;
     #endregion
 
     #region Unity Methods
     private void Start()
     {
         eventManager = GameController.instance.eventManager;
-
         currentIndex = 0;
         selectedIndex = currentIndex;
 
@@ -31,6 +32,8 @@ public class ElevatorButtonController : MonoBehaviour
         {
             eventManager.Subscribe(EventType.ScrollVert, OnChangeButton);
             eventManager.Subscribe(EventType.Interact, SelectButton);
+            eventManager.Subscribe(EventType.TransitionOnFinished, TransitionOnFinished);
+            eventManager.Subscribe(EventType.TransitionOffFinished, TransitionOffFinished);
         }
     }
 
@@ -39,15 +42,24 @@ public class ElevatorButtonController : MonoBehaviour
         if (eventManager != null)
         {
             eventManager.Unsubscribe(EventType.ScrollVert, OnChangeButton);
-            eventManager.Subscribe(EventType.Interact, SelectButton);
+            eventManager.Unsubscribe(EventType.Interact, SelectButton);
+            eventManager.Unsubscribe(EventType.TransitionOnFinished, TransitionOnFinished);
+            eventManager.Unsubscribe(EventType.TransitionOffFinished, TransitionOffFinished);
         }
     }
 
     private void OnEnable()
     {
+        canInteract = false;
+        StartCoroutine(Wait());
+
         currentIndex = selectedIndex;
         UpdateButton("Hover");
         UpdateButton("Selected");
+    }
+    private void OnDisable()
+    {
+        canInteract = false;
     }
     #endregion
 
@@ -82,7 +94,7 @@ public class ElevatorButtonController : MonoBehaviour
 
     private void OnChangeButton(object target)
     {
-        if (gameObject.activeSelf)
+        if (gameObject.activeSelf && canInteract)
         {
             if (target is float input)
             {
@@ -97,27 +109,49 @@ public class ElevatorButtonController : MonoBehaviour
 
     private void SelectButton(object target)
     {
-        if (gameObject.activeSelf)
+        if (gameObject.activeSelf && canInteract)
         {
             UpdateButton("Selected");
 
             selectedIndex = currentIndex;
 
-            switch (currentIndex)
+            if (SceneController.GetCurrentSceneName() != $"Floor{currentIndex + 1}Scene")
             {
-                case 0:
-                    SceneController.GoToScene("Floor1Scene");
-                    break;
-                case 1:
-                    SceneController.GoToScene("Floor2Scene");
-                    break;
-                case 2:
-                    SceneController.GoToScene("Floor3Scene");
-                    break;
+                canInteract = false;
+                eventManager.Publish(EventType.TransitionOn);
             }
         }
     }
+
+    private void TransitionOnFinished(object target)
+    {
+        switch (currentIndex)
+        {
+            case 0:
+                SceneController.GoToScene("Floor1Scene");
+                break;
+            case 1:
+                SceneController.GoToScene("Floor2Scene");
+                break;
+            case 2:
+                SceneController.GoToScene("Floor3Scene");
+                break;
+        }
+    }
+    
+    private void TransitionOffFinished(object target)
+    {
+        PauseController.UnPauseGame();
+        canInteract = true;
+    }
     #endregion
+
+    IEnumerator Wait()
+    {
+        yield return null;
+
+        canInteract = true;
+    }
 
     #region Methods
     private void ChangeButtonLogic()

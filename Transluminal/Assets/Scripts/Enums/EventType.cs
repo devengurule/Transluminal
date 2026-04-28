@@ -47,6 +47,10 @@ public enum EventType
     // UI
     ScrollVert,
     ScrollHori,
+    TransitionOn,
+    TransitionOff,
+    TransitionOnFinished,
+    TransitionOffFinished,
 
     // ALIENS
     SpawnHunter,

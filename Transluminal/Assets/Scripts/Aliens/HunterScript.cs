@@ -60,8 +60,8 @@ public class HunterScript : MonoBehaviour
 
         currentState = State.hide;
 
-        wakeUpTimer.Initalize(wakeUpTime, OnWakeUp);
-        wanderTimer.Initalize(wanderTime + Random.Range(0f, 4f), OnEndWander);
+        wakeUpTimer.Initalize(wakeUpTime, OnWakeUp, true);
+        wanderTimer.Initalize(wanderTime + Random.Range(0f, 4f), OnEndWander, true);
     }
 
     private void Update()
@@ -102,7 +102,7 @@ public class HunterScript : MonoBehaviour
         this.saveDataInstance = saveDataInstance;
         this.lifeTime = lifeTime;
 
-        lifeTimeTimer.Initalize(this.lifeTime, Dead);
+        lifeTimeTimer.Initalize(this.lifeTime, Dead, true);
         lifeTimeTimer.Run();
     }
 
