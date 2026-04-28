@@ -10,7 +10,7 @@ public class HealthManager : MonoBehaviour
 
     private void Awake()
     {
-        currentHealth = maxHealth;
+        currentHealth = 3;
     }
 
     private void Start()
@@ -33,7 +33,7 @@ public class HealthManager : MonoBehaviour
 
     public void AddHealth(int amount)
     {
-        if(currentHealth + amount <= maxHealth)
+        if (currentHealth + amount <= maxHealth)
         {
             currentHealth += amount;
             eventManager.Publish(EventType.HealthChange, currentHealth);

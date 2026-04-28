@@ -28,7 +28,6 @@ public class UIController : MonoBehaviour
             eventManager.Subscribe(EventType.Interact, OnInteractPressed);
             eventManager.Subscribe(EventType.PauseOn, PauseGameOn);
             eventManager.Subscribe(EventType.PauseOff, PauseGameOff);
-            eventManager.Subscribe(EventType.TransitionOffFinished, TransitionOnFinished);
             eventManager.Subscribe(EventType.TransitionOffFinished, TransitionOffFinished);
         }
 
@@ -44,7 +43,6 @@ public class UIController : MonoBehaviour
             eventManager.Unsubscribe(EventType.Interact, OnInteractPressed);
             eventManager.Unsubscribe(EventType.PauseOn, PauseGameOn);
             eventManager.Unsubscribe(EventType.PauseOff, PauseGameOff);
-            eventManager.Unsubscribe(EventType.TransitionOffFinished, TransitionOnFinished);
             eventManager.Unsubscribe(EventType.TransitionOffFinished, TransitionOffFinished);
         }
     }
@@ -67,7 +65,6 @@ public class UIController : MonoBehaviour
             interactWithUI = true;
             availableUIInteractTag = gameObject.tag;
             gameObject.transform.Find("Highlight").GetComponent<HighlightScript>().TurnOnHighLight();
-            //GameController.instance.GetComponent<GameController>().TurnOnHighLight(gameObject);
         }
     }
 
@@ -81,7 +78,6 @@ public class UIController : MonoBehaviour
             interactWithUI = false;
             availableUIInteractTag = "";
             gameObject.transform.Find("Highlight").GetComponent<HighlightScript>().TurnOffHighLight();
-            //GameController.instance.GetComponent<GameController>().TurnOffHighLight(gameObject);
         }
     }
 
@@ -106,7 +102,7 @@ public class UIController : MonoBehaviour
     private void PauseGameOn(object target)
     {
         // Open Pause Menu
-        if (!isUIUP)
+        if (!isUIUP && !GameController.instance.GetComponent<GameController>().InteractWithBed())
         {
             try
             {
@@ -139,11 +135,6 @@ public class UIController : MonoBehaviour
                 Debug.Log($"Failed to Close Pause Menu: {e}");
             }
         }
-    }
-
-    private void TransitionOnFinished(object target)
-    {
-        //canInteract = false;
     }
 
     private void TransitionOffFinished(object target)

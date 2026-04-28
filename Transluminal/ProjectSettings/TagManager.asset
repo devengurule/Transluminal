@@ -48,7 +48,7 @@ TagManager:
   - ShipObjects
   - Player
   - SpaceObject
-  - 
+  - BedCollider
   - 
   - 
   - 

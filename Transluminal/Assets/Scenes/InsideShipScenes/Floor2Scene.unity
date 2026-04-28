@@ -645,7 +645,7 @@ GameObject:
   - component: {fileID: 387947654}
   - component: {fileID: 387947656}
   - component: {fileID: 387947655}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: BedCollider
   m_TagString: Bed
   m_Icon: {fileID: 0}

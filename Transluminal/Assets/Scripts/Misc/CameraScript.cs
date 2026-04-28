@@ -30,18 +30,18 @@ public class CameraScript : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         if (canMove)
         {
-            transform.position = Vector3.Lerp(transform.position, target.transform.position, trackSpeed);
+            transform.position = Vector3.Lerp(transform.position, target.transform.position, trackSpeed * TimeManager.deltaTime);
             transform.position = new Vector3(transform.position.x, transform.position.y, -10f);
 
             float targetZ = target.transform.eulerAngles.z;
             float thisZ = transform.eulerAngles.z;
-            float lerpAngle = Mathf.Lerp(0, Mathf.DeltaAngle(thisZ, targetZ), rotationSpeed);
+            float newZ = Mathf.LerpAngle(thisZ, targetZ, rotationSpeed * Time.deltaTime);
 
-            transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z + lerpAngle);
+            transform.eulerAngles = new Vector3(0, 0, newZ);
         }
     }
 

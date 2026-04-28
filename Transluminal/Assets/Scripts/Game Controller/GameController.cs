@@ -18,6 +18,8 @@ public class GameController : MonoBehaviour
     [SerializeField] private Vector2 playerHidingPos;
     [SerializeField] private GameObject healthObject;
     [SerializeField] private GameObject shipHUDObject;
+    [SerializeField] private float bedPauseTime;
+    [SerializeField] private int healAmount;
 
     private Dictionary<string, SceneData> shipScenesVisited = new Dictionary<string, SceneData>();
     private NavigationController navController;
@@ -25,8 +27,10 @@ public class GameController : MonoBehaviour
     private GameObject parent;
     private string transportLayer = "TransportCollider";
     private string closetLayer = "ClosetCollider";
+    private string bedLayer = "BedCollider";
     private bool interactWithTransport = false;
     private bool interactWithCloset = false;
+    private bool interactWithBed = false;
     private bool disableClosets = false;
     private object closetObject;
     private bool isHiding;
@@ -90,6 +94,7 @@ public class GameController : MonoBehaviour
             eventManager.Subscribe(EventType.ArrivedAtHomeNode, OnArrivedHome);
             eventManager.Subscribe(EventType.PlayerHiding, PlayerOnHiding);
             eventManager.Subscribe(EventType.SpawnCreature, DisableCloset);
+            eventManager.Subscribe(EventType.TransitionOnFinished, TransitionOnFinished);
         }
     }
 
@@ -107,6 +112,7 @@ public class GameController : MonoBehaviour
             eventManager.Unsubscribe(EventType.ArrivedAtHomeNode, OnArrivedHome);
             eventManager.Unsubscribe(EventType.PlayerHiding, PlayerOnHiding);
             eventManager.Unsubscribe(EventType.SpawnCreature, DisableCloset);
+            eventManager.Unsubscribe(EventType.TransitionOffFinished, TransitionOffFinished);
         }
     }
     #endregion
@@ -244,6 +250,11 @@ public class GameController : MonoBehaviour
                 isHiding = true;
                 eventManager.Publish(EventType.OnEnterCloset, closetObject);
             }
+            else if (interactWithBed)
+            {
+                PauseController.PauseGame();
+                eventManager.Publish(EventType.TransitionOn);
+            }
             else if(isHiding)
             {
                 isHiding = false;
@@ -263,6 +274,7 @@ public class GameController : MonoBehaviour
         GameObject gameObject = target as GameObject;
         int transportLayerID = LayerMask.NameToLayer(transportLayer);
         int closetLayerID = LayerMask.NameToLayer(closetLayer);
+        int bedLayerID = LayerMask.NameToLayer(bedLayer);
 
         if (gameObject.layer == transportLayerID)
         {
@@ -275,6 +287,11 @@ public class GameController : MonoBehaviour
             closetObject = target;
             gameObject.transform.Find("Highlight").GetComponent<HighlightScript>().TurnOnHighLight();
         }
+        else if (gameObject.layer == bedLayerID)
+        {
+            interactWithBed = true;
+            gameObject.transform.Find("Highlight").GetComponent<HighlightScript>().TurnOnHighLight();
+        }
     }
 
     private void OnPlayerExitCollide(object target)
@@ -282,6 +299,7 @@ public class GameController : MonoBehaviour
         GameObject gameObject = target as GameObject;
         int transportLayerID = LayerMask.NameToLayer(transportLayer);
         int closetLayerID = LayerMask.NameToLayer(closetLayer);
+        int bedLayerID = LayerMask.NameToLayer(bedLayer);
 
         if (gameObject.layer == transportLayerID)
         {
@@ -291,6 +309,11 @@ public class GameController : MonoBehaviour
         else if(gameObject.layer == closetLayerID)
         {
             interactWithCloset = false;
+            gameObject.transform.Find("Highlight").GetComponent<HighlightScript>().TurnOffHighLight();
+        }
+        else if (gameObject.layer == bedLayerID)
+        {
+            interactWithBed = false;
             gameObject.transform.Find("Highlight").GetComponent<HighlightScript>().TurnOffHighLight();
         }
     }
@@ -334,6 +357,37 @@ public class GameController : MonoBehaviour
     {
         disableClosets = true;
     }
+
+    private void TransitionOnFinished(object target)
+    {
+        if(interactWithBed)
+        {
+            GameController.instance.GetComponent<FoodManager>().SubtractFood(1);
+            GameController.instance.GetComponent<FoodManager>().UpdateFoodCounter();
+            GameController.instance.GetComponent<HealthManager>().AddHealth(healAmount);
+            
+            StartCoroutine(DelayedTransitionOff(bedPauseTime)); 
+        }
+    }
+
+    private void TransitionOffFinished(object target)
+    {
+        if (interactWithBed)
+        {
+            PauseController.UnPauseGame();
+        }
+    }
+    #endregion
+
+    #region IEnumerator Methods
+
+    IEnumerator DelayedTransitionOff(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+
+        eventManager.Publish(EventType.TransitionOff);
+    }
+
     #endregion
 
     #region Methods
@@ -473,6 +527,11 @@ public class GameController : MonoBehaviour
         }
 
         return new Vector2(player.transform.position.x, player.transform.position.y - 1.7f);
+    }
+
+    public bool InteractWithBed()
+    {
+        return interactWithBed;
     }
     #endregion
 

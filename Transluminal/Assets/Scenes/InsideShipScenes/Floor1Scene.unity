@@ -926,6 +926,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3288048148909366786, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: healAmount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3288048148909366786, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: bedPauseTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3288048148909366786, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: healthObject
       value: 
       objectReference: {fileID: 1414259781}
@@ -1008,10 +1016,6 @@ PrefabInstance:
     - target: {fileID: 3553653762792674670, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_GravityScale
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3601692300924228058, guid: 19f9c04572959ca4288edd0516563076, type: 3}
-      propertyPath: m_TagString
-      value: Bed
       objectReference: {fileID: 0}
     - target: {fileID: 3602510169972282844, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
@@ -1195,7 +1199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8422476920209904731, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: maxHealth
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8440181436065359030, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_UiScaleMode

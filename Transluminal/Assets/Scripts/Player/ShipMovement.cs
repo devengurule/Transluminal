@@ -3,9 +3,9 @@ using UnityEngine;
 public class ShipMovement : MonoBehaviour
 {
     #region Variables
-    [SerializeField] private Vector2 maxVelocity;
-    [SerializeField] private Vector2 acceleration;
-    [SerializeField] private Vector2 friction;
+    [SerializeField] private float maxVelocity;
+    [SerializeField] private float acceleration;
+    [SerializeField] private float friction;
     [SerializeField] private float torqueFriction;
     [SerializeField] private float torque;
     [SerializeField] private Vector2 zeroVelocitySpeed;
@@ -110,7 +110,6 @@ public class ShipMovement : MonoBehaviour
             rb.AddTorque(direction.x * torqueStrength);
         }
     }
-
     #endregion
 
     #region Methods
@@ -119,37 +118,25 @@ public class ShipMovement : MonoBehaviour
     /// </summary>
     private void MovementLogic()
     {
-        Vector2 forward = transform.up;
-        Vector2 input = inputVector;
-        Vector2 right = new Vector2(forward.y, -forward.x);
-        move = input.y * forward;
+        move = inputVector.y * transform.up;
+        Vector2 frictionForce = -move.normalized * friction;
 
         if (Mathf.Abs(move.magnitude) > 0) ConsumeFuel();
 
         // Applies an impulse force to the rigidbody
-        rb.AddForce(move * acceleration * TimeManager.deltaTime, ForceMode2D.Impulse);
-
+        if(move.magnitude != 0) rb.AddForce(move * zeroOutFactor * acceleration * TimeManager.deltaTime, ForceMode2D.Impulse);
 
         // Truncates velocity to match the vaximum velocity variable
-        if (Mathf.Abs(rb.linearVelocityX) > maxVelocity.x) rb.linearVelocityX = Mathf.Sign(rb.linearVelocityX) * maxVelocity.x;
-
-        if (Mathf.Abs(rb.linearVelocityY) > maxVelocity.y) rb.linearVelocityY = Mathf.Sign(rb.linearVelocityY) * maxVelocity.y;
-
+        if (Mathf.Abs(rb.linearVelocity.magnitude) > maxVelocity)
+        {
+            rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, rb.linearVelocity.normalized * maxVelocity, 0.05f);
+        }
 
         // Applys an opposite friction force to x & y axis seperately
-        if (move.x == 0 && rb.linearVelocityX != 0)
+        if(move.magnitude == 0 && rb.linearVelocity.magnitude != 0)
         {
-            rb.AddForce(Vector2.right * -rb.linearVelocityX * acceleration * zeroOutFactor.x * friction.x * TimeManager.deltaTime, ForceMode2D.Impulse);
-
-            // Clamp linear velocity
-            if (Mathf.Abs(rb.linearVelocityX) < 0.01) rb.linearVelocityX = 0;
-        }
-        if (move.y == 0 && rb.linearVelocityY != 0)
-        {
-            rb.AddForce(Vector2.up * -rb.linearVelocityY * acceleration * zeroOutFactor.x * friction.y * TimeManager.deltaTime, ForceMode2D.Impulse);
-
-            // Clamp linear velocity
-            if (Mathf.Abs(rb.linearVelocityY) < 0.01) rb.linearVelocityY = 0;
+            rb.AddForce(Vector2.one * -rb.linearVelocity * acceleration * zeroOutFactor * friction * TimeManager.deltaTime, ForceMode2D.Impulse);
+            if (Mathf.Abs(rb.linearVelocity.magnitude) < 0.005) rb.linearVelocity = Vector2.zero;
         }
     }
 

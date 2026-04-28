@@ -990,8 +990,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   target: {fileID: 5135498395866930379}
-  trackSpeed: 0.05
-  rotationSpeed: 0.001
+  trackSpeed: 2
+  rotationSpeed: 0.5
 --- !u!1001 &1251755942
 PrefabInstance:
   m_ObjectHideFlags: 0

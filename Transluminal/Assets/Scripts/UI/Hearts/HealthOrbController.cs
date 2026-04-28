@@ -44,7 +44,7 @@ public class HealthOrbController : MonoBehaviour
         int fullOrbsNum = health / 2;
 
         // Equals zero when health is an even number
-        int halfOrbsNum = health % 2 == 0 || health < 0? 0 : 1;
+        int halfOrbsNum = health % 2 == 0 || health < 0 ? 0 : 1;
 
         // FULL ORBS
         if (fullOrbsNum > 0)

@@ -36,7 +36,7 @@ public class FoodManager : MonoBehaviour
     #endregion
 
     #region Methods
-    private void UpdateFoodCounter()
+    public void UpdateFoodCounter()
     {
         // Get UI object
         GameObject foodCounterObject = GameObject.Find("NumberCounter");
