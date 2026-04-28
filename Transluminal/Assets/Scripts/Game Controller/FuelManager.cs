@@ -28,11 +28,14 @@ public class FuelManager : MonoBehaviour
 
     private void Update()
     {
-        foreach(GameObject obj in GameObject.FindGameObjectsWithTag("FuelMeter"))
+        if (SceneController.GetCurrentSceneName() != "Floor3Scene")
         {
-            if (obj.activeSelf)
+            foreach (GameObject obj in GameObject.FindGameObjectsWithTag("FuelMeter"))
             {
-                UpdateFuelMeter();
+                if (obj.activeSelf)
+                {
+                    UpdateFuelMeter();
+                }
             }
         }
     }
@@ -51,7 +54,7 @@ public class FuelManager : MonoBehaviour
     {
         if (SceneController.GetCurrentScene().name == "Floor3Scene")
         {
-            UpdateFuelMeter();
+            QuickUpdateFuelMeter();
         }
     }
     #endregion
@@ -70,7 +73,9 @@ public class FuelManager : MonoBehaviour
 
     private void QuickUpdateFuelMeter()
     {
-
+        GameObject fuelMeterObject = GameObject.Find("FuelMeter");
+        float newFuelPercent = currentFuel / maxFuel;
+        fuelMeterObject.GetComponent<Image>().fillAmount = newFuelPercent;
     }
 
     private void OnRefuel(object target)
