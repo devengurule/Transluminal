@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using static System.TimeZoneInfo;
 
 public class TransitionScript : MonoBehaviour
 {

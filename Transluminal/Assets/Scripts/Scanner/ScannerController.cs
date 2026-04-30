@@ -122,7 +122,8 @@ public class ScannerController : MonoBehaviour
                     break;
             }
         }
-        else if(gameObject.activeSelf && canScan && selectedScan.tag == "CheatsheetButton")
+        
+        if(gameObject.activeSelf && canScan && selectedScan.tag == "CheatsheetButton")
         {
             ToggleCheatsheet();
         }

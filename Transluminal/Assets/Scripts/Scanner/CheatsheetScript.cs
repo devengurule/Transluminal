@@ -18,6 +18,8 @@ public class CheatsheetScript : MonoBehaviour
     private float newXRatio;
     private float targetRatio;
 
+    private bool isOpen;
+
     private void Start()
     {
         eventManager = GameController.instance.eventManager;
@@ -29,7 +31,11 @@ public class CheatsheetScript : MonoBehaviour
         targetRatio = xClosedRatio;
         currentPage = hunterPage;
 
-        if(eventManager != null)
+        hunterPage.SetActive(true);
+        ratPage.SetActive(false);
+        creaturePage.SetActive(false);
+
+        if (eventManager != null)
         {
             eventManager.Subscribe(EventType.ScrollHori, ChangePage);
             eventManager.Subscribe(EventType.CheatsheetOn, CheatsheetOn);
@@ -54,43 +60,67 @@ public class CheatsheetScript : MonoBehaviour
 
     private void ChangePage(object target)
     {
-        if (target is float input)
+        if (target is float input && isOpen)
         {
             switch (currentPage.name)
             {
                 case "HunterPage":
 
-                    if(input < 0)
+                    if(input > 0)
                     {
+                        hunterPage.SetActive(false);
+                        ratPage.SetActive(false);
+                        creaturePage.SetActive(true);
 
+                        currentPage = creaturePage;
                     }
-                    else if(input > 0)
+                    else if(input < 0)
                     {
+                        hunterPage.SetActive(false);
+                        ratPage.SetActive(true);
+                        creaturePage.SetActive(false);
 
+                        currentPage = ratPage;
                     }
 
                     break;
                 case "RatPage":
 
-                    if (input < 0)
+                    if (input > 0)
                     {
+                        hunterPage.SetActive(true);
+                        ratPage.SetActive(false);
+                        creaturePage.SetActive(false);
 
+                        currentPage = hunterPage;
                     }
-                    else if (input > 0)
+                    else if (input < 0)
                     {
+                        hunterPage.SetActive(false);
+                        ratPage.SetActive(false);
+                        creaturePage.SetActive(true);
 
+                        currentPage = creaturePage;
                     }
 
                     break;
                 case "CreaturePage":
 
-                    if (input < 0)
+                    if (input > 0)
                     {
+                        hunterPage.SetActive(false);
+                        ratPage.SetActive(true);
+                        creaturePage.SetActive(false);
 
+                        currentPage = ratPage;
                     }
-                    else if (input > 0)
+                    else if (input < 0)
                     {
+                        hunterPage.SetActive(true);
+                        ratPage.SetActive(false);
+                        creaturePage.SetActive(false);
 
+                        currentPage = hunterPage;
                     }
 
                     break;
@@ -100,11 +130,13 @@ public class CheatsheetScript : MonoBehaviour
 
     private void CheatsheetOn(object target)
     {
+        isOpen = true;
         targetRatio = xOpenRatio;
     }
 
     private void CheatsheetOff(object target)
     {
+        isOpen = false;
         targetRatio = xClosedRatio;
     }
 

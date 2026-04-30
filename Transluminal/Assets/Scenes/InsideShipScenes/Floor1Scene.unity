@@ -280,6 +280,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3198820168016150870, guid: fb7a6e9fa30735b4baa1ea598401aa79, type: 3}
   m_PrefabInstance: {fileID: 134715732}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &196924008 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1740740640359334160, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+  m_PrefabInstance: {fileID: 964167403}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &536571857
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -454,6 +459,11 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &728888445 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6476061018128953328, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+  m_PrefabInstance: {fileID: 964167403}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &763812849
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -981,6 +991,10 @@ PrefabInstance:
       propertyPath: alphaFadeOutSpeed
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 3288048148909366786, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: sceneChangeTransitionDelay
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3333755633978831275, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_LocalPosition.x
       value: 461.29587
@@ -1141,6 +1155,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5454762181682098038, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: ratPage
+      value: 
+      objectReference: {fileID: 1260022887}
+    - target: {fileID: 5454762181682098038, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: hunterPage
+      value: 
+      objectReference: {fileID: 728888445}
+    - target: {fileID: 5454762181682098038, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: creaturePage
+      value: 
+      objectReference: {fileID: 196924008}
     - target: {fileID: 5739149978919735471, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1150,6 +1176,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5973868785138200518, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6476061018128953328, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -1571,6 +1601,11 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1260022887 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1087953424485457178, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+  m_PrefabInstance: {fileID: 964167403}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1325218715
 GameObject:
   m_ObjectHideFlags: 0

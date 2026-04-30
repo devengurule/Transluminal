@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject shipHUDObject;
     [SerializeField] private float bedPauseTime;
     [SerializeField] private int healAmount;
+    [SerializeField] private float sceneChangeTransitionDelay;
 
     private Dictionary<string, SceneData> shipScenesVisited = new Dictionary<string, SceneData>();
     private NavigationController navController;
@@ -122,7 +123,7 @@ public class GameController : MonoBehaviour
     // Change Input Map when changing scenes
     private void SceneChange(Scene current, Scene next)
     {
-        eventManager.Publish(EventType.TransitionOff);
+        StartCoroutine(DelayedTransitionOff(sceneChangeTransitionDelay));
 
         // Get player in scene
         player = GameObject.Find("Player");
