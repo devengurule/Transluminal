@@ -51,6 +51,8 @@ public enum EventType
     TransitionOff,
     TransitionOnFinished,
     TransitionOffFinished,
+    CheatsheetOn,
+    CheatsheetOff,
 
     // ALIENS
     SpawnHunter,

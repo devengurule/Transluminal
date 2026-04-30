@@ -787,7 +787,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 927042205740890881, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1039896747610030331, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_TagString
+      value: CheatsheetButton
       objectReference: {fileID: 0}
     - target: {fileID: 1087953424485457178, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
@@ -893,6 +897,18 @@ PrefabInstance:
       propertyPath: 'alienArchetypes.Array.data[3]'
       value: 
       objectReference: {fileID: 11400000, guid: 7a094b00dda42144e8ed65a9a88e7a30, type: 2}
+    - target: {fileID: 1406421371944672476, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_Name
+      value: Selected
+      objectReference: {fileID: 0}
+    - target: {fileID: 1406421371944672476, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1893450312191237307, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: leftSelect
+      value: 
+      objectReference: {fileID: 964167404}
     - target: {fileID: 2027796009054927797, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_SizeDelta.x
       value: 190.008
@@ -1021,6 +1037,10 @@ PrefabInstance:
       propertyPath: m_GravityScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3560711155510142420, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: cheatsheet
+      value: 
+      objectReference: {fileID: 1140226602}
     - target: {fileID: 3602510169972282844, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1045,6 +1065,10 @@ PrefabInstance:
       propertyPath: currentMoney
       value: 1000000
       objectReference: {fileID: 0}
+    - target: {fileID: 4285149364845234494, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: leftSelect
+      value: 
+      objectReference: {fileID: 964167404}
     - target: {fileID: 4506358965157602680, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1231,7 +1255,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8463800813169505616, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1689
+      value: -1691
       objectReference: {fileID: 0}
     - target: {fileID: 8577197010670045026, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1245,11 +1269,44 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8707104385889017673, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: leftSelect
+      value: 
+      objectReference: {fileID: 964167404}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1039896747610030331, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 964167405}
   m_SourcePrefab: {fileID: 100100000, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+--- !u!1 &964167404 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1039896747610030331, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+  m_PrefabInstance: {fileID: 964167403}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &964167405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964167404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 595bafaf5afe46e42ae65c2818cd603c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScannerSelectorData
+  upSelect: {fileID: 0}
+  downSelect: {fileID: 0}
+  rightSelect: {fileID: 964167406}
+  leftSelect: {fileID: 0}
+--- !u!1 &964167406 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4608198096443028917, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+  m_PrefabInstance: {fileID: 964167403}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &991450130
 GameObject:
   m_ObjectHideFlags: 0
@@ -1369,6 +1426,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8842678169535479588, guid: 04912dd4f933c9843bd26fd9afc72239, type: 3}
   m_PrefabInstance: {fileID: 1069692835}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1140226602 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1671394862249883779, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+  m_PrefabInstance: {fileID: 964167403}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1176233539
 GameObject:
@@ -2594,11 +2656,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3801542708617742354, guid: 3defd63b018a63046ae6f992b2025763, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.23
+      value: -0.83
       objectReference: {fileID: 0}
     - target: {fileID: 3801542708617742354, guid: 3defd63b018a63046ae6f992b2025763, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.47
+      value: -3.92
       objectReference: {fileID: 0}
     - target: {fileID: 3801542708617742354, guid: 3defd63b018a63046ae6f992b2025763, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2640,6 +2702,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -9095717837082945937, guid: 9cca3bf7ef7ec734caf1436e99c2d0f3, type: 3}
+    - target: {fileID: 5899310472959470645, guid: 3defd63b018a63046ae6f992b2025763, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5899310472959470645, guid: 3defd63b018a63046ae6f992b2025763, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8085324
+      objectReference: {fileID: 0}
+    - target: {fileID: 5899310472959470645, guid: 3defd63b018a63046ae6f992b2025763, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5899310472959470645, guid: 3defd63b018a63046ae6f992b2025763, type: 3}
       propertyPath: m_SpriteSortPoint
       value: 1

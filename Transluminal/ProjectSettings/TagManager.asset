@@ -33,6 +33,7 @@ TagManager:
   - Debris
   - Bed
   - Transition
+  - CheatsheetButton
   layers:
   - Default
   - TransparentFX

@@ -10,12 +10,14 @@ public class ScannerController : MonoBehaviour
     [SerializeField] private GameObject densityImage;
     [SerializeField] private GameObject salvageObject;
     [SerializeField] private GameObject displayObject;
+    [SerializeField] private GameObject cheatsheet;
 
     private EventManager eventManager;
     private List<SalvageSaveData> salvageList;
     private SalvageSaveData currentSalvage;
     private bool canChangeSelection = true;
     private bool canScan;
+    private bool cheatsheetOpen;
 
     private void Start()
     {
@@ -76,10 +78,9 @@ public class ScannerController : MonoBehaviour
 
     private void SelectButton(object target)
     {
+        GameObject selectedScan = GetComponent<ScannerSelectionController>().GetCurrentSelection();
         if (gameObject.activeSelf && currentSalvage.salvageData != null && canScan)
         {
-            GameObject selectedScan = GetComponent<ScannerSelectionController>().GetCurrentSelection();
-
             switch (selectedScan.tag)
             {
                 case "FluidAmount":
@@ -114,7 +115,16 @@ public class ScannerController : MonoBehaviour
                     TrashSalvage();
 
                     break;
+                default:
+
+                    print("No Button Found");
+                    
+                    break;
             }
+        }
+        else if(gameObject.activeSelf && canScan && selectedScan.tag == "CheatsheetButton")
+        {
+            ToggleCheatsheet();
         }
     }
 
@@ -213,6 +223,28 @@ public class ScannerController : MonoBehaviour
             densityImage = null;
             UpdateDisplay("Hello World");
             salvageObject.GetComponent<Image>().enabled = false;
+        }
+    }
+
+    private void ToggleCheatsheet()
+    {
+        if (cheatsheetOpen)
+        {
+            // Cheatsheet is open
+            // Must close it
+
+            eventManager.Publish(EventType.CheatsheetOff);
+            canChangeSelection = true;
+            cheatsheetOpen = false;
+        }
+        else
+        {
+            // Cheatsheet is closed
+            // Must open it
+
+            eventManager.Publish(EventType.CheatsheetOn);
+            canChangeSelection = false;
+            cheatsheetOpen = true;
         }
     }
 }

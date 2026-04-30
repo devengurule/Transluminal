@@ -1287,6 +1287,7 @@ MonoBehaviour:
   densityImage: {fileID: 6053924400269696990}
   salvageObject: {fileID: 4506358965157602680}
   displayObject: {fileID: 3539789121391342202}
+  cheatsheet: {fileID: 0}
 --- !u!114 &4084143099326390443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2240,6 +2241,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8463800813169505616}
+  - component: {fileID: 5454762181682098038}
   m_Layer: 5
   m_Name: Cheatsheet
   m_TagString: Untagged
@@ -2271,6 +2273,21 @@ RectTransform:
   m_AnchoredPosition: {x: -977.25464, y: -23}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5454762181682098038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1671394862249883779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbbca576f5fedf94da502e4de813d840, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  xOpenRatio: -0.03
+  xClosedRatio: -0.38
+  moveSpeed: 0.2
 --- !u!1 &1740740640359334160
 GameObject:
   m_ObjectHideFlags: 0
