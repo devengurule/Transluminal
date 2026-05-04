@@ -1067,6 +1067,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3946282462788642465, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: deductionAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3946282462788642465, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: passiveDeductionTime
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 3946282462788642465, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: passiveDeductionAmount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4266308141701516784, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsTrigger
       value: 1

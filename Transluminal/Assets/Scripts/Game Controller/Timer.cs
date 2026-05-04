@@ -6,6 +6,7 @@ public class Timer : MonoBehaviour
     private float duration;
     private Action action;
     private bool pauseAware;
+    private bool doesLoop;
 
     public float remainingTime { get; private set; }
     public bool isRunning { get; private set; }
@@ -27,22 +28,29 @@ public class Timer : MonoBehaviour
         }
     }
 
-    public void Initalize(float duration, bool pauseAware)
+    public void Initalize(float duration, bool pauseAware, bool doesLoop)
     {
         this.duration = duration;
         this.pauseAware = pauseAware;
+        this.doesLoop = doesLoop;
     }
 
-    public void Initalize(float duration, Action action, bool pauseAware)
+    public void Initalize(float duration, Action action, bool pauseAware, bool doesLoop)
     {
         this.duration = duration;
         this.action = action;
         this.pauseAware = pauseAware;
+        this.doesLoop = doesLoop;
     }
 
     public void Run()
     {
-        if (!isRunning && duration > 0)
+        if (!isRunning && duration <= 0 && doesLoop)
+        {
+            remainingTime = duration;
+            isRunning = true;
+        }
+        else if (!isRunning && duration > 0)
         {
             remainingTime = duration;
             isRunning = true;
@@ -62,6 +70,11 @@ public class Timer : MonoBehaviour
         action?.Invoke();
         remainingTime = duration;
         isRunning = false;
+
+        if (doesLoop)
+        {
+            Run();
+        }
     }
     
     public void Reset()

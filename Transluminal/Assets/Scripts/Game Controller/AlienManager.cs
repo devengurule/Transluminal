@@ -33,7 +33,7 @@ public class AlienManager : MonoBehaviour
         eventManager = GameController.instance.eventManager;
 
         creatureSpawnTimer = gameObject.AddComponent<Timer>();
-        creatureSpawnTimer.Initalize(Random.Range(spawnOffsetTimeRange.x, spawnOffsetTimeRange.y), QueueCreatureSpawn, true);
+        creatureSpawnTimer.Initalize(Random.Range(spawnOffsetTimeRange.x, spawnOffsetTimeRange.y), QueueCreatureSpawn, true, false);
      
         spawnZone = GameObject.FindGameObjectWithTag("SpawnZone");
 

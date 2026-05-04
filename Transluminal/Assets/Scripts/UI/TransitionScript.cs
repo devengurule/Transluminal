@@ -19,7 +19,7 @@ public class TransitionScript : MonoBehaviour
         image = GetComponent<Image>();
 
         transitionTimer = gameObject.AddComponent<Timer>();
-        transitionTimer.Initalize(transitionLength, false);
+        transitionTimer.Initalize(transitionLength, false, false);
 
         colorVector = new Vector4(0,0,0,1);
         image.color = colorVector;

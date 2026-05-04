@@ -20,7 +20,7 @@ public class RatScript : MonoBehaviour
         eventManager = GameController.instance.eventManager;
 
         timer = gameObject.AddComponent<Timer>();
-        timer.Initalize(duration, Dead, true);
+        timer.Initalize(duration, Dead, true, false);
 
         direction = GetRandomDirection();
         rb = GetComponent<Rigidbody2D>();

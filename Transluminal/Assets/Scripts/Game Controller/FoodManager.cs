@@ -10,8 +10,8 @@ public class FoodManager : MonoBehaviour
     [SerializeField, Min(0)] private int totalDigits;
     [SerializeField] private float currentFood;
 
-    [SerializeField] private float deductionTime;
-    [SerializeField] private float deductionAmount;
+    [SerializeField] private float passiveDeductionTime;
+    [SerializeField] private float passiveDeductionAmount;
 
     private Timer passiveDeductionTimer;
     #endregion
@@ -20,7 +20,7 @@ public class FoodManager : MonoBehaviour
     private void Start()
     {
         passiveDeductionTimer = gameObject.AddComponent<Timer>();
-        passiveDeductionTimer.Initalize(deductionTime, DeductFood, true);
+        passiveDeductionTimer.Initalize(passiveDeductionTime, PassiveDeductFood, true, true);
         passiveDeductionTimer.Run();
 
         // Subscribe to active scene change event
@@ -54,7 +54,7 @@ public class FoodManager : MonoBehaviour
         TMP_Text foodCounterText = foodCounterObject.GetComponent<TMP_Text>();
 
         // Update text
-        foodCounterText.text = foodFloatToStr(currentFood);
+        foodCounterText.text = currentFood.ToString();
     }
 
     private string foodFloatToStr(float food)
@@ -95,10 +95,10 @@ public class FoodManager : MonoBehaviour
         currentFood -= food;
     }
 
-    private void DeductFood()
+    private void PassiveDeductFood()
     {
-        currentFood -= deductionAmount;
-        passiveDeductionTimer.Run();
+        currentFood -= passiveDeductionAmount;
+        UpdateFoodCounter();
     }
     #endregion
 }

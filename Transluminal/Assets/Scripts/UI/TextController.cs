@@ -77,7 +77,7 @@ public class TextController : MonoBehaviour
         {
             if (input == key && appearTime != 0)
             {
-                timer.Initalize(appearTime, ResetText, true);
+                timer.Initalize(appearTime, ResetText, true, false);
                 timer.Run();
             }
         }

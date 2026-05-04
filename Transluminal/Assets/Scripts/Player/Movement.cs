@@ -31,7 +31,7 @@ public class Movement : MonoBehaviour
         eventManager = GameController.instance.eventManager;
 
         stunTimer = gameObject.AddComponent<Timer>();
-        stunTimer.Initalize(stunDuration, () => isKnockedBack = false, true);
+        stunTimer.Initalize(stunDuration, () => isKnockedBack = false, true, false);
 
         maxVelocity = walkVelocity;
 
