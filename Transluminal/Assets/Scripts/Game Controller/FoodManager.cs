@@ -8,12 +8,21 @@ public class FoodManager : MonoBehaviour
 {
     #region Variables
     [SerializeField, Min(0)] private int totalDigits;
-    [SerializeField] private int currentFood;
+    [SerializeField] private float currentFood;
+
+    [SerializeField] private float deductionTime;
+    [SerializeField] private float deductionAmount;
+
+    private Timer passiveDeductionTimer;
     #endregion
 
     #region Unity Methods
     private void Start()
     {
+        passiveDeductionTimer = gameObject.AddComponent<Timer>();
+        passiveDeductionTimer.Initalize(deductionTime, DeductFood, true);
+        passiveDeductionTimer.Run();
+
         // Subscribe to active scene change event
         SceneManager.activeSceneChanged += SceneChange;
 
@@ -45,11 +54,11 @@ public class FoodManager : MonoBehaviour
         TMP_Text foodCounterText = foodCounterObject.GetComponent<TMP_Text>();
 
         // Update text
-        foodCounterText.text = foodIntToStr(currentFood);
+        foodCounterText.text = foodFloatToStr(currentFood);
     }
 
-    private string foodIntToStr(int food)
-    {
+    private string foodFloatToStr(float food)
+    {  
         // TotalDigits = 3
         // Input: 6
         // Output = 006
@@ -76,7 +85,7 @@ public class FoodManager : MonoBehaviour
         return foodString;
     }
 
-    public int GetCurrentFood()
+    public float GetCurrentFood()
     {
         return currentFood;
     }
@@ -84,6 +93,12 @@ public class FoodManager : MonoBehaviour
     public void SubtractFood(int food)
     {
         currentFood -= food;
+    }
+
+    private void DeductFood()
+    {
+        currentFood -= deductionAmount;
+        passiveDeductionTimer.Run();
     }
     #endregion
 }
