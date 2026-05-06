@@ -2691,11 +2691,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3801542708617742354, guid: 3defd63b018a63046ae6f992b2025763, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.83
+      value: -0.32
       objectReference: {fileID: 0}
     - target: {fileID: 3801542708617742354, guid: 3defd63b018a63046ae6f992b2025763, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.92
+      value: -3.89
       objectReference: {fileID: 0}
     - target: {fileID: 3801542708617742354, guid: 3defd63b018a63046ae6f992b2025763, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2733,25 +2733,13 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5899310472959470645, guid: 3defd63b018a63046ae6f992b2025763, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -9095717837082945937, guid: 9cca3bf7ef7ec734caf1436e99c2d0f3, type: 3}
-    - target: {fileID: 5899310472959470645, guid: 3defd63b018a63046ae6f992b2025763, type: 3}
-      propertyPath: m_Color.b
-      value: 0
+    - target: {fileID: 3932992506730235195, guid: 3defd63b018a63046ae6f992b2025763, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 5899310472959470645, guid: 3defd63b018a63046ae6f992b2025763, type: 3}
-      propertyPath: m_Color.g
-      value: 0.8085324
-      objectReference: {fileID: 0}
-    - target: {fileID: 5899310472959470645, guid: 3defd63b018a63046ae6f992b2025763, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5899310472959470645, guid: 3defd63b018a63046ae6f992b2025763, type: 3}
-      propertyPath: m_SpriteSortPoint
-      value: 1
+    - target: {fileID: 3932992506730235195, guid: 3defd63b018a63046ae6f992b2025763, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 4.38
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
