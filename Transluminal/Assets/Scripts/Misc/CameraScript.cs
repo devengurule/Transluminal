@@ -34,7 +34,7 @@ public class CameraScript : MonoBehaviour
     {
         if (canMove)
         {
-            transform.position = Vector3.Lerp(transform.position, target.transform.position, trackSpeed * TimeManager.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, trackSpeed);
             transform.position = new Vector3(transform.position.x, transform.position.y, -10f);
 
             float targetZ = target.transform.eulerAngles.z;

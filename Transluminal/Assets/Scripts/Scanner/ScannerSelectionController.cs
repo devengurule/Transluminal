@@ -1,5 +1,3 @@
-using Unity.VisualScripting;
-using UnityEditor.EditorTools;
 using UnityEngine;
 
 public class ScannerSelectionController : MonoBehaviour
