@@ -116,10 +116,10 @@ TextureImporter:
       name: DockDoor_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 504
-        height: 504
+        x: 25
+        y: 22
+        width: 450
+        height: 450
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

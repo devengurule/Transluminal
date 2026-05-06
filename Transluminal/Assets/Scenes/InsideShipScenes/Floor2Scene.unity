@@ -390,7 +390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   doorSprite: {fileID: 1777512901747984553, guid: bf2dcbde5310c7a41a0faa1d1ef67b16, type: 3}
-  shopSprite: {fileID: -8995798871140182514, guid: aaf421ec6559bd94e92ffd9e410e5441, type: 3}
+  shopSprite: {fileID: -2941801896034832243, guid: 150d59fe4533bfc43b795fc85c72c07c, type: 3}
 --- !u!1001 &180283147
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClosetScript
   closetCollider: {fileID: 5189072212648366583}
-  hidingSprite: {fileID: 694456406680718846, guid: 45f2c4a213823254d8d12d4d519f870e, type: 3}
+  hidingSprite: {fileID: -5409440408549150765, guid: a0b429728bc9db64eac60bc6194da6a1, type: 3}
 --- !u!1 &1429787510973059349
 GameObject:
   m_ObjectHideFlags: 0

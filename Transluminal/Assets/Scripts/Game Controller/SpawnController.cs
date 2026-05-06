@@ -65,7 +65,7 @@ public class SpawnController : MonoBehaviour
                 float angle = Random.Range(0, 360);
                 GameObject scrapObject = Instantiate(scrapPrefab, randomPoint, Quaternion.Euler(0, 0, angle));
 
-                Sprite sprite = scrapSprites[Random.Range(0, scrapSprites.Count - 1)];
+                Sprite sprite = scrapSprites[Random.Range(0, scrapSprites.Count)];
 
                 // Set scraps designated tier values
                 switch (tier)
