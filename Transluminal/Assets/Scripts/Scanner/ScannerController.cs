@@ -115,11 +115,6 @@ public class ScannerController : MonoBehaviour
                     TrashSalvage();
 
                     break;
-                default:
-
-                    print("No Button Found");
-                    
-                    break;
             }
         }
         
