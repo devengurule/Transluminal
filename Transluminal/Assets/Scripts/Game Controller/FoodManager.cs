@@ -1,7 +1,5 @@
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class FoodManager : MonoBehaviour
@@ -50,11 +48,14 @@ public class FoodManager : MonoBehaviour
         // Get UI object
         GameObject foodCounterObject = GameObject.Find("NumberCounter");
 
-        // Get text attached to object
-        TMP_Text foodCounterText = foodCounterObject.GetComponent<TMP_Text>();
+        if (foodCounterObject != null)
+        {
+            // Get text attached to object
+            TMP_Text foodCounterText = foodCounterObject.GetComponent<TMP_Text>();
 
-        // Update text
-        foodCounterText.text = currentFood.ToString();
+            // Update text
+            foodCounterText.text = currentFood.ToString();
+        }
     }
 
     private string foodFloatToStr(float food)
@@ -93,6 +94,7 @@ public class FoodManager : MonoBehaviour
     public void SubtractFood(float food)
     {
         currentFood -= food;
+        UpdateFoodCounter();
     }
 
     private void PassiveDeductFood()

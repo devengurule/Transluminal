@@ -94,7 +94,8 @@ public class Movement : MonoBehaviour
             if (move == Vector2.zero) animeState = AnimeState.idle;
             else if(move != Vector2.zero)
             {
-                sr.flipX = move.x > 0;
+                if(move.x != 0) sr.flipX = move.x > 0;
+
                 if (maxVelocity != sprintVelocity) animeState = AnimeState.walk;
                 else animeState = AnimeState.run;
             }

@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class RatScript : MonoBehaviour
@@ -6,12 +5,14 @@ public class RatScript : MonoBehaviour
     [SerializeField] private float detectionRadius;
     [SerializeField] private Vector2 speed;
     [SerializeField] private Vector2 maxSpeed;
-    [SerializeField] private float eatingRate;
+    [SerializeField] private float eatingFoodRate;
+    [SerializeField] private float eatingFuelRate;
 
     private AlienSaveData saveDataInstance;
     private EventManager eventManager;
     private Vector2 direction;
     private Rigidbody2D rb;
+    private Animator animator;
     private bool isFleeing;
     private bool isEating = true;
     private Timer deadTimer;
@@ -20,7 +21,7 @@ public class RatScript : MonoBehaviour
     private void Start()
     {
         eventManager = GameController.instance.eventManager;
-
+        animator = GetComponent<Animator>();
         deadTimer = gameObject.AddComponent<Timer>();
         deadTimer.Initalize(duration, Dead, true, false);
 
@@ -32,6 +33,7 @@ public class RatScript : MonoBehaviour
     {
         Eating();
         Fleeing();
+        UpdateAnimation();
     }
 
     private void Dead()
@@ -47,10 +49,13 @@ public class RatScript : MonoBehaviour
 
     private void Eating()
     {
-        isEating = !isFleeing;
-        if (isEating)
+        if (SceneController.GetCurrentSceneName() == "Floor2Scene" && isEating)
         {
-            GameController.instance.GetComponent<FoodManager>().SubtractFood(eatingRate);
+            GameController.instance.GetComponent<FoodManager>().SubtractFood(eatingFoodRate);
+        }
+        else if(SceneController.GetCurrentSceneName() == "Floor3Scene" && isEating)
+        {
+            GameController.instance.GetComponent<FuelManager>().SubtractFuel(eatingFuelRate);
         }
     }
 
@@ -60,6 +65,7 @@ public class RatScript : MonoBehaviour
         
         if (isFleeing)
         {
+            isEating = false;
             deadTimer.Run();
             Move(direction, speed, maxSpeed);
         }
@@ -97,10 +103,17 @@ public class RatScript : MonoBehaviour
         return false;
     }
 
+    private void UpdateAnimation()
+    {
+        if(isEating) animator.SetFloat("Blend", 0);
+        if (isFleeing) animator.SetFloat("Blend", 1);
+    }
+
     #region Gizmos
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
+
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
 
         Gizmos.color = Color.red;

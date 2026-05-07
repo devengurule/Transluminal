@@ -63,12 +63,16 @@ public class FuelManager : MonoBehaviour
     private void UpdateFuelMeter()
     {
         GameObject fuelMeterObject = GameObject.Find("FuelMeter");
-        float newFuelPercent = currentFuel / maxFuel;
-        float currentFuelPercent = fuelMeterObject.GetComponent<Image>().fillAmount;
 
-        float lerpedFuelPercent = Mathf.Lerp(currentFuelPercent, newFuelPercent, lerpSpeed);
+        if (fuelMeterObject != null)
+        {
+            float newFuelPercent = currentFuel / maxFuel;
+            float currentFuelPercent = fuelMeterObject.GetComponent<Image>().fillAmount;
 
-        fuelMeterObject.GetComponent<Image>().fillAmount = lerpedFuelPercent;
+            float lerpedFuelPercent = Mathf.Lerp(currentFuelPercent, newFuelPercent, lerpSpeed);
+
+            fuelMeterObject.GetComponent<Image>().fillAmount = lerpedFuelPercent;
+        }
     }
 
     private void QuickUpdateFuelMeter()
@@ -91,6 +95,7 @@ public class FuelManager : MonoBehaviour
     public void SubtractFuel(float fuel)
     {
         currentFuel -= fuel;
+        UpdateFuelMeter();
     }
 
     public void IncreaseMaxFuel(float percentAmount)
