@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3801542708617742354}
   - component: {fileID: 5899310472959470645}
+  - component: {fileID: 6414668119665579901}
   - component: {fileID: 3625812884104348763}
   - component: {fileID: 3932992506730235195}
   - component: {fileID: 7694931561697969058}
@@ -95,6 +96,28 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 1
+--- !u!95 &6414668119665579901
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 827656541818608467}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 21ecdef8ec54d5f4d8c63b52bc5167fc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!50 &3625812884104348763
 Rigidbody2D:
   serializedVersion: 5
@@ -156,7 +179,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.09}
+  m_Offset: {x: 0, y: 0.27}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -181,7 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   walkVelocity: {x: 3, y: 2}
-  sprintVelocity: {x: 10, y: 3.5}
+  sprintVelocity: {x: 6, y: 3.5}
   acceleration: {x: 20, y: 15}
   friction: {x: 1, y: 2}
   knockBackForce: 10

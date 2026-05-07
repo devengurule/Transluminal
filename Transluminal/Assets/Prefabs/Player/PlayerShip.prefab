@@ -175,7 +175,7 @@ MonoBehaviour:
   friction: 0.3
   torqueFriction: 0.3
   torque: 10
-  zeroVelocitySpeed: {x: 5, y: 10}
+  zeroVelocitySpeed: {x: 3, y: 7}
   fuelConsumptionRate: 0.001
   hullStrikeFuelPenalty: 10
   speedThreshold: 0.05

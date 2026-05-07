@@ -11,6 +11,8 @@ public class Movement : MonoBehaviour
     [SerializeField] private float stunDuration;
 
     private EventManager eventManager;
+    private Animator animator;
+    private SpriteRenderer sr;
     private Vector2 move = Vector2.zero;
     private Vector2 maxVelocity;
     private Rigidbody2D rb;
@@ -18,12 +20,23 @@ public class Movement : MonoBehaviour
     private bool canMove = true;
     private bool isKnockedBack;
     private Timer stunTimer;
+
+    private enum AnimeState
+    {
+        idle,
+        walk,
+        run
+    }
+    private AnimeState animeState = AnimeState.idle;
+
     #endregion
 
     #region Unity Methods
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     private void Start()
@@ -32,7 +45,7 @@ public class Movement : MonoBehaviour
 
         stunTimer = gameObject.AddComponent<Timer>();
         stunTimer.Initalize(stunDuration, () => isKnockedBack = false, true, false);
-
+        
         maxVelocity = walkVelocity;
 
         if (eventManager != null)
@@ -41,6 +54,7 @@ public class Movement : MonoBehaviour
             eventManager.Subscribe(EventType.SprintOn, OnSprintPlayer);
             eventManager.Subscribe(EventType.SprintOff, OffSprint);
             eventManager.Subscribe(EventType.PauseOn, OnPauseGame);
+            eventManager.Subscribe(EventType.PauseOff, OffPauseGame);
             eventManager.Subscribe(EventType.OnEnterCloset, OnEnterCloset);
             eventManager.Subscribe(EventType.OnExitCloset, OnExitCloset);
             eventManager.Subscribe(EventType.AttackPlayer, OnKnockBack);
@@ -55,6 +69,7 @@ public class Movement : MonoBehaviour
             eventManager.Unsubscribe(EventType.SprintOn, OnSprintPlayer);
             eventManager.Unsubscribe(EventType.SprintOff, OffSprint);
             eventManager.Unsubscribe(EventType.PauseOn, OnPauseGame);
+            eventManager.Unsubscribe(EventType.PauseOff, OffPauseGame);
             eventManager.Unsubscribe(EventType.OnEnterCloset, OnEnterCloset);
             eventManager.Unsubscribe(EventType.OnExitCloset, OnExitCloset);
             eventManager.Unsubscribe(EventType.AttackPlayer, OnKnockBack);
@@ -64,6 +79,7 @@ public class Movement : MonoBehaviour
     private void Update()
     {
         MovementLogic();
+        UpdateAnimation();
     }
     #endregion
 
@@ -74,6 +90,13 @@ public class Movement : MonoBehaviour
         if (target is Vector2 move && canMove)
         {
             this.move = move;
+            if (move == Vector2.zero) animeState = AnimeState.idle;
+            else if(move != Vector2.zero && TimeManager.deltaTime != 0)
+            {
+                sr.flipX = move.x > 0;
+                if (maxVelocity != sprintVelocity) animeState = AnimeState.walk;
+                else animeState = AnimeState.run;
+            }
         }
     }
 
@@ -81,12 +104,14 @@ public class Movement : MonoBehaviour
     {
         // Sets max velocity to sprint if the sprint button is held down
         maxVelocity = sprintVelocity;
+        if (move != Vector2.zero && TimeManager.deltaTime != 0) animeState = AnimeState.run;
     }
 
     private void OffSprint(object target)
     {
         // Sets max velocity to walk if the sprint button is released
         maxVelocity = walkVelocity;
+        if(move != Vector2.zero && TimeManager.deltaTime != 0) animeState = AnimeState.walk;
     }
 
     private void OnPauseGame(object target)
@@ -94,6 +119,12 @@ public class Movement : MonoBehaviour
         // Set all physics numbers to zero when paused
         rb.linearVelocity = Vector2.zero;
         move = Vector2.zero;
+        animator.speed = 0;
+    }
+
+    private void OffPauseGame(object target)
+    {
+        animator.speed = 1;
     }
 
     private void OnEnterCloset(object target)
@@ -163,5 +194,26 @@ public class Movement : MonoBehaviour
             if (Mathf.Abs(rb.linearVelocityY) < 0.005) rb.linearVelocityY = 0;
         }
     }
+
+    private void UpdateAnimation()
+    {
+        
+
+        switch(animeState)
+        {
+            case AnimeState.idle:
+                animator.SetFloat("State", 0);
+                break;
+
+            case AnimeState.walk:
+                animator.SetFloat("State", 1);
+                break;
+
+            case AnimeState.run:
+                animator.SetFloat("State", 2);
+                break;
+        }
+    }
+
     #endregion
 }
