@@ -6,21 +6,23 @@ public class RatScript : MonoBehaviour
     [SerializeField] private float detectionRadius;
     [SerializeField] private Vector2 speed;
     [SerializeField] private Vector2 maxSpeed;
+    [SerializeField] private float eatingRate;
 
     private AlienSaveData saveDataInstance;
     private EventManager eventManager;
     private Vector2 direction;
     private Rigidbody2D rb;
     private bool isFleeing;
-    private Timer timer;
+    private bool isEating = true;
+    private Timer deadTimer;
     private float duration = 2f;
 
     private void Start()
     {
         eventManager = GameController.instance.eventManager;
 
-        timer = gameObject.AddComponent<Timer>();
-        timer.Initalize(duration, Dead, true, false);
+        deadTimer = gameObject.AddComponent<Timer>();
+        deadTimer.Initalize(duration, Dead, true, false);
 
         direction = GetRandomDirection();
         rb = GetComponent<Rigidbody2D>();
@@ -28,6 +30,7 @@ public class RatScript : MonoBehaviour
 
     private void Update()
     {
+        Eating();
         Fleeing();
     }
 
@@ -42,13 +45,22 @@ public class RatScript : MonoBehaviour
         this.saveDataInstance = saveDataInstance;
     }
 
+    private void Eating()
+    {
+        isEating = !isFleeing;
+        if (isEating)
+        {
+            GameController.instance.GetComponent<FoodManager>().SubtractFood(eatingRate);
+        }
+    }
+
     private void Fleeing()
     {
         isFleeing = PlayerCollisionCheck(detectionRadius) ? true : false;
-
+        
         if (isFleeing)
         {
-            timer.Run();
+            deadTimer.Run();
             Move(direction, speed, maxSpeed);
         }
     }

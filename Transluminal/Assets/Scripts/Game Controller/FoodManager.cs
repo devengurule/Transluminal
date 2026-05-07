@@ -90,7 +90,7 @@ public class FoodManager : MonoBehaviour
         return currentFood;
     }
 
-    public void SubtractFood(int food)
+    public void SubtractFood(float food)
     {
         currentFood -= food;
     }

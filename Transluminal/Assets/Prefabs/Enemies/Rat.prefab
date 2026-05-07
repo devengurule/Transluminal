@@ -182,3 +182,4 @@ MonoBehaviour:
   detectionRadius: 2
   speed: {x: 10, y: 10}
   maxSpeed: {x: 3, y: 3}
+  eatingRate: 0.001

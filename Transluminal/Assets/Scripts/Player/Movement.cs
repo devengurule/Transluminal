@@ -87,11 +87,12 @@ public class Movement : MonoBehaviour
     private void OnMovePlayer(object target)
     {
         // Set move to the input vector
-        if (target is Vector2 move && canMove)
+        if (target is Vector2 move && canMove && TimeManager.deltaTime != 0)
         {
             this.move = move;
+
             if (move == Vector2.zero) animeState = AnimeState.idle;
-            else if(move != Vector2.zero && TimeManager.deltaTime != 0)
+            else if(move != Vector2.zero)
             {
                 sr.flipX = move.x > 0;
                 if (maxVelocity != sprintVelocity) animeState = AnimeState.walk;
@@ -120,11 +121,16 @@ public class Movement : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
         move = Vector2.zero;
         animator.speed = 0;
+        canMove = false;
     }
 
     private void OffPauseGame(object target)
     {
         animator.speed = 1;
+        if((Vector2)transform.position != GameController.instance.PlayerHidingPos())
+        {
+            canMove = true;
+        }
     }
 
     private void OnEnterCloset(object target)
@@ -197,8 +203,6 @@ public class Movement : MonoBehaviour
 
     private void UpdateAnimation()
     {
-        
-
         switch(animeState)
         {
             case AnimeState.idle:
