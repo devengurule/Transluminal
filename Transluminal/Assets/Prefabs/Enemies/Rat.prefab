@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6465621578453550595}
   - component: {fileID: 5482940918242599585}
   - component: {fileID: 75972344563369354}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Rat
   m_TagString: Rat
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 4104
+    m_Bits: 36872
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -180,11 +180,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc9e32c288616cd468bde9b05c2b4c41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  detectionRadius: 2
+  detectionRadius: 1
+  detectionPos: {x: 0, y: 0.45}
   speed: {x: 10, y: 10}
   maxSpeed: {x: 3, y: 3}
-  eatingFoodRate: 0.01
-  eatingFuelRate: 0.01
+  eatingFoodRate: 0.001
+  eatingFuelRate: 0.001
 --- !u!95 &75972344563369354
 Animator:
   serializedVersion: 7

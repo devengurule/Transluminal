@@ -1,8 +1,10 @@
+using System.Collections;
 using UnityEngine;
 
 public class RatScript : MonoBehaviour
 {
     [SerializeField] private float detectionRadius;
+    [SerializeField] private Vector2 detectionPos;
     [SerializeField] private Vector2 speed;
     [SerializeField] private Vector2 maxSpeed;
     [SerializeField] private float eatingFoodRate;
@@ -17,6 +19,7 @@ public class RatScript : MonoBehaviour
     private bool isEating = true;
     private Timer deadTimer;
     private float duration = 2f;
+    private bool canAnimate;
 
     private void Start()
     {
@@ -27,6 +30,8 @@ public class RatScript : MonoBehaviour
 
         direction = GetRandomDirection();
         rb = GetComponent<Rigidbody2D>();
+
+        StartCoroutine(Wait());
     }
 
     private void Update()
@@ -91,7 +96,7 @@ public class RatScript : MonoBehaviour
 
     private bool PlayerCollisionCheck(float radius)
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll((Vector2)transform.position + detectionPos, radius);
 
         foreach (Collider2D obj in colliders)
         {
@@ -105,8 +110,18 @@ public class RatScript : MonoBehaviour
 
     private void UpdateAnimation()
     {
-        if(isEating) animator.SetFloat("Blend", 0);
-        if (isFleeing) animator.SetFloat("Blend", 1);
+        if (canAnimate)
+        {
+            if (isEating) animator.SetFloat("Blend", 0);
+            if (isFleeing) animator.SetFloat("Blend", 1);
+        }
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(Random.Range(0f, 0.5f));
+
+        canAnimate = true;
     }
 
     #region Gizmos
@@ -114,7 +129,7 @@ public class RatScript : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
 
-        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+        Gizmos.DrawWireSphere((Vector2)transform.position + detectionPos, detectionRadius);
 
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.position + (Vector3)direction);
