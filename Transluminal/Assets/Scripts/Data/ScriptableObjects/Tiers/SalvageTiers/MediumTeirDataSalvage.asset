@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: MediumTeirDataSalvage
   m_EditorClassIdentifier: Assembly-CSharp::TierData
   tier: MediumTierData
-  minValue: 501
-  maxValue: 900
+  minValue: 50001
+  maxValue: 90000

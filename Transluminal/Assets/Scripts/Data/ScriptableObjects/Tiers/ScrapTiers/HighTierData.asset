@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: HighTierData
   m_EditorClassIdentifier: Assembly-CSharp::TierData
   tier: HighTierData
-  minValue: 101
-  maxValue: 300
+  minValue: 8001
+  maxValue: 10000

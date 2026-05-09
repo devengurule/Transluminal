@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: HighTierDataSalvage
   m_EditorClassIdentifier: Assembly-CSharp::TierData
   tier: HighTierData
-  minValue: 1000
-  maxValue: 2000
+  minValue: 90001
+  maxValue: 150000

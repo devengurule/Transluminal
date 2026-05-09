@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: LowTierDataSalvage
   m_EditorClassIdentifier: Assembly-CSharp::TierData
   tier: LowTierData
-  minValue: 300
-  maxValue: 500
+  minValue: 30000
+  maxValue: 50000

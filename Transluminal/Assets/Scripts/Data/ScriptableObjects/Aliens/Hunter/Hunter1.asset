@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AlienData
   densityImage: {fileID: -1188111363833284870, guid: ced7446a05bfcf343b2075596cda542f, type: 3}
   camoflaugeImage: {fileID: 0}
-  fluidSignature: 1.2
+  fluidSignature: 0
   fluidSignatureType: 0
   alienType: 2

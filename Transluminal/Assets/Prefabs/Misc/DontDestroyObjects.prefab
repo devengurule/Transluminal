@@ -5110,7 +5110,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3325679889016063388
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12722,7 +12722,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8210518752818356001, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
       propertyPath: alienArchetypes.Array.size
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -8210518752818356001, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
       propertyPath: lowTierScrapData.Array.size
@@ -12737,9 +12737,33 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8210518752818356001, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: salvageArchetypes.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -8210518752818356001, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
       propertyPath: 'alienArchetypes.Array.data[0]'
       value: 
+      objectReference: {fileID: 11400000, guid: 6901381fd6373d24ea807f41bb6e74d2, type: 2}
+    - target: {fileID: -8210518752818356001, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: 'alienArchetypes.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f062041913066443981d810dacd52ae, type: 2}
+    - target: {fileID: -8210518752818356001, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: 'alienArchetypes.Array.data[2]'
+      value: 
       objectReference: {fileID: 11400000, guid: c896f3b4fde599146854c9262f3662aa, type: 2}
+    - target: {fileID: -8210518752818356001, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: 'alienArchetypes.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 7a094b00dda42144e8ed65a9a88e7a30, type: 2}
+    - target: {fileID: -8210518752818356001, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: 'alienArchetypes.Array.data[4]'
+      value: 
+      objectReference: {fileID: 11400000, guid: eeaedc9bbed132747a38d9d962c1adb9, type: 2}
+    - target: {fileID: -8210518752818356001, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: 'alienArchetypes.Array.data[5]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a7f334227b78a7e41b6f4a7d17b39cf0, type: 2}
     - target: {fileID: -8210518752818356001, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
       propertyPath: lowTierSalvageData.Array.size
       value: 5
@@ -12777,6 +12801,46 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 9a5b400e51c7d1b47ba7e6aa23ead8a8, type: 2}
     - target: {fileID: -8210518752818356001, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: 'salvageArchetypes.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 9d92ebc3a68dec84bb36ac0effce5f21, type: 2}
+    - target: {fileID: -8210518752818356001, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: 'salvageArchetypes.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: f300730aa128e944fafb216cbb701a7c, type: 2}
+    - target: {fileID: -8210518752818356001, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: 'salvageArchetypes.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 0b75797296cc7404cafedab3206b0a32, type: 2}
+    - target: {fileID: -8210518752818356001, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: 'salvageArchetypes.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 04e3552600f912048a7fbfcb53c23fe8, type: 2}
+    - target: {fileID: -8210518752818356001, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: 'salvageArchetypes.Array.data[4]'
+      value: 
+      objectReference: {fileID: 11400000, guid: c7b7838e7a21a8a44b23f2b1014f0724, type: 2}
+    - target: {fileID: -8210518752818356001, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: 'salvageArchetypes.Array.data[5]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 37a398d0e5fe9f84dac2b27f2a8e5726, type: 2}
+    - target: {fileID: -8210518752818356001, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: 'salvageArchetypes.Array.data[6]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 085d08229b3eadd4cafcee0f32a36b45, type: 2}
+    - target: {fileID: -8210518752818356001, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: 'salvageArchetypes.Array.data[7]'
+      value: 
+      objectReference: {fileID: 11400000, guid: eda7fbe4a709cc74f96e8dbb13d1cc80, type: 2}
+    - target: {fileID: -8210518752818356001, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: 'salvageArchetypes.Array.data[8]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 5cb2ce8e26d448d4d9aaf9e32dfad856, type: 2}
+    - target: {fileID: -8210518752818356001, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: 'salvageArchetypes.Array.data[9]'
+      value: 
+      objectReference: {fileID: 11400000, guid: ce27a35315ed1e84f9b2e564397dbae2, type: 2}
+    - target: {fileID: -8210518752818356001, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
       propertyPath: 'lowTierSalvageData.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: 9daecb2fa0e7fa5458905085ba757e53, type: 2}
@@ -12800,6 +12864,14 @@ PrefabInstance:
       propertyPath: 'medTierSalvageData.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: 4f8400b0cab215b4881c2dbf64ebbddb, type: 2}
+    - target: {fileID: -8210518752818356001, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: 'salvageArchetypes.Array.data[10]'
+      value: 
+      objectReference: {fileID: 11400000, guid: af2a365c827f4824da4b5c9ea42971d2, type: 2}
+    - target: {fileID: -8210518752818356001, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
+      propertyPath: 'salvageArchetypes.Array.data[11]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 68cfb7c5df35ec64dabacd386285e9e7, type: 2}
     - target: {fileID: -8210518752818356001, guid: 7ebfc2455aa106e4abbb10f5f326ed78, type: 3}
       propertyPath: 'highTierSalvageData.Array.data[0]'
       value: 
