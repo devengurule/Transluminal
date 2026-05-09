@@ -90,8 +90,13 @@ public class GameController : MonoBehaviour
 
         playerInput = GetComponent<PlayerInput>();
 
-        playerSaveData.position = GameObject.Find("Player").transform.position;
-        playerSaveData.eulerRotation = GameObject.Find("Player").transform.eulerAngles;
+        GameObject playerObj = GameObject.Find("Player");
+
+        if (playerObj != null)
+        {
+            playerSaveData.position = playerObj.transform.position;
+            playerSaveData.eulerRotation = playerObj.transform.eulerAngles;
+        }
 
         // Subscribe to active scene change event
         SceneManager.activeSceneChanged += SceneChange;
@@ -251,6 +256,10 @@ public class GameController : MonoBehaviour
 
     private void OnInteractPressed(object target)
     {
+        Debug.Log("Interact pressed");
+        Debug.Log("interactWithTransport: " + interactWithTransport);
+        Debug.Log("Current Scene: " + SceneController.GetCurrentSceneName());
+
         // Switch to floor1scene if inside a ship scene
         if (ShipInputMapScenes.Contains(SceneController.GetCurrentSceneName()))
         {
@@ -309,6 +318,10 @@ public class GameController : MonoBehaviour
         int transportLayerID = LayerMask.NameToLayer(transportLayer);
         int closetLayerID = LayerMask.NameToLayer(closetLayer);
         int bedLayerID = LayerMask.NameToLayer(bedLayer);
+
+        Debug.Log("Entered collision with: " + gameObject.name);
+        Debug.Log("Layer: " + gameObject.layer);
+        Debug.Log("Transport Layer ID: " + transportLayerID);
 
         if (gameObject.layer == transportLayerID)
         {

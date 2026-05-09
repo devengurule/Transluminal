@@ -184,10 +184,30 @@ public class NavigationController : MonoBehaviour
         GameController.instance.GetComponent<FuelManager>().SubtractFuel(fuel);
     }
 
+    //public string GetCurrentShipScene()
+    //{
+    //    return currentShipScene;
+    //}
+
     public string GetCurrentShipScene()
     {
-        return currentShipScene;
+        if (currentNode == null)
+            return "";
+
+        NodeScript node = currentNode.GetComponent<NodeScript>();
+
+        if (node == null)
+            return "";
+
+        if (node.IsHomeNode())
+            return "";
+
+        Debug.Log($"Current Node: {currentNode.name}");
+        Debug.Log($"Target Scene: {node.TargetShipScene()}");
+
+        return node.TargetShipScene();
     }
+
     public bool IsAtHomeNode()
     {
         return atHomeNode;
