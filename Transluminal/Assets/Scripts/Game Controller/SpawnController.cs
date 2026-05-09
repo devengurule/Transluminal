@@ -28,9 +28,12 @@ public class SpawnController : MonoBehaviour
     [SerializeField] TierData salvageLowTier;
     [SerializeField] TierData salvageMedTier;
     [SerializeField] TierData salvageHighTier;
-
-    [SerializeField] List<AlienData> alienArchetypes;
     [SerializeField] List<SalvageData> salvageArchetypes;
+
+    [Header("Alien Archetypes")]
+    [SerializeField] List<AlienData> creatureArchetypes;
+    [SerializeField] List<AlienData> hunterArchetypes;
+    [SerializeField] List<AlienData> ratArchetypes;
 
     private int scrapLeftToSpawn;
     private int salvageLeftToSpawn;
@@ -104,13 +107,12 @@ public class SpawnController : MonoBehaviour
                 float angle = Random.Range(0, 360);
                 GameObject salvageObject = Instantiate(salvagePrefab, randomPoint, Quaternion.Euler(0, 0, angle));
 
-                AlienData alien = Random.Range(0, 1) >= 1 - chanceForAlien ? alienArchetypes[Random.Range(0, alienArchetypes.Count)] : null;
-
-                if (alien == null) print(1);
-
                 int index = Random.Range(0, salvageArchetypes.Count);
 
                 SalvageData salvageData = salvageArchetypes[index];
+
+                AlienData alien = GetAlienArchetype(salvageData);
+
                 // Set salvages designated tier values
                 switch (tier)
                 {
@@ -209,6 +211,96 @@ public class SpawnController : MonoBehaviour
                 salvageLeftToSpawn++;
             }
         }
+    }
+
+    private AlienData GetAlienArchetype(SalvageData data)
+    {
+        switch(data.partType)
+        {
+            case PartType.bellEngine:
+
+                // Rat or creature
+
+                if (Random.Range(0f, 1f) >= 0.5)
+                {
+                    // Rat
+                    return ratArchetypes[Random.Range(0, ratArchetypes.Count)];
+                }
+                else
+                {
+                    // Creature
+                    return creatureArchetypes[Random.Range(0, creatureArchetypes.Count)];
+                }
+
+            case PartType.aerospikeEngine:
+
+                // Rat or creature
+
+                if (Random.Range(0f, 1f) >= 0.5)
+                {
+                    // Rat
+                    return ratArchetypes[Random.Range(0, ratArchetypes.Count)];
+                }
+                else
+                {
+                    // Creature
+                    return creatureArchetypes[Random.Range(0, creatureArchetypes.Count)];
+                }
+
+            case PartType.fuildTank or PartType.scrapMetal:
+
+                // Everyone
+
+                List<AlienData> none = new();
+                List<AlienData> fuel = new();
+                List<AlienData> coolant = new();
+                List<AlienData> cryo = new();
+
+                foreach(AlienData creatureData in creatureArchetypes)
+                {
+                    fuel.Add(creatureData);
+                }
+                foreach (AlienData hunterData in hunterArchetypes)
+                {
+                    none.Add(hunterData);
+                }
+                foreach (AlienData ratData in ratArchetypes)
+                {
+                    if (ratData.fluidSignatureType == FluidType.none)
+                    {
+                        none.Add(ratData);
+                    }
+                    else if (ratData.fluidSignatureType == FluidType.fuel)
+                    {
+                        fuel.Add(ratData);
+                    }
+                    else if (ratData.fluidSignatureType == FluidType.coolant)
+                    {
+                        coolant.Add(ratData);
+                    }
+                    else if (ratData.fluidSignatureType == FluidType.cryogenics)
+                    {
+                        cryo.Add(ratData);
+                    }
+                }
+                switch (data.fluidType)
+                {
+                    case FluidType.none:
+
+                        return none[Random.Range(0, none.Count)];
+                    case FluidType.fuel:
+
+                        return fuel[Random.Range(0, fuel.Count)];
+                    case FluidType.coolant:
+
+                        return coolant[Random.Range(0, coolant.Count)];
+                    case FluidType.cryogenics:
+
+                        return cryo[Random.Range(0, cryo.Count)];
+                }
+                break;
+        }
+        return null;
     }
 
     private void OnDrawGizmos()

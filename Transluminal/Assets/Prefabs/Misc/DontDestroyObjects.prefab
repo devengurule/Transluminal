@@ -1291,7 +1291,7 @@ MonoBehaviour:
   densityImage: {fileID: 6053924400269696990}
   salvageObject: {fileID: 4506358965157602680}
   displayObject: {fileID: 3539789121391342202}
-  cheatsheet: {fileID: 0}
+  cheatsheet: {fileID: 1671394862249883779}
 --- !u!114 &4084143099326390443
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -797,7 +797,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 927042205740890881, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1039896747610030331, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_TagString
@@ -872,54 +872,50 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
-      propertyPath: alienArchetypes.Array.size
-      value: 4
+      propertyPath: ratArchetypes.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
-      propertyPath: salvageArchetypes.Array.size
-      value: 5
+      propertyPath: hunterArchetypes.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
-      propertyPath: 'alienArchetypes.Array.data[0]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 6901381fd6373d24ea807f41bb6e74d2, type: 2}
-    - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
-      propertyPath: 'alienArchetypes.Array.data[1]'
-      value: 
-      objectReference: {fileID: 11400000, guid: c896f3b4fde599146854c9262f3662aa, type: 2}
-    - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
-      propertyPath: 'alienArchetypes.Array.data[2]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 7a094b00dda42144e8ed65a9a88e7a30, type: 2}
-    - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
-      propertyPath: 'alienArchetypes.Array.data[3]'
+      propertyPath: 'ratArchetypes.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: eeaedc9bbed132747a38d9d962c1adb9, type: 2}
     - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
-      propertyPath: 'salvageArchetypes.Array.data[0]'
+      propertyPath: 'ratArchetypes.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: 9d92ebc3a68dec84bb36ac0effce5f21, type: 2}
+      objectReference: {fileID: 11400000, guid: a7f334227b78a7e41b6f4a7d17b39cf0, type: 2}
     - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
-      propertyPath: 'salvageArchetypes.Array.data[1]'
-      value: 
-      objectReference: {fileID: 11400000, guid: f300730aa128e944fafb216cbb701a7c, type: 2}
+      propertyPath: creatureArchetypes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
-      propertyPath: 'salvageArchetypes.Array.data[2]'
+      propertyPath: 'hunterArchetypes.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: 0b75797296cc7404cafedab3206b0a32, type: 2}
+      objectReference: {fileID: 11400000, guid: c896f3b4fde599146854c9262f3662aa, type: 2}
     - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
-      propertyPath: 'salvageArchetypes.Array.data[3]'
+      propertyPath: 'hunterArchetypes.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: 37a398d0e5fe9f84dac2b27f2a8e5726, type: 2}
+      objectReference: {fileID: 11400000, guid: 7a094b00dda42144e8ed65a9a88e7a30, type: 2}
     - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
-      propertyPath: 'salvageArchetypes.Array.data[4]'
+      propertyPath: 'creatureArchetypes.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: ce27a35315ed1e84f9b2e564397dbae2, type: 2}
+      objectReference: {fileID: 11400000, guid: 6901381fd6373d24ea807f41bb6e74d2, type: 2}
+    - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: 'creatureArchetypes.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f062041913066443981d810dacd52ae, type: 2}
     - target: {fileID: 1406421371944672476, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_Name
       value: Selected
       objectReference: {fileID: 0}
     - target: {fileID: 1406421371944672476, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1740740640359334160, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -1059,10 +1055,6 @@ PrefabInstance:
       propertyPath: m_GravityScale
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3560711155510142420, guid: 19f9c04572959ca4288edd0516563076, type: 3}
-      propertyPath: cheatsheet
-      value: 
-      objectReference: {fileID: 1140226602}
     - target: {fileID: 3602510169972282844, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1488,11 +1480,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 8842678169535479588, guid: 04912dd4f933c9843bd26fd9afc72239, type: 3}
   m_PrefabInstance: {fileID: 1069692835}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1140226602 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1671394862249883779, guid: 19f9c04572959ca4288edd0516563076, type: 3}
-  m_PrefabInstance: {fileID: 964167403}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1176233539
 GameObject:
