@@ -43,6 +43,10 @@ public enum EventType
     OnEnterCloset,
     OnExitCloset,
     PlayerHiding,
+    Dead,
+    Starve,
+    Stranded,
+    Win,
 
     // UI
     ScrollVert,

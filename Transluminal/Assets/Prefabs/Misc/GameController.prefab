@@ -61,20 +61,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameController
   PlayerInputMapScenes:
-  - ISDevRoom
   - Floor1Scene
   - Floor2Scene
   - Floor3Scene
   ShipInputMapScenes:
-  - OSDevRoom
   - SalvageScene_0
   - SalvageScene_1
+  - SalvageScene_2
+  - SalvageScene_3
+  - SalvageScene_4
+  - SalvageScene_5
   playerHidingPos: {x: -20, y: 0}
   healthObject: {fileID: 0}
   shipHUDObject: {fileID: 0}
   bedPauseTime: 0
   healAmount: 0
   sceneChangeTransitionDelay: 0
+  fluidAccuracyRange: {x: 0, y: 0}
+  upgradedFluidAccuracyRange: {x: 0, y: 0}
+  upgradedFoodCostConstant: 0
+  upgradedFuelCostConstant: 0
+  upgradedMaxFuel: 0
+  upgradedFuelPenalty: 0
+  upgradedHullStrikeForce: 0
+  upgradedTorqueStrikeForce: 0
 --- !u!114 &5388767112792395842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,10 +237,12 @@ MonoBehaviour:
   salvageLowTier: {fileID: 11400000, guid: 0d93f1ecca3c8654b8e067e29b039289, type: 2}
   salvageMedTier: {fileID: 11400000, guid: 0d93f1ecca3c8654b8e067e29b039289, type: 2}
   salvageHighTier: {fileID: 11400000, guid: 849d67a5b4577d54d873689ce9396054, type: 2}
-  alienArchetypes: []
   salvageArchetypes:
   - {fileID: 11400000, guid: f300730aa128e944fafb216cbb701a7c, type: 2}
   - {fileID: 11400000, guid: ce27a35315ed1e84f9b2e564397dbae2, type: 2}
+  creatureArchetypes: []
+  hunterArchetypes: []
+  ratArchetypes: []
 --- !u!114 &-6372975659343732928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,6 +303,7 @@ MonoBehaviour:
   ratLifeTime: 10
   numOfRat: {x: 0, y: 0}
   creaturePrefab: {fileID: 0}
+  creatureDamageRange: {x: 0, y: 0}
   spawnOffsetTimeRange: {x: 0, y: 0}
   creatureSpawnPos: {x: 0, y: 0}
   maxNumberOfCreature: 0

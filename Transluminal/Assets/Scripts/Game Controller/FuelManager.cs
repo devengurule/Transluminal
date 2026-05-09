@@ -102,6 +102,9 @@ public class FuelManager : MonoBehaviour
     public void SubtractFuel(float fuel)
     {
         currentFuel -= fuel;
+
+        if (currentFuel <= 0) eventManager.Publish(EventType.Stranded);
+
         UpdateFuelMeter();
     }
 

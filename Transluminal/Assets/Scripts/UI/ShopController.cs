@@ -345,7 +345,7 @@ public class ShopController : MonoBehaviour
                 break;
             case PurchasableData.UpgradeType.FTLEngine:
 
-
+                eventManager.Publish(EventType.Win);
 
                 break;
             case PurchasableData.UpgradeType.IncreasedFuel:

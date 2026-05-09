@@ -8,11 +8,6 @@ public class HealthManager : MonoBehaviour
     
     private EventManager eventManager;
 
-    private void Awake()
-    {
-        currentHealth = 3;
-    }
-
     private void Start()
     {
         eventManager = GameController.instance.eventManager;
@@ -28,6 +23,7 @@ public class HealthManager : MonoBehaviour
         else
         {
             // You ded
+            eventManager.Publish(EventType.Dead);
         }
     }
 

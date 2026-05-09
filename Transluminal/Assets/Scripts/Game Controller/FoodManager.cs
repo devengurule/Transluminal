@@ -12,11 +12,14 @@ public class FoodManager : MonoBehaviour
     [SerializeField] private float passiveDeductionAmount;
 
     private Timer passiveDeductionTimer;
+    private EventManager eventManager;
     #endregion
 
     #region Unity Methods
     private void Start()
     {
+        eventManager = GameController.instance.eventManager;
+
         passiveDeductionTimer = gameObject.AddComponent<Timer>();
         passiveDeductionTimer.Initalize(passiveDeductionTime, PassiveDeductFood, true, true);
         passiveDeductionTimer.Run();
@@ -58,34 +61,6 @@ public class FoodManager : MonoBehaviour
         }
     }
 
-    private string foodFloatToStr(float food)
-    {  
-        // TotalDigits = 3
-        // Input: 6
-        // Output = 006
-
-        // Convert int to string
-        string foodString = food.ToString();
-
-        // Remove all characters after the alloted digit length
-        if(foodString.Length > totalDigits)
-        {
-            foodString = foodString.Remove(totalDigits);
-        }
-
-        // Add zeros in front of string if there are empty digits remaining
-        if(foodString.Length < totalDigits)
-        {
-            int stringLength = foodString.Length;
-            for (int i = 0; i < totalDigits - stringLength; i++)
-            {
-                foodString = "0" + foodString;
-            }
-        }
-
-        return foodString;
-    }
-
     public float GetCurrentFood()
     {
         return currentFood;
@@ -94,6 +69,9 @@ public class FoodManager : MonoBehaviour
     public void SubtractFood(float food)
     {
         currentFood -= food;
+
+        if (currentFood <= 0) eventManager.Publish(EventType.Starve);
+
         UpdateFoodCounter();
     }
 

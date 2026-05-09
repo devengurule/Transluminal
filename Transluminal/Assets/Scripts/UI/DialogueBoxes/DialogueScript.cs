@@ -15,11 +15,11 @@ public class DialogueScript : MonoBehaviour
     {
         eventManager = GameController.instance.eventManager;
 
-        //helmError = gameObject.AddComponent<TextController>();
-        //helmError.Initalize(characterSpeed, appearTime, textObject, true);
+        helmError = gameObject.AddComponent<TextController>();
+        helmError.Initalize(characterSpeed, appearTime, textObject, true);
 
-        //shopError = gameObject.AddComponent<TextController>();
-        //shopError.Initalize(characterSpeed, appearTime, textObject, true);
+        shopError = gameObject.AddComponent<TextController>();
+        shopError.Initalize(characterSpeed, appearTime, textObject, true);
 
         moneyError = gameObject.AddComponent<TextController>();
         moneyError.Initalize(characterSpeed, appearTime, textObject, false);

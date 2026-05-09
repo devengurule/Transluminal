@@ -18,8 +18,35 @@ EditorBuildSettings:
     path: Assets/Scenes/InsideShipScenes/Floor3Scene.unity
     guid: 383bf4c3559f803499e6bdef14911165
   - enabled: 1
+    path: Assets/Scenes/Win.unity
+    guid: 8cffa02e6e038aa4ba4b8ab0197dfc97
+  - enabled: 1
+    path: Assets/Scenes/NoHealth.unity
+    guid: 5e8d97802ebb2a84387fb4bc5c27250e
+  - enabled: 1
+    path: Assets/Scenes/NoFuel.unity
+    guid: 2abfc5960e00c5f409a82fd468e71669
+  - enabled: 1
+    path: Assets/Scenes/NoFood.unity
+    guid: 0a9c1899b890d5643875884740c13e76
+  - enabled: 1
+    path: Assets/Scenes/OutSideShipScenes/SalvageScene_0.unity
+    guid: ff2f0a1dfe3997343b17fee650d28e9a
+  - enabled: 1
+    path: Assets/Scenes/OutSideShipScenes/SalvageScene_1.unity
+    guid: 61e8c8aaced9dd340b26f91669c292cf
+  - enabled: 1
     path: Assets/Scenes/OutSideShipScenes/SalvageScene_2.unity
     guid: b53a737a3d035ee4387880217a3b8c3c
+  - enabled: 1
+    path: Assets/Scenes/OutSideShipScenes/SalvageScene_3.unity
+    guid: 20c1177cfe1dd774eae141a08a54a2ea
+  - enabled: 1
+    path: Assets/Scenes/OutSideShipScenes/SalvageScene_4.unity
+    guid: ecb966ed931fd2f44a156ed49c9babd3
+  - enabled: 1
+    path: Assets/Scenes/OutSideShipScenes/SalvageScene_5.unity
+    guid: aaf2ed5e4bd19144cb788d0c70e50c5a
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 1ac8adcdb3bfb134db331509bdb24a92, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

@@ -163,6 +163,7 @@ public class TextController : MonoBehaviour
 
     public void WriteText(string key)
     {
+        // STILL BUGGY
         if (timer.isRunning) timer.Reset();
 
         if (!isRunning)

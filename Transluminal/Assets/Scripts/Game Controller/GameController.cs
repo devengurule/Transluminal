@@ -114,6 +114,10 @@ public class GameController : MonoBehaviour
             eventManager.Subscribe(EventType.TransitionOnFinished, TransitionOnFinished);
             eventManager.Subscribe(EventType.AccuracyUpgrade, OnAccuracyUpgrade);
             eventManager.Subscribe(EventType.HullStrengthUprade, OnHullStrengthUpgrade);
+            eventManager.Subscribe(EventType.Dead, OnDead);
+            eventManager.Subscribe(EventType.Starve, OnStarve);
+            eventManager.Subscribe(EventType.Stranded, OnStranded);
+            eventManager.Subscribe(EventType.Win, OnWin);
         }
     }
 
@@ -134,6 +138,10 @@ public class GameController : MonoBehaviour
             eventManager.Unsubscribe(EventType.TransitionOffFinished, TransitionOffFinished);
             eventManager.Unsubscribe(EventType.AccuracyUpgrade, OnAccuracyUpgrade);
             eventManager.Unsubscribe(EventType.HullStrengthUprade, OnHullStrengthUpgrade);
+            eventManager.Unsubscribe(EventType.Dead, OnDead);
+            eventManager.Unsubscribe(EventType.Starve, OnStarve);
+            eventManager.Unsubscribe(EventType.Stranded, OnStranded);
+            eventManager.Unsubscribe(EventType.Win, OnWin);
         }
     }
     #endregion
@@ -143,6 +151,11 @@ public class GameController : MonoBehaviour
     // Change Input Map when changing scenes
     private void SceneChange(Scene current, Scene next)
     {
+        if(SceneController.GetCurrentSceneName() == "TitleScreen")
+        {
+            Destroy(parent);
+        }
+
         StartCoroutine(DelayedTransitionOff(sceneChangeTransitionDelay));
 
         // Get player in scene
@@ -408,6 +421,24 @@ public class GameController : MonoBehaviour
     {
         isHullStrengthUpgraded = true;
     }
+
+    private void OnDead(object target)
+    {
+        SceneController.GoToScene("NoHealth");
+    }
+    private void OnStarve(object target)
+    {
+        SceneController.GoToScene("NoFood");
+    }
+    private void OnStranded(object target)
+    {
+        SceneController.GoToScene("NoFuel");
+    }
+    private void OnWin(object target)
+    {
+        SceneController.GoToScene("Win");
+    }
+
     #endregion
 
     #region IEnumerator Methods
