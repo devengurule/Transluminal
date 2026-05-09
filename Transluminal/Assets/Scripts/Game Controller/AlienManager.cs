@@ -69,6 +69,11 @@ public class AlienManager : MonoBehaviour
         spawnZone = GameObject.FindGameObjectWithTag("SpawnZone");
         ratSpawnZone = GameObject.FindGameObjectWithTag("RatSpawnZone");
 
+        if(SceneController.GetCurrentSceneName() == "Floor3Scene")
+        {
+            UpdateCreatureStage();
+        }
+
         for (int i = 0; i < alienSaveList.Count; i++)
         {
             AlienSaveData data = alienSaveList[i];
@@ -291,6 +296,30 @@ public class AlienManager : MonoBehaviour
     public Vector2Int HunterDamageRange()
     {
         return hunterDamageRange;
+    }
+
+    private void UpdateCreatureStage()
+    {
+        GameObject stageObject = GameObject.Find("CreatureStage");
+
+        stageObject.transform.Find("stage1").gameObject.SetActive(false);
+        stageObject.transform.Find("stage2").gameObject.SetActive(false);
+        stageObject.transform.Find("stage3").gameObject.SetActive(false);
+
+        switch(currentNumberOfCreature)
+        {
+            case 1:
+                stageObject.transform.Find("stage1").gameObject.SetActive(true);
+                break;
+
+            case 2:
+                stageObject.transform.Find("stage2").gameObject.SetActive(true);
+                break;
+
+            case 3:
+                stageObject.transform.Find("stage3").gameObject.SetActive(true);
+                break;
+        }
     }
 
     #region Gizmos

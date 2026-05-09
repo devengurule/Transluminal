@@ -878,7 +878,7 @@ PrefabInstance:
     - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: 'alienArchetypes.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: c896f3b4fde599146854c9262f3662aa, type: 2}
+      objectReference: {fileID: 11400000, guid: 6901381fd6373d24ea807f41bb6e74d2, type: 2}
     - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: 'alienArchetypes.Array.data[1]'
       value: 
@@ -1137,7 +1137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4826480850986139676, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: maxNumberOfCreature
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4826480850986139676, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: spawnOffsetTimeRange.x
