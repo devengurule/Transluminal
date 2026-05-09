@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10febe8457d77f4db27883b825a0b34, type: 3}
   m_Name: StrongerHull
   m_EditorClassIdentifier: Assembly-CSharp::PurchasableData
+  upgradeType: 7
   title: Hull Stength Upgrade
   description: Scavangers can run into more walls and lose less fuel
   price: 100000

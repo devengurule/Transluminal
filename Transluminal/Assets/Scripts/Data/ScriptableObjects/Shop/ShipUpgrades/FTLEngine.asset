@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10febe8457d77f4db27883b825a0b34, type: 3}
   m_Name: FTLEngine
   m_EditorClassIdentifier: Assembly-CSharp::PurchasableData
+  upgradeType: 5
   title: Transluminal Engine
   description: Organic creatures were never built to move past the speed of light
     and yet here we are

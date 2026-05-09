@@ -23,6 +23,7 @@ public class FuelManager : MonoBehaviour
         if (eventManager != null)
         {
             eventManager.Subscribe(EventType.ArrivedAtHomeNode, OnRefuel);
+            eventManager.Subscribe(EventType.FuelUpgrade, OnFuelUpgrade);
         }
     }
 
@@ -45,6 +46,7 @@ public class FuelManager : MonoBehaviour
         if (eventManager != null)
         {
             eventManager.Unsubscribe(EventType.ArrivedAtHomeNode, OnRefuel);
+            eventManager.Unsubscribe(EventType.FuelUpgrade, OnFuelUpgrade);
         }
     }
     #endregion
@@ -56,6 +58,11 @@ public class FuelManager : MonoBehaviour
         {
             QuickUpdateFuelMeter();
         }
+    }
+
+    private void OnFuelUpgrade(object target)
+    {
+        maxFuel = GameController.instance.UpgradedMaxFuel();
     }
     #endregion
 

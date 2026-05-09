@@ -787,6 +787,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -50
       objectReference: {fileID: 0}
+    - target: {fileID: 390445336994794520, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 427114882119350057, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -919,6 +923,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1688344972466409124, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1740740640359334160, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -927,6 +935,10 @@ PrefabInstance:
       propertyPath: leftSelect
       value: 
       objectReference: {fileID: 964167404}
+    - target: {fileID: 1976437281080156122, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2027796009054927797, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_SizeDelta.x
       value: 190.008
@@ -996,6 +1008,10 @@ PrefabInstance:
       value: -2.73
       objectReference: {fileID: 0}
     - target: {fileID: 3288048148909366786, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: upgradedMaxFuel
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 3288048148909366786, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: alphaFadeInSpeed
       value: 0.05
       objectReference: {fileID: 0}
@@ -1004,8 +1020,44 @@ PrefabInstance:
       value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 3288048148909366786, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: upgradedFuelPenalty
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3288048148909366786, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: fluidAccuracyRange.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3288048148909366786, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: fluidAccuracyRange.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3288048148909366786, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: upgradedHullStrikeForce
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3288048148909366786, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: upgradedFoodCostConstant
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 3288048148909366786, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: upgradedFuelCostConstant
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3288048148909366786, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: upgradedTorqueStrikeForce
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3288048148909366786, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: sceneChangeTransitionDelay
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3288048148909366786, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: upgradedFluidAccuracyRange.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3288048148909366786, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: upgradedFluidAccuracyRange.y
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3333755633978831275, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1071,6 +1123,14 @@ PrefabInstance:
       propertyPath: m_text
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3707123977016084673, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757518253497577284, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -60.8
+      objectReference: {fileID: 0}
     - target: {fileID: 3773142072356704114, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1097,7 +1157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4277981388501146257, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: currentMoney
-      value: 1000000
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4285149364845234494, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: leftSelect
@@ -1191,6 +1251,10 @@ PrefabInstance:
       propertyPath: creaturePage
       value: 
       objectReference: {fileID: 196924008}
+    - target: {fileID: 5533836960683782161, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -421
+      objectReference: {fileID: 0}
     - target: {fileID: 5739149978919735471, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1279,6 +1343,14 @@ PrefabInstance:
       propertyPath: m_text
       value: She sells sea shells on the sea shore
       objectReference: {fileID: 0}
+    - target: {fileID: 7378430314394951168, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_margin.x
+      value: -327.49954
+      objectReference: {fileID: 0}
+    - target: {fileID: 7378430314394951168, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: m_margin.z
+      value: -277.26837
+      objectReference: {fileID: 0}
     - target: {fileID: 7535885745342500649, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1313,6 +1385,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8422476920209904731, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: maxHealth
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8422476920209904731, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: currentHealth
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8440181436065359030, guid: 19f9c04572959ca4288edd0516563076, type: 3}

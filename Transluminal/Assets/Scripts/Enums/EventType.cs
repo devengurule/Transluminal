@@ -65,5 +65,12 @@ public enum EventType
     // DIALOGUE
     NoHelmAccess,
     NoShopAccess,
-    FinishedDialogue
+    NotEnoughMoney,
+    FinishedDialogue,
+
+    // UPGRADES
+    AccuracyUpgrade,
+    EngineUpgrade,
+    FuelUpgrade,
+    HullStrengthUprade
 }

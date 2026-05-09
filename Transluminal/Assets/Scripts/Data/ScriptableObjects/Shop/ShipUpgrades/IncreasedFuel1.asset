@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10febe8457d77f4db27883b825a0b34, type: 3}
   m_Name: IncreasedFuel1
   m_EditorClassIdentifier: Assembly-CSharp::PurchasableData
+  upgradeType: 6
   title: Fuel Tank Upfrade
   description: Enjoy 50% more fuel
   price: 50000

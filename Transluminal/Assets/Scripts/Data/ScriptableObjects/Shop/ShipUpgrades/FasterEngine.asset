@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10febe8457d77f4db27883b825a0b34, type: 3}
   m_Name: FasterEngine
   m_EditorClassIdentifier: Assembly-CSharp::PurchasableData
+  upgradeType: 4
   title: Increased Engine Thrust
   description: Sail faster through space with an engine pushing 300 t more thrust
   price: 300000

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10febe8457d77f4db27883b825a0b34, type: 3}
   m_Name: FasterFluidType
   m_EditorClassIdentifier: Assembly-CSharp::PurchasableData
+  upgradeType: 2
   title: Faster Fluid Scanner
   description: With this upgrade, scavengers will be able to detect differences in
     fluids 3 seconds faster

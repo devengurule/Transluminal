@@ -87,7 +87,8 @@ public class ScannerController : MonoBehaviour
 
                     if(currentSalvage.alienData != null)
                     {
-                        UpdateDisplay((currentSalvage.salvageData.fluidAmount + currentSalvage.alienData.fluidSignature).ToString());
+                        Vector2 accuracyRange = GameController.instance.FluidAccuracyRange();
+                        UpdateDisplay((currentSalvage.salvageData.fluidAmount + currentSalvage.alienData.fluidSignature + Random.Range(accuracyRange.x, accuracyRange.y).ToString()));
                     }
                     else
                     {

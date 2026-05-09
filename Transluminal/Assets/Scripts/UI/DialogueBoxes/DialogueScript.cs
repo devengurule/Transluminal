@@ -8,22 +8,28 @@ public class DialogueScript : MonoBehaviour
     [SerializeField] private TMP_Text textObject;
     private TextController helmError;
     private TextController shopError;
+    private TextController moneyError;
     private EventManager eventManager;
 
     private void Start()
     {
         eventManager = GameController.instance.eventManager;
 
-        helmError = gameObject.AddComponent<TextController>();
-        helmError.Initalize(characterSpeed, appearTime, textObject);
+        //helmError = gameObject.AddComponent<TextController>();
+        //helmError.Initalize(characterSpeed, appearTime, textObject, true);
 
-        shopError = gameObject.AddComponent<TextController>();
-        shopError.Initalize(characterSpeed, appearTime, textObject);
+        //shopError = gameObject.AddComponent<TextController>();
+        //shopError.Initalize(characterSpeed, appearTime, textObject, true);
 
-        if(eventManager != null)
+        moneyError = gameObject.AddComponent<TextController>();
+        moneyError.Initalize(characterSpeed, appearTime, textObject, false);
+
+
+        if (eventManager != null)
         {
             eventManager.Subscribe(EventType.NoHelmAccess, OnHelmError);
             eventManager.Subscribe(EventType.NoShopAccess, OnShopError);
+            eventManager.Subscribe(EventType.NotEnoughMoney, OnMoneyError);
         }
     }
     private void OnDestroy()
@@ -32,6 +38,7 @@ public class DialogueScript : MonoBehaviour
         {
             eventManager.Unsubscribe(EventType.NoHelmAccess, OnHelmError);
             eventManager.Unsubscribe(EventType.NoShopAccess, OnShopError);
+            eventManager.Unsubscribe(EventType.NotEnoughMoney, OnMoneyError);
         }
     }
 
@@ -43,5 +50,10 @@ public class DialogueScript : MonoBehaviour
     private void OnShopError(object target)
     {
         shopError.WriteText("NoShopAccess");
+    }
+
+    private void OnMoneyError(object target)
+    {
+        moneyError.WriteText("NotEnoughMoney");
     }
 }

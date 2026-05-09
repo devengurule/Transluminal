@@ -9,5 +9,8 @@
   ],
   "NoShopAccess": [
     "Error Code 207// Salvager can not access HUB shop while not docked at HUB"
+  ],
+  "NotEnoughMoney": [
+    "Error Code 129// Salvager does not have sufficient money for that purchase. Perhaps if you worked harder you could afford it"
   ]
 }

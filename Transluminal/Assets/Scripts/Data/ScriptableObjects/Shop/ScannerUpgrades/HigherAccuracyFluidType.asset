@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10febe8457d77f4db27883b825a0b34, type: 3}
   m_Name: HigherAccuracyFluidType
   m_EditorClassIdentifier: Assembly-CSharp::PurchasableData
+  upgradeType: 3
   title: Increase Fluid Amount Accuracy
   description: Scavangers will be able to have higher confidence in scanning technology
     with this higher accracy upgrade

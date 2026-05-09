@@ -9,6 +9,7 @@ public class TextController : MonoBehaviour
     private float appearTime = 0;
     private TMP_Text textObject;
     private string key = "Test";
+    private bool pauseAware;
 
     private EventManager eventManager;
     private bool canContinue;
@@ -88,8 +89,6 @@ public class TextController : MonoBehaviour
     #region IEnumerator
     IEnumerator WriteTextRoutine(string key)
     {
-        isRunning = true;
-
         justStarted = true;
 
         yield return null;
@@ -105,11 +104,15 @@ public class TextController : MonoBehaviour
         {
             currentText = line;
 
-            while (text != currentText && isRunning)
+            while (counter < currentText.Length && isRunning)
             {
-                text = text + currentText[counter];
+                text += currentText[counter];
                 textObject.text = text;
-                yield return WaitForSeconds(characterSpeed);
+
+                if (pauseAware)
+                    yield return WaitForSeconds(characterSpeed);
+                else
+                    yield return new WaitForSeconds(characterSpeed);
 
                 counter++;
             }
@@ -141,19 +144,21 @@ public class TextController : MonoBehaviour
     #endregion
 
     #region Methods
-    public void Initalize(float characterSpeed, TMP_Text textObject)
+    public void Initalize(float characterSpeed, TMP_Text textObject, bool pauseAware)
     {
         this.characterSpeed = characterSpeed;
         this.textObject = textObject;
         this.textObject.text = text;
+        this.pauseAware = pauseAware;
     }
 
-    public void Initalize(float characterSpeed, float appearTime, TMP_Text textObject)
+    public void Initalize(float characterSpeed, float appearTime, TMP_Text textObject, bool pauseAware)
     {
         this.characterSpeed = characterSpeed;
         this.appearTime = appearTime;
         this.textObject = textObject;
         this.textObject.text = text;
+        this.pauseAware = pauseAware;
     }
 
     public void WriteText(string key)
@@ -162,8 +167,9 @@ public class TextController : MonoBehaviour
 
         if (!isRunning)
         {
-            StartCoroutine(WriteTextRoutine(key));
+            isRunning = true;
             this.key = key;
+            StartCoroutine(WriteTextRoutine(key));
         }
     }
 

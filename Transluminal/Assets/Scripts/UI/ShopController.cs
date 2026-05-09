@@ -272,7 +272,7 @@ public class ShopController : MonoBehaviour
         }
         else if(!isPurchased && !gameController.CanPurchase(data.price))
         {
-            print("Not enough money :/");
+            eventManager.Publish(EventType.NotEnoughMoney);
         }
     }
 
@@ -284,6 +284,8 @@ public class ShopController : MonoBehaviour
         gameController.MakePurchase(data.price);
 
         purchaseable.transform.Find("Purchased").gameObject.SetActive(true);
+
+        ApplyPurchase(data);
     }
 
     private void SellValue()
@@ -310,5 +312,52 @@ public class ShopController : MonoBehaviour
         salvageValueCounter.GetComponent<TMP_Text>().text = salvageValue.ToString();
         scrapValueCounter.GetComponent<TMP_Text>().text = scrapValue.ToString();
         totalValueCounter.GetComponent<TMP_Text>().text = totalValue.ToString();
+    }
+
+    private void ApplyPurchase(PurchasableData data)
+    {
+        switch (data.upgradeType)
+        {
+            case PurchasableData.UpgradeType.MRScan:
+
+                // Later
+
+                break;
+            case PurchasableData.UpgradeType.PartTypeScan:
+
+                // Later
+
+                break;
+            case PurchasableData.UpgradeType.HigherAccuracyFluidType:
+
+                eventManager.Publish(EventType.AccuracyUpgrade);
+
+                break;
+            case PurchasableData.UpgradeType.FasterFluidType:
+
+                // Later
+
+                break;
+            case PurchasableData.UpgradeType.FasterEngine:
+
+                eventManager.Publish(EventType.EngineUpgrade);
+
+                break;
+            case PurchasableData.UpgradeType.FTLEngine:
+
+
+
+                break;
+            case PurchasableData.UpgradeType.IncreasedFuel:
+
+                eventManager.Publish(EventType.FuelUpgrade);
+
+                break;
+            case PurchasableData.UpgradeType.StrongerHull:
+
+                eventManager.Publish(EventType.HullStrengthUprade);
+
+                break;
+        }
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ShipMovement : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class ShipMovement : MonoBehaviour
     private void Start()
     {
         eventManager = GameController.instance.eventManager;
+
+        SceneManager.activeSceneChanged += SceneChange;
 
         if (eventManager != null)
         {
@@ -69,6 +72,25 @@ public class ShipMovement : MonoBehaviour
     #endregion
 
     #region Event Methods
+
+    private void SceneChange(Scene current, Scene next)
+    {
+        if (GameController.instance.UpgradedFuelPenalty() != 0)
+        {
+            hullStrikeFuelPenalty = GameController.instance.UpgradedFuelPenalty();
+        }
+
+        if (GameController.instance.UpgradedHullStrike() != 0)
+        {
+            hullStrikeForce = GameController.instance.UpgradedHullStrike();
+        }
+
+        if(GameController.instance.UpgradedTorqueStrike() != 0)
+        {
+            torqueStrength = GameController.instance.UpgradedTorqueStrike();
+        }
+    }
+
     private void OnMove(object target)
     {
         if (target is Vector2 inputVector)

@@ -22,6 +22,22 @@ public class GameController : MonoBehaviour
     [SerializeField] private int healAmount;
     [SerializeField] private float sceneChangeTransitionDelay;
 
+    [Header("Upgrades")]
+
+    [SerializeField] private Vector2 fluidAccuracyRange;
+    [SerializeField] private Vector2 upgradedFluidAccuracyRange;
+
+    [SerializeField] private int upgradedFoodCostConstant;
+    [SerializeField] private int upgradedFuelCostConstant;
+
+    [SerializeField] private float upgradedMaxFuel;
+
+    [SerializeField] private float upgradedFuelPenalty;
+    [SerializeField] private float upgradedHullStrikeForce;
+    [SerializeField] private float upgradedTorqueStrikeForce;
+    private bool isHullStrengthUpgraded;
+
+
     private Dictionary<string, SceneData> shipScenesVisited = new Dictionary<string, SceneData>();
     private NavigationController navController;
     private PlayerInput playerInput;
@@ -96,6 +112,8 @@ public class GameController : MonoBehaviour
             eventManager.Subscribe(EventType.PlayerHiding, PlayerOnHiding);
             eventManager.Subscribe(EventType.SpawnCreature, DisableCloset);
             eventManager.Subscribe(EventType.TransitionOnFinished, TransitionOnFinished);
+            eventManager.Subscribe(EventType.AccuracyUpgrade, OnAccuracyUpgrade);
+            eventManager.Subscribe(EventType.HullStrengthUprade, OnHullStrengthUpgrade);
         }
     }
 
@@ -114,6 +132,8 @@ public class GameController : MonoBehaviour
             eventManager.Unsubscribe(EventType.PlayerHiding, PlayerOnHiding);
             eventManager.Unsubscribe(EventType.SpawnCreature, DisableCloset);
             eventManager.Unsubscribe(EventType.TransitionOffFinished, TransitionOffFinished);
+            eventManager.Unsubscribe(EventType.AccuracyUpgrade, OnAccuracyUpgrade);
+            eventManager.Unsubscribe(EventType.HullStrengthUprade, OnHullStrengthUpgrade);
         }
     }
     #endregion
@@ -378,6 +398,16 @@ public class GameController : MonoBehaviour
             PauseController.UnPauseGame();
         }
     }
+
+    private void OnAccuracyUpgrade(object target)
+    {
+        fluidAccuracyRange = upgradedFluidAccuracyRange;
+    }
+
+    private void OnHullStrengthUpgrade(object target)
+    {
+        isHullStrengthUpgraded = true;
+    }
     #endregion
 
     #region IEnumerator Methods
@@ -533,6 +563,53 @@ public class GameController : MonoBehaviour
     public bool InteractWithBed()
     {
         return interactWithBed;
+    }
+
+    public Vector2 FluidAccuracyRange()
+    {
+        return fluidAccuracyRange;
+    }
+
+    public int UpgradedFoodCostConstant()
+    {
+        return upgradedFoodCostConstant;
+    }
+
+    public int UpgradedFuelCostConstant()
+    {
+        return upgradedFuelCostConstant;
+    }
+
+    public float UpgradedMaxFuel()
+    {
+        return upgradedMaxFuel;
+    }
+
+    public float UpgradedFuelPenalty()
+    {
+        if (isHullStrengthUpgraded)
+        {
+            return upgradedFuelPenalty;
+        }
+        return 0f;
+    }
+
+    public float UpgradedHullStrike()
+    {
+        if (isHullStrengthUpgraded)
+        {
+            return upgradedHullStrikeForce;
+        }
+        return 0f;
+    }
+
+    public float UpgradedTorqueStrike()
+    {
+        if (isHullStrengthUpgraded)
+        {
+            return upgradedTorqueStrikeForce;
+        }
+        return 0f;
     }
     #endregion
 

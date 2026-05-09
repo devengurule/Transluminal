@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10febe8457d77f4db27883b825a0b34, type: 3}
   m_Name: PartTypeScanner
   m_EditorClassIdentifier: Assembly-CSharp::PurchasableData
+  upgradeType: 1
   title: Part Type Scanner
   description: Along with looking cooler, MK2 scanners now provide data on Part Types
   price: 100000

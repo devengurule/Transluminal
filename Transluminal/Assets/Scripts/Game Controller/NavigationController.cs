@@ -50,6 +50,7 @@ public class NavigationController : MonoBehaviour
             eventManager.Subscribe(EventType.NodeSelected, OnNodeSelect);
             eventManager.Subscribe(EventType.NodeDeselected, OnNodeDeselect);
             eventManager.Subscribe(EventType.Confirm, OnConfirmTravel);
+            eventManager.Subscribe(EventType.EngineUpgrade, OnEngineUpgrade);
         }
     }
 
@@ -60,6 +61,7 @@ public class NavigationController : MonoBehaviour
             eventManager.Unsubscribe(EventType.NodeSelected, OnNodeSelect);
             eventManager.Unsubscribe(EventType.NodeDeselected, OnNodeDeselect);
             eventManager.Unsubscribe(EventType.Confirm, OnConfirmTravel);
+            eventManager.Unsubscribe(EventType.EngineUpgrade, OnEngineUpgrade);
         }
     }
     #endregion
@@ -113,6 +115,12 @@ public class NavigationController : MonoBehaviour
             //print($"Traveled to {targetNode.name}");
             ChangeCurrentNode(targetNode);
         }
+    }
+
+    private void OnEngineUpgrade(object target)
+    {
+        foodCostConstant = GameController.instance.UpgradedFoodCostConstant();
+        fuelCostConstant = GameController.instance.UpgradedFuelCostConstant();
     }
     #endregion
 
