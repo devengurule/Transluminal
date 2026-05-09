@@ -9,9 +9,11 @@ public class CreatureScript : MonoBehaviour
     private Rigidbody2D rb;
     private AlienSaveData saveDataInstance;
     private Vector2 direction = Vector2.right;
+    private EventManager eventManager;
     
     private void Start()
     {
+        eventManager = GameController.instance.eventManager;
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -42,5 +44,20 @@ public class CreatureScript : MonoBehaviour
         if (Mathf.Abs(rb.linearVelocityX) > maxSpeed.x) rb.linearVelocityX = Mathf.Sign(rb.linearVelocityX) * maxSpeed.x;
 
         if (Mathf.Abs(rb.linearVelocityY) > maxSpeed.y) rb.linearVelocityY = Mathf.Sign(rb.linearVelocityY) * maxSpeed.y;
+    }
+
+    private void DealDamage()
+    {
+        Vector2Int damage = GameController.instance.GetComponent<AlienManager>().CreatureDamageRange();
+        GameController.instance.GetComponent<HealthManager>().SubtractHealth(Random.Range(damage.x, damage.y + 1));
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            DealDamage();
+            eventManager.Publish(EventType.AttackPlayer, gameObject);
+        }
     }
 }

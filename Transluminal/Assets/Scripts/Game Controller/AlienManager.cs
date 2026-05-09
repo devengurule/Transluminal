@@ -17,6 +17,7 @@ public class AlienManager : MonoBehaviour
 
     [Header("Creature")]
     [SerializeField] private GameObject creaturePrefab;
+    [SerializeField] private Vector2Int creatureDamageRange;
     [SerializeField] private Vector2 spawnOffsetTimeRange;
     [SerializeField] private Vector2 creatureSpawnPos;
     [SerializeField] private int maxNumberOfCreature;
@@ -296,6 +297,10 @@ public class AlienManager : MonoBehaviour
     public Vector2Int HunterDamageRange()
     {
         return hunterDamageRange;
+    }
+    public Vector2Int CreatureDamageRange()
+    {
+        return creatureDamageRange;
     }
 
     private void UpdateCreatureStage()
