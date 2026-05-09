@@ -524,10 +524,10 @@ public class GameController : MonoBehaviour
     {
         if (isHiding)
         {
-            return new Vector2(playerLastPos.x, playerLastPos.y - 1.7f);
+            return new Vector2(playerLastPos.x, playerLastPos.y);
         }
 
-        return new Vector2(player.transform.position.x, player.transform.position.y - 1.7f);
+        return new Vector2(player.transform.position.x, player.transform.position.y);
     }
 
     public bool InteractWithBed()

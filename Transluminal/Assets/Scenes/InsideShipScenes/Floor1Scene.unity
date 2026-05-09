@@ -878,7 +878,7 @@ PrefabInstance:
     - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: 'alienArchetypes.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: eeaedc9bbed132747a38d9d962c1adb9, type: 2}
+      objectReference: {fileID: 11400000, guid: c896f3b4fde599146854c9262f3662aa, type: 2}
     - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: 'alienArchetypes.Array.data[1]'
       value: 
@@ -1116,12 +1116,16 @@ PrefabInstance:
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4826480850986139676, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: hunterFleePos.y
+      value: -3.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826480850986139676, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: creatureSpawnPos.x
       value: -13.02
       objectReference: {fileID: 0}
     - target: {fileID: 4826480850986139676, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: creatureSpawnPos.y
-      value: -0.7
+      value: -2.17
       objectReference: {fileID: 0}
     - target: {fileID: 4826480850986139676, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: hunterDamageRange.x
@@ -2707,11 +2711,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3801542708617742354, guid: 3defd63b018a63046ae6f992b2025763, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.08
+      value: 5.01
       objectReference: {fileID: 0}
     - target: {fileID: 3801542708617742354, guid: 3defd63b018a63046ae6f992b2025763, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.15
+      value: -3.73
       objectReference: {fileID: 0}
     - target: {fileID: 3801542708617742354, guid: 3defd63b018a63046ae6f992b2025763, type: 3}
       propertyPath: m_LocalPosition.z

@@ -13,6 +13,8 @@ public class HunterScript : MonoBehaviour
     [SerializeField] private Vector2 t;
     [SerializeField] private float VelocityT;
 
+    private Animator animator;
+    private SpriteRenderer sr;
     private AlienSaveData saveDataInstance;
     private EventManager eventManager;
     private Timer lifeTimeTimer;
@@ -57,6 +59,9 @@ public class HunterScript : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
 
+        animator = transform.GetComponentInChildren<Animator>();
+        sr = transform.GetComponentInChildren<SpriteRenderer>();
+
         currentState = State.hide;
 
         wakeUpTimer.Initalize(wakeUpTime, OnWakeUp, true, false);
@@ -66,6 +71,7 @@ public class HunterScript : MonoBehaviour
     private void Update()
     {
         StateController();
+        UpdateAnimation();
     }
     #endregion
 
@@ -308,6 +314,28 @@ public class HunterScript : MonoBehaviour
     {
         Vector2Int damage = GameController.instance.GetComponent<AlienManager>().HunterDamageRange();
         GameController.instance.GetComponent<HealthManager>().SubtractHealth(Random.Range(damage.x, damage.y + 1));
+    }
+
+    private void UpdateAnimation()
+    {
+        if(direction.x != 0)
+        {
+            if (direction.x < 0)
+            {
+                sr.flipX = true;
+            }
+            else sr.flipX = false;
+        }
+
+        switch (currentState)
+        {
+            case State.hide:
+                animator.SetFloat("Blend", 0);
+                break;
+            default:
+                animator.SetFloat("Blend", 1);
+                break;
+        }
     }
     #endregion
 
