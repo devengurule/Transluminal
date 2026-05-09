@@ -34,6 +34,7 @@ TagManager:
   - Bed
   - Transition
   - CheatsheetButton
+  - Help
   layers:
   - Default
   - TransparentFX
