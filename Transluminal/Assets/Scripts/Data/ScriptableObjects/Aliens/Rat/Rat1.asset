@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b686f33191a3774595ce943fad3cb0c, type: 3}
   m_Name: Rat1
   m_EditorClassIdentifier: Assembly-CSharp::AlienData
-  densityImage: {fileID: 0}
+  densityImage: {fileID: -5088639860993470946, guid: 12c2d32c01ca7f94d8062dfa23b52915, type: 3}
   camoflaugeImage: {fileID: 0}
   fluidSignature: 0
   fluidSignatureType: 0
