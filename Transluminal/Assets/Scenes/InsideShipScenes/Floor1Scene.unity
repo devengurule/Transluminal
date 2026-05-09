@@ -791,13 +791,17 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 691608707243815922, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: chanceForAlien
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 885943803502057170, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: transitionLength
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 927042205740890881, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1039896747610030331, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_TagString
@@ -869,7 +873,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: chanceToSpawnSalvage
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 1359723961056290062, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: ratArchetypes.Array.size
@@ -942,6 +946,10 @@ PrefabInstance:
     - target: {fileID: 2583866456066935071, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3101737789262802288, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: chanceForAlien
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3284176783976601457, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_Name
@@ -1195,6 +1203,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6203133462237386685, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: chanceForAlien
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 6476061018128953328, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1205,7 +1217,7 @@ PrefabInstance:
       objectReference: {fileID: 3890585258287567564, guid: b8f8c257181c148428afd2c6733981dc, type: 3}
     - target: {fileID: 6647613376188606750, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: chanceForAlien
-      value: 1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 6746356321768640213, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: spawnPos.x
@@ -1291,6 +1303,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8189426349667825382, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: chanceForAlien
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8293972498330850022, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1310,6 +1326,10 @@ PrefabInstance:
     - target: {fileID: 8463800813169505616, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -1691
+      objectReference: {fileID: 0}
+    - target: {fileID: 8562212393516253857, guid: 19f9c04572959ca4288edd0516563076, type: 3}
+      propertyPath: chanceForAlien
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8577197010670045026, guid: 19f9c04572959ca4288edd0516563076, type: 3}
       propertyPath: m_AnchorMax.x
