@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/InsideShipScenes/Floor3Scene.unity
     guid: 383bf4c3559f803499e6bdef14911165
   - enabled: 1
-    path: Assets/Scenes/OutSideShipScenes/SalvageScene_0.unity
+    path: Assets/Scenes/OutSideShipScenes/SalvageScene_2.unity
     guid: b53a737a3d035ee4387880217a3b8c3c
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 1ac8adcdb3bfb134db331509bdb24a92, type: 2}
